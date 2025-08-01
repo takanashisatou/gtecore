@@ -1,0 +1,19 @@
+Java Launcher: C:\Program Files\Java\jdk-17\bin\java.exe
+Arguments: '--task, SRG_TO_MCP, --input, C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\com.gregtechceu.gtceu\gtceu-1.20.1\7.0.2\602e4690cf99ddd49146a26f0629ac53bd6813db\gtceu-1.20.1-7.0.2.jar, --output, C:\Users\Jerry\.gradle\caches\forge_gradle\deobf_dependencies\com\gregtechceu\gtceu\gtceu-1.20.1\7.0.2_mapped_official_1.20.1\gtceu-1.20.1-7.0.2_mapped_official_1.20.1.jar, --mcp, C:\Users\Jerry\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\mapping\1.20.1\mapping-1.20.1-mapping.zip, --strip-signatures'
+Classpath:
+ - C:\Users\Jerry\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\installertools\1.4.4\installertools-1.4.4-fatjar.jar
+Working directory: C:\Users\Jerry\Downloads\gtecore\build\_RenameSrg2Mcp_-560750781
+Main class: net.minecraftforge.installertools.ConsoleTool
+====================================
+Task: SRG_TO_MCP
+Input:  C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\com.gregtechceu.gtceu\gtceu-1.20.1\7.0.2\602e4690cf99ddd49146a26f0629ac53bd6813db\gtceu-1.20.1-7.0.2.jar
+Output: C:\Users\Jerry\.gradle\caches\forge_gradle\deobf_dependencies\com\gregtechceu\gtceu\gtceu-1.20.1\7.0.2_mapped_official_1.20.1\gtceu-1.20.1-7.0.2_mapped_official_1.20.1.jar
+MCP:    C:\Users\Jerry\.gradle\caches\forge_gradle\mcp_repo\net\minecraft\mapping\1.20.1\mapping-1.20.1-mapping.zip
+Loading MCP Data
+Processing ZIP file
+Stripped Manifest of sha digests
+Stripped Manifest of sha digests
+Stripped Manifest of sha digests
+Stripped Manifest of sha digests
+Stripped Manifest of sha digests
+Process complete
