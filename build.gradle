@@ -26,7 +26,7 @@ base {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
 minecraft {
@@ -132,6 +132,10 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    mavenCentral()
+    maven { // Registrate
+        url "https://maven.tterrag.com/"
+    }
     maven {
         name = 'GTCEu Maven'
         url = 'https://maven.gtceu.com'
@@ -139,16 +143,121 @@ repositories {
             includeGroup 'com.gregtechceu.gtceu'
         }
     }
+    maven {
+        name "firstdarkMavenSnapshots"
+        url "https://maven.firstdarkdev.xyz/snapshots"
+    }
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
-    // flatDir {
-    //     dir 'libs'
-    // }
+     flatDir {
+         dir 'lib'
+     }
+    exclusiveContent { // Create, Ponder, Flywheel
+        forRepository { maven { url = "https://maven.createmod.net" } }
+        filter {
+            includeGroup("net.createmod.ponder")
+            includeGroup("com.simibubi.create")
+            includeGroup("dev.engine-room.flywheel")
+        }
+    }
+    exclusiveContent { // Configuration
+        forRepository { maven { url = "https://api.repsy.io/mvn/toma/public" } }
+        filter { includeGroup("dev.toma.configuration")}
+    }
+    exclusiveContent { // KubeJS and Rhino
+        forRepository { maven { url = "https://maven.latvian.dev/releases" } }
+        filter { includeGroup("dev.latvian.mods")}
+    }
+    exclusiveContent { // FTB mods
+        forRepository { maven { url = "https://maven.ftb.dev/releases" } }
+        filter { includeGroup("dev.ftb.mods") }
+    }
+    exclusiveContent { // TOP
+        forRepository { maven { url = "https://maven.k-4u.nl" } }
+        filter { includeGroup('mcjty.theoneprobe') }
+    }
+    exclusiveContent { // JourneyMap API
+        forRepository { maven { url = "https://jm.gserv.me/repository/maven-public/" } }
+        filter { includeGroup("info.journeymap") }
+    }
+    exclusiveContent { // Modrinth Maven
+        forRepository { maven { url = "https://api.modrinth.com/maven" } }
+        filter { includeGroup("maven.modrinth") }
+    }
+    exclusiveContent { // Curseforge Maven
+        forRepository { maven { url = "https://cursemaven.com" } }
+        filter { includeGroup("curse.maven") }
+    }
+    exclusiveContent { // terraformers - EMI
+        forRepository { maven { url = "https://maven.terraformersmc.com/releases/" } }
+        filter { includeGroup("dev.emi") }
+    }
+    exclusiveContent { // shedaniel - REI, architectury, cloth-config
+        forRepository { maven { url = "https://maven.shedaniel.me/" } }
+        filter {
+            includeGroupAndSubgroups("me.shedaniel")
+            includeGroup("dev.architectury")
+        }
+    }
+    exclusiveContent { // Curios
+        forRepository { maven { url = "https://maven.theillusivec4.top/" } }
+        filter { includeGroup('top.theillusivec4.curios')}
+    }
+    exclusiveContent { // KotlinForForge
+        forRepository { maven { url = "https://thedarkcolour.github.io/KotlinForForge/" } }
+        filter { includeGroup("thedarkcolour") }
+    }
+    exclusiveContent { // CC: Tweaked
+        forRepository { maven { url = "https://maven.squiddev.cc" } }
+        filter { includeGroup("cc.tweaked") }
+    }
+}
+/*
+repositories {
+    maven {
+        // location of the maven that hosts JEI files before January 2023
+        name = "Progwml6's maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of the maven that hosts JEI files since January 2023
+        name = "Jared's maven"
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+}
+repositories {
+    maven {
+        url "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+
+    maven {
+        url 'https://jitpack.io'
+        content {
+            includeGroup "com.github.rtyley"
+        }
+    }
+    maven{
+        name = "Arch Maven"
+        url 'https://maven.architectury.dev/dev/architectury/architectury-forge/'
+        content{
+            includeGroup("dev.architectury.*")
+        }
+    }
 }
 
+ */
 dependencies {
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
@@ -167,13 +276,25 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-    implementation fg.deobf("com.gregtechceu.gtceu:gtceu-${mc_version}:${gtm_version}")
+    //compileOnly fg.deobf("com.gregtechceu.gtceu:gtceu-${mc_version}:${gtm_version}-sources")
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    //api("dev.latvian.mods:kubejs-neoforge:$kubejs_version")
+    //interfaceInjectionData("dev.latvian.mods:kubejs-neoforge:$kubejs_version") // optional
+    compileOnly "org.appliedenergistics:appliedenergistics2:19.2.1-beta:api"
+    implementation fg.deobf("com.gregtechceu.gtceu:gtceu-${mc_version}:${gtm_version}")
 
+    compileOnly "com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.42"
+
+    compileOnly("dev.architectury:architectury-forge:9.1.12")
+    compileOnly "dev.latvian.mods:kubejs-neoforge:2101.7.2-build.233"
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:MC1.20-1.3.0")// http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+    //implementation("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.10.b")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    // https://mvnrepository.com/artifact/dev.architectury/architectury-forge
 
+   //compileOnly fg.deobf("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.40.b")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

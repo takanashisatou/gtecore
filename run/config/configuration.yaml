@@ -31,7 +31,7 @@ longArray:
   - 133
 
 floatArray:
-  - 135.32
+  - 500.0
   - 1561.23
 
 stringArray:

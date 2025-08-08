@@ -1,113 +1,171 @@
-[018ÔÂ2025 21:21:53.296] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, MOD_DEV, --assetIndex, 5, --assetsDir, C:\Users\Jerry\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.4, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, gtecore.mixins.json]
-[018ÔÂ2025 21:21:53.303] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.10 by Oracle Corporation; OS Windows 11 arch amd64 version 10.0
-[018ÔÂ2025 21:21:53.413] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
-[018ÔÂ2025 21:21:53.473] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
-[018ÔÂ2025 21:21:53.799] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
-[018ÔÂ2025 21:21:53.865] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/Jerry/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
-[018ÔÂ2025 21:21:53.909] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4070 Laptop GPU/PCIe/SSE2 GL version 4.6.0 NVIDIA 576.52, NVIDIA Corporation
-[018ÔÂ2025 21:21:54.255] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.4\c05c04093d241dea1d0f54782d19cfe5db9d0aac\javafmllanguage-1.20.1-47.4.4.jar is missing mods.toml file
-[018ÔÂ2025 21:21:54.257] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.4\8a8bd6d44f3f0e6a1145b9066eac84fdcfbe7108\lowcodelanguage-1.20.1-47.4.4.jar is missing mods.toml file
-[018ÔÂ2025 21:21:54.260] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.4\a8876f0a1a04237fc48a4a73692ea08e0443d2ba\mclanguage-1.20.1-47.4.4.jar is missing mods.toml file
-[018ÔÂ2025 21:21:54.262] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.4\55a693260a8a7b851c3531972ef997294c191b3e\fmlcore-1.20.1-47.4.4.jar is missing mods.toml file
-[018ÔÂ2025 21:21:54.626] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 5 dependencies adding them to mods collection
-[018ÔÂ2025 21:21:56.477] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[018ÔÂ2025 21:21:56.486] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, C:\Users\Jerry\.gradle\caches\forge_gradle\assets, --assetIndex, 5]
-[018ÔÂ2025 21:21:56.571] [main/WARN] [mixin/]: Reference map 'gtecore.refmap.json' for gtecore.mixins.json could not be read. If this is a development environment you can ignore this message
-[018ÔÂ2025 21:21:56.734] [main/INFO] [mixin/]: Remapping refMap configuration.refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
-[018ÔÂ2025 21:21:56.741] [main/INFO] [mixin/]: Remapping refMap ldlib-common-1.20.1-ldlib-common-refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
-[018ÔÂ2025 21:21:56.742] [main/INFO] [mixin/]: Remapping refMap ldlib-forge-1.20.1-ldlib-forge-refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
-[018ÔÂ2025 21:21:56.744] [main/INFO] [mixin/]: Remapping refMap gtceu.refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
-[018ÔÂ2025 21:21:57.125] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0-rc.4).
-[018ÔÂ2025 21:22:00.753] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 188 Datafixer optimizations took 110 milliseconds
-[018ÔÂ2025 21:22:02.445] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Jerry/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.4_mapped_official_1.20.1/forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[018ÔÂ2025 21:22:02.445] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Jerry/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.4_mapped_official_1.20.1/forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[018ÔÂ2025 21:22:02.468] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[018ÔÂ2025 21:22:02.472] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
-[018ÔÂ2025 21:22:02.608] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.1 build 7
-[018ÔÂ2025 21:22:02.874] [modloading-worker-0/INFO] [GregTechCEu/]: GregTechCEu is initializing...
-[018ÔÂ2025 21:22:02.902] [modloading-worker-0/INFO] [LowDragLib/]: LowDragLib is initializing on platform: Forge
-[018ÔÂ2025 21:22:02.903] [modloading-worker-0/INFO] [LowDragLib/]: create ldlib config folder
-[018ÔÂ2025 21:22:02.928] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.4, for MC 1.20.1 with MCP 20230612.114412
-[018ÔÂ2025 21:22:02.929] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.4 Initialized
-[018ÔÂ2025 21:22:03.041] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered configuration config for auto-sync function
-[018ÔÂ2025 21:22:03.098] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered gtceu config for auto-sync function
-[018ÔÂ2025 21:22:03.104] [modloading-worker-0/INFO] [GregTechCEu/]: High-Tier is Enabled.
-[018ÔÂ2025 21:22:03.414] [Render thread/INFO] [GregTechCEu/]: GTCEu common proxy init!
-[018ÔÂ2025 21:22:03.480] [Render thread/INFO] [GregTechCEu/]: Registering material registries
-[018ÔÂ2025 21:22:03.480] [Render thread/INFO] [GregTechCEu/]: Registering GTCEu Materials
-[018ÔÂ2025 21:22:03.742] [Render thread/INFO] [GregTechCEu/]: Registering addon Materials
-[018ÔÂ2025 21:22:03.861] [Render thread/WARN] [GregTechCEu/]: FluidStorageKey{gtceu:liquid} already has an associated fluid for material gtceu:water
-[018ÔÂ2025 21:22:03.924] [Render thread/WARN] [GregTechCEu/]: FluidStorageKey{gtceu:liquid} already has an associated fluid for material gtceu:lava
-[018ÔÂ2025 21:22:03.924] [Render thread/WARN] [GregTechCEu/]: FluidStorageKey{gtceu:liquid} already has an associated fluid for material gtceu:milk
-[018ÔÂ2025 21:22:05.217] [Render thread/INFO] [GregTechCEu/]: Registering KeyBinds
-[018ÔÂ2025 21:22:05.220] [Render thread/WARN] [net.minecraftforge.fml.DeferredWorkQueue/LOADING]: Mod 'gtceu' took 1.805 s to run a deferred task.
-[018ÔÂ2025 21:22:06.175] [Render thread/WARN] [mixin/]: Error loading class: dev/latvian/mods/kubejs/KubeJSPlugin (java.lang.ClassNotFoundException: dev.latvian.mods.kubejs.KubeJSPlugin)
-[018ÔÂ2025 21:22:06.177] [Render thread/WARN] [mixin/]: Error loading class: org/embeddedt/modernfix/api/entrypoint/ModernFixClientIntegration (java.lang.ClassNotFoundException: org.embeddedt.modernfix.api.entrypoint.ModernFixClientIntegration)
-[018ÔÂ2025 21:22:06.385] [Render thread/INFO] [net.minecraftforge.gametest.ForgeGameTestHooks/]: Enabled Gametest Namespaces: [gtecore]
-[018ÔÂ2025 21:22:06.592] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: gtceu:dynamic_assets, vanilla, mod_resources, ldlib
-[018ÔÂ2025 21:22:06.624] [Worker-Main-7/INFO] [org.satou.gtecore.Gtecore/]: HELLO FROM COMMON SETUP
-[018ÔÂ2025 21:22:06.624] [Worker-Main-7/INFO] [org.satou.gtecore.Gtecore/]: DIRT BLOCK >> minecraft:dirt
-[018ÔÂ2025 21:22:06.624] [Worker-Main-7/INFO] [org.satou.gtecore.Gtecore/]: DIRT BLOCK >> minecraft:dirt
-[018ÔÂ2025 21:22:06.625] [Worker-Main-7/INFO] [org.satou.gtecore.Gtecore/]: The magic number is... 42
-[018ÔÂ2025 21:22:06.625] [Worker-Main-7/INFO] [org.satou.gtecore.Gtecore/]: ITEM >> iron_ingot
-[018ÔÂ2025 21:22:06.736] [Worker-Main-3/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.0.06.hex, loading
-[018ÔÂ2025 21:22:06.747] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [configuration] Starting version check at https://raw.githubusercontent.com/Toma1O6/UpdateSchemas/master/configuration-forge.json
-[018ÔÂ2025 21:22:07.054] [Render thread/INFO] [GregTechCEu/]: GregTech Model loading took 416ms
-[018ÔÂ2025 21:22:07.275] [Worker-Main-14/INFO] [org.satou.gtecore.Gtecore/]: HELLO FROM CLIENT SETUP
-[018ÔÂ2025 21:22:07.275] [Worker-Main-14/INFO] [org.satou.gtecore.Gtecore/]: MINECRAFT NAME >> Dev
-[018ÔÂ2025 21:22:07.724] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [configuration] Found status: OUTDATED Current: 2.2.0 Target: 2.2.1
-[018ÔÂ2025 21:22:07.724] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
-[018ÔÂ2025 21:22:08.116] [Worker-Main-1/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtecore:blockstates/example_block.json' missing model for variant: 'gtecore:example_block#'
-[018ÔÂ2025 21:22:08.193] [Worker-Main-1/WARN] [net.minecraft.client.resources.model.ModelBakery/]: gtecore:example_block#inventory
-java.io.FileNotFoundException: gtecore:models/item/example_block.json
-	at net.minecraft.client.resources.model.ModelBakery.loadBlockModel(ModelBakery.java:417) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.loadModel(ModelBakery.java:266) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.getModel(ModelBakery.java:243) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.loadTopLevel(ModelBakery.java:384) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.<init>(ModelBakery.java:150) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelManager.lambda$reload$0(ModelManager.java:83) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
+[088æœˆ2025 10:18:53.624] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, MOD_DEV, --assetIndex, 5, --assetsDir, C:\Users\Jerry\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.4.4, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mixin.config, gtecore.mixins.json]
+[088æœˆ2025 10:18:53.629] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 21.0.5 by Amazon.com Inc.; OS Windows 11 arch amd64 version 10.0
+[088æœˆ2025 10:18:53.746] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[088æœˆ2025 10:18:53.798] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[088æœˆ2025 10:18:54.111] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[088æœˆ2025 10:18:54.168] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/Jerry/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[088æœˆ2025 10:18:54.372] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4070 Laptop GPU/PCIe/SSE2 GL version 4.6.0 NVIDIA 576.52, NVIDIA Corporation
+[088æœˆ2025 10:18:54.557] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.4.4\c05c04093d241dea1d0f54782d19cfe5db9d0aac\javafmllanguage-1.20.1-47.4.4.jar is missing mods.toml file
+[088æœˆ2025 10:18:54.559] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.4.4\8a8bd6d44f3f0e6a1145b9066eac84fdcfbe7108\lowcodelanguage-1.20.1-47.4.4.jar is missing mods.toml file
+[088æœˆ2025 10:18:54.561] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.4.4\a8876f0a1a04237fc48a4a73692ea08e0443d2ba\mclanguage-1.20.1-47.4.4.jar is missing mods.toml file
+[088æœˆ2025 10:18:54.563] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Jerry\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.4.4\55a693260a8a7b851c3531972ef997294c191b3e\fmlcore-1.20.1-47.4.4.jar is missing mods.toml file
+[088æœˆ2025 10:18:54.848] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 5 dependencies adding them to mods collection
+[088æœˆ2025 10:18:56.362] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[088æœˆ2025 10:18:56.373] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, C:\Users\Jerry\.gradle\caches\forge_gradle\assets, --assetIndex, 5]
+[088æœˆ2025 10:18:56.428] [main/WARN] [mixin/]: Reference map 'gtecore.refmap.json' for gtecore.mixins.json could not be read. If this is a development environment you can ignore this message
+[088æœˆ2025 10:18:56.578] [main/INFO] [mixin/]: Remapping refMap configuration.refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
+[088æœˆ2025 10:18:56.599] [main/INFO] [mixin/]: Remapping refMap ldlib-common-1.20.1-ldlib-common-refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
+[088æœˆ2025 10:18:56.601] [main/INFO] [mixin/]: Remapping refMap ldlib-forge-1.20.1-ldlib-forge-refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
+[088æœˆ2025 10:18:56.606] [main/INFO] [mixin/]: Remapping refMap gtceu.refmap.json using C:\Users\Jerry\Downloads\gtecore\build\createSrgToMcp\output.srg
+[088æœˆ2025 10:18:57.003] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0-rc.4).
+[088æœˆ2025 10:19:01.714] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 188 Datafixer optimizations took 114 milliseconds
+[088æœˆ2025 10:19:02.974] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Jerry/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.4_mapped_official_1.20.1/forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[088æœˆ2025 10:19:02.974] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Jerry/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.4.4_mapped_official_1.20.1/forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[088æœˆ2025 10:19:02.989] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[088æœˆ2025 10:19:02.993] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[088æœˆ2025 10:19:03.057] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.1 build 7
+[088æœˆ2025 10:19:03.232] [modloading-worker-0/INFO] [GregTechCEu/]: GregTechCEu is initializing...
+[088æœˆ2025 10:19:03.251] [modloading-worker-0/INFO] [LowDragLib/]: LowDragLib is initializing on platform: Forge
+[088æœˆ2025 10:19:03.274] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.4, for MC 1.20.1 with MCP 20230612.114412
+[088æœˆ2025 10:19:03.298] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.4.4 Initialized
+[088æœˆ2025 10:19:03.347] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered configuration config for auto-sync function
+[088æœˆ2025 10:19:03.347] [modloading-worker-0/INFO] [Configuration/FileWatching]: Registered gtceu config for auto-sync function
+[088æœˆ2025 10:19:03.436] [modloading-worker-0/INFO] [GregTechCEu/]: High-Tier is Enabled.
+[088æœˆ2025 10:19:03.646] [Render thread/INFO] [GregTechCEu/]: GTCEu common proxy init!
+[088æœˆ2025 10:19:03.693] [Render thread/INFO] [GregTechCEu/]: Registering material registries
+[088æœˆ2025 10:19:03.694] [Render thread/INFO] [GregTechCEu/]: Registering GTCEu Materials
+[088æœˆ2025 10:19:03.869] [Render thread/INFO] [GregTechCEu/]: Registering addon Materials
+[088æœˆ2025 10:19:03.952] [Render thread/WARN] [GregTechCEu/]: FluidStorageKey{gtceu:liquid} already has an associated fluid for material gtceu:water
+[088æœˆ2025 10:19:04.006] [Render thread/WARN] [GregTechCEu/]: FluidStorageKey{gtceu:liquid} already has an associated fluid for material gtceu:lava
+[088æœˆ2025 10:19:04.006] [Render thread/WARN] [GregTechCEu/]: FluidStorageKey{gtceu:liquid} already has an associated fluid for material gtceu:milk
+[088æœˆ2025 10:19:04.956] [Render thread/INFO] [GregTechCEu/]: Registering KeyBinds
+[088æœˆ2025 10:19:04.957] [Render thread/WARN] [net.minecraftforge.fml.DeferredWorkQueue/LOADING]: Mod 'gtceu' took 1.311 s to run a deferred task.
+[088æœˆ2025 10:19:05.856] [Render thread/WARN] [mixin/]: Error loading class: dev/latvian/mods/kubejs/KubeJSPlugin (java.lang.ClassNotFoundException: dev.latvian.mods.kubejs.KubeJSPlugin)
+[088æœˆ2025 10:19:05.858] [Render thread/WARN] [mixin/]: Error loading class: org/embeddedt/modernfix/api/entrypoint/ModernFixClientIntegration (java.lang.ClassNotFoundException: org.embeddedt.modernfix.api.entrypoint.ModernFixClientIntegration)
+[088æœˆ2025 10:19:06.029] [Render thread/INFO] [net.minecraftforge.gametest.ForgeGameTestHooks/]: Enabled Gametest Namespaces: [gtecore]
+[088æœˆ2025 10:19:06.199] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: gtceu:dynamic_assets, vanilla, mod_resources, ldlib
+[088æœˆ2025 10:19:06.306] [Worker-Main-8/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.0.06.hex, loading
+[088æœˆ2025 10:19:06.316] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [configuration] Starting version check at https://raw.githubusercontent.com/Toma1O6/UpdateSchemas/master/configuration-forge.json
+[088æœˆ2025 10:19:06.652] [Render thread/INFO] [GregTechCEu/]: GregTech Model loading took 411ms
+[088æœˆ2025 10:19:06.844] [Worker-Main-29/INFO] [com.mojang.text2speech.Narrator/]: HELLO FROM CLIENT SETUP
+[088æœˆ2025 10:19:06.846] [Worker-Main-29/INFO] [com.mojang.text2speech.Narrator/]: MINECRAFT NAME >> Dev
+[088æœˆ2025 10:19:07.085] [Worker-Main-11/ERROR] [net.minecraft.Util/]: Invalid path in pack: gtceu:models/block/æ–‡æ¡£ - å¿«æ·æ–¹å¼.lnk, ignoring
+[088æœˆ2025 10:19:07.289] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [configuration] Found status: OUTDATED Current: 2.2.0 Target: 2.2.1
+[088æœˆ2025 10:19:07.290] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[088æœˆ2025 10:19:07.860] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=east': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=north': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=south': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=west': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=east': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=west': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=south': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_alloy.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=north': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.861] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: gtceu:block/machine/big_alloy
+java.io.FileNotFoundException: gtceu:models/block/machine/big_alloy.json
+	at net.minecraft.client.resources.model.ModelBakery.loadBlockModel(ModelBakery.java:417) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.loadModel(ModelBakery.java:262) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.getModel(ModelBakery.java:243) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.loadTopLevel(ModelBakery.java:384) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.lambda$new$7(ModelBakery.java:143) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at com.google.common.collect.ImmutableList.forEach(ImmutableList.java:422) ~[guava-31.1-jre.jar%23106!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.<init>(ModelBakery.java:142) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelManager.lambda$reload$0(ModelManager.java:83) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
 	at java.util.concurrent.CompletableFuture.biApply(CompletableFuture.java:1311) ~[?:?]
 	at java.util.concurrent.CompletableFuture$BiApply.tryFire(CompletableFuture.java:1280) ~[?:?]
 	at java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483) ~[?:?]
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
-	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
-	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
-[018ÔÂ2025 21:22:08.195] [Worker-Main-1/WARN] [net.minecraft.client.resources.model.ModelBakery/]: gtecore:example_item#inventory
-java.io.FileNotFoundException: gtecore:models/item/example_item.json
-	at net.minecraft.client.resources.model.ModelBakery.loadBlockModel(ModelBakery.java:417) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.loadModel(ModelBakery.java:266) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.getModel(ModelBakery.java:243) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.loadTopLevel(ModelBakery.java:384) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelBakery.<init>(ModelBakery.java:150) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
-	at net.minecraft.client.resources.model.ModelManager.lambda$reload$0(ModelManager.java:83) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1.jar%23191!/:?]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+[088æœˆ2025 10:19:07.862] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=east': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=north': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=south': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=west': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=east': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=west': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=down,upwards_facing=south': Unknown value: 'down' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'gtceu:blockstates/big_compressor.json' in resourcepack: 'mod_resources' for variant: 'facing=up,upwards_facing=north': Unknown value: 'up' for blockstate property: 'facing' [north, south, west, east]
+[088æœˆ2025 10:19:07.864] [Worker-Main-29/WARN] [net.minecraft.client.resources.model.ModelBakery/]: gtceu:block/machine/big_compressor
+java.io.FileNotFoundException: gtceu:models/block/machine/big_compressor.json
+	at net.minecraft.client.resources.model.ModelBakery.loadBlockModel(ModelBakery.java:417) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.loadModel(ModelBakery.java:262) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.getModel(ModelBakery.java:243) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.loadTopLevel(ModelBakery.java:384) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.lambda$new$7(ModelBakery.java:143) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at com.google.common.collect.ImmutableList.forEach(ImmutableList.java:422) ~[guava-31.1-jre.jar%23106!/:?]
+	at net.minecraft.client.resources.model.ModelBakery.<init>(ModelBakery.java:142) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
+	at net.minecraft.client.resources.model.ModelManager.lambda$reload$0(ModelManager.java:83) ~[forge-1.20.1-47.4.4_mapped_official_1.20.1-recomp.jar%23191!/:?]
 	at java.util.concurrent.CompletableFuture.biApply(CompletableFuture.java:1311) ~[?:?]
 	at java.util.concurrent.CompletableFuture$BiApply.tryFire(CompletableFuture.java:1280) ~[?:?]
 	at java.util.concurrent.CompletableFuture$Completion.exec(CompletableFuture.java:483) ~[?:?]
-	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:373) ~[?:?]
-	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1182) ~[?:?]
-	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
-	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
-	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
-[018ÔÂ2025 21:22:10.053] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: AHEAD Current: 47.4.4 Target: null
-[018ÔÂ2025 21:22:11.863] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
-[018ÔÂ2025 21:22:11.863] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
-[018ÔÂ2025 21:22:12.376] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on ÑïÉùÆ÷ (Realtek(R) Audio)
-[018ÔÂ2025 21:22:12.377] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
-[018ÔÂ2025 21:22:12.480] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
-[018ÔÂ2025 21:22:12.494] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
-[018ÔÂ2025 21:22:12.497] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[018ÔÂ2025 21:22:12.498] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[018ÔÂ2025 21:22:12.498] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
-[018ÔÂ2025 21:22:12.500] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[018ÔÂ2025 21:22:12.502] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
-[018ÔÂ2025 21:22:12.502] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[018ÔÂ2025 21:22:12.502] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[018ÔÂ2025 21:22:12.613] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
-[018ÔÂ2025 21:22:12.694] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
-[018ÔÂ2025 21:22:12.695] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
-[018ÔÂ2025 21:22:12.695] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[018ÔÂ2025 21:22:13.163] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient/]: Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: 0
-[018ÔÂ2025 21:22:20.119] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
-[018ÔÂ2025 21:22:20.122] [Render thread/WARN] [Configuration/IO]: Correcting config value 'floatArray[0]' from '135.32' to '500.0'
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:387) ~[?:?]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.topLevelExec(ForkJoinPool.java:1312) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1843) ~[?:?]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1808) ~[?:?]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:188) ~[?:?]
+[088æœˆ2025 10:19:08.014] [Worker-Main-29/ERROR] [net.minecraft.Util/]: Invalid path in pack: gtceu:models/block/æ–‡æ¡£ - å¿«æ·æ–¹å¼.lnk, ignoring
+[088æœˆ2025 10:19:08.218] [Forge Version Check/INFO] [net.minecraftforge.fml.VersionChecker/]: [forge] Found status: OUTDATED Current: 47.4.4 Target: 47.4.6
+[088æœˆ2025 10:19:10.976] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[088æœˆ2025 10:19:10.976] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[088æœˆ2025 10:19:11.340] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on æ‰¬å£°å™¨ (Realtek(R) Audio)
+[088æœˆ2025 10:19:11.340] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[088æœˆ2025 10:19:11.421] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[088æœˆ2025 10:19:11.431] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[088æœˆ2025 10:19:11.434] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[088æœˆ2025 10:19:11.435] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[088æœˆ2025 10:19:11.435] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[088æœˆ2025 10:19:11.436] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[088æœˆ2025 10:19:11.437] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[088æœˆ2025 10:19:11.438] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[088æœˆ2025 10:19:11.438] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[088æœˆ2025 10:19:11.505] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[088æœˆ2025 10:19:11.539] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[088æœˆ2025 10:19:11.540] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[088æœˆ2025 10:19:11.541] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[088æœˆ2025 10:19:12.002] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient/]: Could not authorize you against Realms server: java.lang.RuntimeException: Failed to parse into SignedJWT: 0
+[088æœˆ2025 10:19:17.288] [Render thread/INFO] [GregTechCEu/]: Registering dungeon loot...
+[088æœˆ2025 10:19:17.291] [Render thread/INFO] [GregTechCEu/]: GregTech Data loading took 2561ms
+[088æœˆ2025 10:19:17.323] [Render thread/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: Injecting existing registry data into this CLIENT instance
+[088æœˆ2025 10:19:19.344] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 63 recipes
+[088æœˆ2025 10:19:19.436] [Render thread/WARN] [GregTechCEu/]: Recipe duplicate or conflict found in GTRecipeType gtceu:cutter and was not added. See next lines for details
+[088æœˆ2025 10:19:19.436] [Render thread/WARN] [GregTechCEu/]: Attempted to add GTRecipe: gtceu:cutter/cut_stoneslab_into_button_distilled_water
+[088æœˆ2025 10:19:19.436] [Render thread/WARN] [GregTechCEu/]: Which conflicts with: gtceu:cutter/stone_pressure_plate_distilled_water
+[088æœˆ2025 10:19:19.437] [Render thread/WARN] [GregTechCEu/]: Recipe duplicate or conflict found in GTRecipeType gtceu:cutter and was not added. See next lines for details
+[088æœˆ2025 10:19:19.437] [Render thread/WARN] [GregTechCEu/]: Attempted to add GTRecipe: gtceu:cutter/stone_pressure_plate_water
+[088æœˆ2025 10:19:19.437] [Render thread/WARN] [GregTechCEu/]: Which conflicts with: gtceu:cutter/cut_stoneslab_into_button_water
+[088æœˆ2025 10:19:19.440] [Render thread/WARN] [GregTechCEu/]: Recipe duplicate or conflict found in GTRecipeType gtceu:cutter and was not added. See next lines for details
+[088æœˆ2025 10:19:19.440] [Render thread/WARN] [GregTechCEu/]: Attempted to add GTRecipe: gtceu:cutter/stone_pressure_plate
+[088æœˆ2025 10:19:19.440] [Render thread/WARN] [GregTechCEu/]: Which conflicts with: gtceu:cutter/cut_stoneslab_into_button
+[088æœˆ2025 10:19:19.638] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 1271 advancements
+[088æœˆ2025 10:19:20.150] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.20.1
+[088æœˆ2025 10:19:20.150] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[088æœˆ2025 10:19:20.739] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[088æœˆ2025 10:19:21.920] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: å‡†å¤‡ç”ŸæˆåŒºåŸŸä¸­ï¼š0%
+[088æœˆ2025 10:19:21.920] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: å‡†å¤‡ç”ŸæˆåŒºåŸŸä¸­ï¼š0%
+[088æœˆ2025 10:19:21.920] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: å‡†å¤‡ç”ŸæˆåŒºåŸŸä¸­ï¼š0%
+[088æœˆ2025 10:19:22.255] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: å‡†å¤‡ç”ŸæˆåŒºåŸŸä¸­ï¼š61%
+[088æœˆ2025 10:19:22.345] [Server thread/INFO] [net.minecraftforge.server.permission.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[088æœˆ2025 10:19:22.345] [Server thread/INFO] [com.mojang.text2speech.Narrator/]: HELLO from server starting
+[088æœˆ2025 10:19:22.361] [Render thread/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 1618 ms
+[088æœˆ2025 10:19:22.431] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[088æœˆ2025 10:19:22.432] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[088æœˆ2025 10:19:22.557] [Render thread/WARN] [io.netty.util.internal.SystemPropertyUtil/]: Unable to parse the boolean system property 'java.net.preferIPv6Addresses':system - using the default value: false
+[088æœˆ2025 10:19:23.062] [Netty Local Client IO #0/INFO] [net.minecraftforge.network.NetworkHooks/]: Connected to a modded server.
+[088æœˆ2025 10:19:23.094] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:68186de3] logged in with entity id 74 at (-45.17365575314663, 69.53292827534491, -105.71716073499697)
+[088æœˆ2025 10:19:23.189] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: DevåŠ å…¥äº†æ¸¸æˆ
+[088æœˆ2025 10:19:24.402] [Render thread/INFO] [net.minecraft.advancements.AdvancementList/]: Loaded 39 advancements
+[088æœˆ2025 10:20:04.033] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
+[088æœˆ2025 10:20:04.052] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: è¿æ¥ä¸­æ–­
+[088æœˆ2025 10:20:04.052] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Devé€€å‡ºäº†æ¸¸æˆ
+[088æœˆ2025 10:20:04.059] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Stopping singleplayer server as player logged out
+[088æœˆ2025 10:20:04.098] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[088æœˆ2025 10:20:04.098] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[088æœˆ2025 10:20:04.098] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[088æœˆ2025 10:20:04.317] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[æ–°çš„ä¸–ç•Œ]'/minecraft:overworld
+[088æœˆ2025 10:20:04.657] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[æ–°çš„ä¸–ç•Œ]'/minecraft:the_nether
+[088æœˆ2025 10:20:04.658] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[æ–°çš„ä¸–ç•Œ]'/minecraft:the_end
+[088æœˆ2025 10:20:04.697] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (æ–°çš„ä¸–ç•Œ): All chunks are saved
+[088æœˆ2025 10:20:04.697] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[088æœˆ2025 10:20:04.697] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[088æœˆ2025 10:20:04.697] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved

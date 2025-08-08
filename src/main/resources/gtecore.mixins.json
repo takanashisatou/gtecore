@@ -2,9 +2,11 @@
   "required": true,
   "minVersion": "0.8",
   "package": "org.satou.gtecore.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "gtecore.refmap.json",
   "mixins": [
+    "gtemultimachinemixin",
+    "steammachinemixin"
   ],
   "client": [
   ],

@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Specification-Title: gtecore
-Specification-Vendor: 
+Specification-Vendor: satou
 Specification-Version: 1
 Implementation-Title: gtecore
 Implementation-Version: 1.0-SNAPSHOT
-Implementation-Vendor: 
-Implementation-Timestamp: 2025-08-01T21:18:27+0800
+Implementation-Vendor: satou
+Implementation-Timestamp: 2025-08-07T22:51:37+0800
 MixinConfigs: gtecore.mixins.json
 
