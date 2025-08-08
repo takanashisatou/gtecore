@@ -33,6 +33,8 @@ public interface steammachinemixin {// 注入机器并行
     default @NotNull ModifierFunction getModifier(MetaMachine machine, GTRecipe recipe, long maxVoltage,
                                                   boolean shouldParallel) {
         long EUt = RecipeHelper.getRealEUt(recipe).getTotalEU();
+        recipe.duration /= 20;
+        if(recipe.duration == 0) recipe.duration = 1;
         if (EUt == 0) return ModifierFunction.IDENTITY;
 
         int recipeTier = GTUtil.getTierByVoltage(EUt);
@@ -59,8 +61,7 @@ public interface steammachinemixin {// 注入机器并行
             }
         }
         //maxParallels *= 64;
-        recipe.duration /= 20;
-        if(recipe.duration == 0) recipe.duration = 1;
+
         OverclockingLogic.OCParams params = new OverclockingLogic.OCParams(EUt, recipe.duration, OCs, maxParallels);
         OverclockingLogic.OCResult result = runOverclockingLogic(params, maxVoltage);
         return result.toModifier();
