@@ -71,7 +71,7 @@ public class Gtecore {
     public static final String MODID = "gtecore";
     // Directly reEXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
     // Creates a new BlockItem with the id "gteference a slf4j logger
-    //    private static final Logger LOGGER = LogUtils.getLogger();
+       public static final Logger LOP = LogUtils.getLogger();
     //    // Create a Deferred Register to hold Blocks which will all be registered under the "gtecore" namespace
     //    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     //    // Create a Deferred Register to hold Items which will all be registered under the "gtecore" namespace

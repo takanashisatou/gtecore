@@ -1,4 +1,14 @@
 {
-  "mappings": {},
-  "data": {}
+  "mappings": {
+    "org/satou/gtecore/mixin/diamondmixin": {
+      "getFuel": "Lnet/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity;m_58423_()Ljava/util/Map;"
+    }
+  },
+  "data": {
+    "searge": {
+      "org/satou/gtecore/mixin/diamondmixin": {
+        "getFuel": "Lnet/minecraft/world/level/block/entity/AbstractFurnaceBlockEntity;m_58423_()Ljava/util/Map;"
+      }
+    }
+  }
 }

@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "gtecore.refmap.json",
   "mixins": [
+    "diamondmixin",
     "gtemultimachinemixin",
     "steammachinemixin"
   ],
