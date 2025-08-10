@@ -9,7 +9,6 @@
     <facet type="minecraft" name="Minecraft">
       <configuration>
         <autoDetectTypes>
-          <platformType>ARCHITECTURY</platformType>
           <platformType>FORGE</platformType>
           <platformType>MIXIN</platformType>
           <platformType>MCP</platformType>

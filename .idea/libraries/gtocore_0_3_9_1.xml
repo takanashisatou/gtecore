@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gtocore-0.3.9.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/gtocore-0.3.9.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

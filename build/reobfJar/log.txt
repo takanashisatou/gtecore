@@ -203,6 +203,7 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   org/satou/gtecore/Gtecore$ClientModEvents.class
   org/satou/gtecore/Gtecore.class
   org/satou/gtecore/mixin/
+  org/satou/gtecore/mixin/diamondmixin.class
   org/satou/gtecore/mixin/gtemultimachinemixin.class
   org/satou/gtecore/mixin/steammachinemixin.class
   pack.mcmeta
