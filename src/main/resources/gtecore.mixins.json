@@ -6,7 +6,6 @@
   "refmap": "gtecore.refmap.json",
   "mixins": [
     "diamondmixin",
-    "gtemultimachinemixin",
     "steam_hatch_mixin",
     "steammachinemixin",
   ],

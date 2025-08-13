@@ -215,7 +215,7 @@ repositories {
         filter { includeGroup("cc.tweaked") }
     }
 }
-/*
+
 repositories {
     maven {
         // location of the maven that hosts JEI files before January 2023
@@ -257,7 +257,7 @@ repositories {
     }
 }
 
- */
+
 dependencies {
     // Specify the version of Minecraft to use.
     // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
@@ -265,7 +265,11 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
+    //implementation fg.deobf("mezz.jei:jei-1.20.1-forge:14.0.0.41")
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
+    compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
+    // at runtime, use the full JEI jar for Forge
+    runtimeOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"))
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
@@ -285,11 +289,10 @@ dependencies {
     implementation fg.deobf("com.gregtechceu.gtceu:gtceu-${mc_version}:${gtm_version}")
 
     compileOnly "com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.42"
-
     compileOnly("dev.architectury:architectury-forge:9.1.12")
     compileOnly "dev.latvian.mods:kubejs-neoforge:2101.7.2-build.233"
     compileOnly fg.deobf("com.tterrag.registrate:Registrate:MC1.20-1.3.0")// http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    //runtimeOnly(fg.deobf("com.hepdd.gtmthings:gtmthings:1.5.2"))
     //implementation("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.10.b")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     // https://mvnrepository.com/artifact/dev.architectury/architectury-forge

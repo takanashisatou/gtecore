@@ -5,6 +5,7 @@ import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
@@ -53,6 +54,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
+import org.satou.gtecore.common.registry.GTECoreRegistration;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -71,6 +73,7 @@ import static net.minecraft.resources.ResourceLocation.tryBuild;
 
 //@Mod.EventBusSubscriber(modid = "gtecore", bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Gtecore {
+    public static final String NAME = "GTE Core";
     public static String MOD_ID = "gtecore";
     //public static final String MODID = "gtecore";
     public static ResourceLocation id(String name) {
@@ -101,12 +104,15 @@ public class Gtecore {
     //    public static final RegistryObject<Block> core:example_block", combining the namespace and path
 
 
-    public Gtecore() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
-        // Register the commonSetup method for modloading
+    public Gtecore(FMLJavaModLoadingContext context) {
+        IEventBus modEventBus = context.getModEventBus();
         ConfigHolder.init();
         ConfigHolder.INSTANCE.machines.steamMultiParallelAmount = 1024;
+        GTECoreRegistration.GTECore_REGISTRATE.registerEventListeners(modEventBus);
+        modEventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
+        modEventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
+        // Register the commonSetup method for modloading
+
         // Register the Deferred Register to the mod event bus so blocks get registered
 
         // Register ourselves for server and other game events we are interested in
@@ -119,7 +125,9 @@ public class Gtecore {
 
 
     }
-
+    private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
+        GTEMultiMachine.init();
+    }
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
             GTERecipeTypes.init();
     }

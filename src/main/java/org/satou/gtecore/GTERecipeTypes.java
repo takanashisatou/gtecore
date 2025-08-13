@@ -21,13 +21,14 @@ public class GTERecipeTypes {
         GTRegistries.RECIPE_TYPES.register(recipeType.registryName, recipeType);
         return recipeType;
     }
-    public final static GTRecipeType EASY_BOX = register("easu_box","multiblock")
-            .setMaxIOSize(80, 1, 0, 0).setEUIO(IO.IN)
-            .setSlotOverlay(false, false, GuiTextures.FURNACE_OVERLAY_1)
+    public final static GTRecipeType EASY_BOX = register("easy_box","multiblock")
+            .setMaxIOSize(1, 80, 0, 0).setEUIO(IO.IN)
+            //.setSlotOverlay(false, false,GuiTextures.SLOT)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
-            .setIconSupplier(() -> GTMachines.ALLOY_SMELTER[GTValues.LV].asStack())
-            .setSteamProgressBar(GuiTextures.PROGRESS_BAR_ARROW_STEAM, LEFT_TO_RIGHT)
-            .setSound(GTSoundEntries.FURNACE);
+            .setSteamProgressBar(GuiTextures.PROGRESS_BAR_ARROW_STEAM, LEFT_TO_RIGHT);
+    public final static GTRecipeType Component_Factory = register("component_factory","multiblock")
+            .setMaxIOSize(2,16,0,0).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public static void init() {
     }
 }
