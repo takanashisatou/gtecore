@@ -8,13 +8,14 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.satou.gtecore.GTECore;
 
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
 
 public class GTERecipeTypes {
 
     public static GTRecipeType register(String name, String group, RecipeType<?>... proxyRecipes) {
-        var recipeType = new GTRecipeType(Gtecore.id(name), group, proxyRecipes);
+        var recipeType = new GTRecipeType(GTECore.id(name), group, proxyRecipes);
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, recipeType.registryName, recipeType);
         GTRegistries.register(BuiltInRegistries.RECIPE_SERIALIZER, recipeType.registryName, new GTRecipeSerializer());
         GTRegistries.RECIPE_TYPES.register(recipeType.registryName, recipeType);
