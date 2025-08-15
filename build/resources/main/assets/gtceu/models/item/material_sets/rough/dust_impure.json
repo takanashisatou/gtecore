@@ -1,7 +1,0 @@
-{
-  "parent": "gtceu:item/material_sets/fine/dust_impure",
-  "textures": {
-    "layer0": "gtceu:item/material_sets/rough/dust",
-    "layer1": "gtceu:item/material_sets/rough/dust_secondary"
-  }
-}
