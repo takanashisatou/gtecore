@@ -1,0 +1,130 @@
+[versions]
+ldlib = "1.0.42"
+registrate = "MC1.20-1.3.11"
+configuration = "3.1.0-forge"
+gtm = "7.1.4"
+mixinExtras = "0.5.0-rc.3"
+
+jei = "15.20.0.106"
+emi = "1.1.13+1.20.1"
+ae2 = "15.4.8"
+guideme = "20.1.11"
+kubejs = "2001.6.5-build.16"
+rhino = "2001.2.3-build.10"
+architectury = "9.2.14"
+curios = "5.9.1+1.20.1"
+shimmer = "1.20.1-0.2.4"
+modernui = "bFqOmRXG" #3.11.1.6
+
+resourcefullib = "2.1.29"
+resourcefulconfig = "2.1.3"
+botarium = "2.3.4"
+ad_astra = "1.15.20"
+
+patchouli = "1.20.1-84-FORGE"
+botania = "1.20.1-449-FORGE"
+libx = "1.20.1-5.0.14"
+mythicbotany = "1.20.1-4.0.4"
+
+## ftb mod ##
+ftblibrary = "2001.2.10"
+ftbteams = "2001.3.1"
+ftbultimine = "2001.1.6"
+ftbquests = "2001.4.14"
+ftbchunks = "2001.3.6"
+ftbessentials = "2001.2.3"
+ftbxmodcompat = "2.1.3"
+
+## sophisticated ##
+sophisticated-core = "1.20.1-1.2.80.1073"
+sophisticated-backpacks = "1.20.1-3.23.23.1289"
+sophisticated-storage = "1.20.1-1.3.58.1217"
+
+## modrinth maven ##
+jade = "11.6.3"
+cloth-config = "11.1.136+forge"
+ae2wtlib = "15.2.3-forge"
+glodium = "1.20-1.5-forge"
+extendedae = "1.20-1.4.2-forge"
+re-avaritia = "1.3.8.3"
+chisel-reborn = "forge-1.20.1-2.0.0"
+cryonicconfig = "forge-1.20.1-1.0.0"
+jer = "1.4.0.247"
+emitrades = "forge-1.2.1+mc1.20.1"
+embeddium = "0.3.31+mc1.20.1"
+oculus = "1.20.1-1.8.0"
+ferritecore = "6.0.1"
+modernfix = "5.24.4+mc1.20.1"
+
+## curseforge maven ##
+
+## libs ##
+mana = "1.4+1.20.1-forge"
+jech = "4.5.11-dev-shadow"
+gtmt = "1.5.4"
+
+
+[libraries]
+ldlib               = { module = "com.lowdragmc.ldlib:ldlib-forge-1.20.1", version.ref = "ldlib" }
+registrate          = { module = "com.tterrag.registrate:Registrate", version.ref = "registrate" }
+configuration       = { module = "dev.toma.configuration:configuration-1.20.1", version.ref = "configuration" }
+gtm                 = { module = "com.gregtechceu.gtceu:gtceu-1.20.1", version.ref = "gtm"}
+mixinExtras-common  = { module = "io.github.llamalad7:mixinextras-common", version.ref = "mixinExtras" }
+
+jei-common-api      = { module = "mezz.jei:jei-1.20.1-common-api", version.ref = "jei" }
+jei-forge-api       = { module = "mezz.jei:jei-1.20.1-forge-api", version.ref = "jei" }
+jei-forge-impl      = { module = "mezz.jei:jei-1.20.1-forge", version.ref = "jei" }
+emi                 = { module = "dev.emi:emi-forge", version.ref = "emi" }
+jer                 = { module = "maven.modrinth:just-enough-resources-jer", version.ref = "jer" }
+emitrades           = { module = "maven.modrinth:emitrades", version.ref = "emitrades" }
+
+ae2                 = { module = "appeng:appliedenergistics2-forge", version.ref = "ae2" }
+guideme             = { module = "org.appliedenergistics:guideme", version.ref = "guideme" }
+architectury        = { module = "dev.architectury:architectury-forge", version.ref = "architectury" }
+kubejs              = { module = "dev.latvian.mods:kubejs-forge", version.ref = "kubejs" }
+rhino               = { module = "dev.latvian.mods:rhino-forge", version.ref = "rhino" }
+curios              = { module = "top.theillusivec4.curios:curios-forge", version.ref = "curios" }
+shimmer             = { module = "com.lowdragmc.shimmer:Shimmer-forge", version.ref = "shimmer" }
+ae2wtlib            = { module = "maven.modrinth:applied-energistics-2-wireless-terminals", version.ref = "ae2wtlib" }
+clothconfig         = { module = "maven.modrinth:cloth-config", version.ref = "cloth-config" }
+glodium             = { module = "maven.modrinth:glodium", version.ref = "glodium" }
+extendedae          = { module = "maven.modrinth:JiOqfoFM", version.ref = "extendedae" }
+reavaritia          = { module = "maven.modrinth:re-avaritia", version.ref = "re-avaritia" }
+chiselreborn        = { module = "maven.modrinth:chisel-reborn", version.ref = "chisel-reborn" }
+cryonicconfig       = { module = "maven.modrinth:cryonicconfig", version.ref = "cryonicconfig" }
+jade                = { module = "maven.modrinth:jade", version.ref = "jade" }
+embeddium           = { module = "maven.modrinth:embeddium", version.ref = "embeddium" }
+oculus              = { module = "maven.modrinth:oculus", version.ref = "oculus" }
+ferritecore         = { module = "maven.modrinth:uXXizFIs", version.ref = "ferritecore" }
+modernfix           = { module = "maven.modrinth:modernfix", version.ref = "modernfix" }
+modernui            = { module = "maven.modrinth:modern-ui", version.ref = "modernui" }
+
+resourcefullib      = { module = "com.teamresourceful.resourcefullib:resourcefullib-forge-1.20.1", version.ref = "resourcefullib"}
+resourcefulconfig   = { module = "com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-1.20.1", version.ref = "resourcefulconfig"}
+botarium            = { module = "earth.terrarium.botarium:botarium-forge-1.20.1", version.ref = "botarium"}
+adastra             = { module = "earth.terrarium.adastra:ad_astra-forge-1.20.1", version.ref = "ad_astra"}
+
+patchouli           = { module = "vazkii.patchouli:Patchouli", version.ref = "patchouli" }
+botania             = { module = "vazkii.botania:Botania", version.ref = "botania" }
+libx                = { module = "org.moddingx:LibX", version.ref = "libx" }
+mythicbotany        = { module = "maven.modrinth:mythicbotany", version.ref = "mythicbotany" }
+
+ftblibrary          = { module = "dev.ftb.mods:ftb-library-forge", version.ref = "ftblibrary" }
+ftbteams            = { module = "dev.ftb.mods:ftb-teams-forge", version.ref = "ftbteams" }
+ftbquests           = { module = "dev.ftb.mods:ftb-quests-forge", version.ref = "ftbquests" }
+ftbchunks           = { module = "dev.ftb.mods:ftb-chunks-forge", version.ref = "ftbchunks" }
+ftbultimine         = { module = "dev.ftb.mods:ftb-ultimine-forge", version.ref = "ftbultimine" }
+ftbessentials       = { module = "dev.ftb.mods:ftb-essentials-forge", version.ref = "ftbessentials" }
+ftbxmodcompat       = { module = "dev.ftb.mods:ftb-xmod-compat-forge", version.ref = "ftbxmodcompat" }
+
+sophisticatedcore  = { module = "maven.modrinth:nmoqTijg", version.ref = "sophisticated-core" }
+sophisticatedbackpacks = { module = "maven.modrinth:TyCTlI4b", version.ref = "sophisticated-backpacks" }
+sophisticatedstorage = { module = "maven.modrinth:hMlaZH8f", version.ref = "sophisticated-storage" }
+
+
+manapeeper          = { module = "dev:ManaPeeper", version.ref = "mana" }
+jecharacters        = { module = "dev:jecharacters-1.20.1-forge", version.ref = "jech" }
+gtmthings           = { module = "dev:gtmthings", version.ref = "gtmt" }
+[bundles]
+jei = ["jei-common-api", "jei-forge-api", "jei-forge-impl"]
+kjs = ["kubejs", "rhino", "architectury"]
