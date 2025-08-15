@@ -1,5 +1,7 @@
 package org.satou.gtecore.common.data.machines;
 
+import org.satou.gtecore.common.data.GTERecipeTypes;
+
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
@@ -21,7 +23,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
-import org.satou.gtecore.common.data.GTERecipeTypes;
 
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.controller;

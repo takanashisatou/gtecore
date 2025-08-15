@@ -1,5 +1,7 @@
 package org.satou.gtecore.common.data;
 
+import org.satou.gtecore.GTECore;
+
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.recipe.GTRecipeSerializer;
@@ -8,8 +10,8 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
-import org.satou.gtecore.GTECore;
 
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
 
 public class GTERecipeTypes {
@@ -22,12 +24,12 @@ public class GTERecipeTypes {
         return recipeType;
     }
 
-    public final static GTRecipeType EASY_BOX = register("easy_box", "multiblock")
+    public final static GTRecipeType EASY_BOX = register("easy_box", MULTIBLOCK)
             .setMaxIOSize(1, 80, 0, 0).setEUIO(IO.IN)
             // .setSlotOverlay(false, false,GuiTextures.SLOT)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
             .setSteamProgressBar(GuiTextures.PROGRESS_BAR_ARROW_STEAM, LEFT_TO_RIGHT);
-    public final static GTRecipeType Component_Factory = register("component_factory", "multiblock")
+    public final static GTRecipeType Component_Factory = register("component_factory", MULTIBLOCK)
             .setMaxIOSize(2, 16, 0, 0).setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
 

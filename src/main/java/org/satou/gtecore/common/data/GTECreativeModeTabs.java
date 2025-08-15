@@ -1,14 +1,15 @@
 package org.satou.gtecore.common.data;
 
+import org.satou.gtecore.GTECore;
+
 import com.gregtechceu.gtceu.common.data.GTCreativeModeTabs;
 
 import net.minecraft.world.item.CreativeModeTab;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import org.satou.gtecore.GTECore;
 
-import static org.satou.gtecore.common.data.machines.GTEMultiMachine.Easy_Box;
 import static org.satou.gtecore.api.registry.GTECoreRegistration.GTECore_REGISTRATE;
+import static org.satou.gtecore.common.data.machines.GTEMultiMachine.Easy_Box;
 
 public class GTECreativeModeTabs {
 
