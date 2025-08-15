@@ -1,2 +1,0 @@
-org/satou/gtecore/mixin/diamondmixin add (Ljava/util/Map;Lnet/minecraft/tags/TagKey;I)V m_204302_
-org/satou/gtecore/mixin/diamondmixin add (Ljava/util/Map;Lnet/minecraft/world/level/ItemLike;I)V m_58374_
