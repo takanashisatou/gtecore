@@ -166,9 +166,11 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/
   assets/gtceu/blockstates/
   assets/gtceu/blockstates/big_alloy.json
+  assets/gtceu/blockstates/big_bender.json
   assets/gtceu/blockstates/big_compressor.json
   assets/gtceu/blockstates/big_forge_hammer.json
   assets/gtceu/blockstates/big_steam_extractor.json
+  assets/gtceu/blockstates/big_wiremill.json
   assets/gtceu/blockstates/component_factory.json
   assets/gtceu/blockstates/easy_box.json
   assets/gtceu/lang/
@@ -206,9 +208,11 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/models/block/lamp_off.json
   assets/gtceu/models/block/machine/
   assets/gtceu/models/block/machine/big_alloy.json
+  assets/gtceu/models/block/machine/big_bender.json
   assets/gtceu/models/block/machine/big_compressor.json
   assets/gtceu/models/block/machine/big_forge_hammer.json
   assets/gtceu/models/block/machine/big_steam_extractor.json
+  assets/gtceu/models/block/machine/big_wiremill.json
   assets/gtceu/models/block/machine/component_factory.json
   assets/gtceu/models/block/machine/easy_box.json
   assets/gtceu/models/block/machine/large_miner_active.json
@@ -420,9 +424,11 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/models/item/armor/trimmed/leggings_quartz_trim.json
   assets/gtceu/models/item/armor/trimmed/leggings_redstone_trim.json
   assets/gtceu/models/item/big_alloy.json
+  assets/gtceu/models/item/big_bender.json
   assets/gtceu/models/item/big_compressor.json
   assets/gtceu/models/item/big_forge_hammer.json
   assets/gtceu/models/item/big_steam_extractor.json
+  assets/gtceu/models/item/big_wiremill.json
   assets/gtceu/models/item/bucket/
   assets/gtceu/models/item/bucket/bucket.json
   assets/gtceu/models/item/component_factory.json
