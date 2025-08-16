@@ -1,6 +1,7 @@
 package org.satou.gtecore.utils;
 
-import net.minecraft.resources.ResourceLocation;
+import org.satou.gtecore.GTECore;
+
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -9,7 +10,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.satou.gtecore.GTECore;
 
 import static net.minecraft.resources.ResourceLocation.tryParse;
 
