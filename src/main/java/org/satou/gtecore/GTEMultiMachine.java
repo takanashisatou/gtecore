@@ -8,12 +8,14 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMa
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
+import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderHelper;
 import com.gregtechceu.gtceu.common.block.BoilerFireboxType;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTRecipeModifiers;
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
+import com.gregtechceu.gtceu.common.registry.GTRegistration;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -33,6 +35,9 @@ import static org.satou.gtecore.GTERecipeTypes.Component_Factory;
 public class GTEMultiMachine {
     public static void init() {
 
+    }
+    public static TraceabilityPredicate easy(String a) {
+        return Predicates.blocks(new Block[]{(Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation(a))});
     }
     public static BlockEntry<Block> steel_pipe_casing = createCasingBlock("steel_pipe_casing",new ResourceLocation("gtceu","steel_pipe_casing"));
     //public static BlockEntry<Block> aluminium_frame = createCasingBlock("aluminium_frame",new ResourceLocation("gtceu","aluminium_frame"));
@@ -175,6 +180,53 @@ public class GTEMultiMachine {
             .tooltips(
                     Component.translatable("com.gtecore.tooltips.3"),
                     Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static final MultiblockMachineDefinition Big_Forge_Hammer = REGISTRATE
+            .multiblock("big_forge_hammer", SteamParallelMultiblockMachine::new)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.FORGE_HAMMER_RECIPES).
+            recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
+            .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
+            .pattern((definition) ->
+        FactoryBlockPattern.start()
+                        .aisle(new String[]{"AAAAA", "AAAAA", "B...B", "B...B", "AAAAA"})
+                        .aisle(new String[]{"ACDCA", "A...A", "..E..", "..C..", "AAAAA"})
+                        .aisle(new String[]{"ADCDA", "A.E.A", ".EEE.", ".CEC.", "AAAAA"})
+                        .aisle(new String[]{"ACDCA", "A...A", "..E..", "..C..", "AAAAA"})
+                        .aisle(new String[]{"AAAAA", "AAFAA", "B...B", "B...B", "AAAAA"})
+                        .where(".", Predicates.air())
+                        .where("A", Predicates.blocks(new Block[]{(Block)steam_machine_casing.get()})
+                                .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_IMPORT_ITEMS})
+                                        .setPreviewCount(1)).or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_EXPORT_ITEMS})
+                                        .setPreviewCount(1)).or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM}).setExactLimit(1)))
+                        .where("B", Predicates.blocks(new Block[]{(Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:glass"))}))
+                        .where("C", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_GEARBOX.get()})).where("D", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_PIPE.get()}))
+                        .where("E", Predicates.blocks(new Block[]{(Block)steel_pipe_casing.get()}))
+                .where("F", Predicates.controller(Predicates.blocks(new Block[]{definition.getBlock()})))
+                .build())
+            .register();
+
+    public static final MultiblockMachineDefinition Big_Steam_Extractor = GTRegistration.REGISTRATE.multiblock("big_steam_extractor", (x$0) -> {
+        return new SteamParallelMultiblockMachine(x$0, new Object[0]);
+    }).rotationState(RotationState.NON_Y_AXIS)
+            .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
+            .recipeType(GTRecipeTypes.EXTRACTOR_RECIPES)
+            .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
+            .pattern((definition) -> {
+        return FactoryBlockPattern.start()
+                .aisle(new String[]{"........", "........", "........", "..AAAA..", ".AAAAAA.", ".BBBBBB.", ".BBBBBB."})
+                .aisle(new String[]{"..BBBB..", "...AA...", "..AAAA..", ".A....A.", "A......A", "B......B", "B......B"})
+                .aisle(new String[]{".BDEEDB.", "........", ".A....A.", "A......A", "A......A", "B......B", "B......B"})
+                .aisle(new String[]{".BDEEDB.", ".A....A.", ".A....A.", "A......A", "A......A", "B......B", "B......B"})
+                .aisle(new String[]{".BDEEDB.", ".A....A.", ".A....A.", "A......A", "A......A", "B......B", "B......B"})
+                .aisle(new String[]{".BDEEDB.", "........", ".A....A.", "A......A", "A......A", "B......B", "B......B"})
+                .aisle(new String[]{"..BCBB..", "...AA...", ".AAAAA..", "A.....A.", "A......A", "B......B", "B......B"})
+                .aisle(new String[]{"........", "........", "........", ".AAAAA..", ".AAAAAA.", ".BBBBBB.", ".BBBBBB."})
+                .where(".", Predicates.air()).where("A", easy("minecraft:glass"))
+                .where("B", Predicates.blocks(new Block[]{(Block)steam_machine_casing.get()})
+                        .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_IMPORT_ITEMS})
+                                .setPreviewCount(1)).or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_EXPORT_ITEMS}).setPreviewCount(1)).or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM}).setExactLimit(1))).where("C", Predicates.controller(Predicates.blocks(new Block[]{definition.getBlock()}))).where("D", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_GEARBOX.get()})).where("E", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_PIPE.get()})).build();
+    }).tooltips(new Component[]{Component.translatable("com.gtecore.tooltips.0")})
             .register();
     static {
         //GTECoreRegistration.GTECore_REGISTRATE.creativeModeTab(() -> MORE_MACHINES);

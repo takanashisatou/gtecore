@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gtecore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gtecore.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gtecore.test.iml" filepath="$PROJECT_DIR$/.idea/modules/gtecore.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.satou.gtecore.test.iml" filepath="$PROJECT_DIR$/.idea/modules/org.satou.gtecore.test.iml" />
     </modules>
   </component>
 </project>
