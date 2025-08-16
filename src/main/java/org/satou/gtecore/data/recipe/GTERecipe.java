@@ -77,6 +77,22 @@ public class GTERecipe {
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(rotor, material, 1);
                 flag = true;
             }
+            if (material.hasFlag(MaterialFlags.GENERATE_SPRING)) {
+                gtRecipeBuilder = gtRecipeBuilder.outputItems(spring, material, 4);
+                flag = true;
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_SPRING_SMALL)) {
+                gtRecipeBuilder = gtRecipeBuilder.outputItems(springSmall, material, 16);
+                flag = true;
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_FRAME)) {
+                gtRecipeBuilder = gtRecipeBuilder.outputItems(frameGt, material, 2);
+                flag = true;
+            }
+            if (material.hasFlag(MaterialFlags.GENERATE_FOIL)) {
+                gtRecipeBuilder = gtRecipeBuilder.outputItems(foil, material, 16);
+                flag = true;
+            }
             if (flag) {
                 gtRecipeBuilder.save(provider);
             }

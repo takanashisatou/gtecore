@@ -1,6 +1,7 @@
 package org.satou.gtecore;
 
 import org.satou.gtecore.api.registry.GTECoreRegistration;
+import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.data.recipe.GTERecipe;
 
 import com.gregtechceu.gtceu.api.addon.GTAddon;
@@ -30,5 +31,10 @@ public class GTEGTAddon implements IGTAddon {
     @Override
     public void addRecipes(Consumer<FinishedRecipe> provider) {
         GTERecipe.init(provider);
+    }
+
+    @Override
+    public void registerCovers() {
+        GTEBlocks.init();
     }
 }

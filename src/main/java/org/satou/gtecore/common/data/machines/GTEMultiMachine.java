@@ -4,6 +4,7 @@ import org.satou.gtecore.common.data.GTERecipeTypes;
 
 import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
+import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
@@ -22,13 +23,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.controller;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.HSSE;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWorkableCasingMachineModel;
 import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
@@ -58,8 +60,11 @@ public class GTEMultiMachine {
                     .where("B", blocks(steam_machine_casing.get()).setMinGlobalLimited(6)
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
-
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS)
+                                    .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                                    .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                                    .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS))))
                     .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
             .modelProperty(RecipeLogic.STATUS_PROPERTY, RecipeLogic.Status.IDLE)
@@ -85,7 +90,11 @@ public class GTEMultiMachine {
                     .where("B", blocks(steam_machine_casing.get()).setMinGlobalLimited(6)
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS)
+                                    .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                                    .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                                    .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS))))
                     .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
             .modelProperty(RecipeLogic.STATUS_PROPERTY, RecipeLogic.Status.IDLE)
@@ -121,25 +130,25 @@ public class GTEMultiMachine {
                     .where(".", Predicates.any())
                     .where("A", Predicates.blocks(industral.get()))
                     .where("?", Predicates.abilities(PartAbility.IMPORT_ITEMS))
-                    .where("B", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:glass"))))
-                    .where("C", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:lapis_block"))))
-                    .where("D", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:emerald_block"))))
-                    .where("E", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:redstone_block"))))
-                    .where("F", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:smooth_stone"))))
-                    .where("G", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:gold_block"))))
+                    .where("B", Predicates.blocks(Blocks.GLASS))
+                    .where("C", Predicates.blocks(Blocks.LAPIS_BLOCK))
+                    .where("D", Predicates.blocks(Blocks.EMERALD_BLOCK))
+                    .where("E", Predicates.blocks(Blocks.REDSTONE_BLOCK))
+                    .where("F", Predicates.blocks(Blocks.SMOOTH_STONE))
+                    .where("G", Predicates.blocks(Blocks.GOLD_BLOCK))
                     .where("#", Predicates.controller(blocks(definition.getBlock())))
-                    .where("I", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:gold_block"))))
-                    .where("J", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:diamond_block"))))
-                    .where("H", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:diamond_block"))))
+                    .where("I", Predicates.blocks(Blocks.GOLD_BLOCK))
+                    .where("J", Predicates.blocks(Blocks.DIAMOND_BLOCK))
+                    .where("H", Predicates.blocks(Blocks.DIAMOND_BLOCK))
                     .where("K", Predicates.blocks(industral.get()))
-                    .where("L", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:waxed_copper_block"))))
-                    .where("M", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("gtceu:bronze_pipe_casing"))))
-                    .where("N", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:copper_block"))))
+                    .where("L", Predicates.blocks(Blocks.WAXED_COPPER_BLOCK))
+                    .where("M", Predicates.blocks(CASING_BRONZE_PIPE.get()))
+                    .where("N", Predicates.blocks(Blocks.WAXED_COPPER_BLOCK))
                     .where("O", Predicates.blocks(steam_machine_casing.get()))
-                    .where("P", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:iron_block"))))
+                    .where("P", Predicates.blocks(Blocks.IRON_BLOCK))
                     .where("Q", Predicates.abilities(PartAbility.EXPORT_ITEMS))
                     .where("R", Predicates.abilities(PartAbility.STEAM))
-                    .where("S", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:copper_block"))))
+                    .where("S", Predicates.blocks(Blocks.COPPER_BLOCK))
                     .build())
             .modelProperty(RecipeLogic.STATUS_PROPERTY, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
@@ -147,7 +156,6 @@ public class GTEMultiMachine {
                     .andThen(b -> b.addDynamicRenderer(
                             () -> DynamicRenderHelper.makeBoilerPartRender(
                                     BoilerFireboxType.BRONZE_FIREBOX, CASING_BRONZE_BRICKS))))
-
             .tooltips(Component.translatable("com.gtecore.tooltips.1"), Component.translatable("com.gtecore.tooltips.0"))
             .recipeModifier(SteamParallelMultiblockMachine::recipeModifier, true)
             .register();
@@ -170,7 +178,7 @@ public class GTEMultiMachine {
                             .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                             .or(Predicates.autoAbilities(true, false, false)))
                     .where("B", Predicates.blocks(CLEANROOM_GLASS.get()))
-                    .where("C", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("gtceu:aluminium_frame"))))
+                    .where("C", Predicates.blocks(ChemicalHelper.getBlock(frameGt, HSSE)))
                     .where("D", Predicates.blocks(CASING_STEEL_PIPE.get()))
                     .where("E", Predicates.controller(blocks(definition.getBlock())))
                     .build())
@@ -192,8 +200,12 @@ public class GTEMultiMachine {
                     .where("A", Predicates.blocks(steam_machine_casing.get())
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
-                    .where("B", Predicates.blocks(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:glass"))))
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS))
+                            .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                            .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)))
+                    .where("B", Predicates.blocks(Blocks.GLASS))
                     .where("C", Predicates.blocks(GTBlocks.CASING_BRONZE_GEARBOX.get())).where("D", Predicates.blocks(GTBlocks.CASING_BRONZE_PIPE.get()))
                     .where("E", Predicates.blocks(steel_pipe_casing.get()))
                     .where("F", Predicates.controller(Predicates.blocks(definition.getBlock())))
@@ -218,9 +230,48 @@ public class GTEMultiMachine {
                     .where("A", Predicates.blocks(Blocks.GLASS))
                     .where("B", Predicates.blocks(steam_machine_casing.get())
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
-                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1)).or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1)))
+                            .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
+                            .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS))
+                            .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                            .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)))
                     .where("C", Predicates.controller(Predicates.blocks(definition.getBlock())))
                     .where("D", Predicates.blocks(GTBlocks.CASING_BRONZE_GEARBOX.get())).where("E", Predicates.blocks(GTBlocks.CASING_BRONZE_PIPE.get())).build())
+            .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static final MultiblockMachineDefinition Big_Bender = REGISTRATE
+            .multiblock("big_bender", WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.BENDER_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("BBB", "BBB", "BBB")
+                    .aisle("BBB", "BAB", "BBB")
+                    .aisle("BBB", "B#B", "BBB")
+                    .where('B', blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                    .where('A', Predicates.air())
+                    .where('#', controller(blocks(definition.getBlock())))
+                    .build())
+            .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static final MultiblockMachineDefinition Big_Wiremill = REGISTRATE
+            .multiblock("big_wiremill", WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.WIREMILL_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("BBB", "BBB", "BBB")
+                    .aisle("BBB", "BAB", "BBB")
+                    .aisle("BBB", "B#B", "BBB")
+                    .where('B', blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                    .where('A', Predicates.air())
+                    .where('#', controller(blocks(definition.getBlock())))
+                    .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
             .register();
 }

@@ -1,3 +1,6 @@
 package org.satou.gtecore.common.data;
 
-public class GTEBlocks {}
+public class GTEBlocks {
+
+    public static void init() {}
+}
