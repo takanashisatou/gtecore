@@ -143,8 +143,8 @@ Adding Libraries to Inheritance
 Reading Input: C:\Users\Jerry\Downloads\gtecore\build\libs\gtecore-1.0-SNAPSHOT.jar
 Adding input to inheritance map
 Processing entries
-Conflicting propagated mapping for com/gregtechceu/gtceu/api/machine/trait/RecipeLogic$Status/getSerializedName()Ljava/lang/String; from net/minecraft/util/StringRepresentable/getSerializedName()Ljava/lang/String;: getSerializedName -> m_7912_
 Conflicting propagated mapping for com/gregtechceu/gtceu/common/data/GTCreativeModeTabs$RegistrateDisplayItemsGenerator/accept(Lnet/minecraft/world/item/CreativeModeTab$ItemDisplayParameters;Lnet/minecraft/world/item/CreativeModeTab$Output;)V from net/minecraft/world/item/CreativeModeTab$DisplayItemsGenerator/accept(Lnet/minecraft/world/item/CreativeModeTab$ItemDisplayParameters;Lnet/minecraft/world/item/CreativeModeTab$Output;)V: accept -> m_257865_
+Conflicting propagated mapping for com/gregtechceu/gtceu/api/machine/trait/RecipeLogic$Status/getSerializedName()Ljava/lang/String; from net/minecraft/util/StringRepresentable/getSerializedName()Ljava/lang/String;: getSerializedName -> m_7912_
 Conflicting propagated mapping for com/tterrag/registrate/util/entry/ItemProviderEntry/asItem()Lnet/minecraft/world/item/Item; from net/minecraft/world/level/ItemLike/asItem()Lnet/minecraft/world/item/Item;: asItem -> m_5456_
 Conflicting propagated mapping for com/gregtechceu/gtceu/api/recipe/GTRecipe/canCraftInDimensions(II)Z from net/minecraft/world/item/crafting/Recipe/canCraftInDimensions(II)Z: canCraftInDimensions -> m_8004_
 Conflicting propagated mapping for com/gregtechceu/gtceu/api/recipe/GTRecipe/getResultItem(Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack; from net/minecraft/world/item/crafting/Recipe/getResultItem(Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;: getResultItem -> m_8043_
@@ -167,6 +167,8 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/blockstates/
   assets/gtceu/blockstates/big_alloy.json
   assets/gtceu/blockstates/big_compressor.json
+  assets/gtceu/blockstates/big_forge_hammer.json
+  assets/gtceu/blockstates/big_steam_extractor.json
   assets/gtceu/blockstates/component_factory.json
   assets/gtceu/blockstates/easy_box.json
   assets/gtceu/lang/
@@ -205,6 +207,8 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/models/block/machine/
   assets/gtceu/models/block/machine/big_alloy.json
   assets/gtceu/models/block/machine/big_compressor.json
+  assets/gtceu/models/block/machine/big_forge_hammer.json
+  assets/gtceu/models/block/machine/big_steam_extractor.json
   assets/gtceu/models/block/machine/component_factory.json
   assets/gtceu/models/block/machine/easy_box.json
   assets/gtceu/models/block/machine/large_miner_active.json
@@ -417,6 +421,8 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/models/item/armor/trimmed/leggings_redstone_trim.json
   assets/gtceu/models/item/big_alloy.json
   assets/gtceu/models/item/big_compressor.json
+  assets/gtceu/models/item/big_forge_hammer.json
+  assets/gtceu/models/item/big_steam_extractor.json
   assets/gtceu/models/item/bucket/
   assets/gtceu/models/item/bucket/bucket.json
   assets/gtceu/models/item/component_factory.json
@@ -2922,6 +2928,28 @@ Writing Output: C:\Users\Jerry\Downloads\gtecore\build\reobfJar\output.jar
   assets/gtceu/textures/block/multiblock/big_compressor/overlay_top_active.png
   assets/gtceu/textures/block/multiblock/big_compressor/overlay_top_active_emissive.png
   assets/gtceu/textures/block/multiblock/big_compressor/overlay_top_emissive.png
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/overlay_front.png
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/overlay_front_active.png
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/overlay_front_active.png.mcmeta
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/overlay_front_active_emissive.png
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/overlay_front_active_emissive.png.mcmeta
+  assets/gtceu/textures/block/multiblock/big_forge_hammer/overlay_front_emissive.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_front.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_front_active.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_front_active.png.mcmeta
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_front_active_emissive.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_front_active_emissive.png.mcmeta
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_front_emissive.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_side.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_side_active.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_side_active_emissive.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_side_emissive.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_top.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_top_active.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_top_active_emissive.png
+  assets/gtceu/textures/block/multiblock/big_steam_extractor/overlay_top_emissive.png
   assets/gtceu/textures/block/multiblock/blast_furnace/
   assets/gtceu/textures/block/multiblock/blast_furnace/overlay_front.png
   assets/gtceu/textures/block/multiblock/blast_furnace/overlay_front_active.png

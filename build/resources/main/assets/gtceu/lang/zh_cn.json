@@ -5,6 +5,8 @@
 "com.gtecore.tooltips.1": "产出§6巨量矿物",
 "gtecore.easy_box":"§6简§3单§2之§1盒",
   "block.gtceu.component_factory": "§6零件工厂",
+  "block.gtceu.big_forge_hammer":"大型蒸汽锻造锤",
   "gtecore.component_factory": "§6零件工厂",
-  "com.gtecore.tooltips.3": "§6一步到位，生产你所需的材料零件"
+  "com.gtecore.tooltips.3": "§6一步到位，生产你所需的材料零件",
+  "block.gtceu.big_steam_extractor": "大型蒸汽提取机"
 }
