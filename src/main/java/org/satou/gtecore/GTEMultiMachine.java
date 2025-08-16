@@ -20,6 +20,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.event.level.PistonEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.satou.gtecore.common.registry.GTECoreRegistration;
 
@@ -60,7 +61,9 @@ public class GTEMultiMachine {
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
                             .or(Predicates.abilities(PartAbility.EXPORT_ITEMS)
-                                    .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                                    .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                                    .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                                    .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS))
                             )
                     )
 
@@ -90,8 +93,10 @@ public class GTEMultiMachine {
                             .or(Predicates.abilities(PartAbility.STEAM_IMPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM_EXPORT_ITEMS).setPreviewCount(1))
                             .or(Predicates.abilities(PartAbility.STEAM).setExactLimit(1))
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
-                    )
+                            .or(Predicates.abilities(PartAbility.EXPORT_ITEMS)
+                                    .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                                    .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                                    .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS))))
                     .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
             .modelProperty(RecipeLogic.STATUS_PROPERTY, RecipeLogic.Status.IDLE)
@@ -205,9 +210,11 @@ public class GTEMultiMachine {
                                         .setPreviewCount(1)).or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_EXPORT_ITEMS})
                                         .setPreviewCount(1))
                                 .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM}).setExactLimit(1))
-                                .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                                .or(Predicates.abilities(PartAbility.EXPORT_ITEMS))
+                                        .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                                        .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                                        .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)))
 
-                        )
 
                         .where("B", Predicates.blocks(new Block[]{(Block)ForgeRegistries.BLOCKS.getValue(new ResourceLocation("minecraft:glass"))}))
                         .where("C", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_GEARBOX.get()})).where("D", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_PIPE.get()}))
@@ -236,10 +243,14 @@ public class GTEMultiMachine {
                 .where("B", Predicates.blocks(new Block[]{(Block)steam_machine_casing.get()})
                         .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_IMPORT_ITEMS})
                                 .setPreviewCount(1))
-                        .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_EXPORT_ITEMS}).setPreviewCount(1)
-                                .or(Predicates.autoAbilities(definition.getRecipeTypes()))
-                        )
-                        .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM}).setExactLimit(1))).where("C", Predicates.controller(Predicates.blocks(new Block[]{definition.getBlock()}))).where("D", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_GEARBOX.get()})).where("E", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_PIPE.get()})).build();
+                        .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM_EXPORT_ITEMS}))
+                                .setPreviewCount(1)
+                        .or(Predicates.abilities(new PartAbility[]{PartAbility.STEAM}).setExactLimit(1))
+                        .or(Predicates.abilities(PartAbility.EXPORT_ITEMS))
+                        .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
+                        .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
+                        .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS)))
+                        .where("C", Predicates.controller(Predicates.blocks(new Block[]{definition.getBlock()}))).where("D", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_GEARBOX.get()})).where("E", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_PIPE.get()})).build();
     }).tooltips(new Component[]{Component.translatable("com.gtecore.tooltips.0")})
             .register();
     static {
