@@ -253,6 +253,44 @@ public class GTEMultiMachine {
                         .where("C", Predicates.controller(Predicates.blocks(new Block[]{definition.getBlock()}))).where("D", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_GEARBOX.get()})).where("E", Predicates.blocks(new Block[]{(Block)GTBlocks.CASING_BRONZE_PIPE.get()})).build();
     }).tooltips(new Component[]{Component.translatable("com.gtecore.tooltips.0")})
             .register();
+    public static final MultiblockMachineDefinition Big_Bender = REGISTRATE
+            .multiblock("big_bender",WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.BENDER_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("BBB","BBB","BBB")
+                    .aisle("BBB","BAB","BBB")
+                    .aisle("BBB","B#B","BBB")
+                    .where('B',blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                    )
+                    .where('A',Predicates.air())
+                    .where('#',controller(blocks(definition.getBlock())))
+                    .build()
+            )
+            .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static final MultiblockMachineDefinition Big_Wiremill = REGISTRATE
+            .multiblock("big_wiremill",WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeType(GTRecipeTypes.WIREMILL_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("BBB","BBB","BBB")
+                    .aisle("BBB","BAB","BBB")
+                    .aisle("BBB","B#B","BBB")
+                    .where('B',blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                    )
+                    .where('A',Predicates.air())
+                    .where('#',controller(blocks(definition.getBlock())))
+                    .build()
+            )
+            .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
     static {
         //GTECoreRegistration.GTECore_REGISTRATE.creativeModeTab(() -> MORE_MACHINES);
     }
