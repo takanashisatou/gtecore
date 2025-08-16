@@ -1,8 +1,0 @@
-{
-    "parent": "gtceu:item/material_sets/dull/plate",
-    "textures": {
-        "layer0": "gtceu:item/material_sets/dull/plate_double",
-        "layer1": "gtceu:item/material_sets/dull/plate_double_secondary",
-        "layer2": "gtceu:item/material_sets/dull/plate_double_overlay"
-    }
-}

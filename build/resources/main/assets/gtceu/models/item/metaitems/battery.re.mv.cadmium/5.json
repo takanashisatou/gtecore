@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "gtceu:item/battery.hull.mv",
-	"layer1": "gtceu:item/battery.re.mv.cadmium/5"
-  }
-}

@@ -1,6 +1,5 @@
 package org.satou.gtecore.mixin;
 
-import com.google.common.collect.Maps;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -8,9 +7,10 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
+
+import com.google.common.collect.Maps;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -21,15 +21,18 @@ import static net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity.
 
 @Mixin(AbstractFurnaceBlockEntity.class)
 public abstract class diamondmixin {
+
     @Shadow
     private static void add(Map<Item, Integer> p_204303_, TagKey<Item> p_204304_, int p_204305_) {}
+
     @Shadow
     private static void add(Map<Item, Integer> p_58375_, ItemLike p_58376_, int p_58377_) {}
-    @Inject(method = "getFuel",at=@At("HEAD"),cancellable = true)
+
+    @Inject(method = "getFuel", at = @At("HEAD"), cancellable = true)
     private static void getFuel(CallbackInfoReturnable<Map<Item, Integer>> cir) {
         Map<Item, Integer> map = Maps.newLinkedHashMap();
-        add(map, Items.DIAMOND,10240000);
-        add(map,Blocks.DIAMOND_BLOCK,102400000);
+        add(map, Items.DIAMOND, 10240000);
+        add(map, Blocks.DIAMOND_BLOCK, 102400000);
         add(map, Items.LAVA_BUCKET, 20000);
         add(map, Blocks.COAL_BLOCK, 16000);
         add(map, Items.BLAZE_ROD, 2400);

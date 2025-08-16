@@ -1,6 +1,0 @@
-{
-  "parent": "gtceu:item/material_sets/dull/wire_fine",
-  "textures": {
-    "layer1": "gtceu:item/material_sets/radioactive/wire_fine_secondary"
-  }
-}

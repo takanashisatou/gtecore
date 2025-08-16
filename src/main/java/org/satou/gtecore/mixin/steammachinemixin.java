@@ -1,21 +1,20 @@
 package org.satou.gtecore.mixin;
 
-import com.google.common.math.IntMath;
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic;
+import com.gregtechceu.gtceu.api.recipe.OverclockingLogic.*;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.utils.GTMath;
 import com.gregtechceu.gtceu.utils.GTUtil;
+
+import com.google.common.math.IntMath;
 import org.jetbrains.annotations.NotNull;
-import org.jline.utils.Log;
 import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import com.gregtechceu.gtceu.api.recipe.OverclockingLogic.*;
+
 import java.math.RoundingMode;
 
 import static com.gregtechceu.gtceu.api.recipe.OverclockingLogic.NON_PERFECT_OVERCLOCK;
@@ -23,18 +22,24 @@ import static com.gregtechceu.gtceu.api.recipe.OverclockingLogic.PERFECT_OVERCLO
 
 @Mixin(OverclockingLogic.class)
 public interface steammachinemixin {// 注入机器并行
+
     /**
-     * @author
-     * @reason
+     * @author .
+     * @reason .
      */
     @Overwrite(remap = false)
     OverclockingLogic.OCResult runOverclockingLogic(OCParams params, long maxVoltage);
+
+    /**
+     * @author .
+     * @reason .
+     */
     @Overwrite(remap = false)
     default @NotNull ModifierFunction getModifier(MetaMachine machine, GTRecipe recipe, long maxVoltage,
                                                   boolean shouldParallel) {
         long EUt = RecipeHelper.getRealEUt(recipe).getTotalEU();
         recipe.duration /= 20;
-        if(recipe.duration == 0) recipe.duration = 1;
+        if (recipe.duration == 0) recipe.duration = 1;
         if (EUt == 0) return ModifierFunction.IDENTITY;
 
         int recipeTier = GTUtil.getTierByVoltage(EUt);
@@ -60,32 +65,34 @@ public interface steammachinemixin {// 注入机器并行
                 maxParallels = ParallelLogic.getParallelAmount(machine, recipe, p);
             }
         }
-        //maxParallels *= 64;
+        // maxParallels *= 64;
 
         OverclockingLogic.OCParams params = new OverclockingLogic.OCParams(EUt, recipe.duration, OCs, maxParallels);
         OverclockingLogic.OCResult result = runOverclockingLogic(params, maxVoltage);
         return result.toModifier();
     }
-    /*@Inject(method = "recipeModifier",at=@At("HEAD"),remap = false)
-    private static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe, CallbackInfoReturnable<ModifierFunction> cir){
-        if (!(machine instanceof SteamParallelMultiblockMachine steamMachine)) {
-            return RecipeModifier.nullWrongType(SteamParallelMultiblockMachine.class, machine);
-        }
-        if (RecipeHelper.getRecipeEUtTier(recipe) > GTValues.LV) return ModifierFunction.NULL;
-
-        // Duration = 1.5x base duration
-        // EUt (not steam) = (4/3) * (2/3) * parallels * base EUt, up to a max of 32 EUt
-        long eut = recipe.getInputEUt().getTotalEU();
-        int parallelAmount = ParallelLogic.getParallelAmount(machine, recipe, steamMachine.getMaxParallels());
-        parallelAmount = 64;
-        double eutMultiplier = (eut * 0.8888 * parallelAmount <= 32) ? (0.8888 * parallelAmount) : (32.0 / eut);
-        return ModifierFunction.builder()
-                .inputModifier(ContentModifier.multiplier(parallelAmount))
-                .outputModifier(ContentModifier.multiplier(parallelAmount))
-                .durationMultiplier(1.5)
-                .eutMultiplier(eutMultiplier)
-                .parallels(parallelAmount)
-                .build();
-              }
+    /*
+     * @Inject(method = "recipeModifier",at=@At("HEAD"),remap = false)
+     * private static ModifierFunction recipeModifier(MetaMachine machine, GTRecipe recipe,
+     * CallbackInfoReturnable<ModifierFunction> cir){
+     * if (!(machine instanceof SteamParallelMultiblockMachine steamMachine)) {
+     * return RecipeModifier.nullWrongType(SteamParallelMultiblockMachine.class, machine);
+     * }
+     * if (RecipeHelper.getRecipeEUtTier(recipe) > GTValues.LV) return ModifierFunction.NULL;
+     * 
+     * // Duration = 1.5x base duration
+     * // EUt (not steam) = (4/3) * (2/3) * parallels * base EUt, up to a max of 32 EUt
+     * long eut = recipe.getInputEUt().getTotalEU();
+     * int parallelAmount = ParallelLogic.getParallelAmount(machine, recipe, steamMachine.getMaxParallels());
+     * parallelAmount = 64;
+     * double eutMultiplier = (eut * 0.8888 * parallelAmount <= 32) ? (0.8888 * parallelAmount) : (32.0 / eut);
+     * return ModifierFunction.builder()
+     * .inputModifier(ContentModifier.multiplier(parallelAmount))
+     * .outputModifier(ContentModifier.multiplier(parallelAmount))
+     * .durationMultiplier(1.5)
+     * .eutMultiplier(eutMultiplier)
+     * .parallels(parallelAmount)
+     * .build();
+     * }
      */
-    }
+}
