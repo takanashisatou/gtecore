@@ -32,6 +32,9 @@ public class GTERecipeTypes {
     public final static GTRecipeType Component_Factory = register("component_factory", MULTIBLOCK)
             .setMaxIOSize(2, 16, 0, 0).setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public final static GTRecipeType Circuit_Factory = register("circuit_factory", MULTIBLOCK)
+            .setMaxIOSize(16, 6, 0, 0).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
 
     public static void init() {}
 }

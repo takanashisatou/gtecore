@@ -10,5 +10,7 @@
   "com.gtecore.tooltips.3": "§6一步到位，生产你所需的材料零件",
   "block.gtceu.big_steam_extractor": "大型蒸汽提取机",
   "block.gtceu.big_bender": "大型卷板机",
-  "block.gtceu.big_wiremill": "大型线缆轧机"
+  "block.gtceu.big_wiremill": "大型线缆轧机",
+  "block.gtceu.circuit_factory": "§6电路工厂",
+  "gtecore.circuit_factory": "§6电路工厂"
 }

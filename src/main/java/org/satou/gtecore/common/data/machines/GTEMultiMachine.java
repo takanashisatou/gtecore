@@ -1,5 +1,8 @@
 package org.satou.gtecore.common.data.machines;
 
+import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
+import net.minecraftforge.event.level.PistonEvent;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -27,10 +30,11 @@ import net.minecraft.world.level.block.Blocks;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
+import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.gear;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.controller;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.*;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.HSSE;
+import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWorkableCasingMachineModel;
 import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
@@ -174,11 +178,11 @@ public class GTEMultiMachine {
                     .aisle("AAAAAAA", "ADDCDDA", "B.....B", "B.....B", "B.....B", "B.....B", "B.....B", "BBBABBB")
                     .aisle("AAAAAAA", "AAAEAAA", "BBBCBBB", "BBBCBBB", "BBBCBBB", "BBBCBBB", "BBBCBBB", "BBBABBB")
                     .where(".", Predicates.air())
-                    .where('A', Predicates.blocks(CASING_ALUMINIUM_FROSTPROOF.get())
+                    .where("A", Predicates.blocks(CASING_ALUMINIUM_FROSTPROOF.get())
                             .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                             .or(Predicates.autoAbilities(true, false, false)))
                     .where("B", Predicates.blocks(CLEANROOM_GLASS.get()))
-                    .where("C", Predicates.blocks(ChemicalHelper.getBlock(frameGt, HSSE)))
+                    .where("C", Predicates.blocks(ChemicalHelper.getBlock(frameGt,Aluminium)))
                     .where("D", Predicates.blocks(CASING_STEEL_PIPE.get()))
                     .where("E", Predicates.controller(blocks(definition.getBlock())))
                     .build())
@@ -250,10 +254,10 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BBB", "BBB")
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
-                    .where('B', blocks(CASING_STEEL_SOLID.get())
+                    .where("B", blocks(CASING_STEEL_SOLID.get())
                             .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where('A', Predicates.air())
-                    .where('#', controller(blocks(definition.getBlock())))
+                    .where("A", Predicates.air())
+                    .where("#", controller(blocks(definition.getBlock())))
                     .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
             .register();
@@ -267,11 +271,43 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BBB", "BBB")
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
-                    .where('B', blocks(CASING_STEEL_SOLID.get())
+                    .where("B", blocks(CASING_STEEL_SOLID.get())
                             .or(Predicates.autoAbilities(definition.getRecipeTypes())))
-                    .where('A', Predicates.air())
-                    .where('#', controller(blocks(definition.getBlock())))
+                    .where("A", Predicates.air())
+                    .where("#", controller(blocks(definition.getBlock())))
                     .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static MultiblockMachineDefinition Circuit_Factory = REGISTRATE
+            .multiblock("circuit_factory",WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTRecipeTypes.ASSEMBLER_RECIPES,GTRecipeTypes.CIRCUIT_ASSEMBLER_RECIPES,GTRecipeTypes.LASER_ENGRAVER_RECIPES,GTRecipeTypes.CUTTER_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK,BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("AAAAAAAAAAA","BCCCCCCCCCB","ACCCCCCCCCA","ACCCCCCCCCA","ACCCCCCCCCA","ACCCCCCCCCA","ACCCCCCCCCA","AAAAAAAAAAA")
+                    .aisle("AAAAAAAAAAA","CB.......BC","CB.......BC","C.........C","C.........C","C.........C","C.........C","AAAAAAAAAAA")
+                    .aisle("AAAAAAAAAAA","C.B.....B.C","C.B.....B.C","C.B.....B.C","C.........C","C.........C","C.........C","AAAAAAAAAAA")
+                    .aisle("AAAAAAAAAAA","C..B...B..C","C..B...B..C","C..B...B..C","C..B...B..C","C.........C","C.........C","AAACCCCCAAA")
+                    .aisle("AAAAAAAAAAA","C...BDB...C","C...BAB...C","C...BDB...C","C...BAB...C","C...BDB...C","C.........C","AAACCCCCAAA")
+                    .aisle("AAAAAAAAAAA","C...DBD...C","C...ABE...C","C...DBD...C","C...ABE...C","C...DBD...C","C....B....C","AAACCCCCAAA")
+                    .aisle("AAAAAAAAAAA","C...BDB...C","C...BAB...C","C...BDB...C","C...BAB...C","C...BDB...C","C.........C","AAACCCCCAAA")
+                    .aisle("AAAAAAAAAAA","C..B...B..C","C..B...B..C","C..B...B..C","C..B...B..C","C.........C","C.........C","AAACCCCCAAA")
+                    .aisle("AAAAAAAAAAA","C.B.....B.C","C.B.....B.C","C.B.....B.C","C.........C","C.........C","C.........C","AAAAAAAAAAA")
+                    .aisle("AAAAAAAAAAA","CB.......BC","CB.......BC","C.........C","C.........C","C.........C","C.........C","AAAAAAAAAAA")
+                    .aisle("AAAAAFAAAAA","BCCCCCCCCCB","ACCCCCCCCCA","ACCCCCCCCCA","ACCCCCCCCCA","ACCCCCCCCCA","ACCCCCCCCCA","AAAAAAAAAAA")
+                    .where(".", Predicates.air())
+                    .where("A", blocks(CASING_STAINLESS_CLEAN.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                    )
+                    .where("B", Predicates.blocks(ChemicalHelper.getBlock(frameGt,StainlessSteel)))
+                    .where("C", blocks(CLEANROOM_GLASS.get()))
+                    .where("D", blocks(CASING_STAINLESS_STEEL_GEARBOX.get()))
+                    .where("E", blocks(CASING_STAINLESS_TURBINE.get()))
+                    .where("F", controller(blocks(definition.getBlock())))
+
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/gcym/watertight_casing"),
+                    GTCEu.id("block/multiblock/gcym/large_distillery"))
             .register();
 }
