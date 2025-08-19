@@ -12,5 +12,10 @@
   "block.gtceu.big_bender": "大型卷板机",
   "block.gtceu.big_wiremill": "大型线缆轧机",
   "block.gtceu.circuit_factory": "§6电路工厂",
-  "gtecore.circuit_factory": "§6电路工厂"
+  "gtecore.circuit_factory": "§6电路工厂",
+  "block.gtceu.big_gas_collector": "大型集气室",
+  "block.gtceu.big_electrolyzer": "大型电解机",
+  "block.gtceu.big_centrifuge": "大型离心机",
+  "block.gtceu.ecological_simulator": "生态圈模拟器",
+  "block.gtceu.big_wash": "大型复合洗矿机"
 }
