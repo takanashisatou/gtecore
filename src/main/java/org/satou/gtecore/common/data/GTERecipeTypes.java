@@ -36,6 +36,6 @@ public class GTERecipeTypes {
             .setMaxIOSize(16, 6, 0, 0).setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public final static GTRecipeType Ecological_Simulator = register("ecological_simulator", MULTIBLOCK)
-            .setMaxIOSize(2, 4, 0, 0).setEUIO(IO.IN);
+            .setMaxIOSize(2, 16, 0, 0).setEUIO(IO.IN);
     public static void init() {}
 }
