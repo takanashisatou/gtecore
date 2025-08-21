@@ -1,8 +1,11 @@
 package org.satou.gtecore.common.data.machines;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
+import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.machine.multiblock.generator.LargeCombustionEngineMachine;
 import net.minecraftforge.event.level.PistonEvent;
+import org.satou.gtecore.FUEL_ENGINE;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -29,6 +32,7 @@ import net.minecraft.world.level.block.Blocks;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 
+import static com.gregtechceu.gtceu.api.GTValues.IV;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.frameGt;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.gear;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.blocks;
@@ -152,7 +156,7 @@ public class GTEMultiMachine {
                     .where("P", Predicates.blocks(Blocks.IRON_BLOCK))
                     .where("Q", Predicates.abilities(PartAbility.EXPORT_ITEMS))
                     .where("R", Predicates.abilities(PartAbility.STEAM))
-                    .where("S", Predicates.blocks(Blocks.COPPER_BLOCK))
+                    .where("S", Predicates.blocks(Blocks.WAXED_COPPER_BLOCK))
                     .build())
             .modelProperty(RecipeLogic.STATUS_PROPERTY, RecipeLogic.Status.IDLE)
             .model(createWorkableCasingMachineModel(GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
@@ -180,7 +184,8 @@ public class GTEMultiMachine {
                     .where(".", Predicates.air())
                     .where("A", Predicates.blocks(CASING_ALUMINIUM_FROSTPROOF.get())
                             .or(Predicates.autoAbilities(definition.getRecipeTypes()))
-                            .or(Predicates.autoAbilities(true, false, false)))
+                            .or(Predicates.autoAbilities(true, false, false))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("B", Predicates.blocks(CLEANROOM_GLASS.get()))
                     .where("C", Predicates.blocks(ChemicalHelper.getBlock(frameGt,Aluminium)))
                     .where("D", Predicates.blocks(CASING_STEEL_PIPE.get()))
@@ -255,7 +260,8 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B", blocks(CASING_STEEL_SOLID.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("A", Predicates.air())
                     .where("#", controller(blocks(definition.getBlock())))
                     .build())
@@ -272,7 +278,10 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B", blocks(CASING_STEEL_SOLID.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER))
+
+                    )
                     .where("A", Predicates.air())
                     .where("#", controller(blocks(definition.getBlock())))
                     .build())
@@ -299,6 +308,7 @@ public class GTEMultiMachine {
                     .where(".", Predicates.air())
                     .where("A", blocks(CASING_STAINLESS_CLEAN.get())
                             .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER))
                     )
                     .where("B", Predicates.blocks(ChemicalHelper.getBlock(frameGt,StainlessSteel)))
                     .where("C", blocks(CLEANROOM_GLASS.get()))
@@ -321,7 +331,8 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B", blocks(CASING_STEEL_SOLID.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("A", Predicates.air())
                     .where("#", controller(blocks(definition.getBlock())))
                     .build())
@@ -338,7 +349,8 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B", blocks(CASING_STEEL_SOLID.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("A", Predicates.air())
                     .where("#", controller(blocks(definition.getBlock())))
                     .build())
@@ -355,7 +367,8 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B", blocks(CASING_STEEL_SOLID.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("A", Predicates.air())
                     .where("#", controller(blocks(definition.getBlock())))
                     .build())
@@ -372,7 +385,8 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B", blocks(CASING_STEEL_SOLID.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes())))
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("A", Predicates.air())
                     .where("#", controller(blocks(definition.getBlock())))
                     .build())
@@ -394,10 +408,97 @@ public class GTEMultiMachine {
                         .aisle("AAAAAAA","B.....B","B.....B","B.....B","B.....B","AAAAAAA")
                         .aisle("AAACAAA","BBBBBBB","BBBBBBB","BBBBBBB","BBBBBBB","AAAAAAA")
                         .where(".", Predicates.air())
-                        .where("A", blocks(CASING_ALUMINIUM_FROSTPROOF.get()))
+                        .where("A", blocks(CASING_ALUMINIUM_FROSTPROOF.get())
+                                .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                                .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                         .where("B", blocks(CASING_TEMPERED_GLASS.get()))
                         .where("C", controller(blocks(definition.getBlock())))
-
                         .build())
+                .tooltips(Component.translatable("com.gtecore.tooltips.0"))
                 .register();
+        public static MultiblockMachineDefinition General_FUEL_ENGINE = REGISTRATE
+                .multiblock("general_fuel_engine", holder -> new FUEL_ENGINE(holder, IV))
+                .appearanceBlock(CASING_TUNGSTENSTEEL_ROBUST)
+                .rotationState(RotationState.NON_Y_AXIS)
+                .recipeTypes(GTERecipeTypes.General_Fuel_Generator)
+                .recipeModifier(FUEL_ENGINE::recipeModifier)
+                .pattern(definition -> FactoryBlockPattern.start()
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ABA","AAA")
+                        .aisle("AAA","ACA","AAA")
+                        .where(".", Predicates.air())
+                        .where("A", blocks(CASING_TUNGSTENSTEEL_ROBUST.get())
+                                .or(Predicates.autoAbilities(false,false,false))
+                                .or(Predicates.abilities(PartAbility.OUTPUT_LASER)))
+                        .where("B", blocks(CASING_TUNGSTENSTEEL_PIPE.get()))
+                        .where("C", controller(blocks(definition.getBlock())))
+                        .build())
+                .tooltips(Component.translatable("com.gtecore.tooltips.4"),Component.translatable("com.gtecore.tooltips.0"))
+                .register();
+    public static final MultiblockMachineDefinition Big_Brewery = REGISTRATE
+            .multiblock("big_brewery", WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTRecipeTypes.BREWING_RECIPES,GTRecipeTypes.FLUID_HEATER_RECIPES,GTRecipeTypes.FERMENTING_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("BBB", "BBB", "BBB")
+                    .aisle("BBB", "BAB", "BBB")
+                    .aisle("BBB", "B#B", "BBB")
+                    .where("B", blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
+                    .where("A", Predicates.air())
+                    .where("#", controller(blocks(definition.getBlock())))
+                    .build())
+            .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static final MultiblockMachineDefinition Miracle_Ring = REGISTRATE
+            .multiblock("miracle_ring",WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_TUNGSTENSTEEL_ROBUST)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTRecipeTypes.ASSEMBLY_LINE_RECIPES,GTRecipeTypes.ASSEMBLER_RECIPES)
+            .recipeModifiers(FUEL_ENGINE::recipeModifierForRing)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("............AAAAAAAAA............","..........AA.........AA..........","........AA.............AA........","......AA.................AA......",".....A.....................A.....","....A.......................A....","...A.........................A...","...A.........................A...","..A...........................A..","..A...........................A..",".A.............................A.",".A.............................A.","A...............................A","A...............................A","A...............................A","A..............AAA..............A","A..............AAA..............A","A..............AAA..............A","A...............................A","A...............................A","A...............................A",".A.............................A.",".A.............................A.","..A...........................A..","..A...........................A..","...A.........................A...","...A.........................A...","....A.......................A....",".....A.....................A.....","......AA.................AA......","........AA.............AA........","..........AA.........AA..........","............AAAAAAAAA............",".................................")
+                    .aisle("............AAAAAAAAA............","..........AA.........AA..........","........AA.............AA........","......AA.................AA......",".....A.....................A.....","....A.......................A....","...A.........................A...","...A.........................A...","..A...........................A..","..A...........................A..",".A.............................A.",".A.............................A.","A...............................A","A...............................A","A...............................A","A..............AAA..............A","A..............AAA..............A","A..............AAA..............A","A...............................A","A...............................A","A...............................A",".A.............................A.",".A.............................A.","..A...........................A..","..A...........................A..","...A.........................A...","...A.........................A...","....A.......................A....",".....A.....................A.....","......AA.................AA......","........AA.............AA........","..........AA.........AA..........","............AAAAAAAAA............",".................................")
+                    .aisle("............AAAAAAAAA............","..........AA.........AA..........","........AA.............AA........","......AA.................AA......",".....A.....................A.....","....A.......................A....","...A.........................A...","...A.........................A...","..A...........................A..","..A...........................A..",".A.............................A.",".A.............................A.","A...............................A","A...............................A","A...............................A","A..............AAA..............A","A..............ABA..............A","A..............AAA..............A","A...............................A","A...............................A","A...............................A",".A.............................A.",".A.............................A.","..A...........................A..","..A...........................A..","...A.........................A...","...A.........................A...","....A.......................A....",".....A.....................A.....","......AA.................AA......","........AA.............AA........","..........AA.........AA..........","............AAAAAAAAA............",".................................")
+                    .where(".", Predicates.any())
+                    .where("A", blocks(CASING_TUNGSTENSTEEL_ROBUST.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER))
+                            .or(Predicates.abilities(PartAbility.DATA_ACCESS))
+                    )
+                    .where("B", controller(blocks(definition.getBlock())))
+                    .build())
+            .tooltips(Component.translatable("com.gtecore.tooltips.miracle_ring"),
+                    Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static final MultiblockMachineDefinition Big_Extractor = REGISTRATE
+            .multiblock("big_extractor", WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(CASING_STEEL_SOLID)
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTRecipeTypes.EXTRACTOR_RECIPES,GTRecipeTypes.FLUID_SOLIDFICATION_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.OC_PERFECT_SUBTICK, BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("BBB", "BBB", "BBB")
+                    .aisle("BBB", "BAB", "BBB")
+                    .aisle("BBB", "B#B", "BBB")
+                    .where("B", blocks(CASING_STEEL_SOLID.get())
+                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.INPUT_LASER)))
+                    .where("A", Predicates.air())
+                    .where("#", controller(blocks(definition.getBlock())))
+                    .build())
+            .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
 }
