@@ -437,7 +437,7 @@ public class GTEMultiMachine {
                         .aisle("AAA","ACA","AAA")
                         .where(".", Predicates.air())
                         .where("A", blocks(CASING_TUNGSTENSTEEL_ROBUST.get())
-                                .or(Predicates.autoAbilities(false,false,false))
+                                .or(Predicates.autoAbilities(definition.getRecipeTypes()))
                                 .or(Predicates.abilities(PartAbility.OUTPUT_LASER)))
                         .where("B", blocks(CASING_TUNGSTENSTEEL_PIPE.get()))
                         .where("C", controller(blocks(definition.getBlock())))
