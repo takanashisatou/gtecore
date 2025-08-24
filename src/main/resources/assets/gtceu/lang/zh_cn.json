@@ -24,6 +24,8 @@
   "com.gtecore.tooltips.4": "支持所有类型的燃料，拥有§620亿§r并行,一瞬之间消耗完你所有的燃料!",
   "block.gtceu.big_brewery": "大型酿造厂",
   "block.gtceu.miracle_ring": "§6奇迹之环",
-  "com.gtecore.tooltips.miracle_ring": "§6奇迹的造物§r拥有§61024并行§r，并且执行§6所有§r配方均为§61tick",
-  "block.gtceu.big_extractor": "大型流体提取固化一体机"
+  "com.gtecore.tooltips.miracle_ring": "§6奇迹的造物。\n§r拥有§61024并行§r，并且执行§6所有§r配方均为§61tick",
+  "block.gtceu.big_extractor": "大型流体提取固化一体机",
+  "block.gtceu.big_extruder": "大型压模阵列",
+  "block.gtceu.big_autoclave": "大型高压釜"
 }

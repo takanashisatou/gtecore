@@ -19,6 +19,7 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Americium;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
+import static com.mojang.text2speech.Narrator.LOGGER;
 import static org.satou.gtecore.common.data.GTERecipeTypes.Component_Factory;
 import static org.satou.gtecore.common.data.GTERecipeTypes.General_Fuel_Generator;
 
@@ -293,6 +294,7 @@ public class GTERecipe {
             if (material.hasFlag(MaterialFlags.NO_UNIFICATION)) {
                 continue;
             }
+            if(specialJudge(material.getName())) continue;
             if (!material.isSolid()) continue;
             Boolean flag = false;
             Boolean flag2 = false;
@@ -312,11 +314,13 @@ public class GTERecipe {
             gtRecipeBuilder = gtRecipeBuilder.duration(40 * 20)
                     .EUt(GTValues.VA[GTValues.MV]);
             if (material.hasFlag(MaterialFlags.GENERATE_ROD)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(rod, material, 8);
                 flag = true;
             }
 
             if (material.hasFlag(MaterialFlags.GENERATE_PLATE)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(plate, material, 4);
                 flag = true;
             }
@@ -329,44 +333,60 @@ public class GTERecipe {
             }
 
             if (material.hasFlag(MaterialFlags.GENERATE_RING)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(ring, material, 32);
                 flag = true;
             }
 
             if (material.hasFlag(MaterialFlags.GENERATE_GEAR)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(gear, material, 1);
                 flag = true;
             }
 
-            if (!material.hasFlag(MaterialFlags.GENERATE_SMALL_GEAR)) {
+            if (material.hasFlag(MaterialFlags.GENERATE_SMALL_GEAR)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(gearSmall, material, 4);
                 flag = true;
             }
 
             if (material.hasFlag(MaterialFlags.GENERATE_ROTOR)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(rotor, material, 1);
                 flag = true;
             }
             if (material.hasFlag(MaterialFlags.GENERATE_SPRING)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(spring, material, 4);
                 flag = true;
             }
             if (material.hasFlag(MaterialFlags.GENERATE_SPRING_SMALL)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(springSmall, material, 16);
                 flag = true;
             }
             if (material.hasFlag(MaterialFlags.GENERATE_FRAME)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(frameGt, material, 2);
                 flag = true;
             }
             if (material.hasFlag(MaterialFlags.GENERATE_FOIL)) {
+
                 gtRecipeBuilder = gtRecipeBuilder.outputItems(foil, material, 16);
                 flag = true;
             }
+
+
             if (flag) {
                 gtRecipeBuilder.save(provider);
             }
 
         }
+    }
+
+    private static boolean specialJudge(String name) {
+        if(name == "infinite") return true;
+        if(name == "raw_rubber") return true;
+        return  false;
     }
 }
