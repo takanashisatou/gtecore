@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.config.ConfigHolder;
 
 import dev.toma.configuration.Configuration;
 import dev.toma.configuration.config.Config;
+import dev.toma.configuration.config.Configurable;
 import dev.toma.configuration.config.format.ConfigFormats;
 
 @Config(id = GTECore.MOD_ID)
@@ -24,4 +25,8 @@ public class GTEConfig {
             ConfigHolder.INSTANCE.machines.steamMultiParallelAmount = 1024;
         }
     }
+
+    @Configurable
+    @Configurable.Range(min = 0)
+    public double durationMultiplier = 1;
 }
