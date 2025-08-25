@@ -1,29 +1,21 @@
 package org.satou.gtecore;
 
 import com.gregtechceu.gtceu.api.GTValues;
-import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder;
 import com.gregtechceu.gtceu.api.capability.recipe.RecipeCapability;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
-import com.gregtechceu.gtceu.api.gui.GuiTextures;
-import com.gregtechceu.gtceu.api.gui.fancy.IFancyTooltip;
-import com.gregtechceu.gtceu.api.gui.fancy.TooltipsPanel;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
-import com.gregtechceu.gtceu.api.machine.feature.IOverclockMachine;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.feature.ITieredMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockDisplayText;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine;
-import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
-import com.gregtechceu.gtceu.api.recipe.content.Content;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.ingredient.EnergyStack;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
-import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
@@ -36,11 +28,9 @@ import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraftforge.fluids.FluidStack;
 
 import lombok.Getter;
-import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +41,6 @@ import java.util.List;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic.getMaxByInput;
-import static com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic.limitByOutputMerging;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -80,7 +69,6 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         super(holder, args);
         this.tier = tier;
     }
-
 
     private boolean isExtreme() {
         return getTier() > GTValues.EV;
@@ -134,10 +122,9 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         int maxInputMultiplier = FUEL_ENGINE.getMaxByInput(rlm, recipe, parallelLimit, Collections.emptyList());
         if (maxInputMultiplier == 0) return 0;
         return maxInputMultiplier;
-        //GTECore.LOGGER.log(Level.valueOf("1"),maxInputMultiplier);
+        // GTECore.LOGGER.log(Level.valueOf("1"),maxInputMultiplier);
         // Simulate the merging of the maximum amount of recipes that can be run with these items
         // and limit by the amount we can successfully merge
-
     }
 
     /**
@@ -170,6 +157,7 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         if (minimum == Integer.MAX_VALUE) return 0;
         return minimum;
     }
+
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof FUEL_ENGINE engineMachine)) {
             return RecipeModifier.nullWrongType(FUEL_ENGINE.class, machine);
@@ -189,21 +177,21 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         }
         return ModifierFunction.NULL;
     }
+
     public static ModifierFunction recipeModifierForRing(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof WorkableElectricMultiblockMachine engineMachine)) {
             return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);
         }
-            int maxParallel = 1024; // get maximum parallel
-            int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
-            double eutMultiplier = actualParallel;
-            return ModifierFunction.builder()
-                    .inputModifier(ContentModifier.multiplier(actualParallel))
-                    .outputModifier(ContentModifier.multiplier(actualParallel))
-                    .eutMultiplier(eutMultiplier)
-                    .parallels(actualParallel)
-                    .durationModifier(ContentModifier.multiplier(0.0001))
-                    .build();
-
+        int maxParallel = 1024; // get maximum parallel
+        int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+        double eutMultiplier = actualParallel;
+        return ModifierFunction.builder()
+                .inputModifier(ContentModifier.multiplier(actualParallel))
+                .outputModifier(ContentModifier.multiplier(actualParallel))
+                .eutMultiplier(eutMultiplier)
+                .parallels(actualParallel)
+                .durationModifier(ContentModifier.multiplier(0.0001))
+                .build();
     }
 
     @Override
@@ -258,7 +246,6 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         int neededAmount = GTMath.saturatedCast(ocAmount * requiredFluidInput.getAmount());
         return ChatFormatting.RED + FormattingUtil.formatNumbers(neededAmount) + "mB";
     }
-
 
     @Override
     public ManagedFieldHolder getFieldHolder() {

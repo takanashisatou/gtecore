@@ -38,6 +38,7 @@ public class GTERecipeTypes {
     public final static GTRecipeType Ecological_Simulator = register("ecological_simulator", MULTIBLOCK)
             .setMaxIOSize(2, 16, 0, 0).setEUIO(IO.IN);
     public final static GTRecipeType General_Fuel_Generator = register("general_fuel_generator", MULTIBLOCK)
-            .setMaxIOSize(0,0,1,1).setEUIO(IO.OUT);
+            .setMaxIOSize(0, 0, 1, 1).setEUIO(IO.OUT);
+
     public static void init() {}
 }

@@ -19,14 +19,12 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Americium;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
-import static com.mojang.text2speech.Narrator.LOGGER;
 import static org.satou.gtecore.common.data.GTERecipeTypes.Component_Factory;
 import static org.satou.gtecore.common.data.GTERecipeTypes.General_Fuel_Generator;
 
 public class GTERecipe {
 
     public static void init(@NotNull Consumer<FinishedRecipe> provider) {
-
         General_Fuel_Generator.recipeBuilder("naphtha")
                 .inputFluids(Naphtha.getFluid(1))
                 .duration(10)
@@ -294,7 +292,7 @@ public class GTERecipe {
             if (material.hasFlag(MaterialFlags.NO_UNIFICATION)) {
                 continue;
             }
-            if(specialJudge(material.getName())) continue;
+            if (specialJudge(material.getName())) continue;
             if (!material.isSolid()) continue;
             Boolean flag = false;
             Boolean flag2 = false;
@@ -376,7 +374,6 @@ public class GTERecipe {
                 flag = true;
             }
 
-
             if (flag) {
                 gtRecipeBuilder.save(provider);
             }
@@ -385,8 +382,8 @@ public class GTERecipe {
     }
 
     private static boolean specialJudge(String name) {
-        if(name == "infinite") return true;
-        if(name == "raw_rubber") return true;
-        return  false;
+        if (name == "infinite") return true;
+        if (name == "raw_rubber") return true;
+        return false;
     }
 }
