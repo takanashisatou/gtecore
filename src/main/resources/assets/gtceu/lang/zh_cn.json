@@ -27,5 +27,7 @@
   "com.gtecore.tooltips.miracle_ring": "§6奇迹的造物。\n§r拥有§61024并行§r，并且执行§6所有§r配方均为§61tick",
   "block.gtceu.big_extractor": "大型流体提取固化一体机",
   "block.gtceu.big_extruder": "大型压模阵列",
-  "block.gtceu.big_autoclave": "大型高压釜"
+  "block.gtceu.big_autoclave": "大型高压釜",
+  "block.gtceu.steam_grinder_easy": "蒸汽碾磨机Easy版",
+  "block.gtceu.steam_oven_easy": "蒸汽熔炼炉Easy版"
 }

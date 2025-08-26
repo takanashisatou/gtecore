@@ -8,7 +8,11 @@
   ],
   "mixins": [
     "diamondmixin",
+    "GTMMultiblockRegistrationMixin",
+    "GTMSteamMultiblockMachineMixin",
+    "GTMSteamParallelMultiBlockMachineMixin",
     "GTRecipeBuilderMixin",
+    "SimpleSteamMachineRecipeMixin",
     "steam_hatch_mixin",
     "steammachinemixin"
   ],
