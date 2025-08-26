@@ -1,5 +1,6 @@
 package org.satou.gtecore.common;
 
+import com.gregtechceu.gtceu.common.machine.multiblock.part.SteamHatchPartMachine;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 import org.satou.gtecore.common.data.machines.GTEMultiMachine;
 import org.satou.gtecore.config.GTEConfig;
