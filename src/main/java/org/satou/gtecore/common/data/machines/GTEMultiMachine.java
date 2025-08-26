@@ -2,7 +2,6 @@ package org.satou.gtecore.common.data.machines;
 
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability;
 import com.gregtechceu.gtceu.api.machine.property.GTMachineModelProperties;
-import org.satou.gtecore.FUEL_ENGINE;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 
 import com.gregtechceu.gtceu.GTCEu;
@@ -40,7 +39,7 @@ import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 import static com.gregtechceu.gtceu.common.data.models.GTMachineModels.createWorkableCasingMachineModel;
 import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
 import static org.satou.gtecore.common.data.GTERecipeTypes.Component_Factory;
-
+import org.satou.gtecore.common.machine.multiblock.generator.FUEL_ENGINE;
 public class GTEMultiMachine {
 
     public static void init() {}
@@ -120,9 +119,11 @@ public class GTEMultiMachine {
                     .aisle("BBB", "BAB", "BBB")
                     .aisle("BBB", "B#B", "BBB")
                     .where("B",blocks(steam_machine_casing.get())
-                            .or(Predicates.autoAbilities(definition.getRecipeTypes()))
+                            .or(Predicates.abilities(PartAbility.STEAM))
                             .or(Predicates.abilities(PartAbility.IMPORT_ITEMS))
                             .or(Predicates.abilities(PartAbility.EXPORT_ITEMS))
+                            .or(Predicates.abilities(PartAbility.IMPORT_FLUIDS))
+                            .or(Predicates.abilities(PartAbility.EXPORT_FLUIDS))
                     )
                     .where("A",Predicates.air())
                     .where("#",controller(blocks(definition.getBlock())))
@@ -365,7 +366,7 @@ public class GTEMultiMachine {
             .appearanceBlock(CASING_TUNGSTENSTEEL_ROBUST)
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeTypes(GTERecipeTypes.General_Fuel_Generator)
-            .recipeModifier(FUEL_ENGINE::recipeModifier)
+            .recipeModifier(org.satou.gtecore.common.machine.multiblock.generator.FUEL_ENGINE::recipeModifier)
             .pattern(definition -> FactoryBlockPattern.start()
                     .aisle("AAA", "ABA", "AAA")
                     .aisle("AAA", "ABA", "AAA")
