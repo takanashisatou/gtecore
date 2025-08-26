@@ -1,4 +1,4 @@
-package org.satou.gtecore;
+package org.satou.gtecore.common.machine.multiblock.generator;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.IRecipeCapabilityHolder;
@@ -39,8 +39,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic.getMaxByInput;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
