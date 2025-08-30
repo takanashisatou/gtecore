@@ -11,6 +11,7 @@ import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import org.jetbrains.annotations.NotNull;
+import org.satou.gtecore.common.data.GTERecipeTypes;
 
 import java.util.function.Consumer;
 
@@ -292,6 +293,9 @@ public class GTERecipe {
             if (material.hasFlag(MaterialFlags.NO_UNIFICATION)) {
                 continue;
             }
+            if(material.getName() == "borosilicate_glass"){
+                continue;
+            }
             if (specialJudge(material.getName())) continue;
             if (!material.isSolid()) continue;
             Boolean flag = false;
@@ -378,6 +382,18 @@ public class GTERecipe {
                 gtRecipeBuilder.save(provider);
             }
 
+        }
+        for (Material material : GTCEuAPI.materialManager.getRegisteredMaterials()) {
+            if(material.hasFlag(MaterialFlags.NO_UNIFICATION)){continue;}
+            if(material.hasProperty(PropertyKey.ORE)){
+                GTERecipeTypes.SteamOp_Recipe.recipeBuilder("easy_steam_op_"+material.getName())
+                        .EUt(8)
+                        .duration(200)
+                        .inputItems(rawOre, material)
+                        .outputItems(dust,material,3)
+                        .circuitMeta(1)
+                        .save(provider);
+            }
         }
     }
 

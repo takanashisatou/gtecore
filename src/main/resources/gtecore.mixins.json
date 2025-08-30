@@ -10,11 +10,8 @@
     "diamondmixin",
     "GTMMultiblockRegistrationMixin",
     "GTMSteamMultiblockMachineMixin",
-    "GTMSteamParallelMultiBlockMachineMixin",
     "GTRecipeBuilderMixin",
-    "SimpleSteamMachineRecipeMixin",
-    "steam_hatch_mixin",
-    "steammachinemixin"
+    "steam_hatch_mixin"
   ],
   "injectors": {
     "defaultRequire": 1

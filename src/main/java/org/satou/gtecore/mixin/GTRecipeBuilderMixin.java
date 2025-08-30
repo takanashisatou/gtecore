@@ -1,5 +1,6 @@
 package org.satou.gtecore.mixin;
 
+import org.satou.gtecore.GTECore;
 import org.satou.gtecore.config.GTEConfig;
 
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
@@ -56,6 +57,8 @@ public class GTRecipeBuilderMixin {
 
     @Inject(method = "toJson", at = @At("TAIL"), remap = false)
     public void toJson(JsonObject json, CallbackInfo ci) {
+        //GTECore.LOGGER.warn("Now duration is "+gTECore$getDuration());
         json.addProperty("duration", gTECore$getDuration());
     }
+
 }

@@ -10,14 +10,19 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 
 import static org.satou.gtecore.api.registry.GTECoreRegistration.GTECore_REGISTRATE;
 import static org.satou.gtecore.common.data.machines.GTEMultiMachine.Easy_Box;
+import static org.satou.gtecore.common.data.machines.GTEMultiMachine.STEAM_OP;
 
 public class GTECreativeModeTabs {
 
     public static final RegistryEntry<CreativeModeTab> MORE_MACHINES = GTECore_REGISTRATE
-            .defaultCreativeTab("more_machines", builder -> builder
-                    .displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator("more_machines", GTECore_REGISTRATE))
-                    .title(GTECore_REGISTRATE.addLang("itemGroup", GTECore.id("gtecore_machine"), GTECore.NAME))
-                    .icon(Easy_Box::asStack)
+            .defaultCreativeTab("gtecore_machines", builder -> builder
+                    .displayItems(new GTCreativeModeTabs.RegistrateDisplayItemsGenerator("gtecore_machines", GTECore_REGISTRATE))
+                    .title(GTECore_REGISTRATE.addLang("itemGroup", GTECore.id("gtecore_machines"), GTECore.NAME))
+                    .icon(STEAM_OP::asStack)
                     .build())
             .register();
+
+    public static void init() {
+
+    }
 }

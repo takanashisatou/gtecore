@@ -2,6 +2,9 @@
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
   "machine": "gtceu:circuit_factory",
+  "texture_overrides": {
+    "all": "gtceu:block/casings/solid/machine_casing_clean_stainless_steel"
+  },
   "variants": {
     "recipe_logic_status=idle": {
       "model": {

@@ -1,6 +1,12 @@
 package org.satou.gtecore.common;
 
+import com.gregtechceu.gtceu.api.cover.CoverDefinition;
 import com.gregtechceu.gtceu.common.machine.multiblock.part.SteamHatchPartMachine;
+import com.hepdd.gtmthings.data.CreativeModeTabs;
+import com.hepdd.gtmthings.data.CustomItems;
+import com.hepdd.gtmthings.data.GTMTCovers;
+import org.satou.gtecore.GTECore;
+import org.satou.gtecore.common.data.GTECreativeModeTabs;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 import org.satou.gtecore.common.data.machines.GTEMultiMachine;
 import org.satou.gtecore.config.GTEConfig;
@@ -25,6 +31,7 @@ public class CommonProxy {
         eventBus.addListener(CommonProxy::commonSetup);
         eventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
         eventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
+        eventBus.addGenericListener(CoverDefinition.class, this::registerCovers);
     }
 
     private static void init() {
@@ -39,5 +46,8 @@ public class CommonProxy {
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         GTEMultiMachine.init();
+    }
+    private void registerCovers(GTCEuAPI.RegisterEvent<ResourceLocation, CoverDefinition> event) {
+        GTECreativeModeTabs.init();
     }
 }

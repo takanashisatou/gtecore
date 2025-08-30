@@ -2,6 +2,9 @@
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
   "machine": "gtceu:miracle_ring",
+  "texture_overrides": {
+    "all": "gtceu:block/casings/solid/machine_casing_robust_tungstensteel"
+  },
   "variants": {
     "recipe_logic_status=idle": {
       "model": {

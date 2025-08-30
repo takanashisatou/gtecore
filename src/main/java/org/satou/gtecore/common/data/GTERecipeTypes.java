@@ -39,6 +39,12 @@ public class GTERecipeTypes {
             .setMaxIOSize(2, 16, 0, 0).setEUIO(IO.IN);
     public final static GTRecipeType General_Fuel_Generator = register("general_fuel_generator", MULTIBLOCK)
             .setMaxIOSize(0, 0, 1, 1).setEUIO(IO.OUT);
+    public final static GTRecipeType Desulfurization_Recipe = register("desulfurization_recipe", MULTIBLOCK)
+            .setMaxIOSize(1,1,8,8).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public final static GTRecipeType SteamOp_Recipe = register("steam_op_recipe", MULTIBLOCK)
+            .setMaxIOSize(2,16,0,0).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
 
     public static void init() {}
 }

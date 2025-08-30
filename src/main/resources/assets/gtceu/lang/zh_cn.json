@@ -29,5 +29,8 @@
   "block.gtceu.big_extruder": "大型压模阵列",
   "block.gtceu.big_autoclave": "大型高压釜",
   "block.gtceu.steam_grinder_easy": "蒸汽碾磨机Easy版",
-  "block.gtceu.steam_oven_easy": "蒸汽熔炼炉Easy版"
+  "block.gtceu.steam_oven_easy": "蒸汽熔炼炉Easy版",
+  "block.gtceu.desulfurization": "脱硫机",
+  "gtecore.desulfurization_recipe": "脱硫机",
+  "block.gtceu.big_mixer": "大型搅拌机"
 }

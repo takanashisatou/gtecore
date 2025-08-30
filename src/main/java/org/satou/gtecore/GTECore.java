@@ -1,5 +1,6 @@
 package org.satou.gtecore;
 
+import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import org.satou.gtecore.client.ClientProxy;
 import org.satou.gtecore.common.CommonProxy;
 
@@ -10,11 +11,13 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Iterator;
+import java.util.List;
+
 import static net.minecraft.resources.ResourceLocation.tryBuild;
 
 @Mod(GTECore.MOD_ID)
 public class GTECore {
-
     public static final String NAME = "GTE Core";
     public static final String MOD_ID = "gtecore";
     public static final Logger LOGGER = LogManager.getLogger(NAME);
