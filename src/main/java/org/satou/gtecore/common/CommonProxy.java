@@ -5,9 +5,13 @@ import com.gregtechceu.gtceu.common.machine.multiblock.part.SteamHatchPartMachin
 import com.hepdd.gtmthings.data.CreativeModeTabs;
 import com.hepdd.gtmthings.data.CustomItems;
 import com.hepdd.gtmthings.data.GTMTCovers;
+import net.minecraftforge.eventbus.api.GenericEvent;
 import org.satou.gtecore.GTECore;
+import org.satou.gtecore.GTEGTAddon;
+import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTECreativeModeTabs;
 import org.satou.gtecore.common.data.GTERecipeTypes;
+import org.satou.gtecore.common.data.items.GTEItems;
 import org.satou.gtecore.common.data.machines.GTEMultiMachine;
 import org.satou.gtecore.config.GTEConfig;
 
@@ -32,7 +36,9 @@ public class CommonProxy {
         eventBus.addGenericListener(GTRecipeType.class, this::registerRecipeTypes);
         eventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
         eventBus.addGenericListener(CoverDefinition.class, this::registerCovers);
+        //Register the GTRecipeTypes event to ensure that GTERecipeTypes is initialized at the right time
     }
+
 
     private static void init() {
         GTEConfig.init();
@@ -49,5 +55,7 @@ public class CommonProxy {
     }
     private void registerCovers(GTCEuAPI.RegisterEvent<ResourceLocation, CoverDefinition> event) {
         GTECreativeModeTabs.init();
+        GTEItems.init();
+        GTEBlocks.init();
     }
 }

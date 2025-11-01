@@ -32,5 +32,20 @@
   "block.gtceu.steam_oven_easy": "蒸汽熔炼炉Easy版",
   "block.gtceu.desulfurization": "脱硫机",
   "gtecore.desulfurization_recipe": "脱硫机",
-  "block.gtceu.big_mixer": "大型搅拌机"
+  "block.gtceu.big_mixer": "大型搅拌机",
+  "gtceu.machine.multi_parallel_hatch_mk0.tooltip": "允许在跨配方并行中运行最多 2 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk1.tooltip": "允许在跨配方并行中运行最多 4 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk2.tooltip": "允许在跨配方并行中运行最多 8 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk3.tooltip": "允许在跨配方并行中运行最多 16 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk4.tooltip": "允许在跨配方并行中运行最多 32 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk5.tooltip": "允许在跨配方并行中运行最多 64 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk6.tooltip": "允许在跨配方并行中运行最多 128 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk7.tooltip": "允许在跨配方并行中运行最多 256 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk8.tooltip": "允许在跨配方并行中运行最多 512 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk9.tooltip": "允许在跨配方并行中运行最多 1024 个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk10.tooltip": "允许在跨配方并行中运行最多 2048个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk11.tooltip": "允许在跨配方并行中运行最多 4096个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk12.tooltip": "允许在跨配方并行中运行最多 8192个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk13.tooltip": "允许在跨配方并行中运行最多 16384个配方。",
+  "gtceu.machine.multi_parallel_hatch_mk14.tooltip": "允许在跨配方并行中允许最多 32768个配方。"
 }

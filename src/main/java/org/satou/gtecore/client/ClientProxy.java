@@ -1,5 +1,8 @@
 package org.satou.gtecore.client;
 
+import com.gregtechceu.gtceu.client.TooltipsHandler;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.satou.gtecore.common.CommonProxy;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +20,10 @@ public class ClientProxy extends CommonProxy {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(ClientProxy::clientSetup);
     }
-
+    @SubscribeEvent
+    public static void onTooltipEvent(ItemTooltipEvent event) {
+        TooltipsHandler.appendTooltips(event.getItemStack(), event.getFlags(), event.getToolTip());
+    }
     private static void init() {}
 
     private static void clientSetup(FMLClientSetupEvent event) {}

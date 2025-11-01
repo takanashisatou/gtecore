@@ -166,6 +166,8 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         if (!EUt.isEmpty()) {
             int maxParallel = 2000000000; // get maximum parallel
             int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+            ((FUEL_ENGINE) machine).recipeLogic.setMultiParallelLogic(true);
+            ((FUEL_ENGINE) machine).recipeLogic.setMultiParallelCount(maxParallel);
             double eutMultiplier = actualParallel * engineMachine.getProductionBoost();
             return ModifierFunction.builder()
                     .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -175,6 +177,22 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
                     .build();
         }
         return ModifierFunction.NULL;
+    }
+    public static ModifierFunction recipeModifieForFusionReactor(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
+        if (!(machine instanceof WorkableElectricMultiblockMachine engineMachine)) {
+            return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);
+        }
+        EnergyStack EUt = recipe.getOutputEUt();
+        // has lubricant
+            int maxParallel = 2000000000; // get maximum parallel
+            int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+            //double eutMultiplier = actualParallel * engineMachine.getProductionBoost();
+            return ModifierFunction.builder()
+                    .inputModifier(ContentModifier.multiplier(actualParallel))
+                    .outputModifier(ContentModifier.multiplier(actualParallel))
+                    .parallels(actualParallel)
+                    .build();
+
     }
 
     public static ModifierFunction recipeModifierForRing(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
@@ -198,6 +216,8 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         }
         int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+        engineMachine.recipeLogic.setMultiParallelLogic(true);
+        engineMachine.recipeLogic.setMultiParallelCount(maxParallel);
         double eutMultiplier = actualParallel;
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))

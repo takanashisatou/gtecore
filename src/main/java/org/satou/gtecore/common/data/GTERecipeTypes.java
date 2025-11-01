@@ -16,6 +16,7 @@ import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection
 
 public class GTERecipeTypes {
 
+
     public static GTRecipeType register(String name, String group, RecipeType<?>... proxyRecipes) {
         var recipeType = new GTRecipeType(GTECore.id(name), group, proxyRecipes);
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, recipeType.registryName, recipeType);
@@ -40,11 +41,31 @@ public class GTERecipeTypes {
     public final static GTRecipeType General_Fuel_Generator = register("general_fuel_generator", MULTIBLOCK)
             .setMaxIOSize(0, 0, 1, 1).setEUIO(IO.OUT);
     public final static GTRecipeType Desulfurization_Recipe = register("desulfurization_recipe", MULTIBLOCK)
-            .setMaxIOSize(1,1,8,8).setEUIO(IO.IN)
+            .setMaxIOSize(1, 1, 8, 8).setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public final static GTRecipeType SteamOp_Recipe = register("steam_op_recipe", MULTIBLOCK)
-            .setMaxIOSize(2,16,0,0).setEUIO(IO.IN)
+            .setMaxIOSize(2, 16, 0, 0).setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
-
-    public static void init() {}
+    public final static GTRecipeType Chemistry_Terminator_Recipe = register("chemistry_terminator_recipe", MULTIBLOCK)
+            .setMaxIOSize(9, 9, 9, 9).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public final static GTRecipeType SUPER_FUSION_REACTOR_RECIPE = register("super_fusion_reactor_recipe", MULTIBLOCK)
+            .setMaxIOSize(9, 9, 9, 9).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public final static GTRecipeType SUPER_STRING_MIXING = register("super_string_mixing", MULTIBLOCK)
+            .setMaxIOSize(9, 9, 9, 9).setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public final static GTRecipeType STRING_OF_CREATION = register("string_of_creation", MULTIBLOCK)
+            .setMaxIOSize(9,1,6,0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public final static GTRecipeType SUPER_STRING_OSCILLATOR_ARRAY = register("super_string_oscillator_array",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW,LEFT_TO_RIGHT);
+    public final static GTRecipeType CHORD_OF_ALL_THINGS = register("chord_of_all_things", MULTIBLOCK)
+            .setMaxIOSize(6,12,6,12).setEUIO(IO.IN);
+    public final static GTRecipeType EASY_FLUID = register("easy_fluid", MULTIBLOCK)
+            .setMaxIOSize(1,0,0,12)
+            .setSteamProgressBar(GuiTextures.PROGRESS_BAR_ARROW_STEAM, LEFT_TO_RIGHT);
+    public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
+    }
 }

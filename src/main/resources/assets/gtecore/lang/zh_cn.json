@@ -1,9 +1,0 @@
-{
-  "config.gtecore.option.durationMultiplier": "配方时间倍率",
-  "config.screen.gtecore": "gtecore配置菜单",
-  "block.gtecore.steam_op": "蒸汽矿物处理厂",
-  "gtecore.steam_op_recipe": "蒸汽矿物处理厂",
-  "itemGroup.gtecore.gtecore_machines": "格雷科技Easy机器",
-  "com.gtecore.tooltips.addbygtecore": "由GTECore添加",
-  "com.gtecore.tooltips.steam_op": "10亿并行，并且所有配方1tick执行完毕，支持所有类型的输入输出仓室"
-}

@@ -20,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static org.satou.gtecore.config.GTEConfig.init;
+
 @Mixin(GTRecipeBuilder.class)
 @Accessors(chain = true, fluent = true)
 public class GTRecipeBuilderMixin {
@@ -49,6 +51,7 @@ public class GTRecipeBuilderMixin {
 
     @Unique
     private int gTECore$getDuration() {
+
         if (GTEConfig.INSTANCE.durationMultiplier == 1 || gTECore$eut < 0) {
             return Math.abs(duration);
         }
@@ -58,6 +61,9 @@ public class GTRecipeBuilderMixin {
     @Inject(method = "toJson", at = @At("TAIL"), remap = false)
     public void toJson(JsonObject json, CallbackInfo ci) {
         //GTECore.LOGGER.warn("Now duration is "+gTECore$getDuration());
+        if(GTEConfig.INSTANCE == null){
+            init();
+        }
         json.addProperty("duration", gTECore$getDuration());
     }
 

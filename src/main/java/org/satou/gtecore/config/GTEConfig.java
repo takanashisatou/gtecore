@@ -21,7 +21,6 @@ public class GTEConfig {
                 INSTANCE = Configuration.registerConfig(GTEConfig.class, ConfigFormats.YAML).getConfigInstance();
             }
             ConfigHolder.init();
-
             ConfigHolder.INSTANCE.machines.steamMultiParallelAmount = 1024;
         }
     }

@@ -2,7 +2,6 @@ dependencies {
     compileOnly(libs.jetbrains.annotations)
 
     modClientLocalRuntime(forge.jecharacters.get())
-
     // Mixin (& Extras)
     annotationProcessor(variantOf(libs.mixin) { classifier("processor") })
     api(annotationProcessor(forge.mixinExtras.common.get()))
@@ -15,9 +14,12 @@ dependencies {
 
     // Configuration
     modCompileOnly(forge.configuration)
+    modCompileOnly "com.gregtechceu.gtceu:gtceu-1.20.1:8.0.3"
+    modRuntimeOnly "com.gregtechceu.gtceu:gtceu-1.20.1:8.0.3"
+
 
     // GregTech
-    modCompileOnly(forge.gtm)
+    //modCompileOnly(forge.gtm)
     modCompileOnly(forge.gtmthings)
 
     // Recipe Viewers
@@ -71,7 +73,7 @@ dependencies {
 //    modCompileOnly(forge.reavaritia)
 //
 //    modCompileOnly(forge.chiselreborn)
-
+    modCompileOnly(forge.guideme)
     modCompileOnly(forge.sophisticatedcore)
     modCompileOnly(forge.sophisticatedbackpacks)
     modCompileOnly(forge.sophisticatedstorage)
@@ -105,12 +107,12 @@ dependencies {
     // GregTech //
     modLocalRuntime(forge.ldlib)
     modLocalRuntime(forge.configuration)
-    modLocalRuntime(forge.gtm)
+    //modLocalRuntime(forge.gtm)
     modLocalRuntime(forge.gtmthings)
 
     // Ad:astra //
 //    modLocalRuntime(forge.resourcefullib)
-//    modLocalRuntime(forge.resourcefulconfig)
+//    modLocalRuntime(forge.resourcefulconfig)c
 //    modLocalRuntime(forge.botarium)
 //    modLocalRuntime(forge.adastra)
 

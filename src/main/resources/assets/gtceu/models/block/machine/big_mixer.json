@@ -6,71 +6,47 @@
     "all": "gtceu:block/casings/solid/machine_casing_solid_steel"
   },
   "variants": {
-    "is_formed=true,recipe_logic_status=idle": {
+    "recipe_logic_status=idle": {
       "model": {
         "parent": "gtceu:block/casings/voltage/lv",
         "textures": {
-          "overlay_front": "gtceu:block/machines/mixer/overlay_front"
+          "overlay_back": "gtceu:block/machines/mixer/overlay_back",
+          "overlay_front": "gtceu:block/machines/mixer/overlay_front",
+          "overlay_side": "gtceu:block/machines/mixer/overlay_side",
+          "overlay_top": "gtceu:block/machines/mixer/overlay_top"
         }
       }
     },
-    "is_formed=true,recipe_logic_status=suspend": {
+    "recipe_logic_status=suspend": {
       "model": {
         "parent": "gtceu:block/casings/voltage/lv",
         "textures": {
-          "overlay_front": "gtceu:block/machines/mixer/overlay_front"
+          "overlay_back": "gtceu:block/machines/mixer/overlay_back",
+          "overlay_front": "gtceu:block/machines/mixer/overlay_front",
+          "overlay_side": "gtceu:block/machines/mixer/overlay_side",
+          "overlay_top": "gtceu:block/machines/mixer/overlay_top"
         }
       }
     },
-    "is_formed=true,recipe_logic_status=waiting": {
+    "recipe_logic_status=waiting": {
       "model": {
         "parent": "gtceu:block/casings/voltage/lv",
         "textures": {
+          "overlay_back": "gtceu:block/machines/mixer/overlay_back_active",
           "overlay_front": "gtceu:block/machines/mixer/overlay_front_active",
-          "overlay_front_emissive": "gtceu:block/machines/mixer/overlay_front_active_emissive"
+          "overlay_side": "gtceu:block/machines/mixer/overlay_side_active",
+          "overlay_top": "gtceu:block/machines/mixer/overlay_top_active"
         }
       }
     },
-    "is_formed=true,recipe_logic_status=working": {
+    "recipe_logic_status=working": {
       "model": {
         "parent": "gtceu:block/casings/voltage/lv",
         "textures": {
+          "overlay_back": "gtceu:block/machines/mixer/overlay_back_active",
           "overlay_front": "gtceu:block/machines/mixer/overlay_front_active",
-          "overlay_front_emissive": "gtceu:block/machines/mixer/overlay_front_active_emissive"
-        }
-      }
-    },
-    "is_formed=false,recipe_logic_status=idle": {
-      "model": {
-        "parent": "gtceu:block/casings/voltage/lv",
-        "textures": {
-          "overlay_front": "gtceu:block/machines/mixer/overlay_front"
-        }
-      }
-    },
-    "is_formed=false,recipe_logic_status=suspend": {
-      "model": {
-        "parent": "gtceu:block/casings/voltage/lv",
-        "textures": {
-          "overlay_front": "gtceu:block/machines/mixer/overlay_front"
-        }
-      }
-    },
-    "is_formed=false,recipe_logic_status=waiting": {
-      "model": {
-        "parent": "gtceu:block/casings/voltage/lv",
-        "textures": {
-          "overlay_front": "gtceu:block/machines/mixer/overlay_front_active",
-          "overlay_front_emissive": "gtceu:block/machines/mixer/overlay_front_active_emissive"
-        }
-      }
-    },
-    "is_formed=false,recipe_logic_status=working": {
-      "model": {
-        "parent": "gtceu:block/casings/voltage/lv",
-        "textures": {
-          "overlay_front": "gtceu:block/machines/mixer/overlay_front_active",
-          "overlay_front_emissive": "gtceu:block/machines/mixer/overlay_front_active_emissive"
+          "overlay_side": "gtceu:block/machines/mixer/overlay_side_active",
+          "overlay_top": "gtceu:block/machines/mixer/overlay_top_active"
         }
       }
     }
