@@ -5,19 +5,15 @@ dependencies {
     // Mixin (& Extras)
     annotationProcessor(variantOf(libs.mixin) { classifier("processor") })
     api(annotationProcessor(forge.mixinExtras.common.get()))
-
     // LDLib
-    modCompileOnly(forge.ldlib)
-
+   compileOnly ("curse.maven:ldlib-626676:6995785")
     // Registrate
-    modCompileOnly(forge.registrate)
+    jarJar(modApi(forge.registrate.get()))
 
     // Configuration
     modCompileOnly(forge.configuration)
-    modCompileOnly "com.gregtechceu.gtceu:gtceu-1.20.1:8.0.3"
-    modRuntimeOnly "com.gregtechceu.gtceu:gtceu-1.20.1:8.0.3"
-
-
+    modCompileOnly ("curse.maven:gregtech-modern-reborn-1347911:7213800")
+    modLocalRuntime("curse.maven:gregtech-modern-reborn-1347911:7213800")
     // GregTech
     //modCompileOnly(forge.gtm)
     modCompileOnly(forge.gtmthings)
@@ -33,7 +29,8 @@ dependencies {
 
     // Curios
     modCompileOnly(forge.curios)
-
+    compileOnly("curse.maven:gt-community-edition-1353895:7198723")
+    modLocalRuntime("curse.maven:gt-community-edition-1353895:7198723")
     // AE2
     modCompileOnly(forge.ae2)
     modCompileOnly(forge.ae2wtlib)
@@ -43,13 +40,6 @@ dependencies {
     // FTB
     modCompileOnly(forge.architectury)
 
-    modCompileOnly(forge.ftblibrary)
-    modCompileOnly(forge.ftbteams)
-    modCompileOnly(forge.ftbquests)
-    modCompileOnly(forge.ftbchunks)
-    modCompileOnly(forge.ftbultimine)
-    modCompileOnly(forge.ftbessentials)
-    modCompileOnly(forge.ftbxmodcompat)
 
     modCompileOnly(forge.kubejs)
     modCompileOnly(forge.rhino)
@@ -93,19 +83,10 @@ dependencies {
     modLocalRuntime(forge.glodium)
     modLocalRuntime(forge.guideme)
     modLocalRuntime(forge.clothconfig)
-
+    modLocalRuntime("curse.maven:ldlib-626676:6995785")
     // FTB //
     modLocalRuntime(forge.architectury)
-    modLocalRuntime(forge.ftblibrary)
-    modLocalRuntime(forge.ftbteams)
-    modLocalRuntime(forge.ftbquests)
-    modLocalRuntime(forge.ftbchunks)
-    modLocalRuntime(forge.ftbultimine)
-    modLocalRuntime(forge.ftbessentials)
-    modLocalRuntime(forge.ftbxmodcompat)
-
     // GregTech //
-    modLocalRuntime(forge.ldlib)
     modLocalRuntime(forge.configuration)
     //modLocalRuntime(forge.gtm)
     modLocalRuntime(forge.gtmthings)

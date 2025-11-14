@@ -17,6 +17,7 @@ import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection
 public class GTERecipeTypes {
 
 
+
     public static GTRecipeType register(String name, String group, RecipeType<?>... proxyRecipes) {
         var recipeType = new GTRecipeType(GTECore.id(name), group, proxyRecipes);
         GTRegistries.register(BuiltInRegistries.RECIPE_TYPE, recipeType.registryName, recipeType);
@@ -66,6 +67,12 @@ public class GTERecipeTypes {
     public final static GTRecipeType EASY_FLUID = register("easy_fluid", MULTIBLOCK)
             .setMaxIOSize(1,0,0,12)
             .setSteamProgressBar(GuiTextures.PROGRESS_BAR_ARROW_STEAM, LEFT_TO_RIGHT);
+    public static final GTRecipeType MOLECULAR_SEPARATORS = register("molecular_separators", MULTIBLOCK)
+            .setMaxIOSize(9,9,3,3);
+    public static final GTRecipeType INTEGRATED_PETROCHEMICAL_PLANT = register("integrated_petrochemical_plant",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }

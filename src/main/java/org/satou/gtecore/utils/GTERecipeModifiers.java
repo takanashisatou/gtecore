@@ -18,9 +18,9 @@ public class GTERecipeModifiers {
         if (!(machine instanceof WorkableElectricMultiblockMachine super_string_mixer_machine)) {
             return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);
         }
-        super_string_mixer_machine.recipeLogic.setMultiParallelLogic(true);
-        super_string_mixer_machine.recipeLogic.setMultiParallelCount(2000000000);
-        int maxParallel = 2000000000; // get maximum parallel
+        //super_string_mixer_machine.recipeLogic.setMultiParallelLogic(true);
+        //super_string_mixer_machine.recipeLogic.setMultiParallelCount(128);
+        int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(super_string_mixer_machine, recipe, maxParallel);
         //double eutMultiplier = actualParallel * super_string_mixer_machine.getProductionBoost();
         return ModifierFunction.builder()
@@ -34,9 +34,9 @@ public class GTERecipeModifiers {
         if (!(machine instanceof WorkableElectricMultiblockMachine super_string_oscillator_array_machine)) {
             return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);
         }
-        super_string_oscillator_array_machine.recipeLogic.setMultiParallelLogic(true);
-        super_string_oscillator_array_machine.recipeLogic.setMultiParallelCount(2000000000);
-        int maxParallel = 2000000000; // get maximum parallel
+        //super_string_oscillator_array_machine.recipeLogic.setMultiParallelLogic(true);
+        //super_string_oscillator_array_machine.recipeLogic.setMultiParallelCount(128);
+        int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(super_string_oscillator_array_machine, recipe, maxParallel);
         //double eutMultiplier = actualParallel * super_string_mixer_machine.getProductionBoost();
         return ModifierFunction.builder()

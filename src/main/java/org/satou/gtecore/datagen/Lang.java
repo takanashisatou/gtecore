@@ -48,5 +48,12 @@ public class Lang {
         provider.add("item.gtecore.gamma_string","§d γ String","§d γ弦");
         provider.add("block.gtecore.easy_fluid_drilling_rig","Easy Fluid Drilling Rig","简单流体钻机");
         provider.add("gtecore.easy_fluid","Easy Fluid Drilling Rig","简单流体钻机");
+        provider.add("block.gtecore.molecular_separators","§3Molecular Separators","§3分子离析者");
+        provider.add("gtecore.molecular_separators","§3Molecular Separators","§3分子离析者");
+        provider.add("block.gtecore.easy_box","§6Easy §3B§2o§1x ", "§6简§3单§2之§1盒");
+        provider.add("gtecore.easy_box","§6Easy §3B§2o§1x ", "§6简§3单§2之§1盒");
+        provider.add("block.gtecore.integrated_petrochemical_plant","Integrated Petrochemical Plant","综合石化工厂");
+        provider.add("gtecore.integrated_petrochemical_plant","Integrated Petrochemical Plant","综合石化工厂");
+
     }
 }
