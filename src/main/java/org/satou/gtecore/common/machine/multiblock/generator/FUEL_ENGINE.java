@@ -216,8 +216,6 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         }
         int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
-        engineMachine.recipeLogic.setMultiParallelLogic(true);
-        engineMachine.recipeLogic.setMultiParallelCount(128);
         double eutMultiplier = actualParallel;
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))

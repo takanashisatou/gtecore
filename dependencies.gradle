@@ -12,8 +12,9 @@ dependencies {
 
     // Configuration
     modCompileOnly(forge.configuration)
-    modCompileOnly ("curse.maven:gregtech-modern-reborn-1347911:7213800")
-    modLocalRuntime("curse.maven:gregtech-modern-reborn-1347911:7213800")
+    modCompileOnly ("curse.maven:gregtech-modern-reborn-1347911:7288776")
+
+    //api("com.gregtech.gtceu:gtceu-1.20.1:8.1.5")
     // GregTech
     //modCompileOnly(forge.gtm)
     modCompileOnly(forge.gtmthings)
@@ -29,7 +30,9 @@ dependencies {
 
     // Curios
     modCompileOnly(forge.curios)
-    compileOnly("curse.maven:gt-community-edition-1353895:7198723")
+    modCompileOnly("curse.maven:gt-community-edition-1353895:7198723")
+    api("curse.maven:gt-community-edition-1353895:7198723")
+
     modLocalRuntime("curse.maven:gt-community-edition-1353895:7198723")
     // AE2
     modCompileOnly(forge.ae2)
@@ -37,7 +40,7 @@ dependencies {
 
     modCompileOnly(forge.extendedae)
 
-    // FTB
+    // FTBide
     modCompileOnly(forge.architectury)
 
 
@@ -63,10 +66,10 @@ dependencies {
 //    modCompileOnly(forge.reavaritia)
 //
 //    modCompileOnly(forge.chiselreborn)
-    modCompileOnly(forge.guideme)
-    modCompileOnly(forge.sophisticatedcore)
-    modCompileOnly(forge.sophisticatedbackpacks)
-    modCompileOnly(forge.sophisticatedstorage)
+    //modCompileOnly(forge.guideme)
+    //modCompileOnly(forge.sophisticatedcore)
+    //modCompileOnly(forge.sophisticatedbackpacks)
+    //modCompileOnly(forge.sophisticatedstorage)
 
     // Standard runtime mods //
     modLocalRuntime(forge.jade)
@@ -76,21 +79,24 @@ dependencies {
     modLocalRuntime(forge.ferritecore)
 
     // AE2 //
+    modLocalRuntime(forge.guideme)
     modLocalRuntime(forge.ae2)
     modLocalRuntime(forge.ae2wtlib)
     modLocalRuntime(forge.extendedae)
 
     modLocalRuntime(forge.glodium)
-    modLocalRuntime(forge.guideme)
     modLocalRuntime(forge.clothconfig)
+
     modLocalRuntime("curse.maven:ldlib-626676:6995785")
+
     // FTB //
     modLocalRuntime(forge.architectury)
     // GregTech //
     modLocalRuntime(forge.configuration)
+
     //modLocalRuntime(forge.gtm)
     modLocalRuntime(forge.gtmthings)
-
+    modLocalRuntime("curse.maven:gregtech-modern-reborn-1347911:7288776")
     // Ad:astra //
 //    modLocalRuntime(forge.resourcefullib)
 //    modLocalRuntime(forge.resourcefulconfig)c
@@ -114,6 +120,7 @@ dependencies {
     modLocalRuntime(forge.sophisticatedcore)
     modLocalRuntime(forge.sophisticatedbackpacks)
     modLocalRuntime(forge.sophisticatedstorage)
+
 
     // Runtime Recipe Viewers - uncomment whichever one you want to use //
 //    modLocalRuntime(forge.emi)

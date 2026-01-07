@@ -1,0 +1,9 @@
+{
+    "ldlib": {
+        "connection": "gtecore:block/casings/coils/yin_yang_coil_bloom_ctm",
+        "emissive": true
+    },
+    "shimmer": {
+        "bloom": true
+    }
+}

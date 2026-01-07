@@ -1,5 +1,6 @@
 package org.satou.gtecore.mixin;
 
+import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import org.satou.gtecore.GTECore;
 import org.satou.gtecore.config.GTEConfig;
 
@@ -24,7 +25,7 @@ import static org.satou.gtecore.config.GTEConfig.init;
 
 @Mixin(GTRecipeBuilder.class)
 @Accessors(chain = true, fluent = true)
-public class GTRecipeBuilderMixin {
+public abstract class GTRecipeBuilderMixin {
 
     @Shadow(remap = false)
     public GTRecipeType recipeType;
@@ -39,6 +40,8 @@ public class GTRecipeBuilderMixin {
     public GTRecipeBuilder duration(int duration) {
         return null;
     }
+
+    @Shadow(remap = false) public abstract @NotNull GTRecipeBuilder recipeType(GTRecipeType recipeType);
 
     @Unique
     private long gTECore$eut = 0;
@@ -55,6 +58,7 @@ public class GTRecipeBuilderMixin {
         if (GTEConfig.INSTANCE.durationMultiplier == 1 || gTECore$eut < 0) {
             return Math.abs(duration);
         }
+        if(recipeType == GTRecipeTypes.GAS_TURBINE_FUELS || recipeType == GTRecipeTypes.COMBUSTION_GENERATOR_FUELS || recipeType == GTRecipeTypes.STEAM_TURBINE_FUELS || recipeType == GTRecipeTypes.PLASMA_GENERATOR_FUELS) return Math.abs(duration);
         return (int) Math.min(Integer.MAX_VALUE, Math.max(1, Math.abs(duration * GTEConfig.INSTANCE.durationMultiplier)));
     }
 

@@ -1,0 +1,13 @@
+{
+  "ldlib": {
+    "connection": "gtecore:block/casings/yin_yang_field_restriction/yin_yang_field_restriction_ctm"
+  },
+  "animation": {
+    "interpolate": true,
+    "frametime": 2,
+    "frames": [
+      0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+    ]
+  }
+}
+

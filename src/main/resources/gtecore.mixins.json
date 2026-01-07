@@ -12,6 +12,9 @@
     "GTMSteamMultiblockMachineMixin",
     "GTRecipeBuilderMixin",
     "GTUtilsMixin",
+    "LargeBoilerMachineMixin",
+    "SimpleGeneratorMixin",
+    "SpawnMixin",
     "steam_hatch_mixin"
   ],
   "injectors": {

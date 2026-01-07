@@ -2,12 +2,15 @@ package org.satou.gtecore.utils;
 
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
 import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.ingredient.EnergyStack;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
+import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
+import com.gregtechceu.gtceu.config.ConfigHolder;
 import org.jetbrains.annotations.NotNull;
 import org.satou.gtecore.common.machine.multiblock.generator.FUEL_ENGINE;
 
@@ -27,6 +30,7 @@ public class GTERecipeModifiers {
                 .inputModifier(ContentModifier.multiplier(actualParallel))
                 .outputModifier(ContentModifier.multiplier(actualParallel))
                 .parallels(actualParallel)
+                .eutModifier(ContentModifier.multiplier(actualParallel))
                 .build();
     }
 
@@ -44,5 +48,22 @@ public class GTERecipeModifiers {
                 .outputModifier(ContentModifier.multiplier(actualParallel))
                 .parallels(actualParallel)
                 .build();
+    }
+    public static @NotNull ModifierFunction SteamBatchMode(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
+            if (recipe.duration < ConfigHolder.INSTANCE.machines.batchDuration) {
+                int parallel = ConfigHolder.INSTANCE.machines.batchDuration / recipe.duration;
+                parallel = ParallelLogic.getParallelAmountWithoutEU(machine, recipe, parallel);
+
+                if (parallel == 0) return ModifierFunction.NULL;
+                if (parallel == 1) return ModifierFunction.IDENTITY;
+
+                return ModifierFunction.builder()
+                        .inputModifier(ContentModifier.multiplier(parallel))
+                        .outputModifier(ContentModifier.multiplier(parallel))
+                        .durationMultiplier(parallel)
+                        .batchParallels(parallel)
+                        .build();
+            }
+        return ModifierFunction.IDENTITY;
     }
 }

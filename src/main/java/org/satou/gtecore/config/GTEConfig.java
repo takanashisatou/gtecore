@@ -28,4 +28,7 @@ public class GTEConfig {
     @Configurable
     @Configurable.Range(min = 0)
     public double durationMultiplier = 1;
+    @Configurable
+    public  boolean superPeace = false;
+
 }

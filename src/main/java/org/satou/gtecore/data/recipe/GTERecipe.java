@@ -20,12 +20,14 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Americium;
-import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static org.satou.gtecore.common.data.GTERecipeTypes.*;
 
 public class GTERecipe {
 
     public static void init(@NotNull Consumer<FinishedRecipe> provider) {
+        WIREMILL_FACTORY_HANDLER.init(provider);
+        QUANTUM_CABLE_ASSEMBLER_HANDLER.init(provider);
+        ORE_RECIPE_CENTER_HANDLER.init(provider);
         SUPER_FUSION_REACTOR_RECIPE.recipeBuilder("easy_deuterium_and_tritium_to_helium_plasma")
                 .inputFluids(GTMaterials.Deuterium.getFluid(125))
                 .inputFluids(GTMaterials.Tritium.getFluid(125))

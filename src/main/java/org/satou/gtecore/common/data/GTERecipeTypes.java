@@ -70,9 +70,27 @@ public class GTERecipeTypes {
     public static final GTRecipeType MOLECULAR_SEPARATORS = register("molecular_separators", MULTIBLOCK)
             .setMaxIOSize(9,9,3,3);
     public static final GTRecipeType INTEGRATED_PETROCHEMICAL_PLANT = register("integrated_petrochemical_plant",MULTIBLOCK)
-            .setMaxIOSize(9,9,9,9)
+            .setMaxIOSize(9,9,9,12)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public static final GTRecipeType ORE_PROCESS_CENTER = register("ore_process_center", MULTIBLOCK)
+            .setMaxIOSize(9,9,3,3)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType WIREMILL_FACTORY = register("wiremill_factory", MULTIBLOCK)
+            .setMaxIOSize(1,9,0,0)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType QUANTUM_CABLE_ASSEMBLER = register("quantum_cable_assembler",MULTIBLOCK)
+            .setMaxIOSize(1,16,1,0)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType CRYSTAL_CENTER = register("crystal_center",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType STARBLADE_ETCHING = register("starblade_etching",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType ANTIMATTER_TRANSFORMATION = register("antimatter_transformation",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }
