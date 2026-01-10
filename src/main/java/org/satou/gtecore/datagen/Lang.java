@@ -136,7 +136,7 @@ public class Lang {
         provider.add("block.gtecore.zhuque_module", "§cVermilion Bird Module", "§c朱雀阵法方块");
 
         provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace", "§8Yin §rYang Eight Trigmas Blast Furnace", "§8阴§r阳八卦锻炉");
-        provider.add("gtecore.yin_yang_eight_trigmas_blast", "§8Yin §rYang Eight Trigmas Blast", "§8阴§r阳八卦锻造");
+        provider.add("gtecore.yin_yang_eight_trigmas_blast", "§5Crape Myrtle §0Eight Trigrams §6Immortal Forging Furnace", "§5紫薇§0八卦§6炼仙炉");
 
         provider.add("gtecore.xuanwu_module.enabled","§8Black Tortoise Module§2 Enabled","§8玄武阵法§2启动");
         provider.add("gtecore.xuanwu_module.disabled","§8Black Tortoise Module§4 Disabled","§8玄武阵法§4关闭");
@@ -161,6 +161,9 @@ public class Lang {
         provider.add("block.gtecore.big_extractor","Large Fluid Extraction and Solidification Machine","大型流体提取固化一体机");
         provider.add("block.gtecore.big_extruder","Large Extruder Array","大型压模阵列");
         provider.add("block.gtecore.big_autoclave","Large Autoclave","大型高压釜");
+
+        provider.add("block.gtecore.taichi_five_elements_separation_array","Tai Chi Five Elements Separation Array","太极五行剥离阵列");
+        provider.add("gtecore.taichi_five_elements_separating","Tai Chi Five Elements Separating","太极五行剥离");
 
 
     }

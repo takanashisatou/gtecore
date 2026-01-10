@@ -94,6 +94,9 @@ public class GTERecipeTypes {
     public static final GTRecipeType YIN_YANG_EIGHT_TRIGMAS_BLAST = register("yin_yang_eight_trigmas_blast",MULTIBLOCK)
             .setMaxIOSize(9,9,9,9)
             .setEUIO(IO.IN);
+    public static final GTRecipeType TAICHI_FIVE_ELEMENTS_SEPARATING = register("taichi_five_elements_separating",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }

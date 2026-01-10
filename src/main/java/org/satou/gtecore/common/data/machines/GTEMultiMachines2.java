@@ -4,6 +4,7 @@ import com.gregtechceu.gtceu.GTCEu;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern;
 import com.gregtechceu.gtceu.api.pattern.Predicates;
 import com.gregtechceu.gtceu.common.data.GCYMRecipeTypes;
@@ -14,7 +15,7 @@ import org.satou.gtecore.api.registry.GTECoreRegistration;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 import org.satou.gtecore.utils.GTERecipeModifiers;
 
-import static com.gregtechceu.gtceu.api.pattern.Predicates.autoAbilities;
+import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_PERFECT_SUBTICK;
@@ -121,6 +122,42 @@ public class GTEMultiMachines2 {
             .workableCasingModel(GTECore.id("block/casings/uhv/li_huo_casing"),
                     GTCEu.id("block/multiblock/distillation_tower"))
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
+            .register();
+    public static MultiblockMachineDefinition TAICHI_Five_Elements_Separation_Array = GTECore_REGISTRATE
+            .multiblock("taichi_five_elements_separation_array", WorkableElectricMultiblockMachine::new)
+            .appearanceBlock(HIGH_POWER_CASING)
+            .rotationState(RotationState.ALL)
+            .recipeTypes(GTRecipeTypes.CENTRIFUGE_RECIPES,GTRecipeTypes.THERMAL_CENTRIFUGE_RECIPES,GTERecipeTypes.TAICHI_FIVE_ELEMENTS_SEPARATING)
+            .recipeModifiers(GTERecipeModifiers::recipeModifierForSuperStringMixer,OC_PERFECT_SUBTICK,BATCH_MODE)
+            .pattern(definition -> FactoryBlockPattern.start()
+                    .aisle("....A.....A..","....AAAAAAA..","....A.....A..",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............","......A.A....","......A.A....","......A.A....")
+                    .aisle("....A.....A..","...AABBBBBAA.","...CCDDDDDCC.",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....BBBBB...","......ACA....")
+                    .aisle("..AAAAAAAAAAA","..AABBBBBBBAA","..ACD.....DCA","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.E...D..","....D..E..D..","....D...E.D..","....D....ED..","....BBBBBBB..","......ACA....")
+                    .aisle("....A.....A..","..ABBBBBBBBBA","...D.E...E.D.","...D..E....D.","...D...E...D.","...D....E..D.","...D..E....D.","...D...E...D.","...D....E..D.","...D.....E.D.","...D.E....ED.","...D..E....D.","...D...E...D.","...DE...E..D.","...D.E...E.D.","...D..E....D.","...D...E...D.","...D....E..D.","...D..E....D.","...D...E...D.","...D....E..D.","...D.E...E.D.","...D......ED.","...D.......D.","...D.......D.","...DE......D.","...BBBBBBBBB.","......AAA....")
+                    .aisle("....A.....A..","..ABBBBBBBBBA","...D..CCC..D.","...D..CCCE.D.","...D..CCC..D.","...D.ECCC..D.","...D..CCCE.D.","...D..CCC..D.","...D..CCC..D.","...D.ECCC..D.","...D..CCC..D.","...D..CCC.ED.","...DE.CCC..D.","...D..CCC..D.","...D..CCC..D.","...D..CCCE.D.","...D..CCC..D.","...D.ECCC..D.","...D..CCCE.D.","...D..CCC..D.","...D.ECCC..D.","...D..CCC..D.","...D..CCC..D.","...D..CCC.ED.","...DE.CCC..D.","..AD..CCC..DA","..ABBBBBBBBBA","..AAAAAAAAAAA")
+                    .aisle("....A.....A..","..ABBBBBBBBBA","...D..CCC..D.","...D..CCC..D.","...D.ECCCE.D.","...D..CCC..D.","...D..CCC..D.","...D..CCCE.D.","...D.ECCC..D.","...D..CCC..D.","...D..CCC..D.","...DE.CCC..D.","...D..CCC.ED.","...D..CCC..D.","...D..CCC..D.","...D..CCC..D.","...D.ECCCE.D.","...D..CCC..D.","...D..CCC..D.","...D.ECCCE.D.","...D..CCC..D.","...D..CCC..D.","...D..CCC..D.","...DE.CCC..D.","...D..CCC.ED.","...D..CCC..D.","...BBBBBBBBB.","...CCAA.AACC.")
+                    .aisle("....A.....A..","..ABBBBBBBBBA","...D..CCC..D.","...D.ECCC..D.","...D..CCC..D.","...D..CCCE.D.","...D..CCC..D.","...D.ECCC..D.","...D..CCCE.D.","...D..CCC..D.","...DE.CCC..D.","...D..CCC..D.","...D..CCC..D.","...D..CCC.ED.","...D..CCC..D.","...D.ECCC..D.","...D..CCC..D.","...D..CCCE.D.","...D.ECCC..D.","...D..CCC..D.","...D..CCCE.D.","...D..CCC..D.","...DE.CCC..D.","...D..CCC..D.","...D..CCC..D.","..AD..CCC.EDA","..ABBBBBBBBBA","..AAAAAAAAAAA")
+                    .aisle("....A.....A..","..ABBBBBBBBBA","...D.E.....D.","...D.......D.","...D.......D.","...D.......D.","...D....E..D.","...D...E...D.","...D..E....D.","...D.E...E.D.","...D.......D.","...D.......D.","...D.......D.","...D.......D.","...D.E...E.D.","...D....E..D.","...D...E...D.","...D..E....D.","...D....E..D.","...D...E...D.","...D..E....D.","...D.E...E.D.","...D.......D.","...D.......D.","...D.......D.","...D.......D.","...BBBBBBBBB.","......AAA....")
+                    .aisle("..AAAAAAAAAAA","..AABBBBBBBAA","..ACD.....DCA","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D...E.D..","....D..E..D..","....D.E...D..","....DE....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D.....D..","....D...E.D..","....D..E..D..","....D.E...D..","....DE....D..","....BBBBBBB..","......ACA....")
+                    .aisle("....A.....A..","...AABBBBBAA.","...CCDDDDDCC.",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....DDDDD...",".....BBBBB...","......ACA....")
+                    .aisle("....A.....A..","....AAAFAAA..","....A.....A..",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............","......A.A....","......A.A....","......A.A....")
+                    .aisle(".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............")
+                    .aisle(".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............",".............")
+                    .where(".", Predicates.any())
+                    .where("A", easy("gtceu:high_power_casing")
+                            .or(autoAbilities(false,false,true))
+                            .or(autoAbilities(definition.getRecipeTypes()))
+                            .or(abilities(PartAbility.INPUT_LASER))
+                    )
+                    .where("B", easy("gtecore:eight_trigmas_casing"))
+                    .where("C", easy("gtecore:yin_yang_field_restriction"))
+                    .where("D", easy("gtceu:cleanroom_glass"))
+                    .where("E", easy("gtceu:infinity_frame"))
+                    .where("F", controller(blocks(definition.getBlock())))
+                    .build())
+            .workableCasingModel(GTCEu.id("block/casings/hpca/high_power_casing"),
+                    GTCEu.id("block/multiblock/fusion_reactor")
+            )
             .register();
 
 
