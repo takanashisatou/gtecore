@@ -3,6 +3,9 @@ package org.satou.gtecore.common;
 import com.gregtechceu.gtceu.api.cover.CoverDefinition;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
+import com.gregtechceu.gtceu.api.recipe.RecipeCondition;
+import com.gregtechceu.gtceu.api.recipe.condition.RecipeConditionType;
+import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.common.data.GTRecipes;
 import com.gregtechceu.gtceu.data.pack.GTDynamicDataPack;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -11,6 +14,7 @@ import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTECreativeModeTabs;
 import org.satou.gtecore.common.data.GTEMaterials;
 import org.satou.gtecore.common.data.GTERecipeTypes;
+import org.satou.gtecore.common.data.condition.GTERecipeConditions;
 import org.satou.gtecore.common.data.items.GTEItems;
 import org.satou.gtecore.common.data.machines.GTEMachines;
 import org.satou.gtecore.config.GTEConfig;
@@ -42,8 +46,11 @@ public class CommonProxy {
         eventBus.addGenericListener(GTRecipes.class, this::registerRecipes);
         eventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
         eventBus.addGenericListener(CoverDefinition.class, this::registerCovers);
+        eventBus.addGenericListener(RecipeConditionType.class,this::registerRecipeConditions);
         //Register the GTRecipeTypes event to ensure that GTERecipeTypes is initialized at the right time
     }
+
+
 
     private void registerRecipes(GTCEuAPI.RegisterEvent<ResourceLocation,GTRecipes> event) {
         Consumer<FinishedRecipe> consumer = GTDynamicDataPack::addRecipe;
@@ -63,6 +70,9 @@ public class CommonProxy {
 
     private static void commonSetup(FMLCommonSetupEvent event) {}
 
+    private void registerRecipeConditions(GTCEuAPI.RegisterEvent<ResourceLocation,RecipeConditionType> event) {
+        GTERecipeConditions.init();
+    }
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         GTERecipeTypes.init();
 

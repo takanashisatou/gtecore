@@ -36,5 +36,6 @@ public class GTEMachines {
             .register();
     public static void init() {
         GTEMultiMachine.init();
+        GTEMultiMachines2.init();
     }
 }

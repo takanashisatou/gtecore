@@ -1,3 +1,8 @@
 {
-  "block.gtmthings.ulv_programmablec_hatch": "§8 ULV Programmable Hatch"
+  "block.gtmthings.ulv_programmablec_hatch": "§8ULV Programmable Hatch",
+  "block.gtmthings.lv_programmablec_hatch": "§7LV§rProgrammable Hatch",
+  "block.gtmthings.mv_programmablec_hatch": "§bMV§rProgrammable Hatch",
+  "block.gtmthings.hv_programmablec_hatch": "§4HV§rProgrammable Hatch",
+  "block.gtmthings.ev_programmablec_hatch":"§5EV§rProgrammable Hatch",
+  "block.gtmthings.iv_programmablec_hatch": "§9IV§rProgrammable Hatch"
 }

@@ -8,7 +8,7 @@
   ],
   "mixins": [
     "diamondmixin",
-    "GTMMultiblockRegistrationMixin",
+    "GTMCircuitHandlerMixin",
     "GTMSteamMultiblockMachineMixin",
     "GTRecipeBuilderMixin",
     "GTUtilsMixin",

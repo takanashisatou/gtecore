@@ -1,26 +1,26 @@
 {
   "parent": "minecraft:block/block",
   "loader": "gtceu:machine",
-  "machine": "gtmthings:ulv_programmablec_hatch",
+  "machine": "gtmthings:hv_programmablec_hatch",
   "variants": {
     "recipe_logic_status=idle": {
       "model": {
-        "parent": "gtceu:block/casings/voltage/ulv"
+        "parent": "gtceu:block/casings/voltage/hv"
       }
     },
     "recipe_logic_status=suspend": {
       "model": {
-        "parent": "gtceu:block/casings/voltage/ulv"
+        "parent": "gtceu:block/casings/voltage/hv"
       }
     },
     "recipe_logic_status=waiting": {
       "model": {
-        "parent": "gtceu:block/casings/voltage/ulv"
+        "parent": "gtceu:block/casings/voltage/hv"
       }
     },
     "recipe_logic_status=working": {
       "model": {
-        "parent": "gtceu:block/casings/voltage/ulv"
+        "parent": "gtceu:block/casings/voltage/hv"
       }
     }
   }

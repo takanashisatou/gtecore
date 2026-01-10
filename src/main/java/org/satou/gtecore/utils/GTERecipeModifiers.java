@@ -11,12 +11,28 @@ import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+import dev.architectury.platform.Mod;
 import org.jetbrains.annotations.NotNull;
+import org.satou.gtecore.common.data.machines.YIN_YANG_EIGHT_TRIGMAS_BLAST_FURNACE;
 import org.satou.gtecore.common.machine.multiblock.generator.FUEL_ENGINE;
 
 import java.util.Collections;
 
 public class GTERecipeModifiers {
+    public static ModifierFunction recipeModifierForYinYangEightTrigmasBlastFurnace(@NotNull MetaMachine machine,@NotNull GTRecipe recipe){
+        if(!(machine instanceof YIN_YANG_EIGHT_TRIGMAS_BLAST_FURNACE)){
+            return RecipeModifier.nullWrongType(YIN_YANG_EIGHT_TRIGMAS_BLAST_FURNACE.class,machine);
+        }
+        int maxParallel = 1000000000; // get maximum parallel
+        int actualParallel = FUEL_ENGINE.getParallelAmount(machine, recipe, maxParallel);
+        //double eutMultiplier = actualParallel * super_string_mixer_machine.getProductionBoost();
+        return ModifierFunction.builder()
+                .inputModifier(ContentModifier.multiplier(actualParallel))
+                .outputModifier(ContentModifier.multiplier(actualParallel))
+                .parallels(actualParallel)
+                .eutModifier(ContentModifier.multiplier(actualParallel))
+                .build();
+    }
     public static ModifierFunction recipeModifierForSuperStringMixer(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof WorkableElectricMultiblockMachine super_string_mixer_machine)) {
             return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);

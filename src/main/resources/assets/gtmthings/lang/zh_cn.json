@@ -1,3 +1,8 @@
 {
-  "block.gtmthings.ulv_programmablec_hatch": "§8 ULV可编程仓"
+  "block.gtmthings.ulv_programmablec_hatch": "§8ULV§r可编程仓",
+  "block.gtmthings.lv_programmablec_hatch": "§7LV§r可编程仓",
+  "block.gtmthings.mv_programmablec_hatch": "§bMV§r可编程仓",
+  "block.gtmthings.hv_programmablec_hatch": "§4HV§r可编程仓",
+  "block.gtmthings.ev_programmablec_hatch":"§5EV§r可编程仓",
+  "block.gtmthings.iv_programmablec_hatch": "§9IV§r可编程仓"
 }

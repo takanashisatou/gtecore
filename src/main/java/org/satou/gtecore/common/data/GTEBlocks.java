@@ -46,8 +46,13 @@ public class GTEBlocks {
     public static BlockEntry<Block> BASE_DARK_CONCRETE = createCasingBlock("base_dark_concrete",GTECore.id("block/casings/concrete/base_dark_concrete"));
     public static BlockEntry<Block> BASE_LIGHT_CONCRETE = createCasingBlock("base_light_concrete",GTECore.id("block/casings/concrete/base_light_concrete"));
     public static BlockEntry<Block> BASE_MID_CONCRETE = createCasingBlock("base_mid_concrete",GTECore.id("block/casings/concrete/base_mid_concrete"));
-
     public static BlockEntry<Block> YIN_YANG_FIELD_RESTRICTION = createCasingBlock("yin_yang_field_restriction",GTECore.id("block/casings/yin_yang_field_restriction/yin_yang_field_restriction"));
+
+    public static BlockEntry<Block> BAIHU_MODULE = createCasingBlock("baihu_module",GTECore.id("block/casings/uhv/baihu_module"));
+    public static BlockEntry<Block> QINLONG_MODULE = createCasingBlock("qinglong_module",GTECore.id("block/casings/uhv/qinglong_module"));
+    public static BlockEntry<Block> XUANWU_MODULE = createCasingBlock("xuanwu_module",GTECore.id("block/casings/uhv/xuanwu_module"));
+    public static BlockEntry<Block> ZHUQUE_MODULE = createCasingBlock("zhuque_module",GTECore.id("block/casings/uhv/zhuque_module"));
+
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
                 () -> RenderType::solid);
