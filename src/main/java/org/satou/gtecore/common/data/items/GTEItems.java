@@ -161,11 +161,23 @@ public class GTEItems {
     public static ItemEntry<Item> YING = GTECore_REGISTRATE.item("yin",Item::new)
             .lang("Ying")
             .register();
-    public static ItemEntry<Item> YING_YANG_WAFER = GTECore_REGISTRATE.item("yin_yang_wafer",Item::new)
+    public static ItemEntry<Item> YIN_YANG_WAFER = GTECore_REGISTRATE.item("yin_yang_wafer",Item::new)
             .lang("Yin Yang Wafer")
             .register();
-    public static ItemEntry<Item> YING_YANG_GLASS_LENS = GTECore_REGISTRATE.item("yinyang_glass_lens",Item::new)
+    public static ItemEntry<Item> YIN_YANG_GLASS_LENS = GTECore_REGISTRATE.item("yinyang_glass_lens",Item::new)
             .lang("Yin Yang Glass Lens")
+            .register();
+    public static ItemEntry<Item> YIN_YANG_CIRCUIT_BOARD = GTECore_REGISTRATE.item("yin_yang_circuit_board",Item::new)
+            .lang("Yin Yang Circuit Board")
+            .register();
+    public static ItemEntry<Item> YIN_YANG_CIRCUIT_CHIP = GTECore_REGISTRATE.item("yin_yang_circuit_chip",Item::new)
+            .lang("Yin Yang Circuit Chip")
+            .register();
+    public static ItemEntry<Item> YIN_YANG_BOULE = GTECore_REGISTRATE.item("yin_yang_boule",Item::new)
+            .lang("Yin Yang Boule")
+            .register();
+    public static ItemEntry<Item> YIN_YANG_CPU_WAFER = GTECore_REGISTRATE.item("yin_yang_cpu_wafer",Item::new)
+            .lang("Yin Yang CPU Wafer")
             .register();
     public static void init() {
     }

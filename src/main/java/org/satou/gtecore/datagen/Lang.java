@@ -121,7 +121,7 @@ public class Lang {
         provider.add("item.gtecore.dui_chip", "Dui Chip", "兑芯");
         provider.add("item.gtecore.gen_chip", "Gen Chip", "艮芯");
         provider.add("item.gtecore.god_nugget", "God Nugget", "三清之粒");
-        provider.add("item.gtecore.yin_yang_wafer", "§8Yin§rYang Wafer", "§8阴§r阳薄片");
+        provider.add("item.gtecore.yin_yang_wafer", "§8Yin§rYang Wafer", "§8阴§r阳晶圆");
         provider.add("block.gtecore.kan_shui_casing", "§3Kan Shui Casing", "§3坎水机械方块");
         provider.add("block.gtecore.kun_gen_casing", "§8Kun Gen Casing", "§8坤艮机械方块");
         provider.add("block.gtecore.li_huo_casing", "§4Li Huo Casing", "§4离火机械方块");
@@ -135,7 +135,7 @@ public class Lang {
         provider.add("block.gtecore.xuanwu_module", "§8Black Tortoise Module", "§8玄武阵法方块");
         provider.add("block.gtecore.zhuque_module", "§cVermilion Bird Module", "§c朱雀阵法方块");
 
-        provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace", "§8Yin §rYang Eight Trigmas Blast Furnace", "§8阴§r阳八卦锻炉");
+        provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace", "§8Yin §rYang Eight Trigmas Blast Furnace", "§5紫薇§0八卦§6炼仙炉");
         provider.add("gtecore.yin_yang_eight_trigmas_blast", "§5Crape Myrtle §0Eight Trigrams §6Immortal Forging Furnace", "§5紫薇§0八卦§6炼仙炉");
 
         provider.add("gtecore.xuanwu_module.enabled","§8Black Tortoise Module§2 Enabled","§8玄武阵法§2启动");
@@ -165,7 +165,22 @@ public class Lang {
         provider.add("block.gtecore.taichi_five_elements_separation_array","Tai Chi Five Elements Separation Array","太极五行剥离阵列");
         provider.add("gtecore.taichi_five_elements_separating","Tai Chi Five Elements Separating","太极五行剥离");
 
+        provider.add("block.gtecore.kun_gen_star_hub","Kun Gen Star Hub","坤艮星枢");
+        provider.add("gtecore.kun_gen_star_hub","Kun Gen Star Hub","坤艮星枢");
 
+        provider.add("block.gtecore.qian_qiong_engine","Qian Qiong Engine","谦穹引擎");
+        provider.add("gtecore.qing_qiong_engine","Qian Qiong Engine","谦穹引擎");
+
+        provider.add("block.gtecore.red_sun_tao_core","§4Red Sun§rTao Core","§4赤阳§r道核");
+        provider.add("gtecore.red_sun_tao_core","§4Red Sun§rTao Core","§4赤阳§r道核");
+
+        provider.add("block.gtecore.ashing_star_fusion_array","Ashing Star Fusion Array","烬星聚变阵");
+        provider.add("gtecore.ashing_star_fusion_array","Ashing Star Fusion Array","烬星聚变阵");
+
+        provider.add("item.gtecore.yin_yang_cpu_wafer", "§8Yin§rYang CPU Wafer", "§8阴§r阳CPU晶圆");
+        provider.add("item.gtecore.yin_yang_circuit_board","§8Yin§rYang Circuit Board","§8阴§r阳电路板");
+        provider.add("item.gtecore.yin_yang_boule","§8Yin§rYang Boule","§8阴§r阳单晶硅");
+        provider.add("item.gtecore.yin_yang_circuit_chip","§8Yin§rYang Circuit Chip","§8阴§r阳电路芯片");
     }
 
 

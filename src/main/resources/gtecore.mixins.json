@@ -13,6 +13,7 @@
     "GTRecipeBuilderMixin",
     "GTUtilsMixin",
     "LargeBoilerMachineMixin",
+    "MinecraftServerMixin",
     "SimpleGeneratorMixin",
     "SpawnMixin",
     "steam_hatch_mixin"

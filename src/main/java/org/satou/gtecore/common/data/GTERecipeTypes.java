@@ -97,6 +97,18 @@ public class GTERecipeTypes {
     public static final GTRecipeType TAICHI_FIVE_ELEMENTS_SEPARATING = register("taichi_five_elements_separating",MULTIBLOCK)
             .setMaxIOSize(9,9,9,9)
             .setEUIO(IO.IN);
+    public static final GTRecipeType KUN_GEN_STAR_HUB = register("kun_gen_star_hub",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType QIAN_QIONG_ENGINE = register("qian_qiong_engine",MULTIBLOCK)
+            .setMaxIOSize(0,0,1,1)
+            .setEUIO(IO.OUT);
+    public static final GTRecipeType RED_SUN_STAR_CORE = register("red_sun_star_core",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
+    public static final GTRecipeType ASHING_STAR_FUSION_ARRAY = register("ashing_star_fusion_array",MULTIBLOCK)
+            .setMaxIOSize(9,9,9,9)
+            .setEUIO(IO.IN);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }
