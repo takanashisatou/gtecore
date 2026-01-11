@@ -76,11 +76,11 @@ dependencies {
     modLocalRuntime(forge.modernfix)
     modLocalRuntime(forge.modernui)
     modLocalRuntime(forge.ferritecore)
-
+    modLocalRuntime(forge.guideme)
     modLocalRuntime(forge.glodium)
     modLocalRuntime(forge.clothconfig)
     // AE2 //
-    modLocalRuntime(forge.guideme)
+
     modLocalRuntime(forge.ae2)
     modLocalRuntime(forge.ae2wtlib)
     modLocalRuntime(forge.extendedae)
