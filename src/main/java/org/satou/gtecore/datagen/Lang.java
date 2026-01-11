@@ -185,7 +185,7 @@ public class Lang {
         provider.add("recipe.condition.bai_hu.tooltip","Need §fWhite Tiger Module§2 Enabled","需要§f白虎阵法§2启动");
         provider.add("recipe.condition.qing_long.tooltip","Need §3Azure Dragon Module§2 Enabled","需要§3青龙阵法§2启动");
         provider.add("recipe.condition.xuan_wu.tooltip","Need §8Black Tortoise Module§2 Enabled","需要§8玄武阵法§2启动");
-        provider.add("recipe.condition.zhu_que.tooltip","Need §cVermilion Bird Module§2 Enabled","§需要c朱雀阵法§2启动");
+        provider.add("recipe.condition.zhu_que.tooltip","Need §cVermilion Bird Module§2 Enabled","需要§c朱雀阵法§2启动");
     }
 
 
