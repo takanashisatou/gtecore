@@ -25,8 +25,7 @@
 
   "block.gtceu.miracle_ring": "§6 Miracle Ring",
 
-  "com.gtecore.tooltips.miracle_ring": "§6 Miraculous creation. §r Has §61024 parallelism§r, and executes §6 all§r recipes in §61 ticks",
-
+  "com.gtecore.tooltips.miracle_ring": "§6 Miraculous creation. §r Has §61B parallelism§r, and subtick overclock,no need research to execute assembly line recipes",
   "block.gtceu.big_extractor": "Large Fluid Extraction and Solidification Machine",
 
   "block.gtceu.big_extruder": "Large Extruder Array",
@@ -37,7 +36,6 @@
 
   "block.gtceu.steam_oven_easy": "Steam Smelting Furnace Easy Version",
   "block.gtceu.desulfurization": "Desulfurizer",
-  "gtecore.desulfurization_recipe": "Desulfurizer",
   "block.gtceu.big_mixer": "Large Mixer",
   "gtceu.machine.multi_parallel_hatch_mk0.tooltip": "Allows to run up to 2 recipes in multiparallel.",
   "gtceu.machine.multi_parallel_hatch_mk1.tooltip": "Allows to run up to 4 recipes in multiparallel.",

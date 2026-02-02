@@ -6,10 +6,13 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
 import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.integration.ae2.machine.MEInputHatchPartMachine;
+import com.gregtechceu.gtceu.integration.ae2.machine.MEPatternBufferPartMachine;
+import com.gregtechceu.gtceu.integration.ae2.machine.MEPatternBufferProxyPartMachine;
 import net.minecraft.network.chat.Component;
 import org.satou.gtecore.api.registry.GTECoreRegistration;
 
 import static com.gregtechceu.gtceu.api.GTValues.EV;
+import static com.gregtechceu.gtceu.api.GTValues.LuV;
 import static com.gregtechceu.gtceu.common.data.GTCreativeModeTabs.MACHINE;
 import static com.gregtechceu.gtceu.common.data.machines.GTMachineUtils.registerBatteryBuffer;
 import static com.gregtechceu.gtceu.common.registry.GTRegistration.REGISTRATE;
@@ -32,6 +35,35 @@ public class GTEMachines {
                     Component.translatable("gtceu.machine.fluid_hatch.import.tooltip"),
                     Component.translatable("gtceu.machine.me.fluid_import.tooltip"),
                     Component.translatable("gtceu.machine.me.copy_paste.tooltip"),
+                    Component.translatable("gtceu.part_sharing.enabled"))
+            .register();
+    public static final MachineDefinition ME_PATTERN_BUFFER_PLUS = GTECore_REGISTRATE
+            .machine("me_pattern_buffer_plus", MEPatternBufferPlusPartMachine::new)
+            .tier(LuV)
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.IMPORT_ITEMS, PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
+                    PartAbility.EXPORT_ITEMS)
+            .rotationState(RotationState.ALL)
+            .colorOverlayTieredHullModel(GTCEu.id("block/overlay/appeng/me_buffer_hatch"))
+            .langValue("ME Pattern Buffer Plus")
+            .tooltips(Component.translatable("block.gtecore.pattern_buffer_plus.desc.0"),
+                    Component.translatable("block.gtecore.pattern_buffer_plus.desc.1"),
+                    Component.translatable("block.gtecore.pattern_buffer_plus.desc.2"),
+                    Component.translatable("block.gtecore.pattern_buffer_plus.desc.3"))
+            .register();
+    public static final MachineDefinition ME_PATTERN_BUFFER_PROXY_PLUS = GTECore_REGISTRATE
+            .machine("me_pattern_buffer_proxy_plus", MEPatternBufferProxyPlusPartMachine::new)
+            .tier(LuV)
+            .rotationState(RotationState.ALL)
+            .abilities(PartAbility.IMPORT_ITEMS, PartAbility.IMPORT_FLUIDS, PartAbility.EXPORT_FLUIDS,
+                    PartAbility.EXPORT_ITEMS)
+            .rotationState(RotationState.ALL)
+            .colorOverlayTieredHullModel(GTCEu.id("block/overlay/appeng/me_buffer_hatch_proxy"))
+            .langValue("ME Pattern Buffer Proxy Plus")
+            .tooltips(
+                    Component.translatable("block.gtecore.pattern_buffer_proxy_plus.desc.0"),
+                    Component.translatable("block.gtecore.pattern_buffer_proxy_plus.desc.1"),
+                    Component.translatable("block.gtecore.pattern_buffer_proxy_plus.desc.2"),
                     Component.translatable("gtceu.part_sharing.enabled"))
             .register();
     public static void init() {

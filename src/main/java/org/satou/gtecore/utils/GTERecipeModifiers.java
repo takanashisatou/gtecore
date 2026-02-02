@@ -5,11 +5,13 @@ import com.gregtechceu.gtceu.api.machine.feature.IRecipeLogicMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
+import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.ingredient.EnergyStack;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
+import com.gregtechceu.gtceu.common.machine.multiblock.generator.LargeCombustionEngineMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import dev.architectury.platform.Mod;
 import org.jetbrains.annotations.NotNull;
@@ -81,5 +83,25 @@ public class GTERecipeModifiers {
                         .build();
             }
         return ModifierFunction.IDENTITY;
+    }
+    public static ModifierFunction recipeModifierForLargeGeneralGenerator(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
+        if (!(machine instanceof WorkableElectricMultiblockMachine engineMachine)) {
+            return RecipeModifier.nullWrongType(LargeCombustionEngineMachine.class, machine);
+        }
+        EnergyStack EUt = recipe.getOutputEUt();
+        // has lubricant
+        if (!EUt.isEmpty()) {
+            int maxParallel = (int) (engineMachine.getOverclockVoltage() / EUt.getTotalEU()); // get maximum parallel
+            int actualParallel = ParallelLogic.getParallelAmount(engineMachine, recipe, maxParallel);
+            double eutMultiplier = actualParallel;
+
+            return ModifierFunction.builder()
+                    .inputModifier(ContentModifier.multiplier(actualParallel))
+                    .outputModifier(ContentModifier.multiplier(actualParallel))
+                    .eutMultiplier(eutMultiplier)
+                    .parallels(actualParallel)
+                    .build();
+        }
+        return ModifierFunction.NULL;
     }
 }

@@ -2,6 +2,7 @@ package org.satou.gtecore.mixin;
 
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import org.satou.gtecore.GTECore;
+import org.satou.gtecore.common.data.GTERecipeTypes;
 import org.satou.gtecore.config.GTEConfig;
 
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType;
@@ -59,6 +60,7 @@ public abstract class GTRecipeBuilderMixin {
             return Math.abs(duration);
         }
         if(recipeType == GTRecipeTypes.GAS_TURBINE_FUELS || recipeType == GTRecipeTypes.COMBUSTION_GENERATOR_FUELS || recipeType == GTRecipeTypes.STEAM_TURBINE_FUELS || recipeType == GTRecipeTypes.PLASMA_GENERATOR_FUELS) return Math.abs(duration);
+        if(recipeType == GTERecipeTypes.General_Fuel_Generator || recipeType == GTERecipeTypes.QIAN_QIONG_ENGINE) return duration;
         return (int) Math.min(Integer.MAX_VALUE, Math.max(1, Math.abs(duration * GTEConfig.INSTANCE.durationMultiplier)));
     }
 

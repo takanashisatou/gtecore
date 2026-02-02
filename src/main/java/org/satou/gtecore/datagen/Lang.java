@@ -112,10 +112,11 @@ public class Lang {
         provider.add("item.gtecore.rune_qian", "Rune Qian", "乾象");
         provider.add("item.gtecore.rune_xun", "Rune Xun", "巽象");
         provider.add("item.gtecore.rune_zhen", "Rune Zhen", "震象");
-        provider.add("item.gtecore.symbol_paper_earth", "§8Paper of Earth", "§8地之符篆");
+        provider.add("item.gtecore.symbol_paper_earth", "§8Paper of Earth", "§8土之符篆");
         provider.add("item.gtecore.symbol_paper_fire", "§4Symbol Paper of Fire", "§4火之符篆");
         provider.add("item.gtecore.symbol_paper_water", "§3Symbol Paper of Water", "§3水之符篆");
         provider.add("item.gtecore.symbol_paper_wood", "§2Symbol Paper of Wood", "§2木之符篆");
+        provider.add("item.gtecore.symbol_paper_gold", "§2Symbol Paper of Gold", "§e金之符篆");
         provider.add("item.gtecore.yin", "§8Yin", "§8阴");
         provider.add("item.gtecore.yang", "Yang", "阳");
         provider.add("item.gtecore.dui_chip", "Dui Chip", "兑芯");
@@ -135,8 +136,8 @@ public class Lang {
         provider.add("block.gtecore.xuanwu_module", "§8Black Tortoise Module", "§8玄武阵法方块");
         provider.add("block.gtecore.zhuque_module", "§cVermilion Bird Module", "§c朱雀阵法方块");
 
-        provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace", "§8Yin §rYang Eight Trigmas Blast Furnace", "§5紫薇§0八卦§6炼仙炉");
-        provider.add("gtecore.yin_yang_eight_trigmas_blast", "§5Crape Myrtle §0Eight Trigrams §6Immortal Forging Furnace", "§5紫薇§0八卦§6炼仙炉");
+        provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace", "§8Yin §rYang Eight Trigmas Blast Furnace", "§5紫薇§8八卦§6炼仙炉");
+        provider.add("gtecore.yin_yang_eight_trigmas_blast", "§5Crape Myrtle §0Eight Trigrams §6Immortal Forging Furnace", "§5紫薇§8八卦§6炼仙炉");
 
         provider.add("gtecore.xuanwu_module.enabled","§8Black Tortoise Module§2 Enabled","§8玄武阵法§2启动");
         provider.add("gtecore.xuanwu_module.disabled","§8Black Tortoise Module§4 Disabled","§8玄武阵法§4关闭");
@@ -169,7 +170,7 @@ public class Lang {
         provider.add("gtecore.kun_gen_star_hub","Kun Gen Star Hub","坤艮星枢");
 
         provider.add("block.gtecore.qian_qiong_engine","Qian Qiong Engine","谦穹引擎");
-        provider.add("gtecore.qing_qiong_engine","Qian Qiong Engine","谦穹引擎");
+        provider.add("gtecore.qian_qiong_engine","Qian Qiong Engine","谦穹引擎");
 
         provider.add("block.gtecore.red_sun_tao_core","§4Red Sun§rTao Core","§4赤阳§r道核");
         provider.add("gtecore.red_sun_tao_core","§4Red Sun§rTao Core","§4赤阳§r道核");
@@ -186,6 +187,59 @@ public class Lang {
         provider.add("recipe.condition.qing_long.tooltip","Need §3Azure Dragon Module§2 Enabled","需要§3青龙阵法§2启动");
         provider.add("recipe.condition.xuan_wu.tooltip","Need §8Black Tortoise Module§2 Enabled","需要§8玄武阵法§2启动");
         provider.add("recipe.condition.zhu_que.tooltip","Need §cVermilion Bird Module§2 Enabled","需要§c朱雀阵法§2启动");
+
+        provider.add("block.gtecore.big_alloy","Large Alloy","大型蒸汽合金炉");
+        provider.add("block.gtecore.big_compressor","Large Compressor","大型蒸汽压缩机");
+        provider.add("block.gtecore.component_factory","Component Factory","零件工厂");
+        provider.add("gtecore.circuit_factory","Circuit Factory","电路工厂");
+        provider.add("gtecore.component_factory","Component Factory","零件工厂");
+        provider.add("block.gtecore.circuit_factory","Circuit Factory","电路工厂");
+        provider.add("block.gtecore.big_forge_hammer","Large Steam Forge Hammer","大型蒸汽锻造锤");
+        provider.add("block.gtecore.big_steam_extractor","Large Steam Extractor","大型蒸汽提取机");
+        provider.add("block.gtecore.miracle_ring","Miracle Ring","奇迹之环");
+
+        provider.add("block.gtecore.steam_oven_easy","Steam Oven Easy Version","蒸汽熔炼炉简单版");
+        provider.add("block.gtecore.steam_grinder_easy","Steam Grinder Easy Version","蒸汽碾磨机简单版");
+        provider.add("block.gtecore.desulfurization","Desulfurizating Machine","脱硫机");
+        provider.add("gtecore.desulfurization_recipe","Desulfurizing","脱硫");
+
+        provider.add("block.gtecore.me_pattern_buffer_plus","ME Pattern Buffer Plus","ME样板总成Plus版");
+        provider.add("block.gtecore.me_pattern_buffer_proxy_plus","ME Pattern Buffer Proxy Plus","ME样板总成镜像Plus版");
+
+        provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.0",
+                "§fAllows linking many machines to a singular §6ME Pattern Buffer Plus§f.","§f可以将单单一个§6ME样板总成Plus§f连接到众多机器。");
+        provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.1",
+                "§fAll connected proxies will share the patterns held within the §6original buffer§f.","§f所有连接的总成镜像将共享§6原始总成§f中的样板。");
+        provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.2",
+                "§fLet the factory grow!","让工厂蓬勃发展!");
+        provider.add("block.gtecore.pattern_buffer_plus.desc.0",
+                "§fAllows direct §6AE2 pattern storage §ffor GregTech Multiblocks.","§f对于GT多方块结构的集成式§6AE2样板供应器§f。");
+        provider.add("block.gtecore.pattern_buffer_plus.desc.1",
+                "§fAE2 Patterns can utilize anything stored in the §6shared inventory §fwidget.","§fAE2样板可以利用§6共享库存§f中的一切。");
+        provider.add("block.gtecore.pattern_buffer_plus.desc.2",
+                "§fLink §6Pattern Buffer Proxies §fwith a §bdatastick §fto link machines together!","§f使用§b闪存§f绑定§6ME样板总成镜像§f，以使机器相互连接！");
+
+        provider.add("block.gtecore.pattern_buffer_plus.desc.3","With 81 sample slots, it supports the functionality of programmable storage, enabling the output of items and fluids","拥有81个样板槽位，支持可编程仓的功能,支持输出物品和流体");
+
+        provider.add("config.jade.plugin_gtecore.me_pattern_buffer_plus", "Pattern Buffer Plus Info", "样板总成Plus版信息");
+        provider.add("config.jade.plugin_gtecore.me_pattern_buffer_proxy_plus", "Pattern Buffer Proxy PlusInfo", "样板总成镜像Plus版信息");
+        provider.add("gtecore.top.buffer_not_bound", "Buffer Plus Not Currently Bound","尚未绑定样板总成Plus版");
+        provider.add("gtecore.top.proxies_bound", "Buffer Proxies Plus Bound: %s","样板总成镜像Plus版绑定数量：%s");
+        provider.add("gtecore.top.buffer_bound_pos", "Bound To - X: %s, Y: %s, Z: %s","已绑定至 - X：%s；Y：%s；Z：%s");
+        provider.add("com.gtecore.tooltips.yin_yang_eight_trigmas_blast_furnace.0","Due to feng shui reasons, the machine apparently needs to face south in order to function properly.","由于风水原因，机器似乎必须正面朝南才能正常的工作");
+
+        provider.add("com.gtecore.structure_tesing.tooltips.failure","§cStructure Testing Failure","§c结构未成型");
+        provider.add("com.gtecore.structure_tesing.tooltips.success","§2Structure Testing Success","§2结构已成型");
+        provider.add("item.gtecore.check_structure_terminal","Structure Testing Terminal","结构检测终端");
+
+        provider.add("com.gtecore.structure_tesing.tooltips.at","At","位于");
+        provider.add("com.gtecore.structure_tesing.tooltips.place_error","founded placement error","不应该放置在这");
+
+        provider.add("block.gtecore.general_fuel_engine","General Fuel Engine","通用燃料引擎");
+        provider.add("block.gtecore.ecological_simulator","Ecological Simulator","生态圈模拟器");
+
+        provider.add("block.gtecore.mega_alloy_smelter_blast","MEGA Alloy Smelter Blast Furnace","巨型合金冶炼炉");
+        provider.add("block.gtecore.mega_dehydrator","MEGA Dehydrator","巨型脱水机");
     }
 
 

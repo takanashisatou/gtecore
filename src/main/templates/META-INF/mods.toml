@@ -19,7 +19,7 @@ ordering = "AFTER"
 side = "BOTH"
 [[dependencies.${mod_id}]]
 modId = "gtmthings"
-mandatory = false
+mandatory = true
 versionRange = "1.5.4"
-ordering = "AFTER"
+ordering = "BEFORE"
 side = "BOTH"

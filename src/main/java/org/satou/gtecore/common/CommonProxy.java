@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.common.data.GTRecipes;
 import com.gregtechceu.gtceu.data.pack.GTDynamicDataPack;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.eventbus.api.GenericEvent;
 import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTECreativeModeTabs;

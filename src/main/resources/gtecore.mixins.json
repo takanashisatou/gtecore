@@ -12,6 +12,7 @@
     "GTMSteamMultiblockMachineMixin",
     "GTRecipeBuilderMixin",
     "GTUtilsMixin",
+    "GuideMEMixin",
     "LargeBoilerMachineMixin",
     "MinecraftServerMixin",
     "SimpleGeneratorMixin",

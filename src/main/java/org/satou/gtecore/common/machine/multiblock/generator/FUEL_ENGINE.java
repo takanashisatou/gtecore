@@ -16,6 +16,7 @@ import com.gregtechceu.gtceu.api.recipe.RecipeHelper;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.ingredient.EnergyStack;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
+import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
 import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
@@ -166,8 +167,6 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         if (!EUt.isEmpty()) {
             int maxParallel = 2000000000; // get maximum parallel
             int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
-            ((FUEL_ENGINE) machine).recipeLogic.setMultiParallelLogic(true);
-            ((FUEL_ENGINE) machine).recipeLogic.setMultiParallelCount(128);
             double eutMultiplier = actualParallel * engineMachine.getProductionBoost();
             return ModifierFunction.builder()
                     .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -215,8 +214,9 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
             return RecipeModifier.nullWrongType(SteamParallelMultiblockMachine.class, machine);
         }
         int maxParallel = 1000000000; // get maximum parallel
-        int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+        int actualParallel = ParallelLogic.getParallelAmount(engineMachine, recipe, maxParallel);
         double eutMultiplier = actualParallel;
+
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))
                 .outputModifier(ContentModifier.multiplier(actualParallel))

@@ -25,7 +25,6 @@ public abstract class MinecraftServerMixin {
     protected void createLevels(ChunkProgressListener listener, CallbackInfo ci) {
         if (GTEConfig.INSTANCE.superPeace) {
             worldData.setDifficulty(Difficulty.PEACEFUL);
-            worldData.setDifficultyLocked(true);
             ServerLevelData serverleveldata = worldData.overworldData();
             serverleveldata.setRaining(false);
             serverleveldata.setThundering(false);

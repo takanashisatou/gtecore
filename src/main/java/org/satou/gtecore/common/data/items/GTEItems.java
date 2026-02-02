@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.client.renderer.cover.SimpleCoverRenderer;
 import com.gregtechceu.gtceu.common.data.GTCovers;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.item.CoverPlaceBehavior;
+import com.gregtechceu.gtceu.common.item.TerminalBehavior;
 import com.gregtechceu.gtceu.common.item.TooltipBehavior;
 import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.hepdd.gtmthings.GTMThings;
@@ -155,6 +156,9 @@ public class GTEItems {
     public static ItemEntry<Item> SYMBOL_PAPER_WOOD = GTECore_REGISTRATE.item("symbol_paper_wood",Item::new)
             .lang("Symbol Paper of Wood")
             .register();
+    public static ItemEntry<Item> SYMBOL_PAPER_GOLD = GTECore_REGISTRATE.item("symbol_paper_gold",Item::new)
+            .lang("Symbol Paper of Gold")
+            .register();
     public static ItemEntry<Item> YANG = GTECore_REGISTRATE.item("yang",Item::new)
             .lang("Yang")
             .register();
@@ -178,6 +182,11 @@ public class GTEItems {
             .register();
     public static ItemEntry<Item> YIN_YANG_CPU_WAFER = GTECore_REGISTRATE.item("yin_yang_cpu_wafer",Item::new)
             .lang("Yin Yang CPU Wafer")
+            .register();
+    public static ItemEntry<ComponentItem> CHECK_STRUCTURE_TERMINAL = GTECore_REGISTRATE.item("check_structure_terminal", ComponentItem::create)
+            .lang("Structure Testing Terminal")
+            .properties(p -> p.stacksTo(1))
+            .onRegister(attach(new StructureTestingTerminalBehavior()))
             .register();
     public static void init() {
     }

@@ -41,6 +41,6 @@ public class GTEMachineUtils {
                                         batterySlotSize * BatteryBufferMachine.AMPS_PER_BATTERY),
                                 Component.translatable("gtceu.universal.tooltip.amperage_out_till", batterySlotSize))
                         .register(),
-                ALL_TIERS);
+                GTValues.MAX);
     }
 }

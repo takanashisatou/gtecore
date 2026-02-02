@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = SimpleTieredMachine.class,priority = 2000)
+@Mixin(value = SimpleTieredMachine.class)
 public class GTMCircuirHandlerMixin extends WorkableTieredMachine {
 
     private GTMCircuirHandlerMixin(IMachineBlockEntity holder, int tier, Int2IntFunction tankScalingFunction, Object... args) {
@@ -32,6 +32,7 @@ public class GTMCircuirHandlerMixin extends WorkableTieredMachine {
 
     @Override
     protected @NotNull NotifiableItemStackHandler createImportItemHandler(Object @NotNull... args) {
+        //return new NotifiableItemStackHandler(this, getRecipeType().getMaxInputs(ItemRecipeCapability.CAP), IO.IN).setFilter(i -> (false));
         return new NotifiableItemStackHandler(this, getRecipeType().getMaxInputs(ItemRecipeCapability.CAP), IO.IN).setFilter(i -> ((!i.is(CustomItems.VIRTUAL_ITEM_PROVIDER.get()) || !i.hasTag()) && !i.is(GTItems.PROGRAMMED_CIRCUIT.get())));
     }
 }
