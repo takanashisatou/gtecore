@@ -7,12 +7,16 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.data.machines.GCYMMachines;
+import com.gregtechceu.gtceu.data.recipe.CustomTags;
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 
 import net.minecraft.data.recipes.FinishedRecipe;
 
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.satou.gtecore.common.data.GTERecipeTypes;
+import org.satou.gtecore.common.data.machines.GTEMultiMachines2;
 
 import java.util.function.Consumer;
 
@@ -20,6 +24,7 @@ import static com.gregtechceu.gtceu.api.GTValues.*;
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.Americium;
+import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.ASSEMBLY_LINE_RECIPES;
 import static org.satou.gtecore.common.data.GTERecipeTypes.*;
 
 public class GTERecipe {
@@ -28,6 +33,36 @@ public class GTERecipe {
         WIREMILL_FACTORY_HANDLER.init(provider);
         QUANTUM_CABLE_ASSEMBLER_HANDLER.init(provider);
         ORE_RECIPE_CENTER_HANDLER.init(provider);
+        /*
+        gtr.assembly_line('gtecore:rare_earth_processing_plant')
+                .itemInputs('8x gtceu:large_sifting_funnel',
+                        '8x gtceu:large_centrifuge',
+                        '64x gtceu:reinforced_epoxy_resin_plate',
+                        '16x #gtceu:circuits/zpm',
+                        '16x gtceu:yttrium_dust',
+                        '16x gtceu:lanthanum_dust'
+                ).inputFluids('gtceu:epoxy 10000')
+                .itemOutputs('1x gtecore:rare_earth_processing_plant')
+                .duration(20 * 300)
+                .EUt(GTValues.VA[GTValues.IV])
+                .scannerResearch((b)=>b.researchStack(Item.of('gtceu:large_sifting_funnel',1)))
+
+         */
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("rare_earth_processing_plant")
+                .inputItems(GCYMMachines.LARGE_SIFTING_FUNNEL,8)
+                .inputItems(GCYMMachines.LARGE_CENTRIFUGE,8)
+                .inputItems(plate,ReinforcedEpoxyResin,64)
+                .inputItems(CustomTags.ZPM_CIRCUITS,16)
+                .inputItems(dust,Yttrium,16)
+                .inputItems(dust,Lanthanum,16)
+                .inputFluids(Epoxy.getFluid(10000))
+                .duration(20 * 300)
+                .EUt(VA[IV])
+                .scannerResearch(b -> b.researchStack(GCYMMachines.LARGE_SIFTING_FUNNEL.asStack())
+                        .duration(600)
+                        .EUt(VA[IV]))
+                .outputItems(GTEMultiMachines2.RARE_EARTH_PROCESSING_PLANET)
+                .save(provider);
         SUPER_FUSION_REACTOR_RECIPE.recipeBuilder("easy_deuterium_and_tritium_to_helium_plasma")
                 .inputFluids(GTMaterials.Deuterium.getFluid(125))
                 .inputFluids(GTMaterials.Tritium.getFluid(125))

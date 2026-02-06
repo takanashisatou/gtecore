@@ -15,6 +15,7 @@
     "GuideMEMixin",
     "LargeBoilerMachineMixin",
     "MinecraftServerMixin",
+    "PredicatesMixin",
     "SimpleGeneratorMixin",
     "SpawnMixin",
     "steam_hatch_mixin"

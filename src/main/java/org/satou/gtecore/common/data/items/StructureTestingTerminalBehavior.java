@@ -183,6 +183,7 @@ public class StructureTestingTerminalBehavior implements IInteractionItem {
                             TraceabilityPredicate predicate = ((TraceabilityPredicate [][][])blockMatches.get(pattern))[c][b][a];
                             BlockPos pos = setActualRelativeOffset(pattern,x, y, z, frontFacing, upwardsFacing, isFlipped)
                                     .offset(centerPos.getX(), centerPos.getY(), centerPos.getZ());
+                            boolean world_state_flag = true;
                             if (!worldState.update(pos, predicate)) {
                                 return false;
                             }
@@ -232,11 +233,12 @@ public class StructureTestingTerminalBehavior implements IInteractionItem {
                     findFirstAisle = true;
 
                     z++;
-
                     // Check layer-local matcher predicate
                     for (var entry : layerCount.object2IntEntrySet()) {
                         if (entry.getIntValue() < entry.getKey().minLayerCount) {
                             worldState.setError(new SinglePredicateError(entry.getKey(), 3));
+                            failedMatchContext.add(worldState);
+
                             flag = false;
                         }
                     }
@@ -247,6 +249,7 @@ public class StructureTestingTerminalBehavior implements IInteractionItem {
                     if (!worldState.hasError()) {
                         worldState.setError(new PatternError());
                     }
+                    failedMatchContext.add(worldState);
                    flag = false;
                 }
 
@@ -260,6 +263,7 @@ public class StructureTestingTerminalBehavior implements IInteractionItem {
                     worldState.setError(new SinglePredicateError(entry.getKey(), 1));
                    flag = false;
                 }
+                failedMatchContext.add(worldState);
             }
 
             worldState.setError(null);

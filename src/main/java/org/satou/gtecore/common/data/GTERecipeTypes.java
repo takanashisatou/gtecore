@@ -121,6 +121,9 @@ public class GTERecipeTypes {
     public static final GTRecipeType ASHING_STAR_FUSION_ARRAY = register("ashing_star_fusion_array",MULTIBLOCK)
             .setMaxIOSize(9,9,9,9)
             .setEUIO(IO.IN);
+    public static final GTRecipeType RARE_EARTH_PROCESSING = register("rare_earth_processing",MULTIBLOCK)
+            .setMaxIOSize(1,9,0,0)
+            .setEUIO(IO.IN);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }

@@ -12,7 +12,7 @@ dependencies {
 
     // Configuration
     modCompileOnly(forge.configuration)
-    modCompileOnly ("curse.maven:gregtech-modern-reborn-1347911:7548652")
+    modCompileOnly ("curse.maven:gregtech-modern-reborn-1347911:7575959")
     //api("com.gregtech.gtceu:gtceu-1.20.1:8.1.5")
     // GregTech
     //modCompileOnly(forge.gtm)
@@ -28,10 +28,10 @@ dependencies {
 
     // Curios
     modCompileOnly(forge.curios)
-    modCompileOnly("curse.maven:gt-community-edition-1353895:7198723")
+    modCompileOnly("curse.maven:gt-community-edition-1353895:7300116")
     api("curse.maven:gt-community-edition-1353895:7198723")
 
-    modLocalRuntime("curse.maven:gt-community-edition-1353895:7198723")
+    modLocalRuntime("curse.maven:gt-community-edition-1353895:7300116")
     // AE2
     modCompileOnly(forge.ae2)
     modCompileOnly(forge.ae2wtlib)
@@ -97,7 +97,7 @@ dependencies {
 
     //modLocalRuntime(forge.gtm)
     modLocalRuntime(forge.gtmthings)
-    modLocalRuntime("curse.maven:gregtech-modern-reborn-1347911:7548652")
+    modLocalRuntime("curse.maven:gregtech-modern-reborn-1347911:7575959")
     // Ad:astra //
 //    modLocalRuntime(forge.resourcefullib)
 //    modLocalRuntime(forge.resourcefulconfig)c

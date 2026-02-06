@@ -240,6 +240,9 @@ public class Lang {
 
         provider.add("block.gtecore.mega_alloy_smelter_blast","MEGA Alloy Smelter Blast Furnace","巨型合金冶炼炉");
         provider.add("block.gtecore.mega_dehydrator","MEGA Dehydrator","巨型脱水机");
+
+        provider.add("block.gtecore.rare_earth_processing_plant","Rare Earth Processing Plant","稀土处理工厂");
+        provider.add("gtecore.rare_earth_processing","Rare Earth Processing","稀土处理");
     }
 
 
