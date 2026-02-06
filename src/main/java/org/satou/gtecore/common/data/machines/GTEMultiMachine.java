@@ -608,8 +608,8 @@ public class GTEMultiMachine {
                     .where("B", controller(blocks(definition.getBlock())))
                     .build())
             .tooltips(Component.translatable("com.gtecore.tooltips.0"))
-            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"),
-                    GTCEu.id("block/multiblock/gcym/large_centrifuge"))
+            .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_frost_proof"),
+                    GTCEu.id("block/multiblock/vacuum_freezer"))
             .register();
     public static final MultiblockMachineDefinition Miracle_Ring = GTECore_REGISTRATE
             .multiblock("miracle_ring", WorkableElectricMultiblockMachine::new)
