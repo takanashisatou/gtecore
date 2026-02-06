@@ -588,7 +588,7 @@ public class GTEMultiMachine {
             .register();
     public static  final MultiblockMachineDefinition Desulfurization_Machine = GTECore_REGISTRATE
             .multiblock("desulfurization",WorkableElectricMultiblockMachine::new)
-            .appearanceBlock(CASING_STAINLESS_CLEAN)
+            .appearanceBlock(CASING_ALUMINIUM_FROSTPROOF)
             .rotationState(RotationState.ALL)
             .recipeType(GTERecipeTypes.Desulfurization_Recipe)
             .recipeModifiers(FUEL_ENGINE::recipeModifierForOmega)
