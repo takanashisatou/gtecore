@@ -6,10 +6,9 @@ out/
 *.iml
 .gradle/
 output/
-bin/
-libs/
-
-.classpath
+/libs/
+!gradle/libs/
+!gradle/libs/*.jar
 */.factorypath
 .project
 .idea/
