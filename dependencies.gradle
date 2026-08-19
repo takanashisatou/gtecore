@@ -5,8 +5,8 @@ dependencies {
     annotationProcessor(variantOf(libs.mixin) { classifier("processor") })
     api(annotationProcessor(forge.mixinExtras.common.get()))
     
-    // LDLib
-    compileOnly ("curse.maven:ldlib-626676:6995785")
+    // LDLib (provided by gtm-reborn / FirstDarkDev)
+    modCompileOnly(forge.ldlib)
     
     // Registrate (provided by gtm-reborn)
     modCompileOnly(forge.registrate)
