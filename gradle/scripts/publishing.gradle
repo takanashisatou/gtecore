@@ -2,20 +2,17 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = base.archivesName.get()
-            artifact(reobfSlimJar)
+            if (tasks.findByName("reobfSlimJar")) {
+                artifact(tasks.named("reobfSlimJar"))
+            }
             from components.java
         }
     }
 
-    // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
-        // Add repositories to publish to here.
-//        maven {
-//            url = "https://maven.gtceu.com"
-//            credentials {
-//                username = System.getenv("MAVEN_USER")
-//                password = System.getenv("MAVEN_PASSWORD")
-//            }
-//        }
+        maven {
+            name = "LocalMaven"
+            url = uri(project.findProperty("mavenDir") ?: "${rootDir}/build/maven")
+        }
     }
 }
