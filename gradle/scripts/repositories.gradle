@@ -33,63 +33,69 @@ repositories {
         }
     }
 
-    exclusiveContent { // Create, Ponder, Flywheel
-        forRepository { maven { url = "https://maven.createmod.net" } }
-        filter {
-            includeGroup("net.createmod.ponder")
-            includeGroup("com.simibubi.create")
-            includeGroup("dev.engine-room.flywheel")
-        }
+    maven {
+        name = 'CreateMod'
+        url = "https://maven.createmod.net"
     }
-    exclusiveContent { // KubeJS and Rhino
-        forRepository { maven { url = "https://maven.latvian.dev/releases" } }
-        filter { includeGroup("dev.latvian.mods")}
+
+    maven {
+        name = 'Latvian'
+        url = "https://maven.latvian.dev/releases"
     }
-    exclusiveContent { // FTB mods
-        forRepository { maven { url = "https://maven.ftb.dev/releases" } }
-        filter { includeGroup("dev.ftb.mods") }
+
+    maven {
+        name = 'FTB'
+        url = "https://maven.ftb.dev/releases"
     }
-    exclusiveContent { // TOP
-        forRepository { maven { url = "https://maven.k-4u.nl" } }
-        filter { includeGroup('mcjty.theoneprobe') }
+
+    maven {
+        name = 'TOP'
+        url = "https://maven.k-4u.nl"
     }
-    exclusiveContent { // JourneyMap API
-        forRepository { maven { url = "https://jm.gserv.me/repository/maven-public/" } }
-        filter { includeGroup("info.journeymap") }
+
+    maven {
+        name = 'JourneyMap'
+        url = "https://jm.gserv.me/repository/maven-public/"
     }
-    exclusiveContent { // Modrinth Maven
-        forRepository { maven { url = "https://api.modrinth.com/maven" } }
-        filter { includeGroup("maven.modrinth") }
+
+    maven {
+        name = 'Modrinth'
+        url = "https://api.modrinth.com/maven"
     }
-    exclusiveContent { // Curseforge Maven
-        forRepository { maven { url = "https://cursemaven.com" } }
-        filter { includeGroup("curse.maven") }
+
+    maven {
+        name = 'CurseMaven'
+        url = "https://cursemaven.com"
+        content { includeGroup "curse.maven" }
     }
-    exclusiveContent { // terraformers - EMI
-        forRepository { maven { url = "https://maven.terraformersmc.com/releases/" } }
-        filter { includeGroup("dev.emi") }
+
+    maven {
+        name = 'Terraformers'
+        url = "https://maven.terraformersmc.com/releases/"
     }
-    exclusiveContent { // shedaniel - REI, architectury, cloth-config
-        forRepository { maven { url = "https://maven.shedaniel.me/" } }
-        filter {
-            includeGroupAndSubgroups("me.shedaniel")
-            includeGroup("dev.architectury")
-        }
+
+    maven {
+        name = 'shedaniel'
+        url = "https://maven.shedaniel.me/"
     }
-    exclusiveContent { // tterrag - registrate
-        forRepository { maven { url = "https://maven.tterrag.com/" } }
-        filter { includeGroup("com.tterrag.registrate") }
+
+    maven {
+        name = 'tterrag'
+        url = "https://maven.tterrag.com/"
     }
-    exclusiveContent { // Curios
-        forRepository { maven { url = "https://maven.theillusivec4.top/" } }
-        filter { includeGroup('top.theillusivec4.curios')}
+
+    maven {
+        name = 'Curios'
+        url = "https://maven.theillusivec4.top/"
     }
-    exclusiveContent { // KotlinForForge
-        forRepository { maven { url = "https://thedarkcolour.github.io/KotlinForForge/" } }
-        filter { includeGroup("thedarkcolour") }
+
+    maven {
+        name = 'KotlinForForge'
+        url = "https://thedarkcolour.github.io/KotlinForForge/"
     }
-    exclusiveContent { // CC: Tweaked
-        forRepository { maven { url = "https://maven.squiddev.cc" } }
-        filter { includeGroup("cc.tweaked") }
+
+    maven {
+        name = 'SquidDev'
+        url = "https://maven.squiddev.cc"
     }
 }

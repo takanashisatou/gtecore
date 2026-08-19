@@ -8,8 +8,8 @@ dependencies {
     // LDLib
     compileOnly ("curse.maven:ldlib-626676:6995785")
     
-    // Registrate
-    jarJar(modApi(forge.registrate.get()))
+    // Registrate (provided by gtm-reborn)
+    modCompileOnly(forge.registrate)
 
     // Configuration
     modCompileOnly(forge.configuration)
