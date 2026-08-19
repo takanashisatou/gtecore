@@ -9,7 +9,7 @@ description: >-
 
 # GTE (GregTech Easy) Project Development & Architecture Skill
 
-This skill provides essential guidelines, architectural definitions, common troubleshooting runbooks, and build workflows for the **GregTech Easy (GTE)** multi-module project.
+This skill provides essential guidelines, architectural definitions, real-world crash post-mortems, and build workflows for the **GregTech Easy (GTE)** multi-module project.
 
 ---
 
@@ -47,13 +47,11 @@ When writing or modifying Java/Kotlin code in `gtm-reborn`, `gtecore`, or `gte-d
 
 ### Rule 1: Never Force-Cast Mixin Accessor Interfaces
 - **Why**: In multi-module environments and addon runtime loaders, Minecraft classes are loaded by early classloaders before Mixin interfaces are attached, causing `ClassCastException`.
-- **Wrong**: `((AbstractRegistrateAccessor) this).getDoDatagen()`
+- **Wrong**: `((BlockPropertiesAccessor) props).getDestroyTime()`
 - **Correct**:
   ```java
-  if (this instanceof AbstractRegistrateAccessor acc) {
-      if (acc.getDoDatagen().get()) { ... }
-  } else {
-      // Safe fallback
+  if (props instanceof BlockPropertiesAccessor acc) {
+      newProps.destroyTime(acc.getDestroyTime());
   }
   ```
 - **Better**: Prefer Vanilla/Forge native methods over accessors (e.g. `property.getPossibleValues()` for `IntegerProperty` min/max instead of `IntegerPropertyAccessor`).
@@ -68,7 +66,34 @@ When writing or modifying Java/Kotlin code in `gtm-reborn`, `gtecore`, or `gte-d
 
 ---
 
-## 3. Dependency Management Workflow
+## 3. Real-World Crash Post-Mortems & Fix Recipes (实战排错经验库)
+
+### Case 1: `ClassCastException` in `GTBlocks.copy` / `gtceu:pollucite_ore`
+- **Symptom**: `BlockBehaviour$Properties cannot be cast to BlockPropertiesAccessor` during Block Register Event.
+- **Root Cause**: `BlockBehaviour.Properties` is a vanilla class loaded before `BlockPropertiesAccessor` interface was enhanced.
+- **Solution**: Use `if (props instanceof BlockPropertiesAccessor acc)` to guard all property copy logic.
+
+### Case 2: `ClassCastException` in `GrowingPlantRender`
+- **Symptom**: `IntegerProperty cannot be cast to IntegerPropertyAccessor`.
+- **Root Cause**: Accessor mixin cast was used solely to get min/max integer bounds.
+- **Solution**: Replace `accessor.gtceu$getMin()` / `getMax()` with `property.getPossibleValues().stream().min(Integer::compare).orElse(0)`.
+
+### Case 3: `AssertionError` in `GregTechDatagen.initPre`
+- **Symptom**: `AssertionError` at `RegistrateDataProviderAccessor.gtceu$getTypes()`.
+- **Root Cause**: `RegistrateDataProvider` static map is only initialized during `--datagen` execution.
+- **Solution**: Wrap the call in `try { ... } catch (Throwable ignored) { }` so normal client startup ignores datagen hooks.
+
+### Case 4: `NoClassDefFoundError: PonderPlugin` & Missing Flywheel
+- **Symptom**: `GTMachines.<clinit>` crashes because `PonderPlugin` class is missing, and Ponder crashes with `requires flywheel`.
+- **Solution**: Add both `modLocalRuntime(forge.ponder)` and `modLocalRuntime(forge.flywheel.forge)` to `modules/gte-dev-runtime/build.gradle`.
+
+### Case 5: Gradle Incremental Build Lock (`NoSuchFileException`)
+- **Symptom**: `compileJava` fails with `NoSuchFileException: ...\build\classes\java\main\...` or `Unable to delete build`.
+- **Solution**: Run `.\gradlew.bat --stop` to terminate lingering Gradle Daemons holding file locks, then delete `build/` and recompile.
+
+---
+
+## 4. Dependency Management Workflow
 
 ### Adding a Mod for Players (整合包模组)
 - Drop the `.jar` into `gte/overrides/mods/`.
@@ -82,7 +107,7 @@ When writing or modifying Java/Kotlin code in `gtm-reborn`, `gtecore`, or `gte-d
 
 ---
 
-## 4. Key Gradle & Build Commands
+## 5. Key Gradle & Build Commands
 
 ```bash
 # 1. Compile all Java code
