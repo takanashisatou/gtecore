@@ -6,20 +6,19 @@ mixin {
     config "gtecore.mixins.json"
 }
 
-// we have to force LWJGL version 3.3.2, because RenderNurse requires Java 21, and LWJGL 3.3.1 cannot run on Java 21.
+// Force LWJGL version 3.3.2 for Java 21 support
 configurations.configureEach {
     resolutionStrategy {
         eachDependency {
             if (it.requested.group == "org.lwjgl") {
                 it.useVersion("3.3.2")
-                it.because("We need a version of LWJGL that supports java 21 for RenderDoc support")
+                it.because("We need a version of LWJGL that supports java 21")
             }
         }
     }
 }
 
 legacyForge {
-    // Specify Forge version
     version = libs.versions.minecraftForge.get()
 
     parchment {
@@ -34,26 +33,21 @@ legacyForge {
     addModdingDependenciesTo(sourceSets.test)
 
     mods {
-        // define mod <-> source bindings
         "${mod_id}" {
             sourceSet(sourceSets.main)
-            sourceSet(sourceSets.client)
-            sourceSet(sourceSets.test)
-            sourceSet(sourceSets.extra)
-            sourceSet(sourceSets.clientExtra)
         }
     }
     runs {
         client {
             client()
-            sourceSet = sourceSets.clientExtra
+            sourceSet = sourceSets.main
             ideName = "Client"
             systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
         }
 
         server {
             server()
-            sourceSet = sourceSets.extra
+            sourceSet = sourceSets.main
             ideName = "Server"
 
             gameDirectory.set(file('run/server'))
@@ -81,13 +75,22 @@ legacyForge {
             programArguments.addAll('--all')
             programArguments.addAll('--output', file('src/generated/resources/').getAbsolutePath())
             programArguments.addAll('--existing', file('src/main/resources/').getAbsolutePath())
+            programArguments.addAll('--existing-mod', 'gtceu')
         }
 
         configureEach {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
-            jvmArgument('-ea:org.gte.gtecore...')
+            jvmArgument('-ea:org.satou.gtecore...')
             logLevel = org.slf4j.event.Level.INFO
         }
+    }
+}
+
+tasks.matching { it.name == 'runData' || it.name == 'prepareDataRun' }.configureEach {
+    dependsOn(tasks.named('processResources'))
+    doFirst {
+        file('src/generated/resources').mkdirs()
+        file('run/data').mkdirs()
     }
 }
 

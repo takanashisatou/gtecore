@@ -1,80 +1,66 @@
 dependencies {
     compileOnly(libs.jetbrains.annotations)
 
-    modClientLocalRuntime(forge.jecharacters.get())
     // Mixin (& Extras)
     annotationProcessor(variantOf(libs.mixin) { classifier("processor") })
     api(annotationProcessor(forge.mixinExtras.common.get()))
+    
     // LDLib
-   compileOnly ("curse.maven:ldlib-626676:6995785")
+    compileOnly ("curse.maven:ldlib-626676:6995785")
+    
     // Registrate
     jarJar(modApi(forge.registrate.get()))
 
     // Configuration
     modCompileOnly(forge.configuration)
-    modCompileOnly ("curse.maven:gregtech-modern-reborn-1347911:7575959")
-    //api("com.gregtech.gtceu:gtceu-1.20.1:8.1.5")
-    // GregTech
-    //modCompileOnly(forge.gtm)
-    modCompileOnly(forge.gtmthings)
+    
+    // -----------------------------------------------------------------------
+    // Direct Cross-Module Source Dependency to gtm-reborn
+    // -----------------------------------------------------------------------
+    implementation(project(':modules:gtm-reborn')) {
+        transitive = false
+    }
+    compileOnly(project(':modules:gtm-reborn').sourceSets.main.output)
+
+    // GregTech Addons
+    modCompileOnly("blank:gtmthings:1.5.4")
+    modCompileOnly("blank:gtnn:1.20.1-1.3.5.3")
+    
     // Recipe Viewers
     modCompileOnly(forge.bundles.jei)
-//    modCompileOnly(forge.emi)
-//    modCompileOnly(forge.jer)
-//    modCompileOnly(forge.emitrades)
 
     // WAILA-likes
     modCompileOnly(forge.jade)
 
     // Curios
     modCompileOnly(forge.curios)
-    modCompileOnly("curse.maven:gt-community-edition-1353895:7300116")
-    api("curse.maven:gt-community-edition-1353895:7198723")
-
-    modLocalRuntime("curse.maven:gt-community-edition-1353895:7300116")
+    
     // AE2
     modCompileOnly(forge.ae2)
     modCompileOnly(forge.ae2wtlib)
-
     modCompileOnly(forge.extendedae)
 
-    // FTBide
+    // FTB
     modCompileOnly(forge.architectury)
 
-
+    // KubeJS
     modCompileOnly(forge.kubejs)
     modCompileOnly(forge.rhino)
 
-    // Shimmer
+    // Shimmer / Render
     modCompileOnly(forge.shimmer)
     modCompileOnly(forge.embeddium)
     modCompileOnly(forge.oculus)
     modCompileOnly(forge.modernfix)
 
-//    modCompileOnly(forge.resourcefullib)
-//    modCompileOnly(forge.resourcefulconfig)
-//    modCompileOnly(forge.botarium)
-//    modCompileOnly(forge.adastra)
-
-//    modCompileOnly(forge.patchouli)
-//    modCompileOnly(forge.libx)
-//    modCompileOnly(forge.botania)
-//    modCompileOnly(forge.mythicbotany)
-
-//    modCompileOnly(forge.reavaritia)
-//
-//    modCompileOnly(forge.chiselreborn)
-   modCompileOnly(forge.guideme)
-    //modCompileOnly(forge.sophisticatedcore)
-    //modCompileOnly(forge.sophisticatedbackpacks)
-    //modCompileOnly(forge.sophisticatedstorage)
+    modCompileOnly(forge.guideme)
 
     modLocalRuntime(forge.configuration)
     // Standard runtime mods //
-    modLocalRuntime(forge.jade)
+    modClientLocalRuntime(forge.jade)
     modLocalRuntime(forge.curios)
     modLocalRuntime(forge.modernfix)
-    modLocalRuntime(forge.modernui)
+    modClientLocalRuntime(forge.modernui)
     modLocalRuntime(forge.ferritecore)
 
     modLocalRuntime(forge.glodium)
@@ -85,56 +71,29 @@ dependencies {
     modLocalRuntime(forge.ae2wtlib)
     modLocalRuntime(forge.extendedae)
 
-
-
-
     modLocalRuntime("curse.maven:ldlib-626676:6995785")
 
     // FTB //
     modLocalRuntime(forge.architectury)
-    // GregTech //
-
-
-    //modLocalRuntime(forge.gtm)
-    modLocalRuntime(forge.gtmthings)
-    modLocalRuntime("curse.maven:gregtech-modern-reborn-1347911:7575959")
-    // Ad:astra //
-//    modLocalRuntime(forge.resourcefullib)
-//    modLocalRuntime(forge.resourcefulconfig)c
-//    modLocalRuntime(forge.botarium)
-//    modLocalRuntime(forge.adastra)
-
-    // botania //
-//    modLocalRuntime(forge.patchouli)
-//    modLocalRuntime(forge.libx)
-//    modLocalRuntime(forge.botania)
-//    modLocalRuntime(forge.mythicbotany)
-
-    // Re-avaritia //
-//    modLocalRuntime(forge.reavaritia)
-
-    // Chisel Reborn //
-//    modLocalRuntime(forge.chiselreborn)
-//    modLocalRuntime(forge.cryonicconfig)
 
     // Sophisticated Mods //
     modLocalRuntime(forge.sophisticatedcore)
     modLocalRuntime(forge.sophisticatedbackpacks)
     modLocalRuntime(forge.sophisticatedstorage)
 
-
-    // Runtime Recipe Viewers - uncomment whichever one you want to use //
-//    modLocalRuntime(forge.emi)
+    // Runtime Recipe Viewers //
     modLocalRuntime(forge.jei.forge.impl)
-//    modLocalRuntime(forge.jer)
-//    modLocalRuntime(forge.emitrades)
+
+    // Ponder / Flywheel //
+    modLocalRuntime(forge.ponder)
+    modLocalRuntime(forge.flywheel.forge)
 
     // Client-only runtime mods //
     modClientLocalRuntime(forge.embeddium)
     modClientLocalRuntime(forge.oculus)
     renderNurseCfg(libs.renderNurse)
 
-    //////////////////////////////////////////////////////
-    // Runtime mods for dev testing with unclean client //
-    //////////////////////////////////////////////////////
+    // GregTech Addon Runtime
+    modLocalRuntime("blank:gtmthings:1.5.4")
+    modLocalRuntime("blank:gtnn:1.20.1-1.3.5.3")
 }

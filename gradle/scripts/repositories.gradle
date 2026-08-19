@@ -1,6 +1,6 @@
 repositories {
     flatDir {
-        dir "gradle/libs"
+        dir "${projectDir}/gradle/libs"
     }
     mavenLocal()
     mavenCentral()

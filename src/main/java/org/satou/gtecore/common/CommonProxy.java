@@ -2,15 +2,10 @@ package org.satou.gtecore.common;
 
 import com.gregtechceu.gtceu.api.cover.CoverDefinition;
 import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialEvent;
-import com.gregtechceu.gtceu.api.recipe.GTRecipe;
-import com.gregtechceu.gtceu.api.recipe.RecipeCondition;
 import com.gregtechceu.gtceu.api.recipe.condition.RecipeConditionType;
-import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import com.gregtechceu.gtceu.common.data.GTRecipes;
 import com.gregtechceu.gtceu.data.pack.GTDynamicDataPack;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.eventbus.api.GenericEvent;
 import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTECreativeModeTabs;
 import org.satou.gtecore.common.data.GTEMaterials;
@@ -47,13 +42,10 @@ public class CommonProxy {
         eventBus.addGenericListener(GTRecipes.class, this::registerRecipes);
         eventBus.addGenericListener(MachineDefinition.class, this::registerMachines);
         eventBus.addGenericListener(CoverDefinition.class, this::registerCovers);
-        eventBus.addGenericListener(RecipeConditionType.class,this::registerRecipeConditions);
-        //Register the GTRecipeTypes event to ensure that GTERecipeTypes is initialized at the right time
+        eventBus.addGenericListener(RecipeConditionType.class, this::registerRecipeConditions);
     }
 
-
-
-    private void registerRecipes(GTCEuAPI.RegisterEvent<ResourceLocation,GTRecipes> event) {
+    private void registerRecipes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipes> event) {
         Consumer<FinishedRecipe> consumer = GTDynamicDataPack::addRecipe;
         Consumer<FinishedRecipe> consumer2 = recipe -> {
             if (!RECIPE_FILTERS.contains(recipe.getId())) {
@@ -63,31 +55,32 @@ public class CommonProxy {
         GTERecipe.init(consumer2);
     }
 
-
     private static void init() {
         GTEConfig.init();
-        //Meow
     }
 
     private static void commonSetup(FMLCommonSetupEvent event) {}
 
-    private void registerRecipeConditions(GTCEuAPI.RegisterEvent<ResourceLocation,RecipeConditionType> event) {
+    private void registerRecipeConditions(GTCEuAPI.RegisterEvent<ResourceLocation, RecipeConditionType> event) {
         GTERecipeConditions.init();
     }
+
     private void registerRecipeTypes(GTCEuAPI.RegisterEvent<ResourceLocation, GTRecipeType> event) {
         GTERecipeTypes.init();
-
     }
 
     private void registerMachines(GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition> event) {
         GTEMachines.init();
     }
+
     private void registerCovers(GTCEuAPI.RegisterEvent<ResourceLocation, CoverDefinition> event) {
+        // Cover definitions if any
+    }
+
+    private void registerMaterials(MaterialEvent materialEvent) {
+        GTEMaterials.init();
         GTECreativeModeTabs.init();
         GTEItems.init();
         GTEBlocks.init();
-    }
-    private void registerMaterials(MaterialEvent materialEvent){
-        GTEMaterials.init();
     }
 }

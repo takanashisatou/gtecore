@@ -24,6 +24,7 @@ base {
 afterEvaluate {
     reobfJar.archiveClassifier = ""
     tasks.withType(org.gradle.jvm.tasks.Jar).configureEach {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
         destinationDirectory = file('build/libs/')
         manifest.attributes([
                 'MixinConfigs': "gtecore.mixins.json",
