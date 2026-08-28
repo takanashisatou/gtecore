@@ -1,7 +1,17 @@
 [versions]
 minecraft = "1.20.1"
-forge = "47.4.4"
-minecraftForge = "1.20.1-47.4.3"
+# Must match the aggregate build (root gradle/libs.versions.toml), gradle.properties
+# and gte/pack.toml: gtmthings 1.5.4 requires forge "[47.4.1,)", while 47.4.10 ships
+# ASM 9.8 / coremods 5.2.4 and appliedenergistics2 15.4.9's mixins stop resolving
+# there, so 47.4.1 is the only version that satisfies both.
+#
+# This catalog only applies to a standalone build of this repository -- the
+# aggregate build includes this directory through the root settings.gradle, whose
+# catalog wins. It was 47.4.4 with minecraftForge 47.4.3, so a standalone build
+# compiled against a different Forge than CI shipped, and against a version pair
+# that did not even agree with itself.
+forge = "47.4.1"
+minecraftForge = "1.20.1-47.4.1"
 parchment = "2023.09.03" # https://parchmentmc.org/docs/getting-started
 shadow = "8.3.5"
 spotless = "7.0.2"
