@@ -183,6 +183,52 @@ public class GTEItems {
     public static ItemEntry<Item> YIN_YANG_CPU_WAFER = GTECore_REGISTRATE.item("yin_yang_cpu_wafer",Item::new)
             .lang("Yin Yang CPU Wafer")
             .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_BOULE = GTECore_REGISTRATE.item("imaginary_tree_boule",Item::new)
+            .lang("Imaginary Tree Boule")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_WAFER = GTECore_REGISTRATE.item("imaginary_tree_wafer",Item::new)
+            .lang("Imaginary Tree Wafer")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_CPU_WAFER = GTECore_REGISTRATE.item("imaginary_tree_cpu_wafer",Item::new)
+            .lang("Imaginary Tree CPU Wafer")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_CIRCUIT_CHIP = GTECore_REGISTRATE.item("imaginary_tree_circuit_chip",Item::new)
+            .lang("Imaginary Tree Circuit Chip")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_CIRCUIT_BOARD = GTECore_REGISTRATE.item("imaginary_tree_circuit_board",Item::new)
+            .lang("Imaginary Tree Circuit Board")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_PRINTED_CIRCUIT_BOARD = GTECore_REGISTRATE.item("imaginary_tree_printed_circuit_board",Item::new)
+            .lang("Imaginary Tree Printed Circuit Board")
+            .register();
+    public static ItemEntry<ComponentItem> IMAGINARY_TREE_PROCESSOR_UIV = GTECore_REGISTRATE.item("imaginary_tree_processor", ComponentItem::create)
+            .lang("Imaginary Tree Processor").tag(CustomTags.UIV_CIRCUITS)
+            .onRegister(GTItems.attach(new TooltipBehavior(lines->{
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor.tooltip.0"));
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor.tooltip.1"));
+            })))
+            .register();
+    public static ItemEntry<ComponentItem> IMAGINARY_TREE_PROCESSOR_ASSEMBLY_UXV = GTECore_REGISTRATE.item("imaginary_tree_processor_assembly", ComponentItem::create)
+            .lang("Imaginary Tree Processor Assembly").tag(CustomTags.UXV_CIRCUITS)
+            .onRegister(GTItems.attach(new TooltipBehavior(lines->{
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor_assembly.tooltip.0"));
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor_assembly.tooltip.1"));
+            })))
+            .register();
+    public static ItemEntry<ComponentItem> IMAGINARY_TREE_PROCESSOR_COMPUTER_OPV = GTECore_REGISTRATE.item("imaginary_tree_processor_computer", ComponentItem::create)
+            .lang("Imaginary Tree Processor Computer").tag(CustomTags.OpV_CIRCUITS)
+            .onRegister(GTItems.attach(new TooltipBehavior(lines->{
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor_computer.tooltip.0"));
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor_computer.tooltip.1"));
+            })))
+            .register();
+    public static ItemEntry<ComponentItem> IMAGINARY_TREE_PROCESSOR_MAINFRAME_MAX = GTECore_REGISTRATE.item("imaginary_tree_processor_mainframe", ComponentItem::create)
+            .lang("Imaginary Tree Processor Mainframe").tag(CustomTags.MAX_CIRCUITS)
+            .onRegister(GTItems.attach(new TooltipBehavior(lines->{
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor_mainframe.tooltip.0"));
+                lines.add(Component.translatable("item.gtecore.imaginary_tree_processor_mainframe.tooltip.1"));
+            })))
+            .register();
     public static ItemEntry<ComponentItem> CHECK_STRUCTURE_TERMINAL = GTECore_REGISTRATE.item("check_structure_terminal", ComponentItem::create)
             .lang("Structure Testing Terminal")
             .properties(p -> p.stacksTo(1))
