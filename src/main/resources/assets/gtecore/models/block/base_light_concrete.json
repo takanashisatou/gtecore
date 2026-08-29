@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gtecore:block/casings/concrete/base_light_concrete"
+  }
+}

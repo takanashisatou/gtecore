@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gtecore:block/casings/uhv/li_huo_casing"
+  }
+}

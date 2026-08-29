@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gtecore:item/super_string_printed_circuit_board"
+  }
+}

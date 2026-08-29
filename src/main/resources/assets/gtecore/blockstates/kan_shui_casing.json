@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtecore:block/kan_shui_casing"
+    }
+  }
+}

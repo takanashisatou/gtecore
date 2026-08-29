@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "gtecore:block/casings/yin_yang_field_restriction/yin_yang_field_restriction"
+  }
+}

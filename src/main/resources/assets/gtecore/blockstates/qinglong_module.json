@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "gtecore:block/qinglong_module"
+    }
+  }
+}
