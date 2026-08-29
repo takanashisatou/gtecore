@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "gtecore:block/machine/max_super_battery_buffer_1x",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "gtecore:block/machine/max_super_battery_buffer_1x",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "gtecore:block/machine/max_super_battery_buffer_1x"
+    },
+    "facing=south": {
+      "model": "gtecore:block/machine/max_super_battery_buffer_1x",
+      "y": 180
+    },
+    "facing=up": {
+      "gtceu:z": 180,
+      "model": "gtecore:block/machine/max_super_battery_buffer_1x",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "gtecore:block/machine/max_super_battery_buffer_1x",
+      "y": 270
+    }
+  }
+}

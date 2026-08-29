@@ -1,0 +1,7 @@
+{
+  "parent": "gtceu:block/cube_2_layer/all",
+  "textures": {
+    "bot_all": "gtecore:block/casings/coils/yin_yang_coil",
+    "top_all": "gtecore:block/casings/coils/yin_yang_coil_bloom"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "gtecore:block/yin_yang_coil_block"
+    },
+    "active=true": {
+      "model": "gtecore:block/yin_yang_coil_block_active"
+    }
+  }
+}
