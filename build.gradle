@@ -87,14 +87,23 @@ apply from: "$projectDir/gradle/scripts/resources.gradle"
 apply from: "$projectDir/gradle/scripts/publishing.gradle"
 
 // Hook Blockbench sync before resources processing, compilation, and jar packaging
-tasks.named('processResources').configure {
-    dependsOn(rootProject.tasks.named('syncBlockbenchAssets'))
-}
-tasks.named('compileJava').configure {
-    dependsOn(rootProject.tasks.named('syncBlockbenchAssets'))
-}
-tasks.withType(Jar).configureEach {
-    dependsOn(rootProject.tasks.named('syncBlockbenchAssets'))
+// syncBlockbenchAssets is registered by the GTE root build (it runs
+// scripts/sync_art_assets.py over the root's art_assets/ directory), so it only
+// exists when this repository is a module of the aggregate build. In a standalone
+// build this project IS the root, there is no art_assets/ to sync, and asking for
+// the task fails configuration with "Task with name 'syncBlockbenchAssets' not
+// found in root project 'gtecore'".
+def artSync = rootProject.tasks.findByName('syncBlockbenchAssets')
+if (artSync != null) {
+    tasks.named('processResources').configure {
+        dependsOn(artSync)
+    }
+    tasks.named('compileJava').configure {
+        dependsOn(artSync)
+    }
+    tasks.withType(Jar).configureEach {
+        dependsOn(artSync)
+    }
 }
 
 generateModMetadata.doFirst {
@@ -105,6 +114,16 @@ generateModMetadata.doFirst {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
+    
+    boolean enableWerror = project.hasProperty('werror') || 
+                           System.getenv('WERROR') == 'true' ||
+                           project.findProperty('werror') == 'true' ||
+                           (System.getenv("GITHUB_REF_TYPE") == "tag" && System.getenv("GITHUB_REF_NAME")?.startsWith("v"))
+
+    if (enableWerror) {
+        options.compilerArgs << "-Werror"
+    }
+
     options.compilerArgs << "-Xlint:-removal"
     options.compilerArgs << "-Aquiet=true"
 }

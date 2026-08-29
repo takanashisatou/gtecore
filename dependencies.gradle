@@ -1,3 +1,17 @@
+// Sibling module project dependency with a clear error when the module is
+// missing (standalone build without the GTE monorepo layout).
+def requireSibling(String path, String dirName) {
+    def p = findProject(path)
+    if (p == null) {
+        throw new GradleException(
+            "Sibling module '${dirName}' not found (looked for project '${path}'). " +
+            "Standalone builds need the GTE monorepo layout: modules/gtecore with " +
+            "modules/${dirName} checked out beside it. Alternatively build from the " +
+            "aggregate root (GTEGroup/gradlew.bat :modules:gtecore:compileJava).")
+    }
+    return p
+}
+
 dependencies {
     compileOnly(libs.jetbrains.annotations)
 
@@ -17,17 +31,24 @@ dependencies {
     // -----------------------------------------------------------------------
     // Direct Cross-Module Source Dependency to gtm-reborn
     // -----------------------------------------------------------------------
-    implementation(project(':modules:gtm-reborn')) {
+    // Deliberately NOT using compileOnly(project(...).sourceSets.main.output):
+    // ModDevGradle's legacyForge plugin rewrites every FileCollectionDependency
+    // in implementation/compileOnly/api/runtimeOnly into a mappings-attribute
+    // constraint (ObfuscationExtension.createRemappingConfiguration). In a
+    // standalone build where this repository is the root project AND a source
+    // module with these dependencies, that wiring closes a task-dependency loop
+    // ("Circular dependency between the following tasks: :classes ...").
+    // implementation(project(...)) alone already puts the sibling classes on
+    // the compile classpath.
+    implementation(requireSibling(':modules:gtm-reborn', 'gtm-reborn')) {
         transitive = false
     }
-    compileOnly(project(':modules:gtm-reborn').sourceSets.main.output)
 
     // GregTech Addons
     modCompileOnly("blank:gtmthings:1.5.4")
-    implementation(project(':modules:gt--')) {
+    implementation(requireSibling(':modules:gt--', 'gt--')) {
         transitive = false
     }
-    compileOnly(project(':modules:gt--').sourceSets.main.output)
     
     // Recipe Viewers
     modCompileOnly(forge.bundles.jei)

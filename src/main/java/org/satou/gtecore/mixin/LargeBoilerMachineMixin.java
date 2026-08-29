@@ -35,6 +35,7 @@ public abstract class LargeBoilerMachineMixin {
      * @reason Meow!
      */
     @Overwrite(remap = false)
+    @SuppressWarnings("unchecked")
     protected void updateCurrentTemperature() {
 
         if (((LargeBoilerMachine)((Object)this)).recipeLogic.isWorking()) {
