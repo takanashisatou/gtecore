@@ -38,11 +38,13 @@ legacyForge {
         }
     }
     runs {
-        client {
-            client()
-            sourceSet = sourceSets.main
-            ideName = "Client"
-            systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
+        if (rootProject == project) {
+            client {
+                client()
+                sourceSet = sourceSets.main
+                ideName = "Client"
+                systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
+            }
         }
 
         server {
