@@ -183,6 +183,25 @@ public class Lang {
         provider.add("item.gtecore.yin_yang_boule","§8Yin§rYang Boule","§8阴§r阳单晶硅");
         provider.add("item.gtecore.yin_yang_circuit_chip","§8Yin§rYang Circuit Chip","§8阴§r阳电路芯片");
 
+        provider.add("item.gtecore.imaginary_tree_boule","§bImaginary Tree Boule","§b虚数之树单晶硅");
+        provider.add("item.gtecore.imaginary_tree_wafer","§bImaginary Tree Wafer","§b虚数之树晶圆");
+        provider.add("item.gtecore.imaginary_tree_cpu_wafer","§bImaginary Tree CPU Wafer","§b虚数之树CPU晶圆");
+        provider.add("item.gtecore.imaginary_tree_circuit_chip","§bImaginary Tree Circuit Chip","§b虚数之树电路芯片");
+        provider.add("item.gtecore.imaginary_tree_circuit_board","§bImaginary Tree Circuit Board","§b虚数之树电路基板");
+        provider.add("item.gtecore.imaginary_tree_printed_circuit_board","§bImaginary Tree Printed Circuit Board","§b虚数之树印刷电路基板");
+        provider.add("item.gtecore.imaginary_tree_processor","§bImaginary Tree Processor","§b虚数之树处理器");
+        provider.add("item.gtecore.imaginary_tree_processor.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
+        provider.add("item.gtecore.imaginary_tree_processor.tooltip.1","§bUIV-Level Circuits","§bUIV级电路");
+        provider.add("item.gtecore.imaginary_tree_processor_assembly","§bImaginary Tree Processor Assembly","§b虚数之树处理器集群");
+        provider.add("item.gtecore.imaginary_tree_processor_assembly.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
+        provider.add("item.gtecore.imaginary_tree_processor_assembly.tooltip.1","§bUXV-Level Circuits","§bUXV级电路");
+        provider.add("item.gtecore.imaginary_tree_processor_computer","§bImaginary Tree Processor Computer","§b虚数之树处理器超级计算机");
+        provider.add("item.gtecore.imaginary_tree_processor_computer.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
+        provider.add("item.gtecore.imaginary_tree_processor_computer.tooltip.1","§bOpV-Level Circuits","§bOpV级电路");
+        provider.add("item.gtecore.imaginary_tree_processor_mainframe","§bImaginary Tree Processor Mainframe","§b虚数之树处理器主机");
+        provider.add("item.gtecore.imaginary_tree_processor_mainframe.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
+        provider.add("item.gtecore.imaginary_tree_processor_mainframe.tooltip.1","§bMAX-Level Circuits","§bMAX级电路");
+
         provider.add("recipe.condition.bai_hu.tooltip","Need §fWhite Tiger Module§2 Enabled","需要§f白虎阵法§2启动");
         provider.add("recipe.condition.qing_long.tooltip","Need §3Azure Dragon Module§2 Enabled","需要§3青龙阵法§2启动");
         provider.add("recipe.condition.xuan_wu.tooltip","Need §8Black Tortoise Module§2 Enabled","需要§8玄武阵法§2启动");
