@@ -98,4 +98,24 @@ repositories {
         name = 'SquidDev'
         url = "https://maven.squiddev.cc"
     }
+
+    // -----------------------------------------------------------------------
+    // Repositories required by sibling modules (gt-- / gtm-reborn) when they
+    // are included as subprojects of a standalone build. Mirrors the aggregate
+    // build's settings.gradle list; keep in sync with it.
+    // -----------------------------------------------------------------------
+    maven { name = 'MojangLibraries'; url = 'https://libraries.minecraft.net/' }
+    maven { name = 'MinecraftForge'; url = 'https://maven.minecraftforge.net/' }
+    maven { name = 'NeoForged'; url = 'https://maven.neoforged.net/releases' }
+    maven { name = 'ParchmentMC'; url = 'https://maven.parchmentmc.org' }
+    maven { name = 'Sponge'; url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven { name = 'Cleanroom'; url = 'https://maven.cleanroommc.com' }
+    maven { name = 'Architectury'; url = 'https://maven.architectury.dev' }
+    maven { name = 'SmartBrainLib'; url = 'https://dl.cloudsmith.io/public/tslat/sbl/maven/' }
+    maven { name = 'TeamResourceful'; url = 'https://maven.teamresourceful.com/repository/maven-public/' }
+    maven {
+        name = 'FuzssModresources'
+        url = 'https://raw.githubusercontent.com/Fuzss/modresources/main/maven/'
+        content { includeGroup 'fuzs' }
+    }
 }

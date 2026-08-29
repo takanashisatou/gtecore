@@ -58,6 +58,15 @@ modernfix = "5.24.4+mc1.20.1"
 
 ## curseforge maven ##
 
+## create ecosystem ##
+# Referenced by dependencies.gradle (modLocalRuntime(forge.ponder) and
+# modLocalRuntime(forge.flywheel.forge)) but previously declared only in the
+# aggregate build's gradle/forge.versions.toml, so a standalone build failed with
+# "Could not get unknown property 'ponder' for extension 'forge'".
+# Kept in sync with the aggregate catalog.
+ponder = "1.0.80"
+flywheel = "1.0.6-beta-266"
+
 ## libs ##
 mana = "1.4+1.20.1-forge"
 jech = "4.5.11-dev-shadow"
@@ -80,6 +89,8 @@ emitrades           = { module = "maven.modrinth:emitrades", version.ref = "emit
 
 ae2                 = { module = "appeng:appliedenergistics2-forge", version.ref = "ae2" }
 guideme             = { module = "org.appliedenergistics:guideme", version.ref = "guideme" }
+ponder              = { module = "net.createmod.ponder:Ponder-Forge-1.20.1", version.ref = "ponder" }
+flywheel-forge      = { module = "dev.engine-room.flywheel:flywheel-forge-1.20.1", version.ref = "flywheel" }
 architectury        = { module = "dev.architectury:architectury-forge", version.ref = "architectury" }
 kubejs              = { module = "dev.latvian.mods:kubejs-forge", version.ref = "kubejs" }
 rhino               = { module = "dev.latvian.mods:rhino-forge", version.ref = "rhino" }

@@ -16,10 +16,14 @@
 //
 // The guard below compares canonical paths, so the shared list is inherited when
 // there is one and the local fallback (this repository's own list, as it stood
-// before the shared file was introduced) is used when there is not.
+// before the shared file was introduced) is used when there is not. The fallback
+// is resolved relative to this script itself (not `projectDir`): in a standalone
+// build with sibling modules included (gt-- / gtm-reborn), those projects apply
+// this same script through `$rootDir`, and a `projectDir`-relative path would
+// point into their own (nonexistent) script directories.
 def shared = file("${rootDir}/gradle/scripts/repositories.gradle")
 if (shared.exists() && shared.canonicalFile != buildscript.sourceFile.canonicalFile) {
     apply from: shared
 } else {
-    apply from: "${projectDir}/gradle/scripts/repositories.standalone.gradle"
+    apply from: new File(buildscript.sourceFile.parentFile, 'repositories.standalone.gradle')
 }

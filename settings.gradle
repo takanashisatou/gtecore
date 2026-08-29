@@ -10,15 +10,48 @@ pluginManagement {
     }
 }
 
+// ---------------------------------------------------------------------------
+// Sibling modules (standalone build)
+// ---------------------------------------------------------------------------
+// When this repository is built standalone from the GTE monorepo layout
+// (modules/gtecore with modules/gt-- and modules/gtm-reborn beside it), the
+// sibling mods are included as subprojects so dependencies.gradle can resolve
+// them as project dependencies and compile against their sources. When they
+// are not checked out, they are simply not included and dependencies.gradle
+// fails with a clear message. The aggregate build never reads this file.
+def modulesDir = new File(rootDir, '..')
+def siblingNames = ['gt--', 'gtm-reborn'].findAll { new File(modulesDir, it).isDirectory() }
+def hasSiblings = !siblingNames.isEmpty()
+
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
     }
     versionCatalogs {
         forge {
-            from(files("gradle/forge.versions.toml"))
+            if (hasSiblings) {
+                def aggCatalog = new File(rootDir, '../../gradle/forge.versions.toml')
+                if (!aggCatalog.isFile()) {
+                    throw new GradleException(
+                        "Sibling modules are present but the aggregate catalog was not found " +
+                        "at ${aggCatalog}. Keep the GTE monorepo layout, or remove the " +
+                        "modules/gt-- / modules/gtm-reborn directories.")
+                }
+                // Sibling modules are in the build: feed the aggregate catalog so all
+                // modules resolve the exact versions CI uses (the sibling build
+                // scripts are written against it, and this repository's own catalog
+                // intentionally diverges from it).
+                from(files("../../gradle/forge.versions.toml"))
+            } else {
+                from(files("gradle/forge.versions.toml"))
+            }
         }
     }
 }
 
 rootProject.name = mod_id
+
+siblingNames.each { name ->
+    include "modules:${name}"
+    project(":modules:${name}").projectDir = new File(modulesDir, name)
+}
