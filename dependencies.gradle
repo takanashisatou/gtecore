@@ -97,6 +97,17 @@ dependencies {
 
     modLocalRuntime("curse.maven:ldlib-626676:6995785")
 
+    // Named standalone copies of libraries that gtm-reborn/gt-- embed via
+    // jarJar as SRG jars. Dev jars no longer carry those embeds (they crashed
+    // named dev runs), so every run config must provide its own remapped copy.
+    modLocalRuntime(forge.registrate)
+    // Pin 0.5.5: gtm-reborn resolves mixinextras via a `[0.5.0-rc.3,)` require
+    // range, i.e. 0.5.5, so dev runs must load the same API level.
+    modLocalRuntime("io.github.llamalad7:mixinextras-forge:0.5.5")
+    // gt-- (gtnn) is written in Kotlin and needs the Kotlin runtime that its
+    // jarJar'd kotlinforforge used to provide.
+    modLocalRuntime(forge.kotlinforforge)
+
     // FTB //
     modLocalRuntime(forge.architectury)
 
