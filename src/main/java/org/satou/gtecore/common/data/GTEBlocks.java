@@ -37,6 +37,7 @@ public class GTEBlocks {
         GTECore_REGISTRATE.creativeModeTab(()->MORE_MACHINES);
     }
     public static BlockEntry<Block> SUPER_STRING_CASING = createCasingBlock("super_string_casing",GTECore.id("block/casings/super_string_casing/super_string_casing"));
+    public static BlockEntry<Block> IMAGINARY_CASING = createCasingBlock("imaginary_casing", GTECore.id("block/casings/imaginary/imaginary_casing"));
     public static BlockEntry<Block> EIGHT_TRIGMAS_CASING = createCasingBlock("eight_trigmas_casing",GTECore.id("block/casings/eight_trigmas/eight_trigmas_casing"));
     public static BlockEntry<GTECoilBlock> YIN_YANG_COIL = createCoilBlock(GTECoilBlock.GTECoilType.YIN_YANG_COIL);
     public static BlockEntry<Block> KAN_SHUI_CASING = createCasingBlock("kan_shui_casing",GTECore.id("block/casings/uhv/kan_shui_casing"));
