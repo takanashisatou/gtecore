@@ -46,6 +46,7 @@ legacyForge {
             systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
             systemProperty('forge.logging.console.level', 'info')
             systemProperty('embeddium.allow_broken_mods', 'true')
+            systemProperty('fml.earlyprogresswindow', 'false')
             jvmArguments.addAll('-Xmx6G', '-XX:+UseG1GC', '-Dfile.encoding=UTF-8', '-Dsun.stdout.encoding=UTF-8', '-Dsun.stderr.encoding=UTF-8')
         }
 

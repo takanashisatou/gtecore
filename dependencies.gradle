@@ -123,7 +123,7 @@ dependencies {
 
     // Client-only optimization & shader runtime //
     modLocalRuntime(forge.embeddium)
-    modLocalRuntime(forge.oculus)
+    // modLocalRuntime(forge.oculus) // Oculus causes GLFW render thread deadlock in dev runs; enabled in prod packs
 
     // GregTech Addon Runtime
     modLocalRuntime("blank:gtmthings:1.5.4")
