@@ -36,15 +36,23 @@ legacyForge {
         "${mod_id}" {
             sourceSet(sourceSets.main)
         }
+        if (rootProject.name == 'gte-multi') {
+            gtceu {
+                sourceSet(project(':modules:gtm-reborn').sourceSets.main)
+                sourceSet(project(':modules:gtm-reborn').sourceSets.client)
+                sourceSet(project(':modules:gtm-reborn').sourceSets.extra)
+            }
+            gtnn {
+                sourceSet(project(':modules:gt--').sourceSets.main)
+            }
+        }
     }
     runs {
-        if (rootProject == project) {
-            client {
-                client()
-                sourceSet = sourceSets.main
-                ideName = "Client"
-                systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
-            }
+        client {
+            client()
+            sourceSet = sourceSets.main
+            ideName = "GTECore Client"
+            systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
         }
 
         server {
