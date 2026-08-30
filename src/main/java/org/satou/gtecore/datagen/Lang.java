@@ -262,7 +262,17 @@ public class Lang {
 
         provider.add("block.gtecore.rare_earth_processing_plant","Rare Earth Processing Plant","稀土处理工厂");
         provider.add("gtecore.rare_earth_processing","Rare Earth Processing","稀土处理");
+
+        // Casings and Modules
+        provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数机械外壳");
+        provider.add("block.gtecore.yin_yang_coil_block", "§f§0Yin Yang Coil Block", "§f§0阴阳线圈方块");
+        provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "深色基础混凝土");
+        provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "浅色基础混凝土");
+        provider.add("block.gtecore.base_mid_concrete", "Base Mid Concrete", "中色基础混凝土");
+        provider.add("block.gtecore.yin_yang_field_restriction", "§f§0Yin Yang Field Restriction Casing", "§f§0阴阳场约束机械外壳");
+        provider.add("block.gtecore.baihu_module", "§fBaihu Module", "§f白虎模组");
+        provider.add("block.gtecore.qinglong_module", "§aQinglong Module", "§a青龙模组");
+        provider.add("block.gtecore.xuanwu_module", "§0Xuanwu Module", "§0玄武模组");
+        provider.add("block.gtecore.zhuque_module", "§cZhuque Module", "§c朱雀模组");
     }
-
-
 }
