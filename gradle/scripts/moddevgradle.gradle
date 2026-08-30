@@ -45,7 +45,10 @@ legacyForge {
             gameDirectory.set(file('run/client'))
             systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
             systemProperty('forge.logging.console.level', 'info')
-            jvmArguments.addAll('-Xmx6G', '-XX:+UseG1GC')
+            systemProperty('flywheel.backend', 'off')
+            systemProperty('flw.backend', 'off')
+            systemProperty('embeddium.allow_broken_mods', 'true')
+            jvmArguments.addAll('-Xmx6G', '-XX:+UseG1GC', '-Dfile.encoding=UTF-8', '-Dsun.stdout.encoding=UTF-8', '-Dsun.stderr.encoding=UTF-8')
         }
 
         server {
