@@ -42,7 +42,10 @@ legacyForge {
             client()
             sourceSet = sourceSets.main
             ideName = "GTECore Client"
+            gameDirectory.set(file('run/client'))
             systemProperty('forge.enabledGameTestNamespaces', project.mod_id)
+            systemProperty('forge.logging.console.level', 'info')
+            jvmArguments.addAll('-Xmx6G', '-XX:+UseG1GC')
         }
 
         server {

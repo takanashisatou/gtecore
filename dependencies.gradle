@@ -83,8 +83,6 @@ dependencies {
     // Standard runtime mods //
     modClientLocalRuntime(forge.jade)
     modLocalRuntime(forge.curios)
-    modLocalRuntime(forge.modernfix)
-    modClientLocalRuntime(forge.modernui)
     modLocalRuntime(forge.ferritecore)
 
     modLocalRuntime(forge.glodium)
@@ -95,7 +93,7 @@ dependencies {
     modLocalRuntime(forge.ae2wtlib)
     modLocalRuntime(forge.extendedae)
 
-    modLocalRuntime("curse.maven:ldlib-626676:6995785")
+    modLocalRuntime(forge.ldlib)
 
     // Named standalone copies of libraries that gtm-reborn/gt-- embed via
     // jarJar as SRG jars. Dev jars no longer carry those embeds (they crashed
@@ -123,12 +121,8 @@ dependencies {
     modLocalRuntime(forge.ponder)
     modLocalRuntime(forge.flywheel.forge)
 
-    // Client-only runtime mods //
-    modClientLocalRuntime(forge.embeddium)
-    modClientLocalRuntime(forge.oculus)
     renderNurseCfg(libs.renderNurse)
 
     // GregTech Addon Runtime
     modLocalRuntime("blank:gtmthings:1.5.4")
-    modLocalRuntime("blank:gtnn:1.20.1-1.3.5.3")
 }
