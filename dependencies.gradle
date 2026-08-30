@@ -81,7 +81,7 @@ dependencies {
 
     modLocalRuntime(forge.configuration)
     // Standard runtime mods //
-    modClientLocalRuntime(forge.jade)
+    modLocalRuntime(forge.jade)
     modLocalRuntime(forge.curios)
     modLocalRuntime(forge.ferritecore)
 
