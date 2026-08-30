@@ -189,6 +189,10 @@ public class Lang {
         provider.add("item.gtecore.imaginary_tree_circuit_chip","§bImaginary Tree Circuit Chip","§b虚数之树电路芯片");
         provider.add("item.gtecore.imaginary_tree_circuit_board","§bImaginary Tree Circuit Board","§b虚数之树电路基板");
         provider.add("item.gtecore.imaginary_tree_printed_circuit_board","§bImaginary Tree Printed Circuit Board","§b虚数之树印刷电路基板");
+        provider.add("item.gtecore.raw_imaginary_tree_chip", "§bRaw Imaginary Tree Chip", "§b粗制虚数晶片");
+        provider.add("item.gtecore.engraved_imaginary_tree_chip", "§bEngraved Imaginary Tree Chip", "§b刻模虚数芯片");
+        provider.add("item.gtecore.imaginary_tree_cpu_chip", "§bImaginary Tree CPU Chip", "§b虚数之树CPU芯片");
+        provider.add("item.gtecore.imaginary_tree_soc", "§bImaginary Tree SoC", "§b虚数之树SoC");
         provider.add("item.gtecore.imaginary_tree_processor","§bImaginary Tree Processor","§b虚数之树处理器");
         provider.add("item.gtecore.imaginary_tree_processor.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
         provider.add("item.gtecore.imaginary_tree_processor.tooltip.1","§bUHV-Level Circuits","§bUHV级电路");

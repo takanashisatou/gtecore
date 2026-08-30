@@ -201,6 +201,18 @@ public class GTEItems {
     public static ItemEntry<Item> IMAGINARY_TREE_PRINTED_CIRCUIT_BOARD = GTECore_REGISTRATE.item("imaginary_tree_printed_circuit_board",Item::new)
             .lang("Imaginary Tree Printed Circuit Board")
             .register();
+    public static ItemEntry<Item> RAW_IMAGINARY_TREE_CHIP = GTECore_REGISTRATE.item("raw_imaginary_tree_chip", Item::new)
+            .lang("Raw Imaginary Tree Chip")
+            .register();
+    public static ItemEntry<Item> ENGRAVED_IMAGINARY_TREE_CHIP = GTECore_REGISTRATE.item("engraved_imaginary_tree_chip", Item::new)
+            .lang("Engraved Imaginary Tree Chip")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_CPU_CHIP = GTECore_REGISTRATE.item("imaginary_tree_cpu_chip", Item::new)
+            .lang("Imaginary Tree CPU Chip")
+            .register();
+    public static ItemEntry<Item> IMAGINARY_TREE_SOC = GTECore_REGISTRATE.item("imaginary_tree_soc", Item::new)
+            .lang("Imaginary Tree SoC")
+            .register();
     public static ItemEntry<ComponentItem> IMAGINARY_TREE_PROCESSOR_UHV = GTECore_REGISTRATE.item("imaginary_tree_processor", ComponentItem::create)
             .lang("Imaginary Tree Processor").tag(CustomTags.UHV_CIRCUITS)
             .onRegister(GTItems.attach(new TooltipBehavior(lines->{
