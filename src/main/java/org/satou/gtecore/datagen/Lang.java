@@ -264,7 +264,7 @@ public class Lang {
         provider.add("gtecore.rare_earth_processing","Rare Earth Processing","稀土处理");
 
         // Casings and Modules
-        provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数机械外壳");
+        provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
         provider.add("block.gtecore.yin_yang_coil_block", "§f§0Yin Yang Coil Block", "§f§0阴阳线圈方块");
         provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "深色基础混凝土");
         provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "浅色基础混凝土");
