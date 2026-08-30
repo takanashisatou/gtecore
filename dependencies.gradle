@@ -118,6 +118,9 @@ dependencies {
     modLocalRuntime(forge.jei.forge.impl)
 
     // Ponder / Flywheel //
+    modLocalRuntime(forge.ponder)
+    modLocalRuntime(forge.flywheel.forge)
+
     // Client-only optimization & shader runtime //
     modLocalRuntime(forge.embeddium)
     modLocalRuntime(forge.oculus)
