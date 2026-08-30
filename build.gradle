@@ -113,13 +113,3 @@ tasks.withType(JavaCompile).configureEach {
 lombok {
     version = "1.18.38"
 }
-
-afterEvaluate {
-    if (rootProject.name == 'gte-multi' && tasks.findByName('runClient') == null) {
-        tasks.register('runClient') {
-            group = 'forge runs'
-            description = 'Delegates to unified :modules:gte-dev-runtime:runClient'
-            dependsOn ':modules:gte-dev-runtime:runClient'
-        }
-    }
-}
