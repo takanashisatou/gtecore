@@ -121,11 +121,6 @@ dependencies {
     modLocalRuntime(forge.ponder)
     modLocalRuntime(forge.flywheel.forge)
 
-    // Client-only optimization & shader runtime (paired with renderNurse) //
-    modClientLocalRuntime(forge.embeddium)
-    modClientLocalRuntime(forge.oculus)
-    renderNurseCfg(libs.renderNurse)
-
     // GregTech Addon Runtime
     modLocalRuntime("blank:gtmthings:1.5.4")
 }
