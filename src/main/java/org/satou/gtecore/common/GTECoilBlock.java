@@ -31,7 +31,9 @@ public class GTECoilBlock extends ActiveBlock {
 
 
         YIN_YANG_COIL("yin_yang", 10800, 16, 8, GTMaterials.Tritanium,
-                GTECore.id("block/casings/coils/yin_yang_coil"));
+                GTECore.id("block/casings/coils/yin_yang_coil")),
+        IMAGINARY_COIL("imaginary", 12600, 32, 16, GTMaterials.Neutronium,
+                GTECore.id("block/casings/coils/imaginary_coil_block"));
 
         @NotNull
         @Getter

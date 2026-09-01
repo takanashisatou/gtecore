@@ -20,6 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.model.generators.ModelFile;
 import org.satou.gtecore.GTECore;
@@ -38,6 +39,14 @@ public class GTEBlocks {
     }
     public static BlockEntry<Block> SUPER_STRING_CASING = createCasingBlock("super_string_casing",GTECore.id("block/casings/super_string_casing/super_string_casing"));
     public static BlockEntry<Block> IMAGINARY_CASING = createCasingBlock("imaginary_casing", GTECore.id("block/casings/imaginary/imaginary_casing"));
+    public static BlockEntry<Block> IMAGINARY_CORE_CASING = createCasingBlock("imaginary_core_casing", GTECore.id("block/casings/imaginary/imaginary_core_casing"));
+    public static BlockEntry<Block> IMAGINARY_BRANCH_CASING = createCasingBlock("imaginary_branch_casing", GTECore.id("block/casings/imaginary/imaginary_branch_casing"));
+    public static BlockEntry<Block> IMAGINARY_CONTAINMENT_CASING = createCasingBlock("imaginary_containment_casing", GTECore.id("block/casings/imaginary/imaginary_containment_casing"));
+    public static BlockEntry<GTECoilBlock> IMAGINARY_COIL = createCoilBlock(GTECoilBlock.GTECoilType.IMAGINARY_COIL);
+    public static BlockEntry<Block> IMAGINARY_ENERGY_CONDUIT = createCasingBlock("imaginary_energy_conduit", GTECore.id("block/casings/imaginary/imaginary_energy_conduit"));
+    public static BlockEntry<GlassBlock> IMAGINARY_GLASS = createGlassCasingBlock("imaginary_glass", GTECore.id("block/casings/imaginary/imaginary_glass"), () -> RenderType::translucent);
+    public static BlockEntry<Block> IMAGINARY_LEAF_MATRIX = createCasingBlock("imaginary_leaf_matrix", GTECore.id("block/casings/imaginary/imaginary_leaf_matrix"), () -> RenderType::cutoutMipped);
+
     public static BlockEntry<Block> EIGHT_TRIGMAS_CASING = createCasingBlock("eight_trigmas_casing",GTECore.id("block/casings/eight_trigmas/eight_trigmas_casing"));
     public static BlockEntry<GTECoilBlock> YIN_YANG_COIL = createCoilBlock(GTECoilBlock.GTECoilType.YIN_YANG_COIL);
     public static BlockEntry<Block> KAN_SHUI_CASING = createCasingBlock("kan_shui_casing",GTECore.id("block/casings/uhv/kan_shui_casing"));
@@ -57,6 +66,24 @@ public class GTEBlocks {
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
                 () -> RenderType::solid);
+    }
+
+    public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture,
+                                                      Supplier<Supplier<RenderType>> type) {
+        return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK, type);
+    }
+
+    public static BlockEntry<GlassBlock> createGlassCasingBlock(String name, ResourceLocation texture,
+                                                                 Supplier<Supplier<RenderType>> type) {
+        return GTECore_REGISTRATE.block(name, GlassBlock::new)
+                .initialProperties(() -> Blocks.GLASS)
+                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+                .addLayer(type)
+                .exBlockstate(GTModels.cubeAllModel(texture))
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new)
+                .build()
+                .register();
     }
     private static BlockEntry<GTECoilBlock> createCoilBlock(ICoilType coilType) {
         //GTCEuAPI.HEATING_COILS.put(coilType, coilBlock);

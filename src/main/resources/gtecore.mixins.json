@@ -7,6 +7,7 @@
   "client": [
   ],
   "mixins": [
+    "BotaniaConfigBypassMixin",
     "diamondmixin",
     "GTMCircuirHandlerMixin",
     "GTMSteamMultiblockMachineMixin",

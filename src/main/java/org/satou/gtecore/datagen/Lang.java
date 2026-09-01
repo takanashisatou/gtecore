@@ -3,6 +3,7 @@ package org.satou.gtecore.datagen;
 public class Lang {
 
     public static void init(CommonLanguageProvider provider) {
+        provider.add("config.jade.plugin_pipez.pipe", "Pipes", "管道");
         provider.add("config.gtecore.option.superPeace", "Super Peace Mode", "超级和平模式");
         provider.add("config.gtecore.option.durationMultiplier", "recipe time multiplier", "配方时间倍率");
         provider.add("block.gtecore.steam_op", "Steam Ore Processing Factory", "蒸汽矿物处理厂");
@@ -269,6 +270,13 @@ public class Lang {
 
         // Casings and Modules
         provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
+        provider.add("block.gtecore.imaginary_core_casing", "§bImaginary Core Casing", "§b虚数核心外壳");
+        provider.add("block.gtecore.imaginary_branch_casing", "§bImaginary Branch Casing", "§b虚数枝桠外壳");
+        provider.add("block.gtecore.imaginary_containment_casing", "§bImaginary Containment Casing", "§b虚数约束外壳");
+        provider.add("block.gtecore.imaginary_coil_block", "§bImaginary Coil Block", "§b虚数线圈方块");
+        provider.add("block.gtecore.imaginary_energy_conduit", "§bImaginary Energy Conduit", "§b虚数能量导管");
+        provider.add("block.gtecore.imaginary_glass", "§bImaginary Glass", "§b虚数玻璃");
+        provider.add("block.gtecore.imaginary_leaf_matrix", "§bImaginary Leaf Matrix", "§b虚数叶矩阵");
         provider.add("block.gtecore.yin_yang_coil_block", "§f§0Yin Yang Coil Block", "§f§0阴阳线圈方块");
         provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "深色基础混凝土");
         provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "浅色基础混凝土");

@@ -47,7 +47,8 @@ legacyForge {
             systemProperty('forge.logging.console.level', 'info')
             systemProperty('embeddium.allow_broken_mods', 'true')
             systemProperty('fml.earlyprogresswindow', 'false')
-            jvmArguments.addAll('-Xmx6G', '-XX:+UseG1GC', '-Dfile.encoding=UTF-8', '-Dsun.stdout.encoding=UTF-8', '-Dsun.stderr.encoding=UTF-8')
+            systemProperty('forge.earlyWindow', 'false')
+            jvmArguments.addAll('-Xmx6G', '-XX:+UseG1GC', '-Dfml.earlyprogresswindow=false', '-Dforge.earlyWindow=false', '-Dfile.encoding=UTF-8', '-Dsun.stdout.encoding=UTF-8', '-Dsun.stderr.encoding=UTF-8')
         }
 
         server {
