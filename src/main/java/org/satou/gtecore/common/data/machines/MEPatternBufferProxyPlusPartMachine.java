@@ -46,6 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import org.satou.gtecore.common.data.machines.MEPatternBufferPlusPartMachine;
 import org.satou.gtecore.common.data.machines.ProxySlotRecipeHandlerPlus;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -305,9 +306,13 @@ public class MEPatternBufferProxyPlusPartMachine extends MEBusPartPlusMachine
     }
     @Override
     public List<RecipeHandlerList> getRecipeHandlers() {
-        var ALlHandlers = proxySlotRecipeHandler.getProxySlotHandlers();
-        ALlHandlers.addAll(super.getRecipeHandlers());
-        return ALlHandlers;
+        var slotHandlers = proxySlotRecipeHandler.getProxySlotHandlers();
+        var superHandlers = super.getRecipeHandlers();
+        List<RecipeHandlerList> allHandlers = new ArrayList<>(slotHandlers.size() + 1 + superHandlers.size());
+        allHandlers.addAll(slotHandlers);
+        allHandlers.add(proxySlotRecipeHandler.getProxySharedHandlerList());
+        allHandlers.addAll(superHandlers);
+        return allHandlers;
     }
 
     public void setBuffer(@Nullable BlockPos pos) {
