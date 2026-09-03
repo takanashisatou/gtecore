@@ -198,8 +198,8 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         if (!(machine instanceof WorkableElectricMultiblockMachine engineMachine)) {
             return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);
         }
-        int maxParallel = 1024; // get maximum parallel
-        int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+        int maxParallel = 1000000000; // get maximum parallel
+        int actualParallel = ParallelLogic.getParallelAmount(engineMachine, recipe, maxParallel);
         double eutMultiplier = actualParallel;
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -227,7 +227,7 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
     }
     public static ModifierFunction recipeModifierForOmega(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof WorkableElectricMultiblockMachine engineMachine)) {
-            return RecipeModifier.nullWrongType(SteamParallelMultiblockMachine.class, machine);
+            return RecipeModifier.nullWrongType(WorkableElectricMultiblockMachine.class, machine);
         }
         int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
@@ -235,6 +235,7 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))
                 .outputModifier(ContentModifier.multiplier(actualParallel))
+                .eutMultiplier(eutMultiplier)
                 .parallels(actualParallel)
                 .durationModifier(ContentModifier.multiplier(0.00001))
                 .build();
