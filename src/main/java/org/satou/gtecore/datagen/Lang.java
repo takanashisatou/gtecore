@@ -2,289 +2,364 @@ package org.satou.gtecore.datagen;
 
 public class Lang {
 
-    public static void init(CommonLanguageProvider provider) {
-        provider.add("config.jade.plugin_pipez.pipe", "Pipes", "管道");
-        provider.add("config.gtecore.option.superPeace", "Super Peace Mode", "超级和平模式");
-        provider.add("config.gtecore.option.durationMultiplier", "recipe time multiplier", "配方时间倍率");
-        provider.add("block.gtecore.steam_op", "Steam Ore Processing Factory", "蒸汽矿物处理厂");
-        provider.add("config.screen.gtecore", "gtecore configure menu", "gtecore配置菜单");
-        provider.add("gtecore.steam_op_recipe", "Steam Ore Processing Factory", "蒸汽矿物处理厂");
-        provider.add("itemGroup.gtecore.gtecore_machines", "GregTech Easy Machines", "格雷科技Easy机器");
-        provider.add("itemGroup.gtecore.gtecore_items", "Gregtech Easy Items", "格雷科技Easy物品");
-        provider.add("com.gtecore.tooltips.addbygtecore", "Added by GTECore ", "由GTECore添加");
-        provider.add("com.gtecore.tooltips.steam_op", "1B parallels and all recipe will finish in 1tick，support all input and output machine parts", "10亿并行，并且所有配方1tick执行完毕，支持所有类型的输入输出仓室");
-        provider.add("com.gtecore.tooltips.chemistry_terminator", "The magical machine has overturned the existence of chemistry and physics, and its emergence undoubtedly marks the end of chemistry", "神奇的机器，颠覆了化学与物理的存在，它的出现无疑代表着化学的终结");
-        provider.add("block.gtecore.chemistry_terminator", "Chemistry Terminator", "化学终结者");
-        provider.add("gtecore.chemistry_terminator_recipe", "Chemistry Terminator", "化学终结者");
-        provider.add("block.gtecore.ten_in_one", "Ten in One General Processing Factory", "十合一通用处理工厂");
-        provider.add("item.gtecore.super_string_processor", "Super String Processor", "超弦处理器");
-        provider.add("item.gtecore.super_string_processor_assembly", "Super String Processor Assembly", "超弦处理器集群");
-        provider.add("item.gtecore.super_string_processor_computer", "Super String Processor Computer", "超弦处理器超级计算机");
-        provider.add("item.gtecore.super_string_processor_mainframe", "Super String Processor Mainframe", "超弦处理器主机");
-        provider.add("item.gtecore.super_string_processor.tooltip.0", "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
-        provider.add("item.gtecore.super_string_processor.tooltip.1", "§dZPM-level circuits", "§dZPM级电路");
-        provider.add("item.gtecore.super_string_processor_assembly.tooltip.0", "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
-        provider.add("item.gtecore.super_string_processor_assembly.tooltip.1", "§dUV-level circuits", "§dUV级电路");
-        provider.add("item.gtecore.super_string_processor_computer.tooltip.0", "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
-        provider.add("item.gtecore.super_string_processor_computer.tooltip.1", "§dUHV-level circuits", "§dUHV级电路");
-        provider.add("item.gtecore.super_string_processor_mainframe.tooltip.0", "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
-        provider.add("item.gtecore.super_string_processor_mainframe.tooltip.1", "§dUEV-level circuits", "§dUEV级电路");
-        provider.add("com.gtecore.tooltips.super_fusion_reactor", "Support 1T OC, Very Fast!", "支持1TOC,再也不用慢慢等聚变了!");
-        provider.add("block.gtecore.super_fusion_reactor", "Super Fusion Reactor", "超级聚变反应堆");
-        provider.add("gtecore.super_fusion_reactor_recipe", "Super Fusion Reactor", "超级聚变反应堆");
-        provider.add("block.gtecore.distillation_tower_easy", "Distillation Tower Easy", "蒸馏塔简单版");
-        provider.add("block.gtecore.super_string_casing", "§d Super String Casing", "§d超弦外壳");
-        provider.add("block.gtecore.super_string_mixer", "§d Super String Mixer", "§d超弦搅拌机");
-        provider.add("gtecore.super_string_mixing", "§d Super String Mixing", "§d超弦搅拌");
-        provider.add("block.gtecore.string_of_creation", "§d String Of Creation", "§d创世之弦");
-        provider.add("gtecore.string_of_creation", "§d String Of Creation", "§d创世之弦");
-        provider.add("block.gtecore.super_string_oscillator_array", "§d Super String Oscillator Array", "§d超弦震荡阵列");
-        provider.add("gtecore.super_string_oscillator_array", "§d Super String Oscillator Array", "§d超弦震荡阵列");
-        provider.add("block.gtecore.chord_of_all_things", "§d Chord Of All Things", "§d 万物之弦");
-        provider.add("gtecore.chord_of_all_things", "§d Chord Of All Things", "§d 万物之弦");
-        provider.add("item.gtecore.super_string_circuit_board", "§d Super String Circuit Board", "§d 超弦电路基板");
-        provider.add("item.gtecore.super_string_printed_circuit_board", "§d Super String Printed Circuit Board", "§d 超弦电路印刷基板");
-        provider.add("item.gtecore.original_string", "§d Original String", "§d起源之弦");
-        provider.add("item.gtecore.alpha_string", "§d α String", "§d α弦");
-        provider.add("item.gtecore.beta_string", "§d β String", "§d β弦");
-        provider.add("item.gtecore.gamma_string", "§d γ String", "§d γ弦");
-        provider.add("block.gtecore.easy_fluid_drilling_rig", "Easy Fluid Drilling", "简单流体钻机");
-        provider.add("gtecore.easy_fluid", "Easy Fluid", "简单流体");
-        provider.add("block.gtecore.not_hard_fluid_drilling_rig", "Not Hard Fluid Drilling Rig", "不难流体钻机");
-        provider.add("block.gtecore.molecular_separators", "§3Molecular Separators", "§3分子离析者");
-        provider.add("gtecore.molecular_separators", "§3Molecular Separators", "§3分子离析者");
-        provider.add("block.gtecore.easy_box", "§6Easy §3B§2o§1x ", "§6简§3单§2之§1盒");
-        provider.add("gtecore.easy_box", "§6Easy §3B§2o§1x ", "§6简§3单§2之§1盒");
-        provider.add("block.gtecore.integrated_petrochemical_plant", "Integrated Petrochemical Plant", "综合石化工厂");
-        provider.add("gtecore.integrated_petrochemical_plant", "Integrated Petrochemical Plant", "综合石化工厂");
-        provider.add("gtecore.ore_process_center", "§6Ore Processing", "§6矿石处理");
-        provider.add("block.gtecore.ore_process_center", "§6Ore Processing Center", "§6矿石处理中心");
-        provider.add("com.gtecore.ore_process_center.tooltips.0", "§The §6Ore Processing Center§r has seven different types of recipes", "§6矿石处理中心§r拥有七种不同类型的配方");
-        provider.add("com.gtecore.ore_process_center.tooltips.1", "Circuit 1: Crushing-Crushing-Washing", "电路1: 粉碎-粉碎-洗矿");
-        provider.add("com.gtecore.ore_process_center.tooltips.2", "Circuit 2: Crushing-Crushing-Centrifugation", "电路2: 粉碎-粉碎-离心");
-        provider.add("com.gtecore.ore_process_center.tooltips.3", "Circuit 3: Crushing-Washing-Thermal Separation-Crushing", "电路3: 粉碎-洗矿-热离-粉碎");
-        provider.add("com.gtecore.ore_process_center.tooltips.4", "Circuit 4: Crushing-Thermal Separation-Crushing", "电路4: 粉碎-热离-粉碎");
-        provider.add("com.gtecore.ore_process_center.tooltips.5", "Circuit 5: Crushing-Washing-Crushing-Washing", "电路5: 粉碎-洗矿-粉碎-洗矿");
-        provider.add("com.gtecore.ore_process_center.tooltips.6", "Circuit 6: Crushing-Washing-Crushing-Centrifugation", "电路6: 粉碎-洗矿-粉碎-离心");
-        provider.add("com.gtecore.ore_process_center.tooltips.7", "Circuit 8: Crushing-Washing-Crushing-Electromagnetic Separation", "电路8: 粉碎-洗矿-粉碎-电磁选矿");
-        provider.add("com.gtecore.ore_process_center.tooltips.8", "Support subtick overclock", "支持1T OC");
-        provider.add("block.gtecore.star_core_cooling_matrix", "§3 Star Core Cooling Matrix", "§3 星核冷却矩阵");
-        provider.add("block.gtecore.max_super_battery_buffer_1x", "§c§lMaximum Voltage§r Super Battery Buffer", "§c上限压§r超级电池箱（§c§lMAX§r）");
-        provider.add("block.gtecore.me_steam_hatch", "ME Steam Hatch", "ME蒸汽仓");
-        provider.add("block.gtecore.not_hard_box", "Not §6Hard §3B§2o§1x", "§6不§3难§2之§1盒");
-        provider.add("com.gtecore.not_hard_box.tooltips.0", "Electricity version of the §6Easy §3B§2o§1x", "§6简§3单§2之§1盒§r的电力版本");
-        provider.add("com.gtecore.tooltips.10", "Can Use MultiParallel Hatch", "可使用跨配方并行仓");
-        provider.add("block.gtecore.large_general_generator", "Large General Generator", "大型通用发电机");
-        provider.add("block.gtecore.wiremill_factory", "§6 Wiremill Factory", "§6 导线工厂");
-        provider.add("gtecore.wiremill_factory", "§6 Wiremill Factory", "§6 导线工厂");
-        provider.add("com.gtecore.wiremill_factory.tooltips.0", "§6Wiremill Factory§r can make all types of wiremills", "§6导线工厂§r可以制造各种种类的导线");
-        provider.add("gtecore.crystal_center", "§6 Crystal Center", "§6 晶核中枢");
-        provider.add("block.gtecore.crystal_center", "§6 Crystal Center", "§6 晶核中枢");
-        provider.add("gtecore.quantum_cable_assembler", "§6 Quantum Cable Assembler", "§6 量子线擎");
-        provider.add("block.gtecore.quantum_cable_assembler", "§6 Quantum Cable Assembler", "§6 量子线擎");
-        provider.add("gtecore.starblade_etching", "§3 Starblade Etching", "§3星刃蚀刻");
-        provider.add("block.gtecore.starblade_etching_machine", "§3 Starblade Etching", "§3星刃蚀刻仪");
-        provider.add("item.gtecore.yin_yang_processor.tooltip.0", "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
-        provider.add("item.gtecore.yin_yang_processor.tooltip.1", "§8UV-Level Circuits", "§8UV级电路");
-        provider.add("item.gtecore.yin_yang_processor", "Ying Yang Processor", "阴阳处理器");
-        provider.add("item.gtecore.yin_yang_processor_assembly.tooltip.0", "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
-        provider.add("item.gtecore.yin_yang_processor_assembly.tooltip.1", "§8UHV-Level Circuits", "§8UHV级电路");
-        provider.add("item.gtecore.yin_yang_processor_assembly", "Ying Yang Processor Assembly", "阴阳处理器集群");
-        provider.add("item.gtecore.yin_yang_processor_computer.tooltip.0", "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
-        provider.add("item.gtecore.yin_yang_processor_computer.tooltip.1", "§8UEV-Level Circuits", "§8UEV级电路");
-        provider.add("item.gtecore.yin_yang_processor_computer", "Ying Yang Processor Computer", "阴阳处理器超级计算机");
-        provider.add("item.gtecore.yin_yang_processor_mainframe.tooltip.0", "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
-        provider.add("item.gtecore.yin_yang_processor_mainframe.tooltip.1", "§8UIV-Level Circuits", "§8UIV级电路");
-        provider.add("item.gtecore.yin_yang_processor_mainframe", "Ying Yang Processor Mainframe", "阴阳处理器主机");
-        provider.add("block.gtecore.antimatter_ball", "§5 Antimatter Ball", "§5暗能脉冲反物质核心");
-        provider.add("gtecore.antimatter_transformation", "§5 Antimatter Transformation", "§5反物质变换");
-        provider.add("block.gtecore.eight_trigmas_casing", "§8Eight Trigmas Casing", "§8八卦机械方块");
-        provider.add("block.gtecore.yin_yang_coil_block", "§8Yin Yang Coil Block", "§8阴阳线圈方块");
-        provider.add("material.gtecore.huo", "§4Fire Element", "§4火元素");
-        provider.add("material.gtecore.shuiyuansu", "§3Water Element", "§3水元素");
-        provider.add("material.gtecore.jinyuansu", "§eGold Element", "§e金元素");
-        provider.add("material.gtecore.muyuansu", "§2Wood Element", "§2木元素");
-        provider.add("material.gtecore.tuyuansu", "§8Earth Element", "§8土元素");
-        provider.add("item.gtecore.rune_dui", "Rune Dui", "兑象");
-        provider.add("item.gtecore.rune_gen", "Rune Gen", "艮象");
-        provider.add("item.gtecore.rune_kan", "Rune Kan", "坎象");
-        provider.add("item.gtecore.rune_kun", "Rune Kun", "坤象");
-        provider.add("item.gtecore.rune_li", "Rune Li", "离象");
-        provider.add("item.gtecore.rune_qian", "Rune Qian", "乾象");
-        provider.add("item.gtecore.rune_xun", "Rune Xun", "巽象");
-        provider.add("item.gtecore.rune_zhen", "Rune Zhen", "震象");
-        provider.add("item.gtecore.symbol_paper_earth", "§8Paper of Earth", "§8土之符篆");
-        provider.add("item.gtecore.symbol_paper_fire", "§4Symbol Paper of Fire", "§4火之符篆");
-        provider.add("item.gtecore.symbol_paper_water", "§3Symbol Paper of Water", "§3水之符篆");
-        provider.add("item.gtecore.symbol_paper_wood", "§2Symbol Paper of Wood", "§2木之符篆");
-        provider.add("item.gtecore.symbol_paper_gold", "§2Symbol Paper of Gold", "§e金之符篆");
-        provider.add("item.gtecore.yin", "§8Yin", "§8阴");
-        provider.add("item.gtecore.yang", "Yang", "阳");
-        provider.add("item.gtecore.dui_chip", "Dui Chip", "兑芯");
-        provider.add("item.gtecore.gen_chip", "Gen Chip", "艮芯");
-        provider.add("item.gtecore.god_nugget", "God Nugget", "三清之粒");
-        provider.add("item.gtecore.yin_yang_wafer", "§8Yin§rYang Wafer", "§8阴§r阳晶圆");
-        provider.add("block.gtecore.kan_shui_casing", "§3Kan Shui Casing", "§3坎水机械方块");
-        provider.add("block.gtecore.kun_gen_casing", "§8Kun Gen Casing", "§8坤艮机械方块");
-        provider.add("block.gtecore.li_huo_casing", "§4Li Huo Casing", "§4离火机械方块");
-        provider.add("item.gtecore.yinyang_glass_lens", "§8Yin §rYang Glass Lens", "§8阴§r阳透镜");
-        provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "§8阴极§r混凝土");
-        provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "阳盛混凝土");
-        provider.add("block.gtecore.base_mid_concrete", "Base Medium Concrete", "中庸混凝土");
-        provider.add("block.gtecore.yin_yang_field_restriction", "§8Yin §rYang Field Restriction", "§8阴§r阳立场约束方块");
-        provider.add("block.gtecore.baihu_module", "§fWhite Tiger Module", "§f白虎阵法方块");
-        provider.add("block.gtecore.qinglong_module", "§3Azure Dragon Module", "§3青龙阵法方块");
-        provider.add("block.gtecore.xuanwu_module", "§8Black Tortoise Module", "§8玄武阵法方块");
-        provider.add("block.gtecore.zhuque_module", "§cVermilion Bird Module", "§c朱雀阵法方块");
+        public static void init(CommonLanguageProvider provider) {
+                provider.add("config.jade.plugin_pipez.pipe", "Pipes", "管道");
+                provider.add("config.gtecore.option.superPeace", "Super Peace Mode", "超级和平模式");
+                provider.add("config.gtecore.option.durationMultiplier", "recipe time multiplier", "配方时间倍率");
+                provider.add("block.gtecore.steam_op", "Steam Ore Processing Factory", "蒸汽矿物处理厂");
+                provider.add("config.screen.gtecore", "gtecore configure menu", "gtecore配置菜单");
+                provider.add("gtecore.steam_op_recipe", "Steam Ore Processing Factory", "蒸汽矿物处理厂");
+                provider.add("itemGroup.gtecore.gtecore_machines", "GregTech Easy Machines", "格雷科技Easy机器");
+                provider.add("itemGroup.gtecore.gtecore_items", "Gregtech Easy Items", "格雷科技Easy物品");
+                provider.add("com.gtecore.tooltips.addbygtecore", "Added by GTECore ", "由GTECore添加");
+                provider.add("com.gtecore.tooltips.steam_op",
+                                "1B parallels and all recipe will finish in 1tick，support all input and output machine parts",
+                                "10亿并行，并且所有配方1tick执行完毕，支持所有类型的输入输出仓室");
+                provider.add("com.gtecore.tooltips.chemistry_terminator",
+                                "The magical machine has overturned the existence of chemistry and physics, and its emergence undoubtedly marks the end of chemistry",
+                                "神奇的机器，颠覆了化学与物理的存在，它的出现无疑代表着化学的终结");
+                provider.add("block.gtecore.chemistry_terminator", "Chemistry Terminator", "化学终结者");
+                provider.add("gtecore.chemistry_terminator_recipe", "Chemistry Terminator", "化学终结者");
+                provider.add("block.gtecore.ten_in_one", "Ten in One General Processing Factory", "十合一通用处理工厂");
+                provider.add("item.gtecore.super_string_processor", "Super String Processor", "超弦处理器");
+                provider.add("item.gtecore.super_string_processor_assembly", "Super String Processor Assembly",
+                                "超弦处理器集群");
+                provider.add("item.gtecore.super_string_processor_computer", "Super String Processor Computer",
+                                "超弦处理器超级计算机");
+                provider.add("item.gtecore.super_string_processor_mainframe", "Super String Processor Mainframe",
+                                "超弦处理器主机");
+                provider.add("item.gtecore.super_string_processor.tooltip.0",
+                                "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
+                provider.add("item.gtecore.super_string_processor.tooltip.1", "§dZPM-level circuits", "§dZPM级电路");
+                provider.add("item.gtecore.super_string_processor_assembly.tooltip.0",
+                                "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
+                provider.add("item.gtecore.super_string_processor_assembly.tooltip.1", "§dUV-level circuits",
+                                "§dUV级电路");
+                provider.add("item.gtecore.super_string_processor_computer.tooltip.0",
+                                "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
+                provider.add("item.gtecore.super_string_processor_computer.tooltip.1", "§dUHV-level circuits",
+                                "§dUHV级电路");
+                provider.add("item.gtecore.super_string_processor_mainframe.tooltip.0",
+                                "§7 Circuits from the Superstring Dimension", "§7来自超弦维度的电路");
+                provider.add("item.gtecore.super_string_processor_mainframe.tooltip.1", "§dUEV-level circuits",
+                                "§dUEV级电路");
+                provider.add("com.gtecore.tooltips.super_fusion_reactor", "Support 1T OC, Very Fast!",
+                                "支持1TOC,再也不用慢慢等聚变了!");
+                provider.add("block.gtecore.super_fusion_reactor", "Super Fusion Reactor", "超级聚变反应堆");
+                provider.add("gtecore.super_fusion_reactor_recipe", "Super Fusion Reactor", "超级聚变反应堆");
+                provider.add("block.gtecore.distillation_tower_easy", "Distillation Tower Easy", "蒸馏塔简单版");
+                provider.add("block.gtecore.super_string_casing", "§d Super String Casing", "§d超弦外壳");
+                provider.add("block.gtecore.super_string_mixer", "§d Super String Mixer", "§d超弦搅拌机");
+                provider.add("gtecore.super_string_mixing", "§d Super String Mixing", "§d超弦搅拌");
+                provider.add("block.gtecore.string_of_creation", "§d String Of Creation", "§d创世之弦");
+                provider.add("gtecore.string_of_creation", "§d String Of Creation", "§d创世之弦");
+                provider.add("block.gtecore.super_string_oscillator_array", "§d Super String Oscillator Array",
+                                "§d超弦震荡阵列");
+                provider.add("gtecore.super_string_oscillator_array", "§d Super String Oscillator Array", "§d超弦震荡阵列");
+                provider.add("block.gtecore.chord_of_all_things", "§d Chord Of All Things", "§d 万物之弦");
+                provider.add("gtecore.chord_of_all_things", "§d Chord Of All Things", "§d 万物之弦");
+                provider.add("item.gtecore.super_string_circuit_board", "§d Super String Circuit Board", "§d 超弦电路基板");
+                provider.add("item.gtecore.super_string_printed_circuit_board", "§d Super String Printed Circuit Board",
+                                "§d 超弦电路印刷基板");
+                provider.add("item.gtecore.original_string", "§d Original String", "§d起源之弦");
+                provider.add("item.gtecore.alpha_string", "§d α String", "§d α弦");
+                provider.add("item.gtecore.beta_string", "§d β String", "§d β弦");
+                provider.add("item.gtecore.gamma_string", "§d γ String", "§d γ弦");
+                provider.add("block.gtecore.easy_fluid_drilling_rig", "Easy Fluid Drilling", "简单流体钻机");
+                provider.add("gtecore.easy_fluid", "Easy Fluid", "简单流体");
+                provider.add("block.gtecore.not_hard_fluid_drilling_rig", "Not Hard Fluid Drilling Rig", "不难流体钻机");
+                provider.add("block.gtecore.molecular_separators", "§3Molecular Separators", "§3分子离析者");
+                provider.add("gtecore.molecular_separators", "§3Molecular Separators", "§3分子离析者");
+                provider.add("block.gtecore.easy_box", "§6Easy §3B§2o§1x ", "§6简§3单§2之§1盒");
+                provider.add("gtecore.easy_box", "§6Easy §3B§2o§1x ", "§6简§3单§2之§1盒");
+                provider.add("block.gtecore.integrated_petrochemical_plant", "Integrated Petrochemical Plant",
+                                "综合石化工厂");
+                provider.add("gtecore.integrated_petrochemical_plant", "Integrated Petrochemical Plant", "综合石化工厂");
+                provider.add("gtecore.ore_process_center", "§6Ore Processing", "§6矿石处理");
+                provider.add("block.gtecore.ore_process_center", "§6Ore Processing Center", "§6矿石处理中心");
+                provider.add("com.gtecore.ore_process_center.tooltips.0",
+                                "§The §6Ore Processing Center§r has seven different types of recipes",
+                                "§6矿石处理中心§r拥有七种不同类型的配方");
+                provider.add("com.gtecore.ore_process_center.tooltips.1", "Circuit 1: Crushing-Crushing-Washing",
+                                "电路1: 粉碎-粉碎-洗矿");
+                provider.add("com.gtecore.ore_process_center.tooltips.2", "Circuit 2: Crushing-Crushing-Centrifugation",
+                                "电路2: 粉碎-粉碎-离心");
+                provider.add("com.gtecore.ore_process_center.tooltips.3",
+                                "Circuit 3: Crushing-Washing-Thermal Separation-Crushing", "电路3: 粉碎-洗矿-热离-粉碎");
+                provider.add("com.gtecore.ore_process_center.tooltips.4",
+                                "Circuit 4: Crushing-Thermal Separation-Crushing", "电路4: 粉碎-热离-粉碎");
+                provider.add("com.gtecore.ore_process_center.tooltips.5",
+                                "Circuit 5: Crushing-Washing-Crushing-Washing", "电路5: 粉碎-洗矿-粉碎-洗矿");
+                provider.add("com.gtecore.ore_process_center.tooltips.6",
+                                "Circuit 6: Crushing-Washing-Crushing-Centrifugation", "电路6: 粉碎-洗矿-粉碎-离心");
+                provider.add("com.gtecore.ore_process_center.tooltips.7",
+                                "Circuit 8: Crushing-Washing-Crushing-Electromagnetic Separation",
+                                "电路8: 粉碎-洗矿-粉碎-电磁选矿");
+                provider.add("com.gtecore.ore_process_center.tooltips.8", "Support subtick overclock", "支持1T OC");
+                provider.add("block.gtecore.star_core_cooling_matrix", "§3 Star Core Cooling Matrix", "§3 星核冷却矩阵");
+                provider.add("block.gtecore.max_super_battery_buffer_1x", "§c§lMaximum Voltage§r Super Battery Buffer",
+                                "§c上限压§r超级电池箱（§c§lMAX§r）");
+                provider.add("block.gtecore.me_steam_hatch", "ME Steam Hatch", "ME蒸汽仓");
+                provider.add("block.gtecore.not_hard_box", "Not §6Hard §3B§2o§1x", "§6不§3难§2之§1盒");
+                provider.add("com.gtecore.not_hard_box.tooltips.0", "Electricity version of the §6Easy §3B§2o§1x",
+                                "§6简§3单§2之§1盒§r的电力版本");
+                provider.add("com.gtecore.tooltips.10", "Can Use MultiParallel Hatch", "可使用跨配方并行仓");
+                provider.add("block.gtecore.large_general_generator", "Large General Generator", "大型通用发电机");
+                provider.add("block.gtecore.wiremill_factory", "§6 Wiremill Factory", "§6 导线工厂");
+                provider.add("gtecore.wiremill_factory", "§6 Wiremill Factory", "§6 导线工厂");
+                provider.add("com.gtecore.wiremill_factory.tooltips.0",
+                                "§6Wiremill Factory§r can make all types of wiremills", "§6导线工厂§r可以制造各种种类的导线");
+                provider.add("gtecore.crystal_center", "§6 Crystal Center", "§6 晶核中枢");
+                provider.add("block.gtecore.crystal_center", "§6 Crystal Center", "§6 晶核中枢");
+                provider.add("gtecore.quantum_cable_assembler", "§6 Quantum Cable Assembler", "§6 量子线擎");
+                provider.add("block.gtecore.quantum_cable_assembler", "§6 Quantum Cable Assembler", "§6 量子线擎");
+                provider.add("gtecore.starblade_etching", "§3 Starblade Etching", "§3星刃蚀刻");
+                provider.add("block.gtecore.starblade_etching_machine", "§3 Starblade Etching", "§3星刃蚀刻仪");
+                provider.add("item.gtecore.yin_yang_processor.tooltip.0",
+                                "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
+                provider.add("item.gtecore.yin_yang_processor.tooltip.1", "§8UV-Level Circuits", "§8UV级电路");
+                provider.add("item.gtecore.yin_yang_processor", "Ying Yang Processor", "阴阳处理器");
+                provider.add("item.gtecore.yin_yang_processor_assembly.tooltip.0",
+                                "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
+                provider.add("item.gtecore.yin_yang_processor_assembly.tooltip.1", "§8UHV-Level Circuits", "§8UHV级电路");
+                provider.add("item.gtecore.yin_yang_processor_assembly", "Ying Yang Processor Assembly", "阴阳处理器集群");
+                provider.add("item.gtecore.yin_yang_processor_computer.tooltip.0",
+                                "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
+                provider.add("item.gtecore.yin_yang_processor_computer.tooltip.1", "§8UEV-Level Circuits", "§8UEV级电路");
+                provider.add("item.gtecore.yin_yang_processor_computer", "Ying Yang Processor Computer", "阴阳处理器超级计算机");
+                provider.add("item.gtecore.yin_yang_processor_mainframe.tooltip.0",
+                                "§7Yin gives rise to Yang, and Yang gives rise to Yin", "§7阴生阳，阳生阴");
+                provider.add("item.gtecore.yin_yang_processor_mainframe.tooltip.1", "§8UIV-Level Circuits", "§8UIV级电路");
+                provider.add("item.gtecore.yin_yang_processor_mainframe", "Ying Yang Processor Mainframe", "阴阳处理器主机");
+                provider.add("block.gtecore.antimatter_ball", "§5 Antimatter Ball", "§5暗能脉冲反物质核心");
+                provider.add("gtecore.antimatter_transformation", "§5 Antimatter Transformation", "§5反物质变换");
+                provider.add("block.gtecore.eight_trigmas_casing", "§8Eight Trigmas Casing", "§8八卦机械方块");
+                provider.add("block.gtecore.yin_yang_coil_block", "§8Yin Yang Coil Block", "§8阴阳线圈方块");
+                provider.add("material.gtecore.huo", "§4Fire Element", "§4火元素");
+                provider.add("material.gtecore.shuiyuansu", "§3Water Element", "§3水元素");
+                provider.add("material.gtecore.jinyuansu", "§eGold Element", "§e金元素");
+                provider.add("material.gtecore.muyuansu", "§2Wood Element", "§2木元素");
+                provider.add("material.gtecore.tuyuansu", "§8Earth Element", "§8土元素");
+                provider.add("item.gtecore.rune_dui", "Rune Dui", "兑象");
+                provider.add("item.gtecore.rune_gen", "Rune Gen", "艮象");
+                provider.add("item.gtecore.rune_kan", "Rune Kan", "坎象");
+                provider.add("item.gtecore.rune_kun", "Rune Kun", "坤象");
+                provider.add("item.gtecore.rune_li", "Rune Li", "离象");
+                provider.add("item.gtecore.rune_qian", "Rune Qian", "乾象");
+                provider.add("item.gtecore.rune_xun", "Rune Xun", "巽象");
+                provider.add("item.gtecore.rune_zhen", "Rune Zhen", "震象");
+                provider.add("item.gtecore.symbol_paper_earth", "§8Paper of Earth", "§8土之符篆");
+                provider.add("item.gtecore.symbol_paper_fire", "§4Symbol Paper of Fire", "§4火之符篆");
+                provider.add("item.gtecore.symbol_paper_water", "§3Symbol Paper of Water", "§3水之符篆");
+                provider.add("item.gtecore.symbol_paper_wood", "§2Symbol Paper of Wood", "§2木之符篆");
+                provider.add("item.gtecore.symbol_paper_gold", "§2Symbol Paper of Gold", "§e金之符篆");
+                provider.add("item.gtecore.yin", "§8Yin", "§8阴");
+                provider.add("item.gtecore.yang", "Yang", "阳");
+                provider.add("item.gtecore.dui_chip", "Dui Chip", "兑芯");
+                provider.add("item.gtecore.gen_chip", "Gen Chip", "艮芯");
+                provider.add("item.gtecore.god_nugget", "God Nugget", "三清之粒");
+                provider.add("item.gtecore.yin_yang_wafer", "§8Yin§rYang Wafer", "§8阴§r阳晶圆");
+                provider.add("block.gtecore.kan_shui_casing", "§3Kan Shui Casing", "§3坎水机械方块");
+                provider.add("block.gtecore.kun_gen_casing", "§8Kun Gen Casing", "§8坤艮机械方块");
+                provider.add("block.gtecore.li_huo_casing", "§4Li Huo Casing", "§4离火机械方块");
+                provider.add("item.gtecore.yinyang_glass_lens", "§8Yin §rYang Glass Lens", "§8阴§r阳透镜");
+                provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "§8阴极§r混凝土");
+                provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "阳盛混凝土");
+                provider.add("block.gtecore.base_mid_concrete", "Base Medium Concrete", "中庸混凝土");
+                provider.add("block.gtecore.yin_yang_field_restriction", "§8Yin §rYang Field Restriction",
+                                "§8阴§r阳立场约束方块");
+                provider.add("block.gtecore.baihu_module", "§fWhite Tiger Module", "§f白虎阵法方块");
+                provider.add("block.gtecore.qinglong_module", "§3Azure Dragon Module", "§3青龙阵法方块");
+                provider.add("block.gtecore.xuanwu_module", "§8Black Tortoise Module", "§8玄武阵法方块");
+                provider.add("block.gtecore.zhuque_module", "§cVermilion Bird Module", "§c朱雀阵法方块");
 
-        provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace", "§8Yin §rYang Eight Trigmas Blast Furnace", "§5紫薇§8八卦§6炼仙炉");
-        provider.add("gtecore.yin_yang_eight_trigmas_blast", "§5Crape Myrtle §0Eight Trigrams §6Immortal Forging Furnace", "§5紫薇§8八卦§6炼仙炉");
+                provider.add("block.gtecore.yin_yang_eight_trigmas_blast_furnace",
+                                "§8Yin §rYang Eight Trigmas Blast Furnace", "§5紫薇§8八卦§6炼仙炉");
+                provider.add("gtecore.yin_yang_eight_trigmas_blast",
+                                "§5Crape Myrtle §0Eight Trigrams §6Immortal Forging Furnace", "§5紫薇§8八卦§6炼仙炉");
 
-        provider.add("gtecore.xuanwu_module.enabled","§8Black Tortoise Module§2 Enabled","§8玄武阵法§2启动");
-        provider.add("gtecore.xuanwu_module.disabled","§8Black Tortoise Module§4 Disabled","§8玄武阵法§4关闭");
+                provider.add("gtecore.xuanwu_module.enabled", "§8Black Tortoise Module§2 Enabled", "§8玄武阵法§2启动");
+                provider.add("gtecore.xuanwu_module.disabled", "§8Black Tortoise Module§4 Disabled", "§8玄武阵法§4关闭");
 
-        provider.add("gtecore.qinglong_module.enabled","§3Azure Dragon Module§2 Enabled","§3青龙阵法§2启动");
-        provider.add("gtecore.qinglong_module.disabled","§3Azure Dragon Module§4 Disabled","§3青龙阵法§4关闭");
+                provider.add("gtecore.qinglong_module.enabled", "§3Azure Dragon Module§2 Enabled", "§3青龙阵法§2启动");
+                provider.add("gtecore.qinglong_module.disabled", "§3Azure Dragon Module§4 Disabled", "§3青龙阵法§4关闭");
 
-        provider.add("gtecore.zhuque_module.enabled","§cVermilion Bird Module§2 Enabled","§c朱雀阵法§2启动");
-        provider.add("gtecore.zhuque_module.disabled","§cVermilion Bird Module§4 Disabled","§c朱雀阵法§4关闭");
+                provider.add("gtecore.zhuque_module.enabled", "§cVermilion Bird Module§2 Enabled", "§c朱雀阵法§2启动");
+                provider.add("gtecore.zhuque_module.disabled", "§cVermilion Bird Module§4 Disabled", "§c朱雀阵法§4关闭");
 
-        provider.add("gtecore.baihu_module.enabled","§fWhite Tiger Module§2 Enabled","§f白虎阵法§2启动");
-        provider.add("gtecore.baihu_module.disabled","§fWhite Tiger Module§4 Disabled","§f白虎阵法§4关闭");
+                provider.add("gtecore.baihu_module.enabled", "§fWhite Tiger Module§2 Enabled", "§f白虎阵法§2启动");
+                provider.add("gtecore.baihu_module.disabled", "§fWhite Tiger Module§4 Disabled", "§f白虎阵法§4关闭");
 
-        provider.add("block.gtecore.big_bender","Large Bender","大型卷板机");
-        provider.add("block.gtecore.big_wiremill","Large WireMill","大型线缆轧机");
-        provider.add("block.gtecore.big_mixer","Large Mixer","大型搅拌机");
-        provider.add("block.gtecore.big_gas_collector","Large Gas Collector","大型集气室");
-        provider.add("block.gtecore.big_electrolyzer","Large Electrolyzer","大型电解机");
-        provider.add("block.gtecore.big_wash","Large Wash","大型复合洗矿机");
-        provider.add("block.gtecore.big_centrifuge","Large Centrifuge","大型离心机");
-        provider.add("block.gtecore.big_brewery","LargeBrewery","大型酿造厂");
-        provider.add("block.gtecore.big_extractor","Large Fluid Extraction and Solidification Machine","大型流体提取固化一体机");
-        provider.add("block.gtecore.big_extruder","Large Extruder Array","大型压模阵列");
-        provider.add("block.gtecore.big_autoclave","Large Autoclave","大型高压釜");
+                provider.add("block.gtecore.big_bender", "Large Bender", "大型卷板机");
+                provider.add("block.gtecore.big_wiremill", "Large WireMill", "大型线缆轧机");
+                provider.add("block.gtecore.big_mixer", "Large Mixer", "大型搅拌机");
+                provider.add("block.gtecore.big_gas_collector", "Large Gas Collector", "大型集气室");
+                provider.add("block.gtecore.big_electrolyzer", "Large Electrolyzer", "大型电解机");
+                provider.add("block.gtecore.big_wash", "Large Wash", "大型复合洗矿机");
+                provider.add("block.gtecore.big_centrifuge", "Large Centrifuge", "大型离心机");
+                provider.add("block.gtecore.big_brewery", "LargeBrewery", "大型酿造厂");
+                provider.add("block.gtecore.big_extractor", "Large Fluid Extraction and Solidification Machine",
+                                "大型流体提取固化一体机");
+                provider.add("block.gtecore.big_extruder", "Large Extruder Array", "大型压模阵列");
+                provider.add("block.gtecore.big_autoclave", "Large Autoclave", "大型高压釜");
 
-        provider.add("block.gtecore.taichi_five_elements_separation_array","Tai Chi Five Elements Separation Array","太极五行剥离阵列");
-        provider.add("gtecore.taichi_five_elements_separating","Tai Chi Five Elements Separating","太极五行剥离");
+                provider.add("block.gtecore.taichi_five_elements_separation_array",
+                                "Tai Chi Five Elements Separation Array", "太极五行剥离阵列");
+                provider.add("gtecore.taichi_five_elements_separating", "Tai Chi Five Elements Separating", "太极五行剥离");
 
-        provider.add("block.gtecore.kun_gen_star_hub","Kun Gen Star Hub","坤艮星枢");
-        provider.add("gtecore.kun_gen_star_hub","Kun Gen Star Hub","坤艮星枢");
+                provider.add("block.gtecore.kun_gen_star_hub", "Kun Gen Star Hub", "坤艮星枢");
+                provider.add("gtecore.kun_gen_star_hub", "Kun Gen Star Hub", "坤艮星枢");
 
-        provider.add("block.gtecore.qian_qiong_engine","Qian Qiong Engine","谦穹引擎");
-        provider.add("gtecore.qian_qiong_engine","Qian Qiong Engine","谦穹引擎");
+                provider.add("block.gtecore.qian_qiong_engine", "Qian Qiong Engine", "谦穹引擎");
+                provider.add("gtecore.qian_qiong_engine", "Qian Qiong Engine", "谦穹引擎");
 
-        provider.add("block.gtecore.red_sun_tao_core","§4Red Sun§rTao Core","§4赤阳§r道核");
-        provider.add("gtecore.red_sun_tao_core","§4Red Sun§rTao Core","§4赤阳§r道核");
+                provider.add("block.gtecore.red_sun_tao_core", "§4Red Sun§rTao Core", "§4赤阳§r道核");
+                provider.add("gtecore.red_sun_tao_core", "§4Red Sun§rTao Core", "§4赤阳§r道核");
 
-        provider.add("block.gtecore.ashing_star_fusion_array","Ashing Star Fusion Array","烬星聚变阵");
-        provider.add("gtecore.ashing_star_fusion_array","Ashing Star Fusion Array","烬星聚变阵");
+                provider.add("block.gtecore.ashing_star_fusion_array", "Ashing Star Fusion Array", "烬星聚变阵");
+                provider.add("gtecore.ashing_star_fusion_array", "Ashing Star Fusion Array", "烬星聚变阵");
 
-        provider.add("item.gtecore.yin_yang_cpu_wafer", "§8Yin§rYang CPU Wafer", "§8阴§r阳CPU晶圆");
-        provider.add("item.gtecore.yin_yang_circuit_board","§8Yin§rYang Circuit Board","§8阴§r阳电路板");
-        provider.add("item.gtecore.yin_yang_boule","§8Yin§rYang Boule","§8阴§r阳单晶硅");
-        provider.add("item.gtecore.yin_yang_circuit_chip","§8Yin§rYang Circuit Chip","§8阴§r阳电路芯片");
+                provider.add("item.gtecore.yin_yang_cpu_wafer", "§8Yin§rYang CPU Wafer", "§8阴§r阳CPU晶圆");
+                provider.add("item.gtecore.yin_yang_circuit_board", "§8Yin§rYang Circuit Board", "§8阴§r阳电路板");
+                provider.add("item.gtecore.yin_yang_boule", "§8Yin§rYang Boule", "§8阴§r阳单晶硅");
+                provider.add("item.gtecore.yin_yang_circuit_chip", "§8Yin§rYang Circuit Chip", "§8阴§r阳电路芯片");
 
-        provider.add("item.gtecore.imaginary_tree_boule","§bImaginary Tree Boule","§b虚数之树单晶硅");
-        provider.add("item.gtecore.imaginary_tree_wafer","§bImaginary Tree Wafer","§b虚数之树晶圆");
-        provider.add("item.gtecore.imaginary_tree_cpu_wafer","§bImaginary Tree CPU Wafer","§b虚数之树CPU晶圆");
-        provider.add("item.gtecore.imaginary_tree_circuit_chip","§bImaginary Tree Circuit Chip","§b虚数之树电路芯片");
-        provider.add("item.gtecore.imaginary_tree_circuit_board","§bImaginary Tree Circuit Board","§b虚数之树电路基板");
-        provider.add("item.gtecore.imaginary_tree_printed_circuit_board","§bImaginary Tree Printed Circuit Board","§b虚数之树印刷电路基板");
-        provider.add("item.gtecore.raw_imaginary_tree_chip", "§bRaw Imaginary Tree Chip", "§b粗制虚数晶片");
-        provider.add("item.gtecore.engraved_imaginary_tree_chip", "§bEngraved Imaginary Tree Chip", "§b刻模虚数芯片");
-        provider.add("item.gtecore.imaginary_tree_cpu_chip", "§bImaginary Tree CPU Chip", "§b虚数之树CPU芯片");
-        provider.add("item.gtecore.imaginary_tree_soc", "§bImaginary Tree SoC", "§b虚数之树SoC");
-        provider.add("item.gtecore.imaginary_tree_processor","§bImaginary Tree Processor","§b虚数之树处理器");
-        provider.add("item.gtecore.imaginary_tree_processor.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
-        provider.add("item.gtecore.imaginary_tree_processor.tooltip.1","§bUHV-Level Circuits","§bUHV级电路");
-        provider.add("item.gtecore.imaginary_tree_processor_assembly","§bImaginary Tree Processor Assembly","§b虚数之树处理器集群");
-        provider.add("item.gtecore.imaginary_tree_processor_assembly.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
-        provider.add("item.gtecore.imaginary_tree_processor_assembly.tooltip.1","§bUEV-Level Circuits","§bUEV级电路");
-        provider.add("item.gtecore.imaginary_tree_processor_computer","§bImaginary Tree Processor Computer","§b虚数之树处理器超级计算机");
-        provider.add("item.gtecore.imaginary_tree_processor_computer.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
-        provider.add("item.gtecore.imaginary_tree_processor_computer.tooltip.1","§bUIV-Level Circuits","§bUIV级电路");
-        provider.add("item.gtecore.imaginary_tree_processor_mainframe","§bImaginary Tree Processor Mainframe","§b虚数之树处理器主机");
-        provider.add("item.gtecore.imaginary_tree_processor_mainframe.tooltip.0","§7Circuits grown upon the branches of the Imaginary Tree","§7生长于虚数之树枝桠上的电路");
-        provider.add("item.gtecore.imaginary_tree_processor_mainframe.tooltip.1","§bUXV-Level Circuits","§bUXV级电路");
+                provider.add("item.gtecore.imaginary_tree_boule", "§bImaginary Tree Boule", "§b虚数之树单晶硅");
+                provider.add("item.gtecore.imaginary_tree_wafer", "§bImaginary Tree Wafer", "§b虚数之树晶圆");
+                provider.add("item.gtecore.imaginary_tree_cpu_wafer", "§bImaginary Tree CPU Wafer", "§b虚数之树CPU晶圆");
+                provider.add("item.gtecore.imaginary_tree_circuit_chip", "§bImaginary Tree Circuit Chip", "§b虚数之树电路芯片");
+                provider.add("item.gtecore.imaginary_tree_circuit_board", "§bImaginary Tree Circuit Board",
+                                "§b虚数之树电路基板");
+                provider.add("item.gtecore.imaginary_tree_printed_circuit_board",
+                                "§bImaginary Tree Printed Circuit Board", "§b虚数之树印刷电路基板");
+                provider.add("item.gtecore.raw_imaginary_tree_chip", "§bRaw Imaginary Tree Chip", "§b粗制虚数晶片");
+                provider.add("item.gtecore.engraved_imaginary_tree_chip", "§bEngraved Imaginary Tree Chip", "§b刻模虚数芯片");
+                provider.add("item.gtecore.imaginary_tree_cpu_chip", "§bImaginary Tree CPU Chip", "§b虚数之树CPU芯片");
+                provider.add("item.gtecore.imaginary_tree_soc", "§bImaginary Tree SoC", "§b虚数之树SoC");
+                provider.add("item.gtecore.imaginary_tree_processor", "§bImaginary Tree Processor", "§b虚数之树处理器");
+                provider.add("item.gtecore.imaginary_tree_processor.tooltip.0",
+                                "§7Circuits grown upon the branches of the Imaginary Tree", "§7生长于虚数之树枝桠上的电路");
+                provider.add("item.gtecore.imaginary_tree_processor.tooltip.1", "§bUHV-Level Circuits", "§bUHV级电路");
+                provider.add("item.gtecore.imaginary_tree_processor_assembly", "§bImaginary Tree Processor Assembly",
+                                "§b虚数之树处理器集群");
+                provider.add("item.gtecore.imaginary_tree_processor_assembly.tooltip.0",
+                                "§7Circuits grown upon the branches of the Imaginary Tree", "§7生长于虚数之树枝桠上的电路");
+                provider.add("item.gtecore.imaginary_tree_processor_assembly.tooltip.1", "§bUEV-Level Circuits",
+                                "§bUEV级电路");
+                provider.add("item.gtecore.imaginary_tree_processor_computer", "§bImaginary Tree Processor Computer",
+                                "§b虚数之树处理器超级计算机");
+                provider.add("item.gtecore.imaginary_tree_processor_computer.tooltip.0",
+                                "§7Circuits grown upon the branches of the Imaginary Tree", "§7生长于虚数之树枝桠上的电路");
+                provider.add("item.gtecore.imaginary_tree_processor_computer.tooltip.1", "§bUIV-Level Circuits",
+                                "§bUIV级电路");
+                provider.add("item.gtecore.imaginary_tree_processor_mainframe", "§bImaginary Tree Processor Mainframe",
+                                "§b虚数之树处理器主机");
+                provider.add("item.gtecore.imaginary_tree_processor_mainframe.tooltip.0",
+                                "§7Circuits grown upon the branches of the Imaginary Tree", "§7生长于虚数之树枝桠上的电路");
+                provider.add("item.gtecore.imaginary_tree_processor_mainframe.tooltip.1", "§bUXV-Level Circuits",
+                                "§bUXV级电路");
 
-        provider.add("recipe.condition.bai_hu.tooltip","Need §fWhite Tiger Module§2 Enabled","需要§f白虎阵法§2启动");
-        provider.add("recipe.condition.qing_long.tooltip","Need §3Azure Dragon Module§2 Enabled","需要§3青龙阵法§2启动");
-        provider.add("recipe.condition.xuan_wu.tooltip","Need §8Black Tortoise Module§2 Enabled","需要§8玄武阵法§2启动");
-        provider.add("recipe.condition.zhu_que.tooltip","Need §cVermilion Bird Module§2 Enabled","需要§c朱雀阵法§2启动");
+                provider.add("recipe.condition.bai_hu.tooltip", "Need §fWhite Tiger Module§2 Enabled", "需要§f白虎阵法§2启动");
+                provider.add("recipe.condition.qing_long.tooltip", "Need §3Azure Dragon Module§2 Enabled",
+                                "需要§3青龙阵法§2启动");
+                provider.add("recipe.condition.xuan_wu.tooltip", "Need §8Black Tortoise Module§2 Enabled",
+                                "需要§8玄武阵法§2启动");
+                provider.add("recipe.condition.zhu_que.tooltip", "Need §cVermilion Bird Module§2 Enabled",
+                                "需要§c朱雀阵法§2启动");
 
-        provider.add("block.gtecore.big_alloy","Large Alloy","大型蒸汽合金炉");
-        provider.add("block.gtecore.big_compressor","Large Compressor","大型蒸汽压缩机");
-        provider.add("block.gtecore.component_factory","Component Factory","零件工厂");
-        provider.add("gtecore.circuit_factory","Circuit Factory","电路工厂");
-        provider.add("gtecore.component_factory","Component Factory","零件工厂");
-        provider.add("block.gtecore.circuit_factory","Circuit Factory","电路工厂");
-        provider.add("block.gtecore.big_forge_hammer","Large Steam Forge Hammer","大型蒸汽锻造锤");
-        provider.add("block.gtecore.big_steam_extractor","Large Steam Extractor","大型蒸汽提取机");
-        provider.add("block.gtecore.miracle_ring","Miracle Ring","奇迹之环");
+                provider.add("block.gtecore.big_alloy", "Large Alloy", "大型蒸汽合金炉");
+                provider.add("block.gtecore.big_compressor", "Large Compressor", "大型蒸汽压缩机");
+                provider.add("block.gtecore.component_factory", "Component Factory", "零件工厂");
+                provider.add("gtecore.circuit_factory", "Circuit Factory", "电路工厂");
+                provider.add("gtecore.component_factory", "Component Factory", "零件工厂");
+                provider.add("block.gtecore.circuit_factory", "Circuit Factory", "电路工厂");
+                provider.add("block.gtecore.big_forge_hammer", "Large Steam Forge Hammer", "大型蒸汽锻造锤");
+                provider.add("block.gtecore.big_steam_extractor", "Large Steam Extractor", "大型蒸汽提取机");
+                provider.add("block.gtecore.miracle_ring", "Miracle Ring", "奇迹之环");
 
-        provider.add("block.gtecore.steam_oven_easy","Steam Oven Easy Version","蒸汽熔炼炉简单版");
-        provider.add("block.gtecore.steam_grinder_easy","Steam Grinder Easy Version","蒸汽碾磨机简单版");
-        provider.add("block.gtecore.desulfurization","Desulfurizating Machine","脱硫机");
-        provider.add("gtecore.desulfurization_recipe","Desulfurizing","脱硫");
+                provider.add("block.gtecore.steam_oven_easy", "Steam Oven Easy Version", "蒸汽熔炼炉简单版");
+                provider.add("block.gtecore.steam_grinder_easy", "Steam Grinder Easy Version", "蒸汽碾磨机简单版");
+                provider.add("block.gtecore.desulfurization", "Desulfurizating Machine", "脱硫机");
+                provider.add("gtecore.desulfurization_recipe", "Desulfurizing", "脱硫");
 
-        provider.add("block.gtecore.me_pattern_buffer_plus","ME Pattern Buffer Plus","ME样板总成Plus版");
-        provider.add("block.gtecore.me_pattern_buffer_proxy_plus","ME Pattern Buffer Proxy Plus","ME样板总成镜像Plus版");
+                provider.add("block.gtecore.me_pattern_buffer_plus", "ME Pattern Buffer Plus", "ME样板总成Plus版");
+                provider.add("block.gtecore.me_pattern_buffer_proxy_plus", "ME Pattern Buffer Proxy Plus",
+                                "ME样板总成镜像Plus版");
 
-        provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.0",
-                "§fAllows linking many machines to a singular §6ME Pattern Buffer Plus§f.","§f可以将单单一个§6ME样板总成Plus§f连接到众多机器。");
-        provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.1",
-                "§fAll connected proxies will share the patterns held within the §6original buffer§f.","§f所有连接的总成镜像将共享§6原始总成§f中的样板。");
-        provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.2",
-                "§fLet the factory grow!","让工厂蓬勃发展!");
-        provider.add("block.gtecore.pattern_buffer_plus.desc.0",
-                "§fAllows direct §6AE2 pattern storage §ffor GregTech Multiblocks.","§f对于GT多方块结构的集成式§6AE2样板供应器§f。");
-        provider.add("block.gtecore.pattern_buffer_plus.desc.1",
-                "§fAE2 Patterns can utilize anything stored in the §6shared inventory §fwidget.","§fAE2样板可以利用§6共享库存§f中的一切。");
-        provider.add("block.gtecore.pattern_buffer_plus.desc.2",
-                "§fLink §6Pattern Buffer Proxies §fwith a §bdatastick §fto link machines together!","§f使用§b闪存§f绑定§6ME样板总成镜像§f，以使机器相互连接！");
+                provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.0",
+                                "§fAllows linking many machines to a singular §6ME Pattern Buffer Plus§f.",
+                                "§f可以将单单一个§6ME样板总成Plus§f连接到众多机器。");
+                provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.1",
+                                "§fAll connected proxies will share the patterns held within the §6original buffer§f.",
+                                "§f所有连接的总成镜像将共享§6原始总成§f中的样板。");
+                provider.add("block.gtecore.pattern_buffer_proxy_plus.desc.2",
+                                "§fLet the factory grow!", "让工厂蓬勃发展!");
+                provider.add("block.gtecore.pattern_buffer_plus.desc.0",
+                                "§fAllows direct §6AE2 pattern storage §ffor GregTech Multiblocks.",
+                                "§f对于GT多方块结构的集成式§6AE2样板供应器§f。");
+                provider.add("block.gtecore.pattern_buffer_plus.desc.1",
+                                "§fAE2 Patterns can utilize anything stored in the §6shared inventory §fwidget.",
+                                "§fAE2样板可以利用§6共享库存§f中的一切。");
+                provider.add("block.gtecore.pattern_buffer_plus.desc.2",
+                                "§fLink §6Pattern Buffer Proxies §fwith a §bdatastick §fto link machines together!",
+                                "§f使用§b闪存§f绑定§6ME样板总成镜像§f，以使机器相互连接！");
 
-        provider.add("block.gtecore.pattern_buffer_plus.desc.3","With 81 sample slots, it supports the functionality of programmable storage, enabling the output of items and fluids","拥有81个样板槽位，支持可编程仓的功能,支持输出物品和流体");
+                provider.add("block.gtecore.pattern_buffer_plus.desc.3",
+                                "With 81 sample slots, it supports the functionality of programmable storage, enabling the output of items and fluids",
+                                "拥有81个样板槽位，支持可编程仓的功能,支持输出物品和流体");
 
-        provider.add("config.jade.plugin_gtecore.me_pattern_buffer_plus", "Pattern Buffer Plus Info", "样板总成Plus版信息");
-        provider.add("config.jade.plugin_gtecore.me_pattern_buffer_proxy_plus", "Pattern Buffer Proxy PlusInfo", "样板总成镜像Plus版信息");
-        provider.add("gtecore.top.buffer_not_bound", "Buffer Plus Not Currently Bound","尚未绑定样板总成Plus版");
-        provider.add("gtecore.top.proxies_bound", "Buffer Proxies Plus Bound: %s","样板总成镜像Plus版绑定数量：%s");
-        provider.add("gtecore.top.buffer_bound_pos", "Bound To - X: %s, Y: %s, Z: %s","已绑定至 - X：%s；Y：%s；Z：%s");
-        provider.add("com.gtecore.tooltips.yin_yang_eight_trigmas_blast_furnace.0","Due to feng shui reasons, the machine apparently needs to face south in order to function properly.","由于风水原因，机器似乎必须正面朝南才能正常的工作");
+                provider.add("config.jade.plugin_gtecore.me_pattern_buffer_plus", "Pattern Buffer Plus Info",
+                                "样板总成Plus版信息");
+                provider.add("config.jade.plugin_gtecore.me_pattern_buffer_proxy_plus", "Pattern Buffer Proxy PlusInfo",
+                                "样板总成镜像Plus版信息");
+                provider.add("gtecore.top.buffer_not_bound", "Buffer Plus Not Currently Bound", "尚未绑定样板总成Plus版");
+                provider.add("gtecore.top.proxies_bound", "Buffer Proxies Plus Bound: %s", "样板总成镜像Plus版绑定数量：%s");
+                provider.add("gtecore.top.buffer_bound_pos", "Bound To - X: %s, Y: %s, Z: %s", "已绑定至 - X：%s；Y：%s；Z：%s");
+                provider.add("com.gtecore.tooltips.yin_yang_eight_trigmas_blast_furnace.0",
+                                "Due to feng shui reasons, the machine apparently needs to face south in order to function properly.",
+                                "由于风水原因，机器似乎必须正面朝南才能正常的工作");
 
-        provider.add("com.gtecore.structure_tesing.tooltips.failure","§cStructure Testing Failure","§c结构未成型");
-        provider.add("com.gtecore.structure_tesing.tooltips.success","§2Structure Testing Success","§2结构已成型");
-        provider.add("item.gtecore.check_structure_terminal","Structure Testing Terminal","结构检测终端");
+                provider.add("com.gtecore.structure_tesing.tooltips.failure", "§cStructure Testing Failure", "§c结构未成型");
+                provider.add("com.gtecore.structure_tesing.tooltips.success", "§2Structure Testing Success", "§2结构已成型");
+                provider.add("item.gtecore.check_structure_terminal", "Structure Testing Terminal", "结构检测终端");
 
-        provider.add("com.gtecore.structure_tesing.tooltips.at","At","位于");
-        provider.add("com.gtecore.structure_tesing.tooltips.place_error","founded placement error","不应该放置在这");
+                provider.add("com.gtecore.structure_tesing.tooltips.at", "At", "位于");
+                provider.add("com.gtecore.structure_tesing.tooltips.place_error", "founded placement error", "不应该放置在这");
 
-        provider.add("block.gtecore.general_fuel_engine","General Fuel Engine","通用燃料引擎");
-        provider.add("block.gtecore.ecological_simulator","Ecological Simulator","生态圈模拟器");
+                provider.add("block.gtecore.general_fuel_engine", "General Fuel Engine", "通用燃料引擎");
+                provider.add("block.gtecore.ecological_simulator", "Ecological Simulator", "生态圈模拟器");
 
-        provider.add("block.gtecore.mega_alloy_smelter_blast","MEGA Alloy Smelter Blast Furnace","巨型合金冶炼炉");
-        provider.add("block.gtecore.mega_dehydrator","MEGA Dehydrator","巨型脱水机");
+                provider.add("block.gtecore.mega_alloy_smelter_blast", "MEGA Alloy Smelter Blast Furnace", "巨型合金冶炼炉");
+                provider.add("block.gtecore.mega_dehydrator", "MEGA Dehydrator", "巨型脱水机");
 
-        provider.add("block.gtecore.rare_earth_processing_plant","Rare Earth Processing Plant","稀土处理工厂");
-        provider.add("gtecore.rare_earth_processing","Rare Earth Processing","稀土处理");
+                provider.add("block.gtecore.rare_earth_processing_plant", "Rare Earth Processing Plant", "稀土处理工厂");
+                provider.add("gtecore.rare_earth_processing", "Rare Earth Processing", "稀土处理");
 
-        // Casings and Modules
-        provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
-        provider.add("block.gtecore.imaginary_core_casing", "§bImaginary Core Casing", "§b虚数核心外壳");
-        provider.add("block.gtecore.imaginary_branch_casing", "§bImaginary Branch Casing", "§b虚数枝桠外壳");
-        provider.add("block.gtecore.imaginary_containment_casing", "§bImaginary Containment Casing", "§b虚数约束外壳");
-        provider.add("block.gtecore.imaginary_coil_block", "§bImaginary Coil Block", "§b虚数线圈方块");
-        provider.add("block.gtecore.imaginary_energy_conduit", "§bImaginary Energy Conduit", "§b虚数能量导管");
-        provider.add("block.gtecore.imaginary_glass", "§bImaginary Glass", "§b虚数玻璃");
-        provider.add("block.gtecore.imaginary_leaf_matrix", "§bImaginary Leaf Matrix", "§b虚数叶矩阵");
-        provider.add("block.gtecore.yin_yang_coil_block", "§f§0Yin Yang Coil Block", "§f§0阴阳线圈方块");
-        provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "深色基础混凝土");
-        provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "浅色基础混凝土");
-        provider.add("block.gtecore.base_mid_concrete", "Base Mid Concrete", "中色基础混凝土");
-        provider.add("block.gtecore.yin_yang_field_restriction", "§f§0Yin Yang Field Restriction Casing", "§f§0阴阳场约束机械外壳");
-        provider.add("block.gtecore.baihu_module", "§fBaihu Module", "§f白虎模组");
-        provider.add("block.gtecore.qinglong_module", "§aQinglong Module", "§a青龙模组");
-        provider.add("block.gtecore.xuanwu_module", "§0Xuanwu Module", "§0玄武模组");
-        provider.add("block.gtecore.zhuque_module", "§cZhuque Module", "§c朱雀模组");
-    }
+                // Casings and Modules
+                provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
+                provider.add("block.gtecore.imaginary_core_casing", "§bImaginary Core Casing", "§b虚数核心外壳");
+                provider.add("block.gtecore.imaginary_branch_casing", "§bImaginary Branch Casing", "§b虚数枝桠外壳");
+                provider.add("block.gtecore.imaginary_containment_casing", "§bImaginary Containment Casing",
+                                "§b虚数约束外壳");
+                provider.add("block.gtecore.imaginary_coil_block", "§bImaginary Coil Block", "§b虚数线圈方块");
+                provider.add("block.gtecore.imaginary_energy_conduit", "§bImaginary Energy Conduit", "§b虚数能量导管");
+                provider.add("block.gtecore.imaginary_glass", "§bImaginary Glass", "§b虚数玻璃");
+                provider.add("block.gtecore.imaginary_leaf_matrix", "§bImaginary Leaf Matrix", "§b虚数叶矩阵");
+                provider.add("block.gtecore.yin_yang_coil_block", "§f§0Yin Yang Coil Block", "§f§0阴阳线圈方块");
+                provider.add("block.gtecore.base_dark_concrete", "Base Dark Concrete", "深色基础混凝土");
+                provider.add("block.gtecore.base_light_concrete", "Base Light Concrete", "浅色基础混凝土");
+                provider.add("block.gtecore.base_mid_concrete", "Base Mid Concrete", "中色基础混凝土");
+                provider.add("block.gtecore.yin_yang_field_restriction", "§f§0Yin Yang Field Restriction Casing",
+                                "§f§0阴阳场约束机械外壳");
+                provider.add("block.gtecore.baihu_module", "§fBaihu Module", "§f白虎模组");
+                provider.add("block.gtecore.qinglong_module", "§aQinglong Module", "§a青龙模组");
+                provider.add("block.gtecore.xuanwu_module", "§0Xuanwu Module", "§0玄武模组");
+                provider.add("block.gtecore.zhuque_module", "§cZhuque Module", "§c朱雀模组");
+
+                // Purified Water Fluids
+                provider.add("material.gtecore.distilled_purified_water", "§3Distilled Purified Water", "§3蒸馏净化水");
+                provider.add("material.gtecore.uv_purified_water", "§9Ultraviolet Purified Water", "§9紫外净化水");
+                provider.add("material.gtecore.ultrapure_water", "§bUltrapure Purified Water", "§b电子级净化水");
+
+        }
 }
