@@ -20,6 +20,8 @@ import org.satou.gtecore.GTECore;
 import org.satou.gtecore.api.registry.GTECoreRegistration;
 import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTERecipeTypes;
+import com.gregtechceu.gtceu.common.data.models.GTMachineModels;
+import org.satou.gtecore.client.renderer.machine.TreeOfImaginaryRender;
 import org.satou.gtecore.utils.GTERecipeModifiers;
 
 import java.util.ArrayList;
@@ -588,7 +590,9 @@ public class GTEMultiMachines2 {
                     Component.translatable("com.gtecore.tooltips.tree_of_imaginary.0"),
                     Component.translatable("com.gtecore.tooltips.tree_of_imaginary.1"),
                     Component.translatable("com.gtecore.tooltips.0"))
-            .workableCasingModel(GTECore.id("block/casings/imaginary/imaginary_casing"),
+            .hasBER(true)
+            .model(GTMachineModels.createWorkableCasingMachineModel(GTECore.id("block/casings/imaginary/imaginary_casing"),
                     GTECore.id("block/multiblock/tree_of_imaginary"))
+                    .andThen(b -> b.addDynamicRenderer(TreeOfImaginaryRender::new)))
             .register();
 }
