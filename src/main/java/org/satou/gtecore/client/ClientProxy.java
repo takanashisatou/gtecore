@@ -18,6 +18,7 @@ import com.gregtechceu.gtceu.client.renderer.item.decorator.GTTankItemFluidPrevi
 import com.gregtechceu.gtceu.client.renderer.item.decorator.GTToolBarRenderer;
 import com.gregtechceu.gtceu.client.renderer.machine.DynamicRenderManager;
 import com.gregtechceu.gtceu.client.renderer.machine.impl.FluidAreaRender;
+import org.satou.gtecore.client.renderer.machine.TreeOfImaginaryRender;
 import com.gregtechceu.gtceu.common.data.GTBlockEntities;
 import com.gregtechceu.gtceu.common.data.GTEntityTypes;
 import com.gregtechceu.gtceu.common.data.GTParticleTypes;
@@ -54,8 +55,8 @@ public class ClientProxy extends CommonProxy {
         super();
         init();
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.register(this);
         eventBus.addListener(ClientProxy::clientSetup);
-
     }
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {
@@ -135,7 +136,7 @@ public class ClientProxy extends CommonProxy {
         }
     }
     private static void initializeDynamicRendersGTE() {
-        //DynamicRenderManager.register(GTECore.id("fluid_area"), FluidAreaRender.TYPE);
+        DynamicRenderManager.register(GTECore.id("tree_of_imaginary"), TreeOfImaginaryRender.TYPE);
     }
 
     private static void clientSetup(FMLClientSetupEvent event) {}

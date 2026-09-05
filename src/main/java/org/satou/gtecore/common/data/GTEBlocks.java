@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.model.generators.ModelFile;
 import org.satou.gtecore.GTECore;
 import org.satou.gtecore.api.registry.GTECoreRegistration;
+import org.satou.gtecore.common.ActiveGlassBlock;
 import org.satou.gtecore.common.GTECoilBlock;
 
 import java.util.function.Supplier;
@@ -38,14 +39,35 @@ public class GTEBlocks {
         GTECore_REGISTRATE.creativeModeTab(()->MORE_MACHINES);
     }
     public static BlockEntry<Block> SUPER_STRING_CASING = createCasingBlock("super_string_casing",GTECore.id("block/casings/super_string_casing/super_string_casing"));
-    public static BlockEntry<Block> IMAGINARY_CASING = createCasingBlock("imaginary_casing", GTECore.id("block/casings/imaginary/imaginary_casing"));
-    public static BlockEntry<Block> IMAGINARY_CORE_CASING = createCasingBlock("imaginary_core_casing", GTECore.id("block/casings/imaginary/imaginary_core_casing"));
-    public static BlockEntry<Block> IMAGINARY_BRANCH_CASING = createCasingBlock("imaginary_branch_casing", GTECore.id("block/casings/imaginary/imaginary_branch_casing"));
-    public static BlockEntry<Block> IMAGINARY_CONTAINMENT_CASING = createCasingBlock("imaginary_containment_casing", GTECore.id("block/casings/imaginary/imaginary_containment_casing"));
+    public static BlockEntry<ActiveBlock> IMAGINARY_CASING = createActiveLightCasingBlock("imaginary_casing", GTECore.id("block/casings/imaginary/imaginary_casing"), 8, 15);
+    public static BlockEntry<ActiveBlock> IMAGINARY_CORE_CASING = createActiveLightCasingBlock("imaginary_core_casing", GTECore.id("block/casings/imaginary/imaginary_core_casing"), 12, 15);
+    public static BlockEntry<ActiveBlock> IMAGINARY_BRANCH_CASING = createActiveLightCasingBlock("imaginary_branch_casing", GTECore.id("block/casings/imaginary/imaginary_branch_casing"), 10, 15);
+    public static BlockEntry<ActiveBlock> IMAGINARY_CONTAINMENT_CASING = createActiveLightCasingBlock("imaginary_containment_casing", GTECore.id("block/casings/imaginary/imaginary_containment_casing"), 7, 15);
     public static BlockEntry<GTECoilBlock> IMAGINARY_COIL = createCoilBlock(GTECoilBlock.GTECoilType.IMAGINARY_COIL);
-    public static BlockEntry<Block> IMAGINARY_ENERGY_CONDUIT = createCasingBlock("imaginary_energy_conduit", GTECore.id("block/casings/imaginary/imaginary_energy_conduit"));
-    public static BlockEntry<GlassBlock> IMAGINARY_GLASS = createGlassCasingBlock("imaginary_glass", GTECore.id("block/casings/imaginary/imaginary_glass"), () -> RenderType::translucent);
-    public static BlockEntry<Block> IMAGINARY_LEAF_MATRIX = createCasingBlock("imaginary_leaf_matrix", GTECore.id("block/casings/imaginary/imaginary_leaf_matrix"), () -> RenderType::cutoutMipped);
+    public static BlockEntry<ActiveBlock> IMAGINARY_ENERGY_CONDUIT = createActiveLightCasingBlock("imaginary_energy_conduit", GTECore.id("block/casings/imaginary/imaginary_energy_conduit"), 12, 15);
+    public static BlockEntry<ActiveGlassBlock> IMAGINARY_GLASS = GTECore_REGISTRATE.block("imaginary_glass", ActiveGlassBlock::new)
+            .initialProperties(() -> Blocks.GLASS)
+            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false)
+                    .lightLevel(state -> state.getValue(GTBlockStateProperties.ACTIVE) ? 15 : 10))
+            .addLayer(() -> RenderType::translucent)
+            .blockstate(createActiveBloomModel(GTECore.id("block/casings/imaginary/imaginary_glass")))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
+    public static BlockEntry<ActiveBlock> IMAGINARY_LEAF_MATRIX = GTECore_REGISTRATE.block("imaginary_leaf_matrix", ActiveBlock::new)
+            .initialProperties(() -> Blocks.OAK_LEAVES)
+            .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false)
+                    .noOcclusion()
+                    .isSuffocating((state, level, pos) -> false)
+                    .isViewBlocking((state, level, pos) -> false)
+                    .lightLevel(state -> state.getValue(GTBlockStateProperties.ACTIVE) ? 15 : 8))
+            .addLayer(() -> RenderType::cutoutMipped)
+            .blockstate(createActiveBloomModel(GTECore.id("block/casings/imaginary/imaginary_leaf_matrix")))
+            .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+            .item(BlockItem::new)
+            .build()
+            .register();
 
     public static BlockEntry<Block> EIGHT_TRIGMAS_CASING = createCasingBlock("eight_trigmas_casing",GTECore.id("block/casings/eight_trigmas/eight_trigmas_casing"));
     public static BlockEntry<GTECoilBlock> YIN_YANG_COIL = createCoilBlock(GTECoilBlock.GTECoilType.YIN_YANG_COIL);
@@ -63,6 +85,18 @@ public class GTEBlocks {
     public static BlockEntry<Block> XUANWU_MODULE = createCasingBlock("xuanwu_module",GTECore.id("block/casings/uhv/xuanwu_module"));
     public static BlockEntry<Block> ZHUQUE_MODULE = createCasingBlock("zhuque_module",GTECore.id("block/casings/uhv/zhuque_module"));
 
+    public static BlockEntry<Block> createLightCasingBlock(String name, ResourceLocation texture, int lightLevel) {
+        return GTECore_REGISTRATE.block(name, Block::new)
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false).lightLevel(state -> lightLevel))
+                .addLayer(() -> RenderType::solid)
+                .exBlockstate(GTModels.cubeAllModel(texture))
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new)
+                .build()
+                .register();
+    }
+
     public static BlockEntry<Block> createCasingBlock(String name, ResourceLocation texture) {
         return createCasingBlock(name, Block::new, texture, () -> Blocks.IRON_BLOCK,
                 () -> RenderType::solid);
@@ -77,7 +111,7 @@ public class GTEBlocks {
                                                                  Supplier<Supplier<RenderType>> type) {
         return GTECore_REGISTRATE.block(name, GlassBlock::new)
                 .initialProperties(() -> Blocks.GLASS)
-                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false).lightLevel(state -> 10))
                 .addLayer(type)
                 .exBlockstate(GTModels.cubeAllModel(texture))
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
@@ -90,7 +124,8 @@ public class GTEBlocks {
         return GTECore_REGISTRATE
                 .block("%s_coil_block".formatted(coilType.getName()), p -> new GTECoilBlock(p, coilType))
                 .initialProperties(() -> Blocks.IRON_BLOCK)
-                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false))
+                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false)
+                        .lightLevel(state -> state.getValue(GTBlockStateProperties.ACTIVE) ? 15 : 0))
                 .addLayer(() -> RenderType::cutoutMipped)
                 .blockstate(GTEBlocks.createCoilModel(coilType))
                 .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
@@ -98,12 +133,42 @@ public class GTEBlocks {
                 .build()
                 .register();
     }
+
+    public static BlockEntry<ActiveBlock> createActiveLightCasingBlock(String name, ResourceLocation texture, int idleLight, int activeLight) {
+        return GTECore_REGISTRATE.block(name, ActiveBlock::new)
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(p -> p.isValidSpawn((state, level, pos, ent) -> false)
+                        .lightLevel(state -> state.getValue(GTBlockStateProperties.ACTIVE) ? activeLight : idleLight))
+                .addLayer(() -> RenderType::cutoutMipped)
+                .blockstate(createActiveBloomModel(texture))
+                .tag(CustomTags.MINEABLE_WITH_CONFIG_VALID_PICKAXE_WRENCH)
+                .item(BlockItem::new)
+                .build()
+                .register();
+    }
+
+    public static <T extends ActiveBlock> NonNullBiConsumer<DataGenContext<Block, T>, RegistrateBlockstateProvider> createActiveBloomModel(ResourceLocation texture) {
+        return (ctx, prov) -> {
+            String name = ctx.getName();
+            ActiveBlock block = ctx.getEntry();
+            ModelFile inactive = prov.models().cubeAll(name, texture);
+            ModelFile active = prov.models().withExistingParent(name + "_active", GTECore.id("block/cube_2_layer/all"))
+                    .texture("bot_all", texture)
+                    .texture("top_all", texture.withSuffix("_bloom"));
+            prov.getVariantBuilder(block)
+                    .partialState().with(GTBlockStateProperties.ACTIVE, false).modelForState().modelFile(inactive)
+                    .addModel()
+                    .partialState().with(GTBlockStateProperties.ACTIVE, true).modelForState().modelFile(active)
+                    .addModel();
+        };
+    }
+
     public static NonNullBiConsumer<DataGenContext<Block, GTECoilBlock>, RegistrateBlockstateProvider> createCoilModel(ICoilType coilType) {
         return (ctx, prov) -> {
             String name = ctx.getName();
             ActiveBlock block = ctx.getEntry();
             ModelFile inactive = prov.models().cubeAll(name, coilType.getTexture());
-            ModelFile active = prov.models().withExistingParent(name + "_active", GTCEu.id("block/cube_2_layer/all"))
+            ModelFile active = prov.models().withExistingParent(name + "_active", GTECore.id("block/cube_2_layer/all"))
                     .texture("bot_all", coilType.getTexture())
                     .texture("top_all", coilType.getTexture().withSuffix("_bloom"));
             prov.getVariantBuilder(block)

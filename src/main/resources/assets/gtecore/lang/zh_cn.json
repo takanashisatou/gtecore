@@ -227,5 +227,9 @@
   "item.gtecore.imaginary_tree_processor_computer.tooltip.1": "§bUIV级电路",
   "item.gtecore.imaginary_tree_processor_mainframe": "§b虚数之树处理器主机",
   "item.gtecore.imaginary_tree_processor_mainframe.tooltip.0": "§7生长于虚数之树枝桠上的电路",
-  "item.gtecore.imaginary_tree_processor_mainframe.tooltip.1": "§bUXV级电路"
+  "item.gtecore.imaginary_tree_processor_mainframe.tooltip.1": "§bUXV级电路",
+  "block.gtecore.tree_of_imaginary": "§b虚数之树",
+  "gtecore.tree_of_imaginary": "§b虚数之树",
+  "com.gtecore.tooltips.tree_of_imaginary.0": "§7交织于维度织理中的无尽枝桠",
+  "com.gtecore.tooltips.tree_of_imaginary.1": "§b八叉树立体分形维度引擎"
 }

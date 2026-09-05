@@ -124,6 +124,10 @@ public class GTERecipeTypes {
     public static final GTRecipeType RARE_EARTH_PROCESSING = register("rare_earth_processing",MULTIBLOCK)
             .setMaxIOSize(1,9,0,0)
             .setEUIO(IO.IN);
+    public static final GTRecipeType TREE_OF_IMAGINARY = register("tree_of_imaginary", MULTIBLOCK)
+            .setMaxIOSize(9, 9, 9, 9)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }
