@@ -15,9 +15,9 @@ public class GTERenderTypes extends RenderType {
             DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.QUADS, 256, false, false,
             RenderType.CompositeState.builder()
                     .setCullState(NO_CULL)
-                    .setShaderState(RenderStateShard.POSITION_COLOR_SHADER)
-                    .setTransparencyState(RenderStateShard.LIGHTNING_TRANSPARENCY)
-                    .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+                    .setShaderState(POSITION_COLOR_SHADER)
+                    .setTransparencyState(LIGHTNING_TRANSPARENCY)
+                    .setWriteMaskState(COLOR_WRITE)
                     .createCompositeState(false));
 
     private GTERenderTypes(String name, VertexFormat format, VertexFormat.Mode mode, int bufferSize,

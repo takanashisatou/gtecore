@@ -55,8 +55,8 @@ public class ClientProxy extends CommonProxy {
         super();
         init();
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.register(this);
         eventBus.addListener(ClientProxy::clientSetup);
-
     }
     @SubscribeEvent
     public static void onTooltipEvent(ItemTooltipEvent event) {
