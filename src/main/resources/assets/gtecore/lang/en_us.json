@@ -227,5 +227,9 @@
   "item.gtecore.imaginary_tree_processor_mainframe": "§bImaginary Tree Processor Mainframe",
   "item.gtecore.imaginary_tree_processor_mainframe.tooltip.0": "§7Circuits grown upon the branches of the Imaginary Tree",
   "item.gtecore.imaginary_tree_processor_mainframe.tooltip.1": "§bUXV-Level Circuits",
-  "block.gtecore.imaginary_casing": "§bImaginary Casing"
+  "block.gtecore.imaginary_casing": "§bImaginary Casing",
+  "block.gtecore.tree_of_imaginary": "§bTree of Imaginary",
+  "gtecore.tree_of_imaginary": "§bTree of Imaginary",
+  "com.gtecore.tooltips.tree_of_imaginary.0": "§7Infinite branches woven from the fabric of dimensions",
+  "com.gtecore.tooltips.tree_of_imaginary.1": "§bOctree 3D Fractal Dimensional Engine"
 }

@@ -335,6 +335,11 @@ public class Lang {
                 provider.add("block.gtecore.rare_earth_processing_plant", "Rare Earth Processing Plant", "稀土处理工厂");
                 provider.add("gtecore.rare_earth_processing", "Rare Earth Processing", "稀土处理");
 
+                provider.add("block.gtecore.tree_of_imaginary", "§bTree of Imaginary", "§b虚数之树");
+                provider.add("gtecore.tree_of_imaginary", "§bTree of Imaginary", "§b虚数之树");
+                provider.add("com.gtecore.tooltips.tree_of_imaginary.0", "§7Infinite branches woven from the fabric of dimensions", "§7交织于维度织理中的无尽枝桠");
+                provider.add("com.gtecore.tooltips.tree_of_imaginary.1", "§bOctree 3D Fractal Dimensional Engine", "§b八叉树立体分形维度引擎");
+
                 // Casings and Modules
                 provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
                 provider.add("block.gtecore.imaginary_core_casing", "§bImaginary Core Casing", "§b虚数核心外壳");

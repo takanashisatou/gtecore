@@ -14,8 +14,11 @@ import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.NotNull;
+import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTERecipeTypes;
+import org.satou.gtecore.common.data.items.GTEItems;
 import org.satou.gtecore.common.data.machines.GTEMultiMachines2;
 
 import java.util.function.Consumer;
@@ -63,6 +66,90 @@ public class GTERecipe {
                                                 .duration(600)
                                                 .EUt(VA[IV]))
                                 .outputItems(GTEMultiMachines2.RARE_EARTH_PROCESSING_PLANET)
+                                .save(provider);
+
+                ASSEMBLY_LINE_RECIPES.recipeBuilder("tree_of_imaginary")
+                                .inputItems(GTEBlocks.IMAGINARY_CORE_CASING, 4)
+                                .inputItems(GTEBlocks.IMAGINARY_BRANCH_CASING, 16)
+                                .inputItems(GTEBlocks.IMAGINARY_CONTAINMENT_CASING, 16)
+                                .inputItems(GTEBlocks.IMAGINARY_ENERGY_CONDUIT, 16)
+                                .inputItems(GTEBlocks.IMAGINARY_COIL, 8)
+                                .inputItems(CustomTags.UV_CIRCUITS, 8)
+                                .inputItems(plate, Neutronium, 16)
+                                .inputItems(rod, NaquadahAlloy, 16)
+                                .inputFluids(Naquadria.getFluid(4000))
+                                .inputFluids(SolderingAlloy.getFluid(5760))
+                                .duration(20 * 600)
+                                .EUt(VA[UV])
+                                .scannerResearch(b -> b.researchStack(GTEBlocks.IMAGINARY_CORE_CASING.asStack())
+                                                .duration(600)
+                                                .EUt(VA[UV]))
+                                .outputItems(GTEMultiMachines2.TREE_OF_IMAGINARY)
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("tree_of_imaginary_test_recipe")
+                                .inputItems(Items.COBBLESTONE, 1)
+                                .outputItems(Items.DIAMOND, 1)
+                                .duration(20 * 10)
+                                .EUt(30)
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("imaginary_tree_boule")
+                                .inputItems(dust, Silicon, 64)
+                                .inputItems(GTEBlocks.IMAGINARY_LEAF_MATRIX, 4)
+                                .inputFluids(Naquadria.getFluid(1000))
+                                .outputItems(GTEItems.IMAGINARY_TREE_BOULE, 4)
+                                .duration(20 * 30)
+                                .EUt(VA[UV])
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("imaginary_tree_wafer")
+                                .inputItems(GTEItems.IMAGINARY_TREE_BOULE, 1)
+                                .inputFluids(Lubricant.getFluid(1000))
+                                .outputItems(GTEItems.IMAGINARY_TREE_WAFER, 16)
+                                .duration(20 * 15)
+                                .EUt(VA[UV])
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("imaginary_tree_processor_uhv")
+                                .inputItems(GTEItems.IMAGINARY_TREE_PRINTED_CIRCUIT_BOARD, 1)
+                                .inputItems(GTEItems.IMAGINARY_TREE_CPU_CHIP, 4)
+                                .inputItems(GTEItems.IMAGINARY_TREE_CIRCUIT_CHIP, 8)
+                                .inputItems(wireFine, Neutronium, 16)
+                                .inputFluids(SolderingAlloy.getFluid(288))
+                                .outputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_UHV, 4)
+                                .duration(20 * 20)
+                                .EUt(VA[UHV])
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("imaginary_tree_processor_assembly_uev")
+                                .inputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_UHV, 4)
+                                .inputItems(GTEItems.IMAGINARY_TREE_SOC, 4)
+                                .inputItems(plate, Neutronium, 2)
+                                .inputFluids(SolderingAlloy.getFluid(576))
+                                .outputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_ASSEMBLY_UEV, 2)
+                                .duration(20 * 30)
+                                .EUt(VA[UEV])
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("imaginary_tree_processor_computer_uiv")
+                                .inputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_ASSEMBLY_UEV, 4)
+                                .inputItems(GTEBlocks.IMAGINARY_CORE_CASING, 1)
+                                .inputItems(plate, Neutronium, 4)
+                                .inputFluids(SolderingAlloy.getFluid(1152))
+                                .outputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_COMPUTER_UIV, 1)
+                                .duration(20 * 45)
+                                .EUt(VA[UIV])
+                                .save(provider);
+
+                TREE_OF_IMAGINARY.recipeBuilder("imaginary_tree_processor_mainframe_uxv")
+                                .inputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_COMPUTER_UIV, 4)
+                                .inputItems(GTEBlocks.IMAGINARY_CONTAINMENT_CASING, 2)
+                                .inputItems(plate, Neutronium, 8)
+                                .inputFluids(SolderingAlloy.getFluid(2304))
+                                .outputItems(GTEItems.IMAGINARY_TREE_PROCESSOR_MAINFRAME_UXV, 1)
+                                .duration(20 * 60)
+                                .EUt(VA[UXV])
                                 .save(provider);
                 SUPER_FUSION_REACTOR_RECIPE.recipeBuilder("easy_deuterium_and_tritium_to_helium_plasma")
                                 .inputFluids(GTMaterials.Deuterium.getFluid(125))
