@@ -366,5 +366,51 @@ public class Lang {
                 provider.add("material.gtecore.uv_purified_water", "§9Ultraviolet Purified Water", "§9紫外净化水");
                 provider.add("material.gtecore.ultrapure_water", "§bUltrapure Purified Water", "§b电子级净化水");
 
+                // Ultrapure Water Refinery
+                provider.add("block.gtecore.ultrapure_water_refinery", "§bUltrapure Water Refinery", "§b超纯水综合精炼中心");
+                provider.add("gtecore.ultrapure_water_refinery", "§bUltrapure Water Refinery", "§b超纯水综合精炼中心");
+                provider.add("gtceu.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("com.gtecore.tooltips.ultrapure_water_refinery.0", "§7High-throughput multi-stage industrial water purification matrix", "§7超大通量多级工业水质综合净化矩阵");
+                provider.add("com.gtecore.tooltips.ultrapure_water_refinery.1", "§bSupports 1-tick Subtick Overclocking and Zero Liquid Discharge recycling", "§b支持 1-tick Subtick 极速超频与零废液排放闭环回收");
+
+                // Central Water Purification Plant & Tiered Purification Units
+                provider.add("block.gtecore.central_water_purification_plant", "§bCentral Water Purification Plant", "§b中枢净化水厂");
+                provider.add("gtecore.central_water_purification_plant", "§bCentral Water Purification Plant", "§b中枢净化水厂");
+                provider.add("block.gtecore.t1_clarifier_purification_unit", "§3T1 Clarifier Purification Unit", "§3一级澄清净化装置");
+                provider.add("gtecore.t1_clarifier_purification_unit", "§3T1 Clarifier Purification Unit", "§3一级澄清净化装置");
+                provider.add("block.gtecore.t2_uv_oxidation_purification_unit", "§9T2 UV-Oxidation Purification Unit", "§9二级紫外氧化净化装置");
+                provider.add("gtecore.t2_uv_oxidation_purification_unit", "§9T2 UV-Oxidation Purification Unit", "§9二级紫外氧化净化装置");
+                provider.add("block.gtecore.t3_edi_ultrapure_purification_unit", "§dT3 EDI Ultrapure Purification Unit", "§d三级 EDI 超纯净化装置");
+                provider.add("gtecore.t3_edi_ultrapure_purification_unit", "§dT3 EDI Ultrapure Purification Unit", "§d三级 EDI 超纯净化装置");
+
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.0", "§7Control hub of the purified water line: binds every tier of purification unit with a data stick", "§7整条净水产线的控制核心：用数据棒连接各级净化单元");
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.1", "§bSupplies EU to every bound unit and broadcasts the parallel setting configured in its GUI", "§b为全部已连接单元供电，并下发 GUI 中设定的并行度");
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.2", "§cPurification units cannot start until bound to a formed plant", "§c未连接到已成型中枢的净化单元无法开机");
+
+                provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.0", "§7Multi-effect flash distillation clarifier (EV)", "§7多效闪蒸精馏澄清装置（EV 阶）");
+                provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.1", "§3Water / Distilled Water -> Distilled Purified Water; requires a bound central plant", "§3普通水/蒸馏水 → 蒸馏净化水；需连接中枢净化水厂");
+                provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.0", "§7DUV photolysis and advanced oxidation unit (LuV)", "§7深紫外光解高级氧化装置（LuV 阶）");
+                provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.1", "§9Distilled Purified Water -> UV Purified Water; requires a bound central plant", "§9蒸馏净化水 → 紫外净化水；需连接中枢净化水厂");
+                provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.0", "§7Continuous electrodeionization and sub-nanometer polishing unit (ZPM)", "§7连续电去离子与亚纳米精抛装置（ZPM 阶）");
+                provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.1", "§dUV Purified Water -> Ultrapure Water; requires a bound central plant", "§d紫外净化水 → 电子级净化水；需连接中枢净化水厂");
+
+                provider.add("com.gtecore.gui.water_plant.parallel", "Parallel", "并行度");
+                provider.add("com.gtecore.tooltips.water_plant.parallel", "§6Parallel setting: %s", "§6并行度设定：%s");
+                provider.add("com.gtecore.tooltips.water_plant.units", "§bLinked purification units: %s", "§b已连接净化单元：%s");
+                provider.add("com.gtecore.tooltips.water_plant.throughput", "§ePower transferred: %s EU/s", "§e实际输出功率：%s EU/s");
+                provider.add("com.gtecore.tooltips.water_plant.link_hint", "§7Right-click a purification unit with a data stick holding this plant's position", "§7手持存有本机坐标的数据棒右键净化单元即可连接");
+
+                provider.add("com.gtecore.tooltips.water_unit.unlinked", "§cNot linked to a central plant - cannot operate", "§c未连接中枢净化水厂，无法开机");
+                provider.add("com.gtecore.tooltips.water_unit.link_hint", "§7Right-click this unit with a data stick holding the plant's position", "§7请手持存有中枢坐标的数据棒右键本机");
+                provider.add("com.gtecore.tooltips.water_unit.linked", "§bCentral plant at %s, %s, %s", "§b中枢净化水厂坐标：%s, %s, %s");
+                provider.add("com.gtecore.tooltips.water_unit.parallel", "§6Parallel received from plant: %s", "§6中枢下发的并行度：%s");
+                provider.add("com.gtecore.tooltips.water_unit.energy", "§eInternal EU buffer: %s / %s", "§e内部电力缓冲：%s / %s");
+
+                provider.add("com.gtecore.chat.water_plant.bound", "Purification unit bound to this plant", "已连接该净化单元");
+                provider.add("com.gtecore.chat.water_plant.bind_failed", "The data stick does not hold a purification unit position", "数据棒中没有净化单元坐标");
+                provider.add("com.gtecore.chat.water_plant.copied", "Central plant position copied to the data stick", "已复制中枢净化水厂坐标");
+                provider.add("com.gtecore.chat.water_unit.linked", "Linked to the central water purification plant", "已连接中枢净化水厂");
+                provider.add("com.gtecore.chat.water_unit.link_failed", "The data stick does not hold a central plant position", "数据棒中没有中枢净化水厂坐标");
+                provider.add("com.gtecore.chat.water_unit.copied", "Purification unit position copied to the data stick", "已复制净化单元坐标");
         }
 }

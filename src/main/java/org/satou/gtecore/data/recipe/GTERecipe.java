@@ -36,6 +36,7 @@ public class GTERecipe {
                 WIREMILL_FACTORY_HANDLER.init(provider);
                 QUANTUM_CABLE_ASSEMBLER_HANDLER.init(provider);
                 ORE_RECIPE_CENTER_HANDLER.init(provider);
+                WATER_PURIFICATION_HANDLER.init(provider);
                 /*
                  * gtr.assembly_line('gtecore:rare_earth_processing_plant')
                  * .itemInputs('8x gtceu:large_sifting_funnel',

@@ -128,6 +128,10 @@ public class GTERecipeTypes {
             .setMaxIOSize(9, 9, 9, 9)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public static final GTRecipeType WATER_PURIFICATION_RECIPES = register("water_purification", MULTIBLOCK)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }

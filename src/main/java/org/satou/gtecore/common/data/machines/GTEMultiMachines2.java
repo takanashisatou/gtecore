@@ -32,6 +32,9 @@ import java.util.List;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_VIBRATION_SAFE;
+import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_WATERTIGHT;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_STEEL_PIPE;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CLEANROOM_GLASS;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.BATCH_MODE;
 import static com.gregtechceu.gtceu.common.data.GTRecipeModifiers.OC_PERFECT_SUBTICK;
@@ -7979,5 +7982,39 @@ public class GTEMultiMachines2 {
                                                         GTECore.id("block/casings/imaginary/imaginary_casing"),
                                                         GTECore.id("block/multiblock/tree_of_imaginary"))
                                         .andThen(b -> b.addDynamicRenderer(TreeOfImaginaryRender::new)))
+                        .register();
+
+        public static final MultiblockMachineDefinition ULTRA_PURE_WATER_REFINERY = GTECore_REGISTRATE
+                        .multiblock("ultrapure_water_refinery", WorkableElectricMultiblockMachine::new)
+                        .recipeTypes(GTERecipeTypes.WATER_PURIFICATION_RECIPES)
+                        .recipeModifiers(OC_PERFECT_SUBTICK, BATCH_MODE)
+                        .rotationState(RotationState.ALL)
+                        .appearanceBlock(CASING_WATERTIGHT)
+                        .pattern(definition -> FactoryBlockPattern.start()
+                                        .aisle("AAAAA", "FAAAF", "FGGGF", "FGGGF", "FGGGF", "FAAAF", "AAAAA")
+                                        .aisle("AAAAA", "AP.PA", "G...G", "G...G", "G...G", "AP.PA", "AAAAA")
+                                        .aisle("AAPAA", "A.P.A", "G.C.G", "G.C.G", "G.C.G", "A.P.A", "AAAAA")
+                                        .aisle("AAAAA", "AP.PA", "G...G", "G...G", "G...G", "AP.PA", "AAAAA")
+                                        .aisle("AAAAA", "FAAAF", "FGGGF", "FGGGF", "FGGGF", "FAAAF", "AA#AA")
+                                        .where("#", controller(blocks(definition.getBlock())))
+                                        .where("A", blocks(CASING_WATERTIGHT.get())
+                                                        .setMinGlobalLimited(20)
+                                                        .or(autoAbilities(definition.getRecipeTypes()))
+                                                        .or(autoAbilities(true, true, true))
+                                                        .or(abilities(PartAbility.INPUT_LASER))
+                                                        .or(abilities(PartAbility.MULTI_PARALLEL_HATCH))
+                                                        .or(abilities(PartAbility.MAINTENANCE)))
+                                        .where("F", easy("gtceu:stainless_steel_frame"))
+                                        .where("G", blocks(CLEANROOM_GLASS.get()))
+                                        .where("P", blocks(CASING_STEEL_PIPE.get()))
+                                        .where("C", blocks(GTEBlocks.IMAGINARY_GLASS.get()).or(blocks(CLEANROOM_GLASS.get())))
+                                        .where(".", Predicates.any())
+                                        .build())
+                        .tooltips(
+                                        Component.translatable("com.gtecore.tooltips.ultrapure_water_refinery.0"),
+                                        Component.translatable("com.gtecore.tooltips.ultrapure_water_refinery.1"),
+                                        Component.translatable("com.gtecore.tooltips.0"))
+                        .workableCasingModel(GTCEu.id("block/casings/gcym/watertight_casing"),
+                                        GTCEu.id("block/multiblock/distillation_tower"))
                         .register();
 }

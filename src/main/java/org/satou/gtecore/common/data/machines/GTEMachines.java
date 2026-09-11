@@ -69,5 +69,6 @@ public class GTEMachines {
     public static void init() {
         GTEMultiMachine.init();
         GTEMultiMachines2.init();
+        GTEWaterPurificationMachines.init();
     }
 }
