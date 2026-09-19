@@ -1,7 +1,6 @@
 package org.satou.gtecore.common.data.machines;
 
 import com.gregtechceu.gtceu.GTCEu;
-import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.data.RotationState;
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition;
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
@@ -15,8 +14,9 @@ import org.satou.gtecore.GTECore;
 import org.satou.gtecore.common.data.GTEBlocks;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 import org.satou.gtecore.common.machine.multiblock.water.CentralPurificationPlantMachine;
-import org.satou.gtecore.common.machine.multiblock.water.LinkedPurificationUnitMachine;
+import org.satou.gtecore.common.machine.multiblock.water.EdiPurificationUnitMachine;
 import org.satou.gtecore.common.machine.multiblock.water.ThermalPurificationUnitMachine;
+import org.satou.gtecore.common.machine.multiblock.water.UvPurificationUnitMachine;
 import com.gregtechceu.gtceu.common.data.GTMachines;
 
 import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
@@ -40,11 +40,11 @@ import static org.satou.gtecore.utils.GTEUtils.easy;
  * 净水产线的四台多方块设备：
  * <ol>
  *     <li>{@code central_water_purification_plant} 中枢净化水厂 —— 数据棒连接各级净化单元、统一供电并下发并行度；</li>
- *     <li>{@code t1_clarifier_purification_unit} 一级澄清净化装置（EV）；</li>
- *     <li>{@code t2_uv_oxidation_purification_unit} 二级紫外氧化净化装置（LuV）；</li>
- *     <li>{@code t3_edi_ultrapure_purification_unit} 三级 EDI 超纯净化装置（ZPM）。</li>
+ *     <li>{@code t1_clarifier_purification_unit} 一级澄清净化装置；</li>
+ *     <li>{@code t2_uv_oxidation_purification_unit} 二级紫外氧化净化装置；</li>
+ *     <li>{@code t3_edi_ultrapure_purification_unit} 三级 EDI 超纯净化装置。</li>
  * </ol>
- * 三个等级单元自身没有能源仓，必须连接中枢才能开机。
+ * 三级均服务于 UEV 虚数系列供水；单元自身没有能源仓，必须连接中枢才能开机。
  */
 public class GTEWaterPurificationMachines {
 
@@ -256,16 +256,15 @@ public class GTEWaterPurificationMachines {
     //////////////////////////////////////
 
     public static final MultiblockMachineDefinition T2_UV_OXIDATION_PURIFICATION_UNIT = GTECore_REGISTRATE
-            .multiblock("t2_uv_oxidation_purification_unit",
-                    holder -> new LinkedPurificationUnitMachine(holder, GTValues.LuV))
+            .multiblock("t2_uv_oxidation_purification_unit", UvPurificationUnitMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTERecipeTypes.WATER_PURIFICATION_RECIPES)
-            .recipeModifiers(LinkedPurificationUnitMachine::recipeModifier)
+            .recipeModifiers(UvPurificationUnitMachine::recipeModifier)
             .appearanceBlock(CASING_PTFE_INERT)
             .pattern(definition -> FactoryBlockPattern.start()
-                    // Z = 0 背面：PTFE 耐蚀倒角 + 滤光层压玻璃通道
+                    // Z = 0 背面：两处外露灯仓插槽 + 滤光层压玻璃通道
                     .aisle(".AAA.",
-                            "FALAF",
+                            "FULUF",
                             "FGLGF",
                             "FGLGF",
                             "FGLGF",
@@ -295,9 +294,9 @@ public class GTEWaterPurificationMachines {
                             "G.L.G",
                             "A...A",
                             "AAAAA")
-                    // Z = 4 正面：控制器（底层居中）+ 紫外滤光视窗
+                    // Z = 4 正面：控制器 + 两处外露灯仓插槽 + 紫外滤光视窗
                     .aisle(".AAA.",
-                            "FALAF",
+                            "FULUF",
                             "FGLGF",
                             "FGLGF",
                             "FGLGF",
@@ -310,12 +309,16 @@ public class GTEWaterPurificationMachines {
                             .or(unitAbilities()))
                     .where("G", blocks(CLEANROOM_GLASS.get()))
                     .where("L", blocks(CASING_LAMINATED_GLASS.get()))
+                    .where("U", abilities(GTEWaterPurificationParts.UV_LAMP)
+                            .setMinGlobalLimited(1).setMaxGlobalLimited(4).setPreviewCount(4)
+                            .or(blocks(CASING_PTFE_INERT.get())))
                     .where("P", blocks(CASING_POLYTETRAFLUOROETHYLENE_PIPE.get()))
                     .where(".", Predicates.any())
                     .build())
             .tooltips(
                     Component.translatable("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.0"),
                     Component.translatable("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.1"),
+                    Component.translatable("gtecore.water.uv.help"),
                     Component.translatable("com.gtecore.tooltips.0"))
             .workableCasingModel(GTCEu.id("block/casings/solid/machine_casing_inert_ptfe"),
                     GTCEu.id("block/multiblock/large_chemical_reactor"))
@@ -326,16 +329,15 @@ public class GTEWaterPurificationMachines {
     //////////////////////////////////////
 
     public static final MultiblockMachineDefinition T3_EDI_ULTRAPURE_PURIFICATION_UNIT = GTECore_REGISTRATE
-            .multiblock("t3_edi_ultrapure_purification_unit",
-                    holder -> new LinkedPurificationUnitMachine(holder, GTValues.ZPM))
+            .multiblock("t3_edi_ultrapure_purification_unit", EdiPurificationUnitMachine::new)
             .rotationState(RotationState.ALL)
             .recipeType(GTERecipeTypes.WATER_PURIFICATION_RECIPES)
-            .recipeModifiers(LinkedPurificationUnitMachine::recipeModifier)
+            .recipeModifiers(EdiPurificationUnitMachine::recipeModifier)
             .appearanceBlock(CASING_WATERTIGHT)
             .pattern(definition -> FactoryBlockPattern.start()
                     // Z = 0 背面：水密倒角 + 框架 + 电解膜板阵列视窗
                     .aisle("..AAA..",
-                            ".FAEAF.",
+                            ".FSEAF.",
                             ".FEGEF.",
                             ".FEGEF.",
                             ".FEGEF.",
@@ -383,7 +385,7 @@ public class GTEWaterPurificationMachines {
                             ".AAAAA.")
                     // Z = 6 正面：控制器（底层居中）+ 离子膜堆视窗
                     .aisle("..AAA..",
-                            ".FAEAF.",
+                            ".FAERF.",
                             ".FEGEF.",
                             ".FEGEF.",
                             ".FEGEF.",
@@ -394,6 +396,8 @@ public class GTEWaterPurificationMachines {
                     .where("A", blocks(CASING_WATERTIGHT.get())
                             .setMinGlobalLimited(24)
                             .or(unitAbilities()))
+                    .where("S", abilities(GTEWaterPurificationParts.EDI_LOAD_SIGNAL).setExactLimit(1))
+                    .where("R", abilities(GTEWaterPurificationParts.EDI_REGENERATION_CONTROL).setExactLimit(1))
                     .where("G", blocks(CLEANROOM_GLASS.get()))
                     .where("E", blocks(ELECTROLYTIC_CELL.get()))
                     .where("P", blocks(CASING_TITANIUM_PIPE.get()))
@@ -402,6 +406,8 @@ public class GTEWaterPurificationMachines {
             .tooltips(
                     Component.translatable("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.0"),
                     Component.translatable("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.1"),
+                    Component.translatable("gtecore.water.edi.rule"),
+                    Component.translatable("gtecore.water.edi.mode_next_batch"),
                     Component.translatable("com.gtecore.tooltips.0"))
             .workableCasingModel(GTCEu.id("block/casings/gcym/watertight_casing"),
                     GTCEu.id("block/multiblock/gcym/large_electrolyzer"))

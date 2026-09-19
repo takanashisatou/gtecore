@@ -17,8 +17,12 @@ final class CreativeTestInputs {
     private CreativeTestInputs() {}
 
     static void energy(CreativeEnergyHatchPartMachine hatch) {
+        energy(hatch, GTValues.EV);
+    }
+
+    static void energy(CreativeEnergyHatchPartMachine hatch, int tier) {
         try {
-            long voltage = GTValues.V[GTValues.EV];
+            long voltage = GTValues.V[tier];
             int amps = 256;
             // These are GTMThings' persisted GUI settings. Refresh its native infinite
             // container before forming the plant, without the GUI setter's queued invalidation.
@@ -30,7 +34,7 @@ final class CreativeTestInputs {
             voltageField.setLong(hatch, voltage);
             ampsField.setInt(hatch, amps);
             capacityField.setLong(hatch, voltage * amps);
-            tierField.setInt(hatch, GTValues.EV);
+            tierField.setInt(hatch, tier);
             hatch.loadCustomPersistedData(new CompoundTag());
             hatch.onChanged();
         } catch (ReflectiveOperationException exception) {

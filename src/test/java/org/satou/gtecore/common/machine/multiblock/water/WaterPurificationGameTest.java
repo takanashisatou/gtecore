@@ -165,7 +165,7 @@ public class WaterPurificationGameTest {
     @GameTest(template = "empty", batch = "waterPurification", required = true)
     public static void linkedPowerConservesEnergyAndSkipsUnaffordableUnit(GameTestHelper helper) throws Exception {
         Network network = placeNetwork(helper);
-        helper.setBlock(UNIT, GTEWaterPurificationMachines.T2_UV_OXIDATION_PURIFICATION_UNIT.getBlock());
+        helper.setBlock(UNIT, GTEWaterPurificationMachines.T1_CLARIFIER_PURIFICATION_UNIT.getBlock());
         var cheap = (LinkedPurificationUnitMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(UNIT));
         BlockPos costlyPos = new BlockPos(0, 1, 3);
         helper.setBlock(costlyPos, GTEWaterPurificationMachines.T3_EDI_ULTRAPURE_PURIFICATION_UNIT.getBlock());

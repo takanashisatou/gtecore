@@ -61,9 +61,11 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
     /** 本机内部缓冲相当于多少 tick 的满额输入。 */
     private static final long BUFFER_TICKS = 20L;
 
-    /** 本机所属科技等级（{@link GTValues} 的 EV / LuV / ZPM 索引）。 */
+    /** Legacy purification-stage discriminator (EV / LuV / ZPM), not the progression voltage. */
     @Getter
     private final int unitTier;
+
+    private final int energyTier;
 
     /** 仅用于配方消费的内部 EU 缓冲，不对外暴露任何能源能力。 */
     @Persisted
@@ -76,9 +78,15 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
     private @Nullable BlockPos plantPos = null;
 
     public LinkedPurificationUnitMachine(IMachineBlockEntity holder, int tier) {
+        this(holder, tier, tier);
+    }
+
+    /** Keep recipe-stage compatibility while allowing independent operating voltage. */
+    protected LinkedPurificationUnitMachine(IMachineBlockEntity holder, int tier, int energyTier) {
         super(holder);
         this.unitTier = tier;
-        long voltage = GTValues.V[tier];
+        this.energyTier = energyTier;
+        long voltage = GTValues.V[energyTier];
         this.internalEnergy = new NotifiableEnergyContainer(this, voltage * LINK_AMPERAGE * BUFFER_TICKS,
                 voltage, LINK_AMPERAGE, 0L, 0L);
         // 只有中枢的内部注入可以进入该缓冲，线缆/能源仓无法直接为单元供电。
@@ -96,7 +104,7 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
 
     /** 中枢注入能量时使用的电压。 */
     public long getLinkVoltage() {
-        return GTValues.V[unitTier];
+        return GTValues.V[energyTier];
     }
 
     /** 中枢注入能量时使用的最大安培。 */

@@ -127,38 +127,43 @@ public class WATER_PURIFICATION_HANDLER {
         // Stage 2a: Distilled Purified Water + Ozone -> UV Purified Water
         GTERecipeTypes.WATER_PURIFICATION_RECIPES.recipeBuilder("uv_purified_water_from_ozone")
                 .addData("waterPurificationTier", LuV)
+                .addData("uvDose", 40)
                 .inputFluids(GTEMaterials.DistilledPurifiedWater.getFluid(800), GTEMaterials.Ozone.getFluid(50))
                 .outputFluids(GTEMaterials.UvPurifiedWater.getFluid(800), Oxygen.getFluid(25))
                 .duration(40)
-                .EUt(VA[LuV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // Stage 2b: Distilled Purified Water + Hydrogen Peroxide -> UV Purified Water (High Speed AOP)
         GTERecipeTypes.WATER_PURIFICATION_RECIPES.recipeBuilder("uv_purified_water_from_peroxide")
                 .addData("waterPurificationTier", LuV)
+                .addData("uvDose", 40)
                 .inputFluids(GTEMaterials.DistilledPurifiedWater.getFluid(800), HydrogenPeroxide.getFluid(50))
                 .outputFluids(GTEMaterials.UvPurifiedWater.getFluid(800), Oxygen.getFluid(25))
                 .duration(20)
-                .EUt(VA[LuV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // Stage 3: UV Purified Water + Acid-Base Reagent + Mixed Bed Resin Beads -> Ultrapure Water
         GTERecipeTypes.WATER_PURIFICATION_RECIPES.recipeBuilder("ultrapure_water")
                 .addData("waterPurificationTier", ZPM)
+                .addData("ediLoad", 800)
+                .addData("ediRegeneration", false)
                 .inputFluids(GTEMaterials.UvPurifiedWater.getFluid(800), GTEMaterials.ElectronicAcidBaseReagent.getFluid(20))
                 .inputItems(GTEItems.MIXED_BED_RESIN_BEADS.asStack(1))
                 .outputFluids(GTEMaterials.UltrapureWater.getFluid(800))
                 .duration(30)
-                .EUt(VA[ZPM])
+                .EUt(VA[UEV])
                 .save(provider);
 
-        // ZLD (Zero Liquid Discharge) Regeneration: Recover spent UV water back to Ultrapure Water
+        // Cleaning removes stored ion load; it never produces water.
         GTERecipeTypes.WATER_PURIFICATION_RECIPES.recipeBuilder("ultrapure_water_regeneration")
                 .addData("waterPurificationTier", ZPM)
-                .inputFluids(GTEMaterials.UvPurifiedWater.getFluid(1000), GTEMaterials.ElectronicAcidBaseReagent.getFluid(10))
-                .outputFluids(GTEMaterials.UltrapureWater.getFluid(980))
-                .duration(20)
-                .EUt(VA[ZPM])
+                .addData("ediLoad", 800)
+                .addData("ediRegeneration", true)
+                .inputFluids(GTEMaterials.UvPurifiedWater.getFluid(100), GTEMaterials.ElectronicAcidBaseReagent.getFluid(1))
+                .duration(2)
+                .EUt(VA[UEV])
                 .save(provider);
 
         // ---------------------------------------------------------------
@@ -219,19 +224,57 @@ public class WATER_PURIFICATION_HANDLER {
                 .EUt(VA[EV])
                 .save(provider);
 
-        // T2 UV-Oxidation Purification Unit
+        // Modular UV lamp: shares the unit's central-plant power supply.
+        ASSEMBLER_RECIPES.recipeBuilder("uv_lamp_hatch")
+                .inputItems(GTBlocks.CASING_PTFE_INERT.asStack())
+                .inputItems(GTBlocks.CASING_LAMINATED_GLASS.asStack(2))
+                .inputItems(GTItems.EMITTER_UEV.asStack(2))
+                .inputItems(GTItems.SENSOR_UEV.asStack())
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
+                .outputItems(GTEWaterPurificationParts.UV_LAMP_HATCH)
+                .duration(200)
+                .EUt(VA[UEV])
+                .save(provider);
+
+        // T2 UV-Oxidation Purification Unit for the UEV Imaginary-series water supply.
         ASSEMBLER_RECIPES.recipeBuilder("t2_uv_oxidation_purification_unit")
                 .inputItems(GTBlocks.CASING_PTFE_INERT.asStack(4))
                 .inputItems(GTBlocks.CLEANROOM_GLASS.asStack(6))
                 .inputItems(GTBlocks.CASING_LAMINATED_GLASS.asStack(6))
-                .inputItems(GTItems.ELECTRIC_PUMP_LuV.asStack(2))
-                .inputItems(CustomTags.LuV_CIRCUITS, 6)
+                .inputItems(GTItems.ELECTRIC_PUMP_UEV.asStack(2))
+                .inputItems(CustomTags.UEV_CIRCUITS, 6)
                 .inputItems(GTEItems.SYMBOL_PAPER_WATER.asStack(2))
                 .inputFluids(HydrogenPeroxide.getFluid(4000))
                 .inputFluids(GTEMaterials.DistilledPurifiedWater.getFluid(8000))
                 .outputItems(GTEWaterPurificationMachines.T2_UV_OXIDATION_PURIFICATION_UNIT)
                 .duration(20 * 40)
-                .EUt(VA[LuV])
+                .EUt(VA[UEV])
+                .save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("edi_load_signal_hatch")
+                .circuitMeta(1)
+                .inputItems(GTItems.SENSOR_UEV.asStack())
+                .inputItems(GTItems.EMITTER_UEV.asStack())
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
+                .inputItems(GCYMBlocks.CASING_WATERTIGHT.asStack())
+                .inputItems(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COMPARATOR))
+                .inputItems(dust, Redstone, 4)
+                .outputItems(GTEWaterPurificationParts.EDI_LOAD_SIGNAL_HATCH)
+                .duration(200)
+                .EUt(VA[UEV])
+                .save(provider);
+
+        ASSEMBLER_RECIPES.recipeBuilder("edi_regeneration_control_hatch")
+                .circuitMeta(2)
+                .inputItems(GTItems.SENSOR_UEV.asStack())
+                .inputItems(GTItems.EMITTER_UEV.asStack())
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
+                .inputItems(GCYMBlocks.CASING_WATERTIGHT.asStack())
+                .inputItems(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COMPARATOR))
+                .inputItems(dust, Redstone, 4)
+                .outputItems(GTEWaterPurificationParts.EDI_REGENERATION_CONTROL_HATCH)
+                .duration(200)
+                .EUt(VA[UEV])
                 .save(provider);
 
         // T3 EDI Ultrapure Purification Unit
@@ -240,13 +283,13 @@ public class WATER_PURIFICATION_HANDLER {
                 .inputItems(GTBlocks.CLEANROOM_GLASS.asStack(6))
                 .inputItems(GCYMBlocks.ELECTROLYTIC_CELL.asStack(6))
                 .inputItems(GTBlocks.CASING_STEEL_PIPE.asStack(4))
-                .inputItems(GTItems.ELECTRIC_PUMP_ZPM.asStack(2))
-                .inputItems(CustomTags.ZPM_CIRCUITS, 6)
+                .inputItems(GTItems.ELECTRIC_PUMP_UEV.asStack(2))
+                .inputItems(CustomTags.UEV_CIRCUITS, 6)
                 .inputItems(GTEItems.SYMBOL_PAPER_WATER.asStack(4))
                 .inputFluids(GTEMaterials.UvPurifiedWater.getFluid(8000))
                 .outputItems(GTEWaterPurificationMachines.T3_EDI_ULTRAPURE_PURIFICATION_UNIT)
                 .duration(20 * 60)
-                .EUt(VA[ZPM])
+                .EUt(VA[UEV])
                 .save(provider);
     }
 }
