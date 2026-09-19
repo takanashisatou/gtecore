@@ -10,6 +10,7 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
+import org.satou.gtecore.common.data.machines.GTEWaterPurificationMachines;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
@@ -128,6 +129,11 @@ public class GTERecipeTypes {
             .setMaxIOSize(9, 9, 9, 9)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public static final GTRecipeType WATER_PURIFICATION_RECIPES = register("water_purification", MULTIBLOCK)
+            .setMaxIOSize(3, 3, 3, 3)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setIconSupplier(() -> GTEWaterPurificationMachines.CENTRAL_WATER_PURIFICATION_PLANT.asStack());
     public static void init() {//Lazy init, one class must be used so that the class static field will be init)}
     }
 }

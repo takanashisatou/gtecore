@@ -246,6 +246,12 @@ public class GTEItems {
             .properties(p -> p.stacksTo(1))
             .onRegister(attach(new StructureTestingTerminalBehavior()))
             .register();
+    public static ItemEntry<Item> MODIFIED_CARBON_MICROSPHERES = GTECore_REGISTRATE.item("modified_carbon_microspheres", Item::new)
+            .lang("Modified Carbon Microspheres")
+            .register();
+    public static ItemEntry<Item> MIXED_BED_RESIN_BEADS = GTECore_REGISTRATE.item("mixed_bed_resin_beads", Item::new)
+            .lang("Mixed Bed Resin Beads")
+            .register();
     public static void init() {
     }
 }

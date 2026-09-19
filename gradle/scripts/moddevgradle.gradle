@@ -35,6 +35,12 @@ legacyForge {
     mods {
         "${mod_id}" {
             sourceSet(sourceSets.main)
+            // Keep test classes out of datagen and ordinary development clients.
+            if (gradle.startParameter.taskNames.any {
+                it.endsWith('runGameTestServer') || it.endsWith('prepareGameTestServerRun')
+            }) {
+                sourceSet(sourceSets.test)
+            }
         }
     }
     runs {
@@ -97,6 +103,27 @@ tasks.matching { it.name == 'runData' || it.name == 'prepareDataRun' }.configure
     doFirst {
         file('src/generated/resources').mkdirs()
         file('run/data').mkdirs()
+    }
+}
+
+tasks.matching { it.name == 'runGameTestServer' }.configureEach {
+    doFirst {
+        // SophisticatedCore lazily writes enabledItems during recipe loading.
+        // Seed the pack's complete config to avoid concurrent first-run writes on Windows.
+        def packConfig = file("${rootDir}/gte/overrides/config/sophisticatedcore-common.toml")
+        if (packConfig.exists()) {
+            copy {
+                from packConfig
+                into file('run/gametest/config')
+            }
+        }
+    }
+    doLast {
+        // Forge can return exit code zero after datapack initialization fails.
+        def log = file('run/gametest/logs/latest.log')
+        if (!log.exists() || !(log.getText('UTF-8') =~ /All [1-9][0-9]* required tests passed/).find()) {
+            throw new GradleException('GameTest did not report passing required tests; inspect run/gametest/logs/latest.log')
+        }
     }
 }
 

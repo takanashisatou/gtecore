@@ -322,6 +322,19 @@ public class Lang {
                 provider.add("com.gtecore.structure_tesing.tooltips.failure", "§cStructure Testing Failure", "§c结构未成型");
                 provider.add("com.gtecore.structure_tesing.tooltips.success", "§2Structure Testing Success", "§2结构已成型");
                 provider.add("item.gtecore.check_structure_terminal", "Structure Testing Terminal", "结构检测终端");
+                provider.add("gtecore.structure_terminal.tooltip.check", "Sneak-right-click a controller to diagnose its structure", "潜行右键控制器，检测当前结构");
+                provider.add("gtecore.structure_terminal.tooltip.preview", "Right-click for an example preview; repeat to cycle layers", "右键显示示例结构预览，再次右键逐层查看");
+                provider.add("gtecore.structure_terminal.success", "Structure matches (this does not check operating requirements)", "结构检测通过（不代表已满足运行条件）");
+                provider.add("gtecore.structure_terminal.failure", "Structure does not match; fix the reported issue and check again", "结构检测未通过；修复提示的问题后再次检测");
+                provider.add("gtecore.structure_terminal.position", "Check X: %s, Y: %s, Z: %s", "检查位置 X：%s，Y：%s，Z：%s");
+                provider.add("gtecore.structure_terminal.candidates", "Candidate blocks (up to 8; count and tier constraints still apply): %s", "候选方块（最多8项，仍须满足数量与等级限制）：%s");
+                provider.add("gtecore.structure_terminal.wrong_block", "The block here does not satisfy the structure rule", "此处方块不满足结构要求");
+                provider.add("gtecore.structure_terminal.no_pattern", "This controller has no structure pattern to inspect", "此控制器没有可检测的结构图案");
+                provider.add("gtecore.structure_terminal.unloaded", "Part of the structure is in an unloaded chunk; load it and check again", "部分结构所在区块未加载，请加载后再次检测");
+                provider.add("gtecore.structure_terminal.error", "Could not inspect this structure; see the game log for details", "无法检测此结构，详细原因见游戏日志");
+                provider.add("gtecore.structure_terminal.no_preview", "No example preview is available for this controller", "此控制器没有可用的示例结构预览");
+                provider.add("gtecore.structure_terminal.preview_orientation", "Example preview is unavailable for mirrored or vertically facing controllers; structure detection still works", "镜像或垂直朝向控制器暂不支持示例预览，结构检测仍可使用");
+                provider.add("gtecore.structure_terminal.preview", "Showing the first example design; right-click again to cycle layers", "正在显示第一种示例结构；再次右键可逐层查看");
 
                 provider.add("com.gtecore.structure_tesing.tooltips.at", "At", "位于");
                 provider.add("com.gtecore.structure_tesing.tooltips.place_error", "founded placement error", "不应该放置在这");
@@ -365,6 +378,159 @@ public class Lang {
                 provider.add("material.gtecore.distilled_purified_water", "§3Distilled Purified Water", "§3蒸馏净化水");
                 provider.add("material.gtecore.uv_purified_water", "§9Ultraviolet Purified Water", "§9紫外净化水");
                 provider.add("material.gtecore.ultrapure_water", "§bUltrapure Purified Water", "§b电子级净化水");
+                provider.add("material.gtecore.composite_flocculant", "Composite Flocculant Reagent", "高纯复合絮凝液");
+                provider.add("material.gtecore.ozone", "High Purity Ozone", "高纯臭氧");
+                provider.add("material.gtecore.electronic_acid_base_reagent", "Electronic Acid-Base Reagent", "电子级酸碱脱附液");
 
+                // Purified Water Precursor Items
+                provider.add("item.gtecore.modified_carbon_microspheres", "Modified Carbon Microspheres", "改性纳米活性炭微球");
+                provider.add("item.gtecore.mixed_bed_resin_beads", "Mixed Bed Resin Beads", "电子级混床离子交换树脂微球");
+
+                // Ultrapure Water Refinery
+                provider.add("block.gtecore.ultrapure_water_refinery", "§bUltrapure Water Refinery", "§b超纯水综合精炼中心");
+                provider.add("gtecore.ultrapure_water_refinery", "§bUltrapure Water Refinery", "§b超纯水综合精炼中心");
+                // Water Purification Recipe Types & Categories
+                provider.add("gtecore.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("gtceu.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("recipe.gtecore.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("recipe.gtceu.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("recipe_type.gtecore.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("recipetype.gtecore.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("gtecore.recipe.category.water_purification", "Water Purification", "水质净化精炼");
+                provider.add("gtceu.recipe.category.water_purification", "Water Purification", "水质净化精炼");
+
+                // Individual Water Purification Recipes
+                provider.add("recipe.gtecore.distilled_purified_water_from_water", "Distilled Purified Water (Water)", "蒸馏净化水（生水澄清）");
+                provider.add("recipe.gtceu.distilled_purified_water_from_water", "Distilled Purified Water (Water)", "蒸馏净化水（生水澄清）");
+                provider.add("recipe.gtecore.distilled_purified_water_from_distilled", "Distilled Purified Water (Distilled Water)", "蒸馏净化水（蒸馏水澄清）");
+                provider.add("recipe.gtceu.distilled_purified_water_from_distilled", "Distilled Purified Water (Distilled Water)", "蒸馏净化水（蒸馏水澄清）");
+                provider.add("recipe.gtecore.uv_purified_water_from_ozone", "UV Purified Water (Ozone)", "紫外净化水（臭氧氧化）");
+                provider.add("recipe.gtceu.uv_purified_water_from_ozone", "UV Purified Water (Ozone)", "紫外净化水（臭氧氧化）");
+                provider.add("recipe.gtecore.uv_purified_water_from_peroxide", "UV Purified Water (Hydrogen Peroxide)", "紫外净化水（双氧水高级氧化）");
+                provider.add("gtceu.recipe.uv_purified_water_from_peroxide", "UV Purified Water (Hydrogen Peroxide)", "紫外净化水（双氧水高级氧化）");
+                provider.add("recipe.gtecore.ultrapure_water", "Ultrapure Water (EDI)", "电子级超纯水（电去离子）");
+                provider.add("gtceu.recipe.ultrapure_water", "Ultrapure Water (EDI)", "电子级超纯水（电去离子）");
+                provider.add("recipe.gtecore.ultrapure_water_regeneration", "EDI Resin Regeneration (Cleaning)", "EDI 树脂再生（清洗）");
+                provider.add("gtceu.recipe.ultrapure_water_regeneration", "EDI Resin Regeneration (Cleaning)", "EDI 树脂再生（清洗）");
+                provider.add("com.gtecore.tooltips.ultrapure_water_refinery.0", "§cRetired machine: retained for existing worlds; no processing recipes", "§c已停用：仅为兼容旧存档保留，不再执行配方");
+                provider.add("com.gtecore.tooltips.ultrapure_water_refinery.1", "§bMigrate to the central plant and T1 / T2 / T3 purification units", "§b请迁移至中枢净化水厂与一、二、三级净化单元");
+
+                // Central Water Purification Plant & Tiered Purification Units
+                provider.add("block.gtecore.central_water_purification_plant", "§bCentral Water Purification Plant", "§b中枢净化水厂");
+                provider.add("gtecore.central_water_purification_plant", "§bCentral Water Purification Plant", "§b中枢净化水厂");
+                provider.add("block.gtecore.t1_clarifier_purification_unit", "§3T1 Clarifier Purification Unit", "§3一级澄清净化装置");
+                provider.add("gtecore.t1_clarifier_purification_unit", "§3T1 Clarifier Purification Unit", "§3一级澄清净化装置");
+                provider.add("block.gtecore.t2_uv_oxidation_purification_unit", "§9T2 UV-Oxidation Purification Unit", "§9二级紫外氧化净化装置");
+                provider.add("gtecore.t2_uv_oxidation_purification_unit", "§9T2 UV-Oxidation Purification Unit", "§9二级紫外氧化净化装置");
+                provider.add("block.gtecore.t3_edi_ultrapure_purification_unit", "§dT3 EDI Ultrapure Purification Unit", "§d三级 EDI 超纯净化装置");
+                provider.add("gtecore.t3_edi_ultrapure_purification_unit", "§dT3 EDI Ultrapure Purification Unit", "§d三级 EDI 超纯净化装置");
+
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.0", "§7Control hub of the purified water line: binds every tier of purification unit with a data stick", "§7整条净水产线的控制核心：用数据棒连接各级净化单元");
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.1", "§bSupplies EU to every bound unit and broadcasts the parallel setting configured in its GUI", "§b为全部已连接单元供电，并下发 GUI 中设定的并行度");
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.2", "§cPurification units cannot start until bound to a formed plant", "§c未连接到已成型中枢的净化单元无法开机");
+
+                provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.0", "§7Multi-effect flash distillation for the UEV Imaginary-series water supply", "§7服务于 UEV 虚数系列供水的多效闪蒸精馏澄清装置");
+                provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.1", "§3Water / Distilled Water -> Distilled Purified Water; requires a bound central plant", "§3普通水/蒸馏水 → 蒸馏净化水；需连接中枢净化水厂");
+                provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.0", "§7DUV photolysis and advanced oxidation for the UEV Imaginary-series water supply", "§7服务于 UEV 虚数系列供水的深紫外光解高级氧化装置");
+                provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.1", "§9Distilled Purified Water -> UV Purified Water; requires a bound central plant", "§9蒸馏净化水 → 紫外净化水；需连接中枢净化水厂");
+                provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.0", "§7Electrodeionization and sub-nanometer polishing for the UEV Imaginary-series water supply", "§7服务于 UEV 虚数系列供水的连续电去离子与亚纳米精抛装置");
+                provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.1", "§dUV Purified Water -> Ultrapure Water; requires a bound central plant", "§d紫外净化水 → 电子级净化水；需连接中枢净化水厂");
+
+                provider.add("com.gtecore.gui.water_plant.parallel", "Parallel", "并行度");
+                provider.add("com.gtecore.tooltips.water_plant.parallel", "§6Parallel setting: %s", "§6并行度设定：%s");
+                provider.add("com.gtecore.tooltips.water_plant.units", "§bLinked purification units: %s", "§b已连接净化单元：%s");
+                provider.add("com.gtecore.tooltips.water_plant.throughput", "§ePower transferred: %s EU/s", "§e实际输出功率：%s EU/s");
+                provider.add("com.gtecore.tooltips.water_plant.link_hint", "§7Right-click a purification unit with a data stick holding this plant's position", "§7手持存有本机坐标的数据棒右键净化单元即可连接");
+
+                provider.add("com.gtecore.tooltips.water_unit.unlinked", "§cNot linked to a central plant - cannot operate", "§c未连接中枢净化水厂，无法开机");
+                provider.add("com.gtecore.tooltips.water_unit.link_hint", "§7Right-click this unit with a data stick holding the plant's position", "§7请手持存有中枢坐标的数据棒右键本机");
+                provider.add("com.gtecore.tooltips.water_unit.linked", "§bCentral plant at %s, %s, %s", "§b中枢净化水厂坐标：%s, %s, %s");
+                provider.add("com.gtecore.tooltips.water_unit.parallel", "§6Parallel received from plant: %s", "§6中枢下发的并行度：%s");
+                provider.add("com.gtecore.tooltips.water_unit.energy", "§eInternal EU buffer: %s / %s", "§e内部电力缓冲：%s / %s");
+
+                provider.add("com.gtecore.chat.water_plant.bound", "Purification unit bound to this plant", "已连接该净化单元");
+                provider.add("com.gtecore.chat.water_plant.bind_failed", "The data stick does not hold a purification unit position", "数据棒中没有净化单元坐标");
+                provider.add("com.gtecore.chat.water_plant.copied", "Central plant position copied to the data stick", "已复制中枢净化水厂坐标");
+                provider.add("com.gtecore.chat.water_unit.linked", "Linked to the central water purification plant", "已连接中枢净化水厂");
+                provider.add("com.gtecore.chat.water_unit.link_failed", "The data stick does not hold a central plant position", "数据棒中没有中枢净化水厂坐标");
+                provider.add("com.gtecore.chat.water_unit.copied", "Purification unit position copied to the data stick", "已复制净化单元坐标");
+                provider.add("block.gtecore.thermal_control_hatch", "Thermal Control Hatch", "温控仓");
+                provider.add("block.gtecore.uv_lamp_hatch", "UV Lamp Hatch", "紫外灯组仓");
+                provider.add("block.gtecore.edi_load_signal_hatch", "EDI Load Signal Hatch", "EDI 负载信号输出仓");
+                provider.add("block.gtecore.edi_regeneration_control_hatch", "EDI Regeneration Control Hatch", "EDI 再生控制仓");
+                provider.add("gtecore.water.edi.title", "T3 / EDI ULTRAPURE WATER", "三级净化 · EDI 超纯水");
+                provider.add("gtecore.water.edi.load", "Ion load: %s / %s mB-equivalent", "离子负载：%s / %s mB 当量");
+                provider.add("gtecore.water.edi.signal", "Load signal: %s / 15", "负载信号：%s / 15");
+                provider.add("gtecore.water.edi.requested", "Requested mode: %s", "请求模式：%s");
+                provider.add("gtecore.water.edi.active", "Active batch: %s, %s parallel", "当前批次：%s，%s 并行");
+                provider.add("gtecore.water.edi.production", "Production", "制水");
+                provider.add("gtecore.water.edi.regeneration", "Regeneration", "再生清洗");
+                provider.add("gtecore.water.edi.full", "Ion load full; regeneration required", "离子负载已满，需要再生清洗");
+                provider.add("gtecore.water.edi.clean", "Resin clean; waiting without consuming resources", "树脂已清洁，待机不消耗资源");
+                provider.add("gtecore.water.edi.unlinked", "Waiting for the central plant", "等待中枢连接及供电");
+                provider.add("gtecore.water.edi.unformed", "Structure incomplete", "结构未成型");
+                provider.add("gtecore.water.edi.waiting", "Ready; waiting for a recipe", "就绪，等待配方");
+                provider.add("gtecore.water.edi.processing", "EDI processing in progress", "正在进行 EDI 处理");
+                provider.add("gtecore.water.edi.time", "Processing: %s / %s ticks", "加工进度：%s / %s tick");
+                provider.add("gtecore.water.edi.output_blocked", "Processing complete; waiting for output space", "加工完成，等待输出空间");
+                provider.add("gtecore.water.edi.rule", "External redstone control: signal >= 12 sets regeneration; <= 3 resets; 4-11 holds the RS latch.", "外部红石控制：信号 ≥12 置位再生，≤3 复位；4～11 由 RS 锁存器保持。");
+                provider.add("gtecore.water.edi.signal_hatch.help", "Front outputs raw load signal 0-15. Use comparison-mode comparators: reference 12 to set; invert reference 4 to reset.", "正面输出原始负载信号 0～15。比较器使用比较模式：侧输入 12 置位；侧输入 4 后反相复位。");
+                provider.add("gtecore.water.edi.control_hatch.help", "Any redstone signal requests regeneration; no signal requests production. Changes apply to the next batch.", "收到任意强度红石信号请求再生，无信号请求制水；切换在下一批次生效。");
+                provider.add("gtecore.water.edi.control_hatch.signal", "Control signal: %s", "控制信号：%s");
+                provider.add("gtecore.water.edi.mode_next_batch", "Mode is locked per batch; external redstone controls the next batch.", "每批锁定运行模式，外部红石控制下一批次。");
+                provider.add("gtecore.water.uv.title", "T2 / UV OXIDATION", "二级净化 · 紫外氧化");
+                provider.add("gtecore.water.uv.lamps", "Installed lamps: %s / 4", "已安装灯组：%s / 4");
+                provider.add("gtecore.water.uv.power", "Next batch power: %s%%", "下批功率：%s%%");
+                provider.add("gtecore.water.uv.batch", "Active batch: %s parallel at %s%% power", "当前批次：%s 并行，%s%% 功率");
+                provider.add("gtecore.water.uv.dose", "UV dose: %s / %s", "紫外剂量：%s / %s");
+                provider.add("gtecore.water.uv.time", "Processing: %s / %s ticks", "加工进度：%s / %s tick");
+                provider.add("gtecore.water.uv.idle", "Ready; waiting for a recipe", "就绪，等待配方");
+                provider.add("gtecore.water.uv.unformed", "Structure incomplete", "结构未成型");
+                provider.add("gtecore.water.uv.unlinked", "Waiting for the central plant", "等待中枢连接及供电");
+                provider.add("gtecore.water.uv.processing", "UV exposure in progress", "正在紫外照射");
+                provider.add("gtecore.water.uv.output_blocked", "Dose complete; waiting for output space", "剂量达标，等待输出空间");
+                provider.add("gtecore.water.uv.no_lamps", "Install at least one UV lamp hatch", "请安装至少一个紫外灯组仓");
+                provider.add("gtecore.water.uv.invalid_batch", "Saved batch has no valid UV dose data; restart the batch", "存档批次缺少有效紫外剂量数据，请重新开始批次");
+                provider.add("gtecore.water.uv.next_batch", "Power changes apply to the next batch", "功率调整在下一批次生效");
+                provider.add("gtecore.water.uv.lamp.title", "UV LAMP HATCH", "紫外灯组仓");
+                provider.add("gtecore.water.uv.lamp.help", "Each lamp supports 64 parallel at full power and uses the central plant's shared energy; no separate energy hatch required.", "每组灯在满功率下提供 64 并行照射能力，共用中枢供电，无需独立能源仓。");
+                provider.add("gtecore.water.uv.help", "Install 1-4 lamps; select 25/50/75/100% power. Lower power or greater parallel extends exposure. Water is released only at full dose.", "安装 1～4 组灯，选择 25/50/75/100% 功率；降低功率或提高并行会延长照射，剂量达标后才产水。");
+                provider.add("block.gtecore.thermal_signal_hatch", "Thermal Signal Hatch", "温控信号输出仓");
+                provider.add("gtecore.water.thermal_signal.help", "Wire the front output to the thermal control hatch: 15 requests heating, 0 requests cooling; target center +/- 1 C hysteresis.", "将正面输出接到温控仓：15 请求升温，0 请求降温；围绕目标中心保留 ±1 ℃ 缓冲区。");
+                provider.add("gtecore.water.thermal_signal.signal", "Redstone output: %s", "红石输出：%s");
+                provider.add("gtecore.water.thermal_signal.heating", "Requesting heat", "请求升温");
+                provider.add("gtecore.water.thermal_signal.cooling", "Requesting cooling", "请求降温");
+                provider.add("gtecore.water.thermal_signal.disconnected", "No formed thermal controller connected", "未关联已成型的控温主机");
+                provider.add("gtecore.water.thermal_hatch.signal", "Redstone strength: %s", "红石强度：%s");
+                provider.add("gtecore.water.thermal_hatch.heating", "Heating (+2 C/s)", "正在升温（+2 ℃/秒）");
+                provider.add("gtecore.water.thermal_hatch.cooling", "Cooling (-2 C/s)", "正在降温（-2 ℃/秒）");
+                provider.add("gtecore.water.thermal_hatch.help", "Apply redstone to any side to heat; remove the signal to cool.", "任意一面输入红石信号即可升温；无信号时降温。");
+                provider.add("gtecore.water.thermal.manual_maintenance", "Requires an ordinary maintenance hatch; thermal faults require repairs.", "必须使用普通维护仓；温控故障需要维修。");
+                provider.add("gtecore.water.thermal.title", "T1 / THERMAL PURIFICATION", "一级净化 · 温度监控");
+                provider.add("gtecore.water.thermal.temperature", "Temperature: %s C", "当前温度：%s ℃");
+                provider.add("gtecore.water.thermal.range", "Target: %s - %s C", "目标温区：%s～%s ℃");
+                provider.add("gtecore.water.thermal.yield", "Water yield: %s%%", "净化水产出率：%s%%");
+                provider.add("gtecore.water.thermal.stable", "Stable: %s / 600 s", "稳定运行：%s / 600 秒");
+                provider.add("gtecore.water.thermal.next_target", "Next target in %s s", "下次变温：%s 秒");
+                provider.add("gtecore.water.thermal.grace", "Out of range: %s s of operating grace left", "温度越界：剩余运行缓冲 %s 秒");
+                provider.add("gtecore.water.thermal.in_range", "Temperature is within the safe band", "温度处于安全区间");
+                provider.add("gtecore.water.thermal.fault_hint", "Thermal trip: repair the maintenance hatch and return to the safe band.", "温控故障：修复维护仓并将温度调回安全区间。");
+                provider.add("gtecore.water.thermal.maintenance_disabled", "Enable GTM maintenance to operate this unit.", "需要启用 GTM 维修机制才能运行本机。");
+                provider.add("gtecore.water.thermal.maintenance_required", "Repair the maintenance hatch before starting.", "请先修好维护仓再开始运行。");
+                provider.add("gtecore.water.thermal.rule", "Target changes every 60 operating seconds; 15 seconds to recover.", "每运行 60 秒改变温区；连续越界缓冲为 15 秒。");
+                provider.add("gtecore.water.thermal.efficiency_hint", "600 stable operating seconds reach 100% water yield; thermal trips reset yield and require maintenance.", "稳定运行 600 秒达到 100% 净化水产出；温控超时将清零产出率并触发维修。");
+                provider.add("gtecore.water.thermal.idle_rule", "Idle resets yield; out-of-range grace pauses yield growth.", "停机会重置产出率；越界缓冲期间不积累稳定时间。");
+                provider.add("gtecore.water.thermal.link_status", "Plant parallel limit: %s", "中枢并行上限：%s");
+                provider.add("com.gtecore.gui.water_plant.dashboard", "WATER PURIFICATION / CONTROL", "水处理 · 中央控制");
+                provider.add("com.gtecore.gui.water_plant.incomplete", "STRUCTURE OFFLINE", "结构未成型");
+                provider.add("com.gtecore.gui.water_plant.disabled", "TRANSFER PAUSED", "供电已暂停");
+                provider.add("com.gtecore.gui.water_plant.online", "NETWORK ONLINE", "供电网络在线");
+                provider.add("com.gtecore.gui.water_plant.network", "Ready / registered units: %s / %s", "已就绪 / 已登记单元：%s / %s");
+                provider.add("com.gtecore.gui.water_plant.tiers", "T1 %s / T2 %s / T3 %s", "一级 %s / 二级 %s / 三级 %s");
+                provider.add("com.gtecore.gui.water_plant.storage", "Stored: %s / %s EU", "储能：%s / %s EU");
+                provider.add("com.gtecore.gui.water_plant.parallel_scope", "Per-unit limit: %s (next cycle)", "单元并行上限：%s（下一周期生效）");
+                provider.add("com.gtecore.gui.water_plant.link_instruction", "Data stick: sneak-use to copy; use on the other controller to link.", "数据棒：潜行右键复制地址，右键另一端控制器绑定。");
+                provider.add("com.gtecore.gui.water_plant.disconnect_all", "Disconnect all", "断开全部");
+                provider.add("com.gtecore.gui.water_unit.disconnect", "Disconnect plant", "断开中枢");
         }
 }
