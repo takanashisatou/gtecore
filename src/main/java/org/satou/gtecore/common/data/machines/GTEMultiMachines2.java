@@ -33,6 +33,7 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.*;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_HIGH_TEMPERATURE_SMELTING;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_VIBRATION_SAFE;
 import static com.gregtechceu.gtceu.common.data.GCYMBlocks.CASING_WATERTIGHT;
+import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_LAMINATED_GLASS;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CASING_STEEL_PIPE;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.CLEANROOM_GLASS;
 import static com.gregtechceu.gtceu.common.data.GTBlocks.HIGH_POWER_CASING;
@@ -7986,8 +7987,8 @@ public class GTEMultiMachines2 {
 
         public static final MultiblockMachineDefinition ULTRA_PURE_WATER_REFINERY = GTECore_REGISTRATE
                         .multiblock("ultrapure_water_refinery", WorkableElectricMultiblockMachine::new)
-                        .recipeTypes(GTERecipeTypes.WATER_PURIFICATION_RECIPES)
-                        .recipeModifiers(OC_PERFECT_SUBTICK, BATCH_MODE)
+                        // Keep the registry ID for existing worlds, but do not bypass the tiered plant.
+                        .recipeTypes(GTRecipeTypes.DUMMY_RECIPES)
                         .rotationState(RotationState.ALL)
                         .appearanceBlock(CASING_WATERTIGHT)
                         .pattern(definition -> FactoryBlockPattern.start()
@@ -8007,7 +8008,7 @@ public class GTEMultiMachines2 {
                                         .where("F", easy("gtceu:stainless_steel_frame"))
                                         .where("G", blocks(CLEANROOM_GLASS.get()))
                                         .where("P", blocks(CASING_STEEL_PIPE.get()))
-                                        .where("C", blocks(GTEBlocks.IMAGINARY_GLASS.get()).or(blocks(CLEANROOM_GLASS.get())))
+                                        .where("C", blocks(CASING_LAMINATED_GLASS.get()).or(blocks(CLEANROOM_GLASS.get())))
                                         .where(".", Predicates.any())
                                         .build())
                         .tooltips(

@@ -29,7 +29,7 @@ sourceSets {
     }
 
     test {
-        compileClasspath += main.output
+        compileClasspath += main.output + main.compileClasspath
         runtimeClasspath += main.output + main.runtimeClasspath
     }
 
@@ -86,8 +86,6 @@ apply from: "$projectDir/dependencies.gradle"
 apply from: "$projectDir/gradle/scripts/resources.gradle"
 apply from: "$projectDir/gradle/scripts/publishing.gradle"
 
-
-
 generateModMetadata.doFirst {
     file('run/server').mkdirs()
     file('run/data').mkdirs()
@@ -108,6 +106,11 @@ tasks.withType(JavaCompile).configureEach {
 
     options.compilerArgs << "-Xlint:-removal"
     options.compilerArgs << "-Aquiet=true"
+}
+
+// Test sources have no Mixin processor; keep -Werror without its unused -Aquiet flag.
+tasks.named('compileTestJava', JavaCompile).configure {
+    options.compilerArgs.removeAll { it.startsWith('-Aquiet=') }
 }
 
 lombok {

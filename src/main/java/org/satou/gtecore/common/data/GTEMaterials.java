@@ -46,4 +46,23 @@ public class GTEMaterials {
                         .flags(MaterialFlags.DISABLE_DECOMPOSITION)
                         .components(GTMaterials.Hydrogen, 2, GTMaterials.Oxygen, 1)
                         .buildAndRegister();
+
+        public static Material CompositeFlocculant = new Material.Builder(GTECore.id("composite_flocculant"))
+                        .fluid()
+                        .color(0x78909C)
+                        .flags(MaterialFlags.DISABLE_DECOMPOSITION)
+                        .buildAndRegister();
+
+        public static Material Ozone = new Material.Builder(GTECore.id("ozone"))
+                        .gas()
+                        .color(0x29B6F6)
+                        .flags(MaterialFlags.DISABLE_DECOMPOSITION)
+                        .components(GTMaterials.Oxygen, 3)
+                        .buildAndRegister();
+
+        public static Material ElectronicAcidBaseReagent = new Material.Builder(GTECore.id("electronic_acid_base_reagent"))
+                        .fluid()
+                        .color(0xB388FF)
+                        .flags(MaterialFlags.DISABLE_DECOMPOSITION)
+                        .buildAndRegister();
 }

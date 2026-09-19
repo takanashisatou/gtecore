@@ -1,6 +1,6 @@
 package org.satou.gtecore.common.machine.multiblock.water;
 
-import com.gregtechceu.gtceu.api.gui.GuiTextures;
+import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.gui.widget.IntInputWidget;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
@@ -11,7 +11,12 @@ import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 
 import com.lowdragmc.lowdraglib.gui.widget.ComponentPanelWidget;
-import com.lowdragmc.lowdraglib.gui.widget.DraggableScrollableWidgetGroup;
+import com.lowdragmc.lowdraglib.gui.texture.ColorRectTexture;
+import com.lowdragmc.lowdraglib.gui.texture.ColorBorderTexture;
+import com.lowdragmc.lowdraglib.gui.texture.GuiTextureGroup;
+import com.lowdragmc.lowdraglib.gui.texture.TextTexture;
+import com.lowdragmc.lowdraglib.gui.widget.ButtonWidget;
+import com.lowdragmc.lowdraglib.gui.widget.ProgressWidget;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.Widget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
@@ -22,7 +27,6 @@ import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
@@ -38,6 +42,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Arrays;
 
 /**
  * 中枢净化水厂：整条净水产线的控制与供电核心（GTNH / GTO 同款定位）。
@@ -80,6 +85,10 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
 
     private final LongSet unitLinks = new LongOpenHashSet();
     private long transferredThisSecond = 0;
+    private int nextUnitIndex;
+    private int tierOneUnits;
+    private int tierTwoUnits;
+    private int tierThreeUnits;
 
     @Nullable
     private TickableSubscription tickSubs;
@@ -134,37 +143,70 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
 
     public void addUnit(@NotNull BlockPos pos) {
         if (unitLinks.add(pos.asLong())) {
+            onChanged();
             refreshLinkedUnits();
         }
     }
 
     public void removeUnit(@NotNull BlockPos pos) {
         if (unitLinks.remove(pos.asLong())) {
+            onChanged();
             refreshLinkedUnits();
         }
     }
 
-    /** 清理已消失的单元并刷新连接数量。 */
+    public boolean hasUnit(BlockPos pos) {
+        return unitLinks.contains(pos.asLong());
+    }
+
+    /** Retain unloaded addresses, prune only loaded stale or one-sided connections. */
     public void refreshLinkedUnits() {
         Level level = getLevel();
-        if (level == null) return;
+        if (level == null || level.isClientSide) return;
         int count = 0;
+        tierOneUnits = tierTwoUnits = tierThreeUnits = 0;
+        boolean changed = false;
         LongIterator iterator = unitLinks.iterator();
         while (iterator.hasNext()) {
-            long packed = iterator.nextLong();
-            if (MetaMachine.getMachine(level, BlockPos.of(packed)) instanceof LinkedPurificationUnitMachine unit) {
-                if (unit.isFormed()) count++;
+            BlockPos pos = BlockPos.of(iterator.nextLong());
+            if (!level.hasChunkAt(pos)) continue;
+            if (MetaMachine.getMachine(level, pos) instanceof LinkedPurificationUnitMachine unit &&
+                    getPos().equals(unit.getPlantPos())) {
+                if (unit.isFormed()) {
+                    count++;
+                    switch (unit.getUnitTier()) {
+                        case GTValues.EV -> tierOneUnits++;
+                        case GTValues.LuV -> tierTwoUnits++;
+                        case GTValues.ZPM -> tierThreeUnits++;
+                    }
+                }
             } else {
                 iterator.remove();
+                changed = true;
             }
         }
-        this.linkedUnits = count;
+        linkedUnits = count;
+        if (changed) onChanged();
+    }
+
+    public void disconnectAll() {
+        Level level = getLevel();
+        if (level == null || level.isClientSide) return;
+        for (long packed : unitLinks.toLongArray()) {
+            BlockPos pos = BlockPos.of(packed);
+            if (level.hasChunkAt(pos) && MetaMachine.getMachine(level, pos) instanceof LinkedPurificationUnitMachine unit &&
+                    getPos().equals(unit.getPlantPos())) unit.bindToPlant(null);
+        }
+        // Unloaded units also fail the reverse-membership check when they return.
+        unitLinks.clear();
+        refreshLinkedUnits();
+        onChanged();
     }
 
     @Override
     public InteractionResult onDataStickUse(Player player, ItemStack dataStick) {
         if (isRemote()) return InteractionResult.PASS;
-        BlockPos pos = readStickPos(dataStick);
+        BlockPos pos = WaterPurificationLink.read(dataStick, getLevel(), "unit");
         if (pos == null) return InteractionResult.PASS;
 
         if (MetaMachine.getMachine(getLevel(), pos) instanceof LinkedPurificationUnitMachine unit &&
@@ -181,19 +223,11 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
 
     @Override
     public InteractionResult onDataStickShiftUse(Player player, ItemStack dataStick) {
-        dataStick.getOrCreateTag().putIntArray("pos",
-                new int[] { getPos().getX(), getPos().getY(), getPos().getZ() });
+        if (isRemote()) return InteractionResult.SUCCESS;
+        WaterPurificationLink.write(dataStick, getLevel(), getPos(), "plant");
         player.displayClientMessage(Component.translatable("com.gtecore.chat.water_plant.copied")
                 .withStyle(ChatFormatting.GREEN), true);
         return InteractionResult.SUCCESS;
-    }
-
-    @Nullable
-    private static BlockPos readStickPos(ItemStack dataStick) {
-        if (!dataStick.hasTag() || !dataStick.getOrCreateTag().contains("pos", Tag.TAG_INT_ARRAY)) return null;
-        int[] posArray = dataStick.getOrCreateTag().getIntArray("pos");
-        if (posArray.length < 3) return null;
-        return new BlockPos(posArray[0], posArray[1], posArray[2]);
     }
 
     //////////////////////////////////////
@@ -202,6 +236,7 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
 
     public void setParallel(int parallel) {
         this.parallel = Mth.clamp(parallel, MIN_PARALLEL, MAX_PARALLEL);
+        onChanged();
     }
 
     private void plantServerTick() {
@@ -209,13 +244,15 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
 
         if (getOffsetTimer() % 20 == 0) {
             refreshLinkedUnits();
-            getRecipeLogic().setStatus(
-                    transferredThisSecond > 0 ? RecipeLogic.Status.WORKING : RecipeLogic.Status.IDLE);
+            if (isWorkingEnabled()) {
+                getRecipeLogic().setStatus(isFormed() && transferredThisSecond > 0 ?
+                        RecipeLogic.Status.WORKING : RecipeLogic.Status.IDLE);
+            }
             transferredPerSecond = transferredThisSecond;
             transferredThisSecond = 0;
         }
 
-        if (!isFormed() || !isWorkingEnabled() || linkedUnits <= 0) return;
+        if (!isFormed() || !isWorkingEnabled()) return;
         transferredThisSecond += transferEnergyToUnits();
     }
 
@@ -229,26 +266,28 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
         Level level = getLevel();
         if (hatches == null || level == null) return 0L;
 
-        long available = hatches.getEnergyStored();
-        if (available <= 0) return 0L;
-
+        long[] links = unitLinks.toLongArray();
+        if (links.length == 0) return 0L;
+        Arrays.sort(links);
+        int start = Math.floorMod(nextUnitIndex, links.length);
+        nextUnitIndex = (start + 1) % links.length;
         long moved = 0L;
-        LongIterator iterator = unitLinks.iterator();
-        while (iterator.hasNext()) {
-            if (moved >= available) break;
-            long packed = iterator.nextLong();
-            if (!(MetaMachine.getMachine(level, BlockPos.of(packed)) instanceof LinkedPurificationUnitMachine unit) ||
-                    !unit.isFormed()) {
-                continue;
-            }
+        // Rotate first service each tick so a busy low-index unit cannot starve its siblings.
+        for (int offset = 0; offset < links.length; offset++) {
+            BlockPos pos = BlockPos.of(links[(start + offset) % links.length]);
+            if (!level.hasChunkAt(pos) ||
+                    !(MetaMachine.getMachine(level, pos) instanceof LinkedPurificationUnitMachine unit) ||
+                    !unit.isFormed() || !unit.isWorkingEnabled() || unit.getPlant() != this) continue;
             long voltage = unit.getLinkVoltage();
-            if (voltage <= 0) continue;
-            long amperage = Math.min(unit.getLinkAmperage(), (available - moved) / voltage);
-            if (amperage <= 0) break;
-            moved += unit.acceptLinkedEnergy(amperage) * voltage;
-        }
-        if (moved > 0) {
-            hatches.changeEnergy(-moved);
+            long amps = Math.min(unit.getLinkAmperage(), Math.min(hatches.getEnergyStored() / voltage,
+                    (unit.getLinkedEnergyCapacity() - unit.getStoredLinkedEnergy()) / voltage));
+            // Insufficient voltage for one unit must not prevent cheaper units receiving power.
+            if (amps <= 0) continue;
+            long removed = -hatches.changeEnergy(-amps * voltage);
+            long accepted = unit.acceptLinkedEnergy(this, removed / voltage) * voltage;
+            // Debit the source before crediting the destination, and refund any rejection.
+            if (removed > accepted) hatches.changeEnergy(removed - accepted);
+            moved += accepted;
         }
         return moved;
     }
@@ -260,12 +299,13 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
     @Override
     public void saveCustomPersistedData(@NotNull CompoundTag tag, boolean forDrop) {
         super.saveCustomPersistedData(tag, forDrop);
-        tag.putLongArray(NBT_LINKED_UNITS, unitLinks.toLongArray());
+        if (!forDrop) tag.putLongArray(NBT_LINKED_UNITS, unitLinks.toLongArray());
     }
 
     @Override
     public void loadCustomPersistedData(@NotNull CompoundTag tag) {
         super.loadCustomPersistedData(tag);
+        parallel = Mth.clamp(parallel, MIN_PARALLEL, MAX_PARALLEL);
         unitLinks.clear();
         for (long packed : tag.getLongArray(NBT_LINKED_UNITS)) {
             unitLinks.add(packed);
@@ -278,35 +318,50 @@ public class CentralPurificationPlantMachine extends WorkableElectricMultiblockM
 
     @Override
     public Widget createUIWidget() {
-        var group = new WidgetGroup(0, 0, 182 + 8, 117 + 26);
-        var scroll = new DraggableScrollableWidgetGroup(4, 4, 182, 117).setBackground(getScreenTexture());
-        scroll.addWidget(new LabelWidget(4, 5, self().getBlockState().getBlock().getDescriptionId()));
-        scroll.addWidget(new ComponentPanelWidget(4, 17, this::addDisplayText)
-                .textSupplier(this.getLevel().isClientSide ? null : this::addDisplayText)
-                .setMaxWidthLimit(200)
-                .clickHandler(this::handleDisplayClick));
-        group.addWidget(scroll);
-        group.addWidget(new LabelWidget(8, 125, "com.gtecore.gui.water_plant.parallel"));
-        group.addWidget(new IntInputWidget(118, 122, 64, 20, this::getParallel, this::setParallel)
-                .setMin(MIN_PARALLEL)
-                .setMax(MAX_PARALLEL));
-        group.setBackground(GuiTextures.BACKGROUND_INVERSE);
+        var group = new WidgetGroup(0, 0, 300, 234);
+        group.setBackground(new GuiTextureGroup(new ColorRectTexture(0xFF091724),
+                new ColorBorderTexture(1, 0xFF267A93)));
+        group.addWidget(new WidgetGroup(6, 6, 288, 23).setBackground(new ColorRectTexture(0xFF123C50)));
+        group.addWidget(new LabelWidget(12, 13, "com.gtecore.gui.water_plant.dashboard").setTextColor(0xFF8CEBF2));
+        group.addWidget(new ComponentPanelWidget(12, 37, this::addDisplayText)
+                .textSupplier(isRemote() ? null : this::addDisplayText).setMaxWidthLimit(274));
+        group.addWidget(new ProgressWidget(this::energyFill, 12, 129, 276, 5)
+                .setProgressTexture(new ColorRectTexture(0xFF173449), new ColorRectTexture(0xFF35CFDD)));
+        group.addWidget(new WidgetGroup(8, 145, 284, 31).setBackground(new ColorRectTexture(0xFF102C3D)));
+        group.addWidget(new LabelWidget(14, 157, "com.gtecore.gui.water_plant.parallel").setTextColor(0xFFB7DCE8));
+        group.addWidget(new IntInputWidget(190, 151, 94, 20, this::getParallel, this::setParallel)
+                .setMin(MIN_PARALLEL).setMax(MAX_PARALLEL));
+        group.addWidget(new ComponentPanelWidget(12, 184, List.of(
+                Component.translatable("com.gtecore.gui.water_plant.link_instruction").withStyle(ChatFormatting.GRAY)))
+                .setMaxWidthLimit(272));
+        group.addWidget(new ButtonWidget(188, 210, 100, 18,
+                new GuiTextureGroup(new ColorRectTexture(0xFF163E50), new ColorBorderTexture(1, 0xFF42869B),
+                        new TextTexture("com.gtecore.gui.water_plant.disconnect_all")),
+                click -> { if (!click.isRemote) disconnectAll(); }));
         return group;
+    }
+
+    private double energyFill() {
+        return energyContainer == null || energyContainer.getEnergyCapacity() == 0 ? 0 :
+                (double) energyContainer.getEnergyStored() / energyContainer.getEnergyCapacity();
     }
 
     @Override
     public void addDisplayText(List<Component> textList) {
-        super.addDisplayText(textList);
-
-        textList.add(Component.translatable("com.gtecore.tooltips.water_plant.parallel", parallel)
-                .withStyle(ChatFormatting.GOLD));
-        textList.add(Component.translatable("com.gtecore.tooltips.water_plant.units", linkedUnits)
-                .withStyle(linkedUnits > 0 ? ChatFormatting.AQUA : ChatFormatting.RED));
+        textList.add(Component.translatable(!isFormed() ? "com.gtecore.gui.water_plant.incomplete" :
+                !isWorkingEnabled() ? "com.gtecore.gui.water_plant.disabled" :
+                        "com.gtecore.gui.water_plant.online").withStyle(isFormed() && isWorkingEnabled() ?
+                                ChatFormatting.AQUA : ChatFormatting.RED));
+        textList.add(Component.translatable("com.gtecore.gui.water_plant.network", linkedUnits, unitLinks.size())
+                .withStyle(ChatFormatting.WHITE));
+        textList.add(Component.translatable("com.gtecore.gui.water_plant.tiers", tierOneUnits, tierTwoUnits, tierThreeUnits)
+                .withStyle(ChatFormatting.AQUA));
         textList.add(Component.translatable("com.gtecore.tooltips.water_plant.throughput", transferredPerSecond)
                 .withStyle(ChatFormatting.YELLOW));
-        if (linkedUnits <= 0) {
-            textList.add(Component.translatable("com.gtecore.tooltips.water_plant.link_hint")
-                    .withStyle(ChatFormatting.GRAY));
-        }
+        textList.add(Component.translatable("com.gtecore.gui.water_plant.storage",
+                energyContainer == null ? 0 : energyContainer.getEnergyStored(),
+                energyContainer == null ? 0 : energyContainer.getEnergyCapacity()).withStyle(ChatFormatting.GRAY));
+        textList.add(Component.translatable("com.gtecore.gui.water_plant.parallel_scope", parallel)
+                .withStyle(ChatFormatting.GOLD));
     }
 }

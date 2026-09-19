@@ -8,6 +8,7 @@ import com.gregtechceu.gtceu.api.machine.feature.IDataStickInteractable;
 import com.gregtechceu.gtceu.api.machine.feature.IMachineLife;
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine;
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableEnergyContainer;
+import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
@@ -17,10 +18,15 @@ import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
+import com.lowdragmc.lowdraglib.gui.texture.ColorRectTexture;
+import com.lowdragmc.lowdraglib.gui.texture.GuiTextureGroup;
+import com.lowdragmc.lowdraglib.gui.texture.TextTexture;
+import com.lowdragmc.lowdraglib.gui.widget.ButtonWidget;
+import com.lowdragmc.lowdraglib.gui.widget.Widget;
+import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +38,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 水净化线的分阶净化单元（一级澄清 / 二级紫外氧化 / 三级 EDI 超纯）。
@@ -61,7 +66,9 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
     private final int unitTier;
 
     /** 仅用于配方消费的内部 EU 缓冲，不对外暴露任何能源能力。 */
-    private final NotifiableEnergyContainer internalEnergy;
+    @Persisted
+    @DescSynced
+    protected final NotifiableEnergyContainer internalEnergy;
 
     @Persisted
     @DescSynced
@@ -75,7 +82,7 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
         this.internalEnergy = new NotifiableEnergyContainer(this, voltage * LINK_AMPERAGE * BUFFER_TICKS,
                 voltage, LINK_AMPERAGE, 0L, 0L);
         // 只有中枢的内部注入可以进入该缓冲，线缆/能源仓无法直接为单元供电。
-        this.internalEnergy.setCapabilityValidator(Objects::isNull);
+        this.internalEnergy.setCapabilityValidator(side -> false);
     }
 
     @Override
@@ -102,26 +109,30 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
         return getLinkVoltage() * LINK_AMPERAGE;
     }
 
-    /**
-     * 由中枢调用，向本机内部缓冲注入能量。
-     *
-     * @param amperage 中枢希望注入的安培数
-     * @return 实际接受的安培数
-     */
-    public long acceptLinkedEnergy(long amperage) {
-        if (amperage <= 0) return 0L;
+    /** Only the currently registered, operational plant can charge this private buffer. */
+    long acceptLinkedEnergy(CentralPurificationPlantMachine source, long amperage) {
+        if (amperage <= 0 || !isFormed() || !isWorkingEnabled() || getPlant() != source) return 0L;
         return internalEnergy.acceptEnergyFromNetwork(null, getLinkVoltage(), amperage);
     }
 
-    /** 解析当前绑定的中枢，未绑定、方块消失或未成型时返回 {@code null}。 */
-    public @Nullable CentralPurificationPlantMachine getPlant() {
+    public long getStoredLinkedEnergy() {
+        return internalEnergy.getEnergyStored();
+    }
+
+    public long getLinkedEnergyCapacity() {
+        return internalEnergy.getEnergyCapacity();
+    }
+
+    private @Nullable CentralPurificationPlantMachine findPlant() {
         Level level = getLevel();
-        if (level == null || plantPos == null) return null;
-        if (MetaMachine.getMachine(level, plantPos) instanceof CentralPurificationPlantMachine plant &&
-                plant.isFormed()) {
-            return plant;
-        }
-        return null;
+        if (level == null || plantPos == null || !level.hasChunkAt(plantPos)) return null;
+        return MetaMachine.getMachine(level, plantPos) instanceof CentralPurificationPlantMachine plant ? plant : null;
+    }
+
+    /** Resolve both ends without loading chunks. Disabled or incomplete plants cannot run units. */
+    public @Nullable CentralPurificationPlantMachine getPlant() {
+        CentralPurificationPlantMachine plant = findPlant();
+        return plant != null && plant.isFormed() && plant.isWorkingEnabled() && plant.hasUnit(getPos()) ? plant : null;
     }
 
     /** 中枢下发的并行度；未连接时为 0（表示禁止开机）。 */
@@ -137,23 +148,25 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
      */
     public boolean bindToPlant(@Nullable BlockPos pos) {
         Level level = getLevel();
-        if (level == null) return false;
+        if (level == null || level.isClientSide) return false;
 
-        CentralPurificationPlantMachine oldPlant = getPlant();
+        CentralPurificationPlantMachine oldPlant = findPlant();
         if (pos == null) {
             if (oldPlant != null) oldPlant.removeUnit(getPos());
             this.plantPos = null;
+            getRecipeLogic().markLastRecipeDirty();
             onChanged();
             return true;
         }
-        if (!(MetaMachine.getMachine(level, pos) instanceof CentralPurificationPlantMachine newPlant)) {
+        if (!level.hasChunkAt(pos) || !(MetaMachine.getMachine(level, pos) instanceof CentralPurificationPlantMachine newPlant)) {
             return false;
         }
         if (oldPlant != null && oldPlant != newPlant) {
             oldPlant.removeUnit(getPos());
         }
-        this.plantPos = pos;
+        this.plantPos = pos.immutable();
         newPlant.addUnit(getPos());
+        getRecipeLogic().markLastRecipeDirty();
         onChanged();
         return true;
     }
@@ -161,7 +174,7 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
     @Override
     public InteractionResult onDataStickUse(Player player, ItemStack dataStick) {
         if (isRemote()) return InteractionResult.PASS;
-        BlockPos pos = readStickPos(dataStick);
+        BlockPos pos = WaterPurificationLink.read(dataStick, getLevel(), "plant");
         if (pos == null) return InteractionResult.PASS;
         if (bindToPlant(pos)) {
             player.displayClientMessage(Component.translatable("com.gtecore.chat.water_unit.linked")
@@ -175,8 +188,8 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
 
     @Override
     public InteractionResult onDataStickShiftUse(Player player, ItemStack dataStick) {
-        dataStick.getOrCreateTag().putIntArray("pos",
-                new int[] { getPos().getX(), getPos().getY(), getPos().getZ() });
+        if (isRemote()) return InteractionResult.SUCCESS;
+        WaterPurificationLink.write(dataStick, getLevel(), getPos(), "unit");
         player.displayClientMessage(Component.translatable("com.gtecore.chat.water_unit.copied")
                 .withStyle(ChatFormatting.GREEN), true);
         return InteractionResult.SUCCESS;
@@ -184,16 +197,54 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
 
     @Override
     public void onMachineRemoved() {
-        CentralPurificationPlantMachine plant = getPlant();
-        if (plant != null) plant.removeUnit(getPos());
+        bindToPlant(null);
     }
 
-    @Nullable
-    private static BlockPos readStickPos(ItemStack dataStick) {
-        if (!dataStick.hasTag() || !dataStick.getOrCreateTag().contains("pos", Tag.TAG_INT_ARRAY)) return null;
-        int[] posArray = dataStick.getOrCreateTag().getIntArray("pos");
-        if (posArray.length < 3) return null;
-        return new BlockPos(posArray[0], posArray[1], posArray[2]);
+    @Override
+    public boolean keepSubscribing() {
+        return true;
+    }
+
+    @Override
+    public boolean alwaysTryModifyRecipe() {
+        // Recalculate the plant's per-unit parallel ceiling at each cycle boundary.
+        return true;
+    }
+
+    @Override
+    public boolean beforeWorking(@Nullable GTRecipe recipe) {
+        return getPlant() != null && recipe != null && acceptsPurificationRecipe(recipe) && super.beforeWorking(recipe);
+    }
+
+    protected boolean acceptsPurificationRecipe(GTRecipe recipe) {
+        return recipe.data.getInt("waterPurificationTier") == unitTier;
+    }
+
+    @Override
+    protected RecipeLogic createRecipeLogic(Object... args) {
+        return new LinkedRecipeLogic(this);
+    }
+
+    /** Subclasses may specialize output IO while retaining link validation before any tick IO. */
+    protected static class LinkedRecipeLogic extends RecipeLogic {
+
+        protected final LinkedPurificationUnitMachine unit;
+
+        protected LinkedRecipeLogic(LinkedPurificationUnitMachine unit) {
+            super(unit);
+            this.unit = unit;
+        }
+
+        @Override
+        public void serverTick() {
+            if (!isSuspend() && (!unit.isWorkingEnabled() || unit.getPlant() == null)) {
+                if (getLastRecipe() != null && !isIdle()) {
+                    setWaiting(Component.translatable("com.gtecore.tooltips.water_unit.unlinked"));
+                }
+                return;
+            }
+            super.serverTick();
+        }
     }
 
     //////////////////////////////////////
@@ -206,6 +257,7 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
      * @return 0 表示无法运行（未连接中枢、电力不足或原料不足）
      */
     public int computeParallel(@NotNull GTRecipe recipe) {
+        if (!acceptsPurificationRecipe(recipe)) return 0;
         int limit = getRequestedParallel();
         if (limit <= 0) return 0;
 
@@ -243,6 +295,21 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
     //////////////////////////////////////
     // ********** GUI ***********//
     //////////////////////////////////////
+
+    protected ButtonWidget createDisconnectButton(int x, int y, int width) {
+        return new ButtonWidget(x, y, width, 18,
+                new GuiTextureGroup(new ColorRectTexture(0xFF163E50),
+                        new TextTexture("com.gtecore.gui.water_unit.disconnect")),
+                click -> { if (!click.isRemote) bindToPlant(null); });
+    }
+
+    @Override
+    public Widget createUIWidget() {
+        WidgetGroup group = new WidgetGroup(0, 0, 190, 149);
+        group.addWidget(super.createUIWidget());
+        group.addWidget(createDisconnectButton(8, 128, 174));
+        return group;
+    }
 
     @Override
     public void addDisplayText(List<Component> textList) {

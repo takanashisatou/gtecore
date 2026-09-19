@@ -67,6 +67,7 @@ public class GTEMachines {
                     Component.translatable("gtceu.part_sharing.enabled"))
             .register();
     public static void init() {
+        GTEWaterPurificationParts.init();
         GTEMultiMachine.init();
         GTEMultiMachines2.init();
         GTEWaterPurificationMachines.init();
