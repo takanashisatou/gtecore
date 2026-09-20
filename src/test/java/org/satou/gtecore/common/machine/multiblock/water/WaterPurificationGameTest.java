@@ -63,7 +63,11 @@ public class WaterPurificationGameTest {
     }
 
     @GameTest(template = "empty", batch = "waterPurification", required = true)
-    public static void registeredStagesRejectOtherTiersAndLegacyMachineIsDisabled(GameTestHelper helper) {
+    public static void registeredStagesRejectOtherTiersAndLegacyMachineIsDisabled(GameTestHelper helper) throws Exception {
+        helper.setBlock(FIRST_PLANT, GTEWaterPurificationMachines.CENTRAL_WATER_PURIFICATION_PLANT.getBlock());
+        var plant = (CentralPurificationPlantMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(FIRST_PLANT));
+        setField(MultiblockControllerMachine.class, plant, "isFormed", true);
+        plant.setParallel(CentralPurificationPlantMachine.MAX_PARALLEL);
         var definitions = List.of(GTEWaterPurificationMachines.T1_CLARIFIER_PURIFICATION_UNIT,
                 GTEWaterPurificationMachines.T2_UV_OXIDATION_PURIFICATION_UNIT,
                 GTEWaterPurificationMachines.T3_EDI_ULTRAPURE_PURIFICATION_UNIT);
@@ -84,9 +88,22 @@ public class WaterPurificationGameTest {
             }
             recipe.data.remove("waterPurificationTier");
             helper.assertTrue(!unit.acceptsPurificationRecipe(recipe), "Missing stage tag must be rejected");
+            setField(MultiblockControllerMachine.class, unit, "isFormed", true);
+            helper.assertTrue(unit.bindToPlant(plant.getPos()), "Stage failed to bind to formed plant");
+            long voltage = GTValues.V[GTValues.UEV];
+            long budget = voltage * LinkedPurificationUnitMachine.LINK_AMPERAGE;
+            helper.assertTrue(unit.getLinkVoltage() == voltage && unit.getEUtBudget() == budget &&
+                    unit.getLinkedEnergyCapacity() == budget * 20,
+                    "Every stage needs UEV packets, a 256 A budget, and a 20-tick full-rate buffer");
+            helper.assertTrue(unit.acceptLinkedEnergy(plant, LinkedPurificationUnitMachine.LINK_AMPERAGE + 1) ==
+                    LinkedPurificationUnitMachine.LINK_AMPERAGE && unit.getStoredLinkedEnergy() == budget,
+                    "Actual linked charging must accept exactly the UEV budget and clamp excess amperage");
+            var budgetRecipe = GTERecipeTypes.WATER_PURIFICATION_RECIPES.recipeBuilder("uev_budget_regression")
+                    .duration(20).EUt(voltage).buildRawRecipe();
+            budgetRecipe.data.putInt("waterPurificationTier", tiers[stage]);
+            helper.assertTrue(unit.computeParallel(budgetRecipe) == LinkedPurificationUnitMachine.LINK_AMPERAGE,
+                    "UEV recipe parallelism must stop at the linked EU/t budget despite a larger plant request");
         }
-        helper.setBlock(FIRST_PLANT, GTEWaterPurificationMachines.CENTRAL_WATER_PURIFICATION_PLANT.getBlock());
-        var plant = (CentralPurificationPlantMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(FIRST_PLANT));
         var plantUi = plant.createUIWidget();
         helper.assertTrue(plantUi != null && plantUi.getSize().width > 0 && plantUi.getSize().height > 0,
                 "Plant UI must construct with positive dimensions on the dedicated server");
@@ -163,59 +180,75 @@ public class WaterPurificationGameTest {
     }
 
     @GameTest(template = "empty", batch = "waterPurification", required = true)
-    public static void linkedPowerConservesEnergyAndSkipsUnaffordableUnit(GameTestHelper helper) throws Exception {
+    public static void linkedPowerConservesEnergyAndRotatesEqualVoltageUnits(GameTestHelper helper) throws Exception {
         Network network = placeNetwork(helper);
         helper.setBlock(UNIT, GTEWaterPurificationMachines.T1_CLARIFIER_PURIFICATION_UNIT.getBlock());
-        var cheap = (LinkedPurificationUnitMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(UNIT));
-        BlockPos costlyPos = new BlockPos(0, 1, 3);
-        helper.setBlock(costlyPos, GTEWaterPurificationMachines.T3_EDI_ULTRAPURE_PURIFICATION_UNIT.getBlock());
-        var costly = (LinkedPurificationUnitMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(costlyPos));
+        var firstUnit = (LinkedPurificationUnitMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(UNIT));
+        BlockPos secondUnitPos = new BlockPos(0, 1, 3);
+        helper.setBlock(secondUnitPos, GTEWaterPurificationMachines.T3_EDI_ULTRAPURE_PURIFICATION_UNIT.getBlock());
+        var secondUnit = (LinkedPurificationUnitMachine) MetaMachine.getMachine(helper.getLevel(), helper.absolutePos(secondUnitPos));
         setField(MultiblockControllerMachine.class, network.first, "isFormed", true);
         setField(MultiblockControllerMachine.class, network.second, "isFormed", true);
-        setField(MultiblockControllerMachine.class, cheap, "isFormed", true);
-        setField(MultiblockControllerMachine.class, costly, "isFormed", true);
-        cheap.bindToPlant(network.first.getPos());
-        costly.bindToPlant(network.first.getPos());
-        var source = new NotifiableEnergyContainer(network.first, 10000000, costly.getLinkVoltage(), 256, 0, 0);
+        setField(MultiblockControllerMachine.class, firstUnit, "isFormed", true);
+        setField(MultiblockControllerMachine.class, secondUnit, "isFormed", true);
+        firstUnit.bindToPlant(network.first.getPos());
+        secondUnit.bindToPlant(network.first.getPos());
+        long voltage = GTValues.V[GTValues.UEV];
+        helper.assertTrue(firstUnit.getLinkVoltage() == voltage && secondUnit.getLinkVoltage() == voltage,
+                "First and third stages must receive equal UEV packets");
+        var source = new NotifiableEnergyContainer(network.first, voltage * 1024, voltage, 256, 0, 0);
         setField(WorkableElectricMultiblockMachine.class, network.first, "energyContainer", new EnergyContainerList(List.of(source)));
         var transfer = CentralPurificationPlantMachine.class.getDeclaredMethod("transferEnergyToUnits");
         transfer.setAccessible(true);
 
-        source.changeEnergy(cheap.getLinkVoltage() - 1);
-        helper.assertTrue((long) transfer.invoke(network.first) == 0 && cheap.getStoredLinkedEnergy() == 0 &&
-                costly.getStoredLinkedEnergy() == 0 && source.getEnergyStored() == cheap.getLinkVoltage() - 1,
+        source.changeEnergy(firstUnit.getLinkVoltage() - 1);
+        helper.assertTrue((long) transfer.invoke(network.first) == 0 && firstUnit.getStoredLinkedEnergy() == 0 &&
+                secondUnit.getStoredLinkedEnergy() == 0 && source.getEnergyStored() == firstUnit.getLinkVoltage() - 1,
                 "Less than one packet must neither debit the source nor credit a unit");
         source.changeEnergy(1);
-        // Packed coordinates sort the lower-x costly unit before the cheaper one.
+        // Packed coordinates sort the lower-x second unit first; service rotates next call.
         setField(CentralPurificationPlantMachine.class, network.first, "nextUnitIndex", 0);
-        helper.assertTrue((long) transfer.invoke(network.first) == cheap.getLinkVoltage() &&
-                source.getEnergyStored() == 0 && cheap.getStoredLinkedEnergy() == cheap.getLinkVoltage() &&
-                costly.getStoredLinkedEnergy() == 0, "Unaffordable first unit must not starve affordable later unit");
+        helper.assertTrue((long) transfer.invoke(network.first) == voltage &&
+                source.getEnergyStored() == 0 && firstUnit.getStoredLinkedEnergy() == 0 &&
+                secondUnit.getStoredLinkedEnergy() == voltage, "First available UEV packet must reach the first serviced unit");
+        source.changeEnergy(voltage);
+        helper.assertTrue((long) transfer.invoke(network.first) == voltage && source.getEnergyStored() == 0 &&
+                firstUnit.getStoredLinkedEnergy() == voltage && secondUnit.getStoredLinkedEnergy() == voltage,
+                "Rotating service must give both stages one packet when only one packet is available each call");
 
-        source.changeEnergy(costly.getLinkVoltage() * 4 + cheap.getLinkVoltage() * 2);
+        source.changeEnergy(secondUnit.getLinkVoltage() * 4 + firstUnit.getLinkVoltage() * 2);
         long beforeSource = source.getEnergyStored();
-        long beforeUnits = cheap.getStoredLinkedEnergy() + costly.getStoredLinkedEnergy();
+        long beforeUnits = firstUnit.getStoredLinkedEnergy() + secondUnit.getStoredLinkedEnergy();
         long moved = (long) transfer.invoke(network.first);
-        long received = cheap.getStoredLinkedEnergy() + costly.getStoredLinkedEnergy() - beforeUnits;
+        long received = firstUnit.getStoredLinkedEnergy() + secondUnit.getStoredLinkedEnergy() - beforeUnits;
         helper.assertTrue(moved > 0 && moved == received && moved == beforeSource - source.getEnergyStored(),
                 "Actual source debit must exactly equal total actual unit credit");
-        cheap.bindToPlant(network.second.getPos());
-        long stored = cheap.getStoredLinkedEnergy();
-        helper.assertTrue(cheap.acceptLinkedEnergy(network.first, 1) == 0 && cheap.getStoredLinkedEnergy() == stored,
+        firstUnit.internalEnergy.changeEnergy(firstUnit.getLinkedEnergyCapacity() - firstUnit.getStoredLinkedEnergy());
+        secondUnit.internalEnergy.changeEnergy(secondUnit.getLinkedEnergyCapacity() - secondUnit.getStoredLinkedEnergy());
+        source.changeEnergy(voltage);
+        helper.assertTrue((long) transfer.invoke(network.first) == 0 && source.getEnergyStored() == voltage,
+                "Full buffers must leave all source energy untouched");
+        firstUnit.internalEnergy.changeEnergy(-voltage);
+        helper.assertTrue((long) transfer.invoke(network.first) == voltage && source.getEnergyStored() == 0 &&
+                firstUnit.getStoredLinkedEnergy() == firstUnit.getLinkedEnergyCapacity(),
+                "One packet of buffer space must accept exactly one UEV packet without overflow");
+        firstUnit.bindToPlant(network.second.getPos());
+        long stored = firstUnit.getStoredLinkedEnergy();
+        helper.assertTrue(firstUnit.acceptLinkedEnergy(network.first, 1) == 0 && firstUnit.getStoredLinkedEnergy() == stored,
                 "Old plant retained authority to charge a rebound unit");
 
-        var tank = new NotifiableFluidTank(cheap, 1, 16000, IO.OUT);
-        cheap.addHandlerList(RecipeHandlerList.of(IO.OUT, List.of(tank)));
+        var tank = new NotifiableFluidTank(firstUnit, 1, 16000, IO.OUT);
+        firstUnit.addHandlerList(RecipeHandlerList.of(IO.OUT, List.of(tank)));
         var recipe = GTERecipeTypes.WATER_PURIFICATION_RECIPES.recipeBuilder("unlinked_completion_regression")
                 .outputFluids(new FluidStack(Fluids.WATER, 1000)).duration(1).EUt(32).buildRawRecipe();
-        var logic = cheap.getRecipeLogic();
+        var logic = firstUnit.getRecipeLogic();
         setField(RecipeLogic.class, logic, "lastRecipe", recipe);
         setField(RecipeLogic.class, logic, "progress", 1);
         setField(RecipeLogic.class, logic, "duration", 1);
         logic.setStatus(RecipeLogic.Status.WORKING);
-        cheap.bindToPlant(null);
+        firstUnit.bindToPlant(null);
         logic.serverTick();
-        helper.assertTrue(cheap.getStoredLinkedEnergy() == stored && tank.getFluidInTank(0).isEmpty() &&
+        helper.assertTrue(firstUnit.getStoredLinkedEnergy() == stored && tank.getFluidInTank(0).isEmpty() &&
                 logic.getProgress() == 1, "Unlinked logic tick consumed EU, advanced progress, or emitted output");
         helper.succeed();
     }

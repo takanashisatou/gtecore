@@ -34,7 +34,7 @@ public final class GTEWaterPurificationParts {
     public static final MachineDefinition THERMAL_CONTROL_HATCH = GTECore_REGISTRATE
             .machine("thermal_control_hatch", ThermalControlHatchPartMachine::new)
             .langValue("Thermal Control Hatch")
-            .tier(GTValues.EV)
+            .tier(GTValues.UEV)
             .rotationState(RotationState.ALL)
             .abilities(THERMAL_CONTROL)
             .colorOverlayTieredHullModel(GTCEu.id("block/overlay/machine/overlay_data_hatch"))
@@ -45,7 +45,7 @@ public final class GTEWaterPurificationParts {
     public static final MachineDefinition THERMAL_SIGNAL_HATCH = GTECore_REGISTRATE
             .machine("thermal_signal_hatch", ThermalSignalHatchPartMachine::new)
             .langValue("Thermal Signal Hatch")
-            .tier(GTValues.EV)
+            .tier(GTValues.UEV)
             .rotationState(RotationState.ALL)
             .abilities(THERMAL_SIGNAL)
             .colorOverlayTieredHullModel(GTCEu.id("block/overlay/machine/overlay_data_hatch"))

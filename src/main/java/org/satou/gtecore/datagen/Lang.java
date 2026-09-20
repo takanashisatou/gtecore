@@ -224,6 +224,8 @@ public class Lang {
                 provider.add("item.gtecore.yin_yang_boule", "§8Yin§rYang Boule", "§8阴§r阳单晶硅");
                 provider.add("item.gtecore.yin_yang_circuit_chip", "§8Yin§rYang Circuit Chip", "§8阴§r阳电路芯片");
 
+                provider.add("item.gtecore.imaginary_growth_medium", "§bImaginary Growth Medium", "§b虚数生长介质");
+                provider.add("item.gtecore.imaginary_growth_medium.tooltip", "§7Consumable crystal-growth medium prepared with third-stage ultrapure water; leaf matrices remain structural blocks", "§7由三级电子级净化水制备的晶体生长耗材；叶矩阵保留为结构方块");
                 provider.add("item.gtecore.imaginary_tree_boule", "§bImaginary Tree Boule", "§b虚数之树单晶硅");
                 provider.add("item.gtecore.imaginary_tree_wafer", "§bImaginary Tree Wafer", "§b虚数之树晶圆");
                 provider.add("item.gtecore.imaginary_tree_cpu_wafer", "§bImaginary Tree CPU Wafer", "§b虚数之树CPU晶圆");
@@ -352,6 +354,15 @@ public class Lang {
                 provider.add("gtecore.tree_of_imaginary", "§bTree of Imaginary", "§b虚数之树");
                 provider.add("com.gtecore.tooltips.tree_of_imaginary.0", "§7Infinite branches woven from the fabric of dimensions", "§7交织于维度织理中的无尽枝桠");
                 provider.add("com.gtecore.tooltips.tree_of_imaginary.1", "§bOctree 3D Fractal Dimensional Engine", "§b八叉树立体分形维度引擎");
+                provider.add("com.gtecore.tooltips.tree_of_imaginary.2", "§7Key Imaginary products require third-stage ultrapure water from the UEV purification line", "§7虚数关键产物需要 UEV 净化产线的三级电子级净化水");
+                provider.add("block.gtecore.imaginary_lithography_center", "§bImaginary Immersion Lithography Center", "§b虚数浸没光刻中心");
+                provider.add("gtecore.imaginary_lithography", "§bImaginary Immersion Lithography", "§b虚数浸没光刻");
+                provider.add("com.gtecore.tooltips.imaginary_lithography_center.0", "§7UEV wafer exposure, etching, dicing and CPU-chip finishing", "§7UEV 级晶圆曝光、刻蚀、切割与 CPU 芯片精加工");
+                provider.add("com.gtecore.tooltips.imaginary_lithography_center.1", "§bAll processes consume third-stage ultrapure water; optical lenses are reusable", "§b全部工序消耗三级电子级净化水；光学透镜可重复使用");
+                provider.add("block.gtecore.imaginary_circuit_fabricator", "§bImaginary Circuit Fabricator", "§b虚数基板封装厂");
+                provider.add("gtecore.imaginary_circuit_fabrication", "§bImaginary Circuit Fabrication", "§b虚数基板与封装");
+                provider.add("com.gtecore.tooltips.imaginary_circuit_fabricator.0", "§7UEV substrate lamination, printed circuit etching and SoC packaging", "§7UEV 级基板层压、印刷电路蚀刻与 SoC 封装");
+                provider.add("com.gtecore.tooltips.imaginary_circuit_fabricator.1", "§bConsumes third-stage ultrapure water; finished circuits are integrated in the Tree of Imaginary", "§b消耗三级电子级净化水；成品电路由虚数之树集成");
 
                 // Casings and Modules
                 provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
@@ -425,15 +436,15 @@ public class Lang {
                 provider.add("block.gtecore.t3_edi_ultrapure_purification_unit", "§dT3 EDI Ultrapure Purification Unit", "§d三级 EDI 超纯净化装置");
                 provider.add("gtecore.t3_edi_ultrapure_purification_unit", "§dT3 EDI Ultrapure Purification Unit", "§d三级 EDI 超纯净化装置");
 
-                provider.add("com.gtecore.tooltips.central_water_purification_plant.0", "§7Control hub of the purified water line: binds every tier of purification unit with a data stick", "§7整条净水产线的控制核心：用数据棒连接各级净化单元");
+                provider.add("com.gtecore.tooltips.central_water_purification_plant.0", "§7Control hub of the UEV purification line: binds all three stages with a data stick", "§7UEV 净水产线的控制核心：用数据棒连接三级净化单元");
                 provider.add("com.gtecore.tooltips.central_water_purification_plant.1", "§bSupplies EU to every bound unit and broadcasts the parallel setting configured in its GUI", "§b为全部已连接单元供电，并下发 GUI 中设定的并行度");
                 provider.add("com.gtecore.tooltips.central_water_purification_plant.2", "§cPurification units cannot start until bound to a formed plant", "§c未连接到已成型中枢的净化单元无法开机");
 
-                provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.0", "§7Multi-effect flash distillation for the UEV Imaginary-series water supply", "§7服务于 UEV 虚数系列供水的多效闪蒸精馏澄清装置");
+                provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.0", "§7UEV multi-effect flash distillation: stage 1 of the Imaginary-series water supply", "§7UEV 级多效闪蒸精馏澄清装置：虚数供水的第一道工序");
                 provider.add("com.gtecore.tooltips.t1_clarifier_purification_unit.1", "§3Water / Distilled Water -> Distilled Purified Water; requires a bound central plant", "§3普通水/蒸馏水 → 蒸馏净化水；需连接中枢净化水厂");
-                provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.0", "§7DUV photolysis and advanced oxidation for the UEV Imaginary-series water supply", "§7服务于 UEV 虚数系列供水的深紫外光解高级氧化装置");
+                provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.0", "§7UEV DUV photolysis and advanced oxidation: stage 2 of the Imaginary-series water supply", "§7UEV 级深紫外光解高级氧化装置：虚数供水的第二道工序");
                 provider.add("com.gtecore.tooltips.t2_uv_oxidation_purification_unit.1", "§9Distilled Purified Water -> UV Purified Water; requires a bound central plant", "§9蒸馏净化水 → 紫外净化水；需连接中枢净化水厂");
-                provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.0", "§7Electrodeionization and sub-nanometer polishing for the UEV Imaginary-series water supply", "§7服务于 UEV 虚数系列供水的连续电去离子与亚纳米精抛装置");
+                provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.0", "§7UEV electrodeionization and polishing: supplies ultrapure water for key Imaginary products", "§7UEV 级连续电去离子与精抛装置：为虚数关键产物提供三级电子级净化水");
                 provider.add("com.gtecore.tooltips.t3_edi_ultrapure_purification_unit.1", "§dUV Purified Water -> Ultrapure Water; requires a bound central plant", "§d紫外净化水 → 电子级净化水；需连接中枢净化水厂");
 
                 provider.add("com.gtecore.gui.water_plant.parallel", "Parallel", "并行度");

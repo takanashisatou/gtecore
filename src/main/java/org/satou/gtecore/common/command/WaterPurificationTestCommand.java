@@ -220,7 +220,7 @@ public final class WaterPurificationTestCommand {
             }
             CentralPurificationPlantMachine plantMachine = machine(level, plant, CentralPurificationPlantMachine.class);
             var unitMachine = machine(level, unit, LinkedPurificationUnitMachine.class);
-            CreativeTestInputs.energy(machine(level, energy, CreativeEnergyHatchPartMachine.class), tier == 1 ? GTValues.EV : GTValues.UEV);
+            CreativeTestInputs.energy(machine(level, energy, CreativeEnergyHatchPartMachine.class), GTValues.UEV);
             if (ediCircuit != null) {
                 machine(level, signal, EdiLoadSignalHatchPartMachine.class).setFrontFacing(Direction.SOUTH);
                 EdiTestCircuit.configure(level, ediCircuit);

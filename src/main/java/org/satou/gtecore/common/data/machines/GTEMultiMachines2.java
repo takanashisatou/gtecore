@@ -7975,6 +7975,7 @@ public class GTEMultiMachines2 {
                         .tooltips(
                                         Component.translatable("com.gtecore.tooltips.tree_of_imaginary.0"),
                                         Component.translatable("com.gtecore.tooltips.tree_of_imaginary.1"),
+                                        Component.translatable("com.gtecore.tooltips.tree_of_imaginary.2"),
                                         Component.translatable("com.gtecore.tooltips.0"))
                         .modelProperty(GTMachineModelProperties.RECIPE_LOGIC_STATUS, RecipeLogic.Status.IDLE)
                         .hasBER(true)
