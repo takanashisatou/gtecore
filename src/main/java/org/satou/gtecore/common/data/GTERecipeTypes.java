@@ -11,6 +11,7 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.satou.gtecore.common.data.machines.GTEWaterPurificationMachines;
+import org.satou.gtecore.common.data.machines.GTEImaginaryMachines;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
@@ -129,6 +130,16 @@ public class GTERecipeTypes {
             .setMaxIOSize(9, 9, 9, 9)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public static final GTRecipeType IMAGINARY_LITHOGRAPHY = register("imaginary_lithography", MULTIBLOCK)
+            .setMaxIOSize(4, 1, 3, 0)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setIconSupplier(() -> GTEImaginaryMachines.IMAGINARY_LITHOGRAPHY_CENTER.asStack());
+    public static final GTRecipeType IMAGINARY_CIRCUIT_FABRICATION = register("imaginary_circuit_fabrication", MULTIBLOCK)
+            .setMaxIOSize(6, 1, 3, 0)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setIconSupplier(() -> GTEImaginaryMachines.IMAGINARY_CIRCUIT_FABRICATOR.asStack());
     public static final GTRecipeType WATER_PURIFICATION_RECIPES = register("water_purification", MULTIBLOCK)
             .setMaxIOSize(3, 3, 3, 3)
             .setEUIO(IO.IN)

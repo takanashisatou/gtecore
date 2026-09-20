@@ -99,6 +99,7 @@ public class WATER_PURIFICATION_HANDLER {
 
         // ---------------------------------------------------------------
         // Water Purification Recipes (三级多段净水与闭环回收)
+        // All stages operate at UEV; legacy EV/LuV/ZPM markers only select the purification process.
         // ---------------------------------------------------------------
 
         // Stage 1a: Raw Water + Flocculant + Carbon Microspheres -> Distilled Purified Water
@@ -110,7 +111,7 @@ public class WATER_PURIFICATION_HANDLER {
                 .chancedOutput(dust, Salt, 1000, 500)
                 .chancedOutput(dust, RareEarth, 500, 250)
                 .duration(60)
-                .EUt(VA[EV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // Stage 1b: Distilled Water + Flocculant + Carbon Microspheres -> Distilled Purified Water
@@ -121,7 +122,7 @@ public class WATER_PURIFICATION_HANDLER {
                 .outputFluids(GTEMaterials.DistilledPurifiedWater.getFluid(1000))
                 .chancedOutput(dust, Salt, 500, 250)
                 .duration(30)
-                .EUt(VA[EV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // Stage 2a: Distilled Purified Water + Ozone -> UV Purified Water
@@ -176,38 +177,38 @@ public class WATER_PURIFICATION_HANDLER {
                 .inputItems(GTBlocks.CLEANROOM_GLASS.asStack(8))
                 .inputItems(GTBlocks.CASING_STEEL_PIPE.asStack(8))
                 .inputItems(GTBlocks.CASING_STAINLESS_TURBINE.asStack(4))
-                .inputItems(GTItems.ELECTRIC_PUMP_IV.asStack(4))
-                .inputItems(CustomTags.IV_CIRCUITS, 8)
+                .inputItems(GTItems.ELECTRIC_PUMP_UEV.asStack(4))
+                .inputItems(CustomTags.UEV_CIRCUITS, 8)
                 .inputItems(GTEItems.SYMBOL_PAPER_WATER.asStack(4))
                 .inputFluids(DistilledWater.getFluid(16000))
                 .outputItems(GTEWaterPurificationMachines.CENTRAL_WATER_PURIFICATION_PLANT)
                 .duration(20 * 40)
-                .EUt(VA[IV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // Redstone-controlled heating / cooling hatch for T1
         ASSEMBLER_RECIPES.recipeBuilder("thermal_control_hatch")
-                .inputItems(GTItems.ELECTRIC_PUMP_EV.asStack(2))
-                .inputItems(GTItems.SENSOR_EV.asStack())
-                .inputItems(CustomTags.EV_CIRCUITS, 2)
+                .inputItems(GTItems.ELECTRIC_PUMP_UEV.asStack(2))
+                .inputItems(GTItems.SENSOR_UEV.asStack())
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
                 .inputItems(GCYMBlocks.CASING_WATERTIGHT.asStack())
                 .inputItems(dust, Redstone, 4)
                 .outputItems(GTEWaterPurificationParts.THERMAL_CONTROL_HATCH)
                 .duration(200)
-                .EUt(VA[EV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // T1 Clarifier Purification Unit
         ASSEMBLER_RECIPES.recipeBuilder("thermal_signal_hatch")
-                .inputItems(GTItems.SENSOR_EV.asStack())
-                .inputItems(GTItems.EMITTER_EV.asStack())
-                .inputItems(CustomTags.EV_CIRCUITS, 2)
+                .inputItems(GTItems.SENSOR_UEV.asStack())
+                .inputItems(GTItems.EMITTER_UEV.asStack())
+                .inputItems(CustomTags.UEV_CIRCUITS, 2)
                 .inputItems(GCYMBlocks.CASING_WATERTIGHT.asStack())
                 .inputItems(new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COMPARATOR))
                 .inputItems(dust, Redstone, 4)
                 .outputItems(GTEWaterPurificationParts.THERMAL_SIGNAL_HATCH)
                 .duration(200)
-                .EUt(VA[EV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // T1 Clarifier Purification Unit
@@ -215,13 +216,13 @@ public class WATER_PURIFICATION_HANDLER {
                 .inputItems(GCYMBlocks.CASING_WATERTIGHT.asStack(4))
                 .inputItems(GTBlocks.CLEANROOM_GLASS.asStack(4))
                 .inputItems(GTBlocks.CASING_STEEL_PIPE.asStack(4))
-                .inputItems(GTItems.ELECTRIC_PUMP_EV.asStack(2))
-                .inputItems(CustomTags.EV_CIRCUITS, 4)
+                .inputItems(GTItems.ELECTRIC_PUMP_UEV.asStack(2))
+                .inputItems(CustomTags.UEV_CIRCUITS, 4)
                 .inputItems(GTEItems.SYMBOL_PAPER_WATER.asStack(1))
                 .inputFluids(Water.getFluid(8000))
                 .outputItems(GTEWaterPurificationMachines.T1_CLARIFIER_PURIFICATION_UNIT)
                 .duration(20 * 20)
-                .EUt(VA[EV])
+                .EUt(VA[UEV])
                 .save(provider);
 
         // Modular UV lamp: shares the unit's central-plant power supply.

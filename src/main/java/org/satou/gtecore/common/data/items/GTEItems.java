@@ -183,6 +183,11 @@ public class GTEItems {
     public static ItemEntry<Item> YIN_YANG_CPU_WAFER = GTECore_REGISTRATE.item("yin_yang_cpu_wafer",Item::new)
             .lang("Yin Yang CPU Wafer")
             .register();
+    public static ItemEntry<ComponentItem> IMAGINARY_GROWTH_MEDIUM = GTECore_REGISTRATE.item("imaginary_growth_medium", ComponentItem::create)
+            .lang("Imaginary Growth Medium")
+            .onRegister(GTItems.attach(new TooltipBehavior(lines ->
+                    lines.add(Component.translatable("item.gtecore.imaginary_growth_medium.tooltip")))))
+            .register();
     public static ItemEntry<Item> IMAGINARY_TREE_BOULE = GTECore_REGISTRATE.item("imaginary_tree_boule",Item::new)
             .lang("Imaginary Tree Boule")
             .register();

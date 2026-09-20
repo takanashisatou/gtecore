@@ -57,7 +57,7 @@ public class ThermalPurificationUnitMachine extends LinkedPurificationUnitMachin
     @DescSynced private boolean heating;
 
     public ThermalPurificationUnitMachine(IMachineBlockEntity holder) {
-        super(holder, GTValues.EV);
+        super(holder, GTValues.EV, GTValues.UEV);
     }
 
     @Override
