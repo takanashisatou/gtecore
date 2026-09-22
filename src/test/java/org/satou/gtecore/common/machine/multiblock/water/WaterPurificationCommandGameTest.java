@@ -69,7 +69,7 @@ public class WaterPurificationCommandGameTest {
         });
     }
 
-    @GameTest(template = "water_tier_lab", batch = "waterCommandBuild", timeoutTicks = 1100, required = true)
+    @GameTest(template = "water_tier_lab", batch = "waterCommandGradeThree", timeoutTicks = 1100, required = true)
     public static void gradeThreeNaturallyRegeneratesAndResumesProduction(GameTestHelper helper) throws Exception {
         var layout = WaterPurificationTestCommand.build(helper.getLevel(), emptySite(helper, 3), 3);
         var unit = (EdiPurificationUnitMachine) MetaMachine.getMachine(helper.getLevel(), layout.unit());
@@ -93,11 +93,15 @@ public class WaterPurificationCommandGameTest {
                 }
                 if (observed[2] && amount(buffer, GTEMaterials.UltrapureWater.getFluid(1)) > outputAtRelease[0]) {
                     observed[3] = true;
+                    assertSupplies(helper, layout, plant);
+                    helper.succeed();
+                    return;
                 }
                 previousLoad[0] = load;
             });
         }
         helper.runAtTickTime(1001, () -> {
+            if (observed[3]) return;
             helper.assertTrue(observed[0] && observed[1] && observed[2] && observed[3],
                     "Natural production must set the latch, regenerate, reset and resume output: requested=" + observed[0]
                             + ", cleaned=" + observed[1] + ", released=" + observed[2] + ", resumed=" + observed[3]
