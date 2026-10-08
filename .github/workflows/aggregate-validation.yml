@@ -50,3 +50,7 @@ jobs:
         run: |
           .\gradlew.bat :modules:gtecore:compileJava :modules:gtecore:runData -Pwerror --console=plain
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Run required GTECore GameTests
+        run: |
+          .\gradlew.bat :modules:gtecore:runGameTestServer --console=plain
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
