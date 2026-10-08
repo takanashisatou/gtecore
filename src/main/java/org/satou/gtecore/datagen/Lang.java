@@ -364,6 +364,17 @@ public class Lang {
                 provider.add("com.gtecore.tooltips.imaginary_circuit_fabricator.0", "§7UEV substrate lamination, printed circuit etching and SoC packaging", "§7UEV 级基板层压、印刷电路蚀刻与 SoC 封装");
                 provider.add("com.gtecore.tooltips.imaginary_circuit_fabricator.1", "§bConsumes third-stage ultrapure water; finished circuits are integrated in the Tree of Imaginary", "§b消耗三级电子级净化水；成品电路由虚数之树集成");
 
+                provider.add("block.gtecore.imaginary_crystal_growth_array", "§bImaginary Crystal Growth Array", "§b虚数晶体生长阵列");
+                provider.add("gtecore.imaginary_crystal_growth", "§bImaginary Crystal Growth", "§b虚数晶体生长");
+                provider.add("com.gtecore.tooltips.imaginary_crystal_growth_array.0", "§7UEV twin-tower crystal factory, constructed with four Imaginary Mainframes", "§7UEV 双塔晶体工厂，控制器需四台虚数主机");
+                provider.add("com.gtecore.tooltips.imaginary_crystal_growth_array.1", "§bDedicated growth-medium, boule and wafer recipes yield 50% more per consumable input", "§b专用生长介质、单晶硅与晶圆配方：相同耗材增加 50% 产出");
+                provider.add("com.gtecore.tooltips.imaginary_crystal_growth_array.2", "§7Requires third-stage ultrapure water; the original line bootstraps the first Mainframe", "§7仍需三级电子级净化水；首台主机由原有产线开荒");
+                provider.add("block.gtecore.imaginary_circuit_integration_matrix", "§bImaginary Circuit Integration Matrix", "§b虚数电路集成矩阵");
+                provider.add("gtecore.imaginary_circuit_integration", "§bImaginary Circuit Integration", "§b虚数电路集成");
+                provider.add("com.gtecore.tooltips.imaginary_circuit_integration_matrix.0", "§7UEV ring-shaped integration factory, constructed with eight Imaginary Mainframes", "§7UEV 环形电路工厂，控制器需八台虚数主机");
+                provider.add("com.gtecore.tooltips.imaginary_circuit_integration_matrix.1", "§bDedicated UHV / UEV / UIV / UXV circuit recipes yield 50% more per consumable input", "§b专用 UHV／UEV／UIV／UXV 电路配方：相同耗材增加 50% 产出");
+                provider.add("com.gtecore.tooltips.imaginary_circuit_integration_matrix.2", "§7Lithography and board fabrication remain upstream; all integration recipes run at UEV", "§7保留上游光刻与封装产线；全部集成配方在 UEV 电压下运行");
+
                 // Casings and Modules
                 provider.add("block.gtecore.imaginary_casing", "§bImaginary Casing", "§b虚数外壳");
                 provider.add("block.gtecore.imaginary_core_casing", "§bImaginary Core Casing", "§b虚数核心外壳");

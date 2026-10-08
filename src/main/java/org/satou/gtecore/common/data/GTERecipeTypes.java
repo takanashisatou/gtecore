@@ -12,6 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.satou.gtecore.common.data.machines.GTEWaterPurificationMachines;
 import org.satou.gtecore.common.data.machines.GTEImaginaryMachines;
+import org.satou.gtecore.common.data.machines.GTEImaginaryExpansionMachines;
 
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.MULTIBLOCK;
 import static com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection.LEFT_TO_RIGHT;
@@ -130,6 +131,16 @@ public class GTERecipeTypes {
             .setMaxIOSize(9, 9, 9, 9)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public static final GTRecipeType IMAGINARY_CRYSTAL_GROWTH = register("imaginary_crystal_growth", MULTIBLOCK)
+            .setMaxIOSize(5, 1, 2, 0)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setIconSupplier(() -> GTEImaginaryExpansionMachines.IMAGINARY_CRYSTAL_GROWTH_ARRAY.asStack());
+    public static final GTRecipeType IMAGINARY_CIRCUIT_INTEGRATION = register("imaginary_circuit_integration", MULTIBLOCK)
+            .setMaxIOSize(4, 1, 2, 0)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT)
+            .setIconSupplier(() -> GTEImaginaryExpansionMachines.IMAGINARY_CIRCUIT_INTEGRATION_MATRIX.asStack());
     public static final GTRecipeType IMAGINARY_LITHOGRAPHY = register("imaginary_lithography", MULTIBLOCK)
             .setMaxIOSize(4, 1, 3, 0)
             .setEUIO(IO.IN)
