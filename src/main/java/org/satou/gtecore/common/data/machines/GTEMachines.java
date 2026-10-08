@@ -72,5 +72,6 @@ public class GTEMachines {
         GTEMultiMachines2.init();
         GTEWaterPurificationMachines.init();
         GTEImaginaryMachines.init();
+        GTEImaginaryExpansionMachines.init();
     }
 }
