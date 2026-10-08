@@ -30,6 +30,19 @@ public class WaterPurificationCommandGameTest {
                 WaterPurificationTestCommand.maximum(anchor, tier))) {
             helper.getLevel().setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
         }
+        // The sparse template reserves space but does not contain neighbouring
+        // fluids. Keep world water outside the command's checked build volume;
+        // glass does not conduct redstone or replace any part of the real plant.
+        BlockPos shellMin = WaterPurificationTestCommand.minimum(anchor, tier).offset(-1, -1, -1);
+        BlockPos shellMax = WaterPurificationTestCommand.maximum(anchor, tier).offset(1, 1, 1);
+        BlockPos marker = helper.absolutePos(BlockPos.ZERO);
+        for (BlockPos pos : BlockPos.betweenClosed(shellMin, shellMax)) {
+            if (!pos.equals(marker) && (pos.getX() == shellMin.getX() || pos.getX() == shellMax.getX()
+                    || pos.getY() == shellMin.getY() || pos.getY() == shellMax.getY()
+                    || pos.getZ() == shellMin.getZ() || pos.getZ() == shellMax.getZ())) {
+                helper.getLevel().setBlock(pos, Blocks.GLASS.defaultBlockState(), 2);
+            }
+        }
         return anchor;
     }
 
@@ -78,6 +91,18 @@ public class WaterPurificationCommandGameTest {
         helper.assertTrue(MetaMachine.getMachine(helper.getLevel(), layout.signal()) instanceof EdiLoadSignalHatchPartMachine &&
                 MetaMachine.getMachine(helper.getLevel(), layout.control()) instanceof EdiRegenerationControlHatchPartMachine,
                 "Grade 3 must contain real load-signal and regeneration-control ports");
+        // Reproduce the ambient water that washed away this comparator in hosted CI.
+        // Keep the source inside the owned template, directly above the analogue chain.
+        var comparator = layout.minimum().subtract(WaterPurificationTestCommand.minimum(BlockPos.ZERO, 3))
+                .offset(4, 1, 13);
+        var waterSource = new BlockPos(comparator.getX(), layout.maximum().getY() + 2, comparator.getZ());
+        helper.getLevel().setBlockAndUpdate(waterSource, Blocks.WATER.defaultBlockState());
+        helper.runAtTickTime(80, () -> {
+            helper.assertTrue(helper.getLevel().getBlockState(comparator).is(Blocks.COMPARATOR),
+                    "Ambient fixture water must not wash away the real EDI comparator");
+            helper.assertTrue(!helper.getLevel().getFluidState(waterSource.east()).isEmpty(),
+                    "The fixture stress must include normally ticking, flowing vanilla water");
+        });
         boolean[] observed = new boolean[4];
         long[] previousLoad = { 0 };
         long[] outputAtRelease = { 0 };
