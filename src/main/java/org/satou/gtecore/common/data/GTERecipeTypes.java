@@ -62,6 +62,10 @@ public class GTERecipeTypes {
             .setMaxIOSize(9, 9, 9, 9)
             .setEUIO(IO.IN)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
+    public static final GTRecipeType SUPER_FUSION_REACTOR_II_RECIPES = register("super_fusion_reactor_ii", MULTIBLOCK)
+            .setMaxIOSize(9, 9, 9, 9)
+            .setEUIO(IO.IN)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, LEFT_TO_RIGHT);
     public final static GTRecipeType SUPER_STRING_MIXING = register("super_string_mixing", MULTIBLOCK)
             .setMaxIOSize(9, 9, 9, 9)
             .setEUIO(IO.IN)
