@@ -1,7 +1,6 @@
 package org.satou.gtecore.common.data.machines;
 
 import appeng.api.config.Actionable;
-import com.gregtechceu.bettergtae.common.machine.multiblock.part.ExtendMEPatternBufferPartMachine;
 import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.gui.GuiTextures;
 import com.gregtechceu.gtceu.api.gui.fancy.ConfiguratorPanel;
@@ -21,17 +20,12 @@ import com.gregtechceu.gtceu.api.machine.trait.RecipeHandlerList;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.ingredient.FluidIngredient;
 import com.gregtechceu.gtceu.api.recipe.ingredient.SizedIngredient;
-import com.gregtechceu.gtceu.api.transfer.fluid.CustomFluidTank;
 import com.gregtechceu.gtceu.api.transfer.item.CustomItemStackHandler;
-import com.gregtechceu.gtceu.common.data.machines.GTAEMachines;
 import com.gregtechceu.gtceu.common.item.IntCircuitBehaviour;
 import com.gregtechceu.gtceu.integration.ae2.gui.widget.AETextInputButtonWidget;
 import com.gregtechceu.gtceu.integration.ae2.gui.widget.slot.AEPatternViewSlotWidget;
-import com.gregtechceu.gtceu.integration.ae2.machine.MEBusPartMachine;
-import com.gregtechceu.gtceu.integration.ae2.machine.MEOutputBusPartMachine;
-import com.gregtechceu.gtceu.integration.ae2.machine.MEOutputHatchPartMachine;
-import com.gregtechceu.gtceu.integration.ae2.machine.trait.InternalSlotRecipeHandler;
 import com.gregtechceu.gtceu.integration.ae2.utils.KeyStorage;
+import com.gregtechceu.gtceu.utils.FluidStackHashStrategy;
 import com.gregtechceu.gtceu.utils.GTMath;
 import com.gregtechceu.gtceu.utils.ItemStackHashStrategy;
 
@@ -48,7 +42,6 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder;
 
-import lombok.NoArgsConstructor;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -72,26 +65,21 @@ import appeng.api.networking.IGrid;
 import appeng.api.networking.IGridNodeListener;
 import appeng.api.networking.crafting.ICraftingProvider;
 import appeng.api.stacks.*;
-import appeng.api.storage.MEStorage;
-import appeng.api.storage.StorageHelper;
 import appeng.crafting.pattern.EncodedPatternItem;
 import appeng.crafting.pattern.ProcessingPatternItem;
 import appeng.helpers.patternprovider.PatternContainer;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import it.unimi.dsi.fastutil.objects.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.A;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
-import org.satou.gtecore.common.data.machines.InternalSlotRecipeHandlerPlus;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.Set;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -119,97 +107,35 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
         @Override
         public void setItemDirect(int slotIndex, ItemStack stack) {
             patternInventory.setStackInSlot(slotIndex, stack);
-            patternInventory.onContentsChanged(slotIndex);
-            onPatternChange(slotIndex);
         }
     };
     @Persisted
     private KeyStorage internalBufferItem;
     @Override
     protected NotifiableItemStackHandler createInventory(Object... args) {
-        this.internalBufferItem = new KeyStorage();
-        return new InaccessibleInfiniteHandler(this);
-    }
-    private class InaccessibleInfiniteHandler extends NotifiableItemStackHandler {
-
-        public InaccessibleInfiniteHandler(MetaMachine holder) {
-            super(holder, 1, IO.OUT, IO.NONE, ItemStackHandlerDelegate::new);
-            internalBufferItem.setOnContentsChanged(this::onContentsChanged);
-        }
-
-        @Override
-        public @NotNull List<Object> getContents() {
-            return Collections.emptyList();
-        }
-
-        @Override
-        public double getTotalContentAmount() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return true;
-        }
+        internalBufferItem = new KeyStorage();
+        return MEPatternBufferOutputHandlers.items(this, internalBufferItem);
     }
 
-    @NoArgsConstructor
-    private class ItemStackHandlerDelegate extends CustomItemStackHandler {
-
-        // Necessary for InaccessibleInfiniteHandler
-        public ItemStackHandlerDelegate(Integer integer) {
-            super();
-        }
-
-        @Override
-        public int getSlots() {
-            return Short.MAX_VALUE;
-        }
-
-        @Override
-        public int getSlotLimit(int slot) {
-            return Integer.MAX_VALUE;
-        }
-
-        @Override
-        public ItemStack getStackInSlot(int slot) {
-            return ItemStack.EMPTY;
-        }
-
-        @Override
-        public void setStackInSlot(int slot, ItemStack stack) {
-            // NO-OP
-        }
-
-        @Override
-        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-            var key = AEItemKey.of(stack);
-            int count = stack.getCount();
-            long oldValue = internalBufferItem.storage.getOrDefault(key, 0);
-            long changeValue = Math.min(Long.MAX_VALUE - oldValue, count);
-            if (changeValue > 0) {
-                if (!simulate) {
-                    internalBufferItem.storage.put(key, oldValue + changeValue);
-                    internalBufferItem.onChanged();
-                }
-                return stack.copyWithCount((int) (count - changeValue));
-            } else {
-                return ItemStack.EMPTY;
-            }
-        }
-
-        @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate) {
-            return ItemStack.EMPTY;
-        }
+    @Override
+    protected NotifiableFluidTank createTank(int initialCapacity, int slots, Object... args) {
+        internalBufferFluid = new KeyStorage();
+        return MEPatternBufferOutputHandlers.fluids(this, internalBufferFluid);
     }
+
     @Persisted
     private KeyStorage internalBufferFluid;
     @Getter
     @Persisted
     @DescSynced // Maybe an Expansion Option in the future? a bit redundant for rn. Maybe Packdevs want to add their own
     // version.
-    private final CustomItemStackHandler patternInventory = new CustomItemStackHandler(MAX_PATTERN_COUNT);
+    private final CustomItemStackHandler patternInventory = new CustomItemStackHandler(MAX_PATTERN_COUNT) {
+        @Override
+        public void onContentsChanged(int slot) {
+            super.onContentsChanged(slot);
+            if (getLevel() != null && !isRemote()) onPatternChange(slot);
+        }
+    };
 
     @Getter
     @Persisted
@@ -223,7 +149,8 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
     @Persisted
     protected final InternalSlot[] internalInventory = new InternalSlot[MAX_PATTERN_COUNT];
 
-    private final BiMap<IPatternDetails, InternalSlot> detailsSlotMap = HashBiMap.create(MAX_PATTERN_COUNT);
+    private final Map<IPatternDetails, InternalSlot> detailsSlotMap = new LinkedHashMap<>();
+    private final IPatternDetails[] slotPatterns = new IPatternDetails[MAX_PATTERN_COUNT];
 
     @DescSynced
     @Persisted
@@ -231,6 +158,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
     private String customName = "";
 
     private boolean needPatternSync;
+    private boolean unloaded;
 
     @Persisted
     private final Set<BlockPos> proxies = new ObjectOpenHashSet<>();
@@ -256,17 +184,14 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
 
     @Override
     public void onLoad() {
+        unloaded = false;
         super.onLoad();
         if (getLevel() instanceof ServerLevel serverLevel) {
             serverLevel.getServer().tell(new TickTask(1, () -> {
-                for (int i = 0; i < patternInventory.getSlots(); i++) {
-                    var pattern = patternInventory.getStackInSlot(i);
-                    var patternDetails = PatternDetailsHelper.decodePattern(pattern, getLevel());
-                    if (patternDetails != null) {
-                        this.detailsSlotMap.put(patternDetails, this.internalInventory[i]);
-                    }
-                }
-                needPatternSync = true;
+                if (isInValid()) return;
+                rebuildPatterns();
+                updateSubscription();
+                for (var proxy : getProxies()) proxy.setBuffer(getPos());
             }));
         }
     }
@@ -321,23 +246,27 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
     }
 
     public void addProxy(MEPatternBufferProxyPlusPartMachine proxy) {
-        proxies.add(proxy.getPos());
+        if (proxies.add(proxy.getPos())) onChanged();
         proxyMachines.add(proxy);
     }
 
     public void removeProxy(MEPatternBufferProxyPlusPartMachine proxy) {
-        proxies.remove(proxy.getPos());
+        if (proxies.remove(proxy.getPos())) onChanged();
+        proxyMachines.remove(proxy);
+    }
+
+    void unloadProxy(MEPatternBufferProxyPlusPartMachine proxy) {
         proxyMachines.remove(proxy);
     }
 
     @UnmodifiableView
     public Set<MEPatternBufferProxyPlusPartMachine> getProxies() {
-        if (proxyMachines.size() != proxies.size()) {
-            proxyMachines.clear();
-            for (var pos : proxies) {
-                if (MetaMachine.getMachine(getLevel(), pos) instanceof MEPatternBufferProxyPlusPartMachine proxy) {
-                    proxyMachines.add(proxy);
-                }
+        proxyMachines.removeIf(proxy -> proxy.isInValid() || !getPos().equals(proxy.getBufferPos()));
+        for (var pos : proxies) {
+            if (getLevel().hasChunkAt(pos) &&
+                    MetaMachine.getMachine(getLevel(), pos) instanceof MEPatternBufferProxyPlusPartMachine proxy &&
+                    getPos().equals(proxy.getBufferPos())) {
+                proxyMachines.add(proxy);
             }
         }
         return Collections.unmodifiableSet(proxyMachines);
@@ -352,19 +281,38 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
     }
 
     private void onPatternChange(int index) {
-        if (isRemote()) return;
-
-        // remove old if applicable
-        var internalInv = internalInventory[index];
-        var newPattern = patternInventory.getStackInSlot(index);
-        var newPatternDetails = PatternDetailsHelper.decodePattern(newPattern, getLevel());
-        var oldPatternDetails = detailsSlotMap.inverse().get(internalInv);
-        detailsSlotMap.forcePut(newPatternDetails, internalInv);
-        if (oldPatternDetails != null && !oldPatternDetails.equals(newPatternDetails)) {
-            internalInv.refund();
+        var newDetails = PatternDetailsHelper.decodePattern(patternInventory.getStackInSlot(index), getLevel());
+        if (!Objects.equals(slotPatterns[index], newDetails)) {
+            internalInventory[index].refund();
+            slotPatterns[index] = newDetails;
         }
+        rebuildPatterns();
+    }
 
+    private void rebuildPatterns() {
+        detailsSlotMap.clear();
+        for (int i = 0; i < MAX_PATTERN_COUNT; i++) {
+            var details = PatternDetailsHelper.decodePattern(patternInventory.getStackInSlot(i), getLevel());
+            slotPatterns[i] = details;
+            // Equivalent patterns are valid in multiple slots; advertise them once.
+            if (details != null) detailsSlotMap.putIfAbsent(details, internalInventory[i]);
+        }
         needPatternSync = true;
+    }
+
+    @Override
+    public void onUnload() {
+        unloaded = true;
+        for (var proxy : Set.copyOf(proxyMachines)) proxy.onBufferUnload(this);
+        if (updateSubs != null) {
+            updateSubs.unsubscribe();
+            updateSubs = null;
+        }
+        super.onUnload();
+    }
+
+    boolean isBufferAvailable() {
+        return !unloaded && !isInValid();
     }
 
     //////////////////////////////////////
@@ -398,7 +346,6 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
         int index = 0;
         for (int y = 0; y < colSize; ++y) {
             for (int x = 0; x < rowSize; ++x) {
-                int finalI = index;
                 var slot = new AEPatternViewSlotWidget(patternInventory, index++, 8 + x * 18, 14 + y * 18)
                         .setOccupiedTexture(GuiTextures.SLOT)
                         .setItemHook(stack -> {
@@ -410,7 +357,6 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                             }
                             return stack;
                         })
-                        .setChangeListener(() -> onPatternChange(finalI))
                         .setBackground(GuiTextures.SLOT, GuiTextures.PATTERN_OVERLAY);
                 group.addWidget(slot);
             }
@@ -431,7 +377,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
 
     @Override
     public List<IPatternDetails> getAvailablePatterns() {
-        return detailsSlotMap.keySet().stream().filter(Objects::nonNull).toList();
+        return List.copyOf(detailsSlotMap.keySet());
     }
 
     @Override
@@ -442,7 +388,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
         }
 
         var slot = detailsSlotMap.get(patternDetails);
-        if (slot != null) {
+        if (slot != null && slot.canAccept(inputHolder)) {
             slot.pushPattern(patternDetails, inputHolder);
             return true;
         }
@@ -509,17 +455,18 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
         } else {
             if (!customName.isEmpty()) {
                 return new PatternContainerGroup(
-                        AEItemKey.of(GTAEMachines.ME_PATTERN_BUFFER.getItem()),
+                        AEItemKey.of(GTEMachines.ME_PATTERN_BUFFER_PLUS.getItem()),
                         Component.literal(customName),
                         Collections.emptyList());
             } else {
                 return new PatternContainerGroup(
-                        AEItemKey.of(GTAEMachines.ME_PATTERN_BUFFER.getItem()),
-                        GTAEMachines.ME_PATTERN_BUFFER.get().getDefinition().getItem().getDescription(),
+                        AEItemKey.of(GTEMachines.ME_PATTERN_BUFFER_PLUS.getItem()),
+                        GTEMachines.ME_PATTERN_BUFFER_PLUS.getItem().getDescription(),
                         Collections.emptyList());
             }
         }
     }
+    @Override
     protected boolean shouldSubscribe() {
         return isWorkingEnabled() && isOnline() && (!internalBufferItem.storage.isEmpty() || !internalBufferFluid.storage.isEmpty());
     }
@@ -538,127 +485,10 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
             this.updateInventorySubscription();
         }
     }
-    private class FluidStorageDelegate extends CustomFluidTank {
-
-        public FluidStorageDelegate() {
-            super(0);
-        }
-
-        @Override
-        public int getCapacity() {
-            return Integer.MAX_VALUE;
-        }
-
-        @Override
-        public void setFluid(FluidStack fluid) {
-            // NO-OP
-        }
-
-        @Override
-        public int fill(FluidStack resource, FluidAction action) {
-            var key = AEFluidKey.of(resource.getFluid(), resource.getTag());
-            int amount = resource.getAmount();
-            int oldValue = GTMath.saturatedCast(internalBufferFluid.storage.getOrDefault(key, 0));
-            int changeValue = Math.min(Integer.MAX_VALUE - oldValue, amount);
-            if (changeValue > 0 && action.execute()) {
-                internalBufferFluid.storage.put(key, oldValue + changeValue);
-                internalBufferFluid.onChanged();
-            }
-            return changeValue;
-        }
-
-        @Override
-        public boolean supportsFill(int tank) {
-            return false;
-        }
-
-        @Override
-        public boolean supportsDrain(int tank) {
-            return false;
-        }
-    }
-    @Override
-    protected NotifiableFluidTank createTank(int initialCapacity, int slots, Object... args) {
-        this.internalBufferFluid = new KeyStorage();
-        return new InaccessibleInfiniteTank(this);
-    }
-    private class InaccessibleInfiniteTank extends NotifiableFluidTank {
-
-        FluidStorageDelegate storage;
-
-        public InaccessibleInfiniteTank(MetaMachine holder) {
-            super(holder, List.of(new FluidStorageDelegate()), IO.OUT, IO.NONE);
-            internalBufferFluid.setOnContentsChanged(this::onContentsChanged);
-            storage = (FluidStorageDelegate) getStorages()[0];
-            allowSameFluids = true;
-        }
-
-        @Override
-        public int getTanks() {
-            return 128;
-        }
-
-        @Override
-        public @NotNull List<Object> getContents() {
-            return Collections.emptyList();
-        }
-
-        @Override
-        public double getTotalContentAmount() {
-            return 0;
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return true;
-        }
-
-        @Override
-        public @NotNull FluidStack getFluidInTank(int tank) {
-            return FluidStack.EMPTY;
-        }
-
-        @Override
-        public void setFluidInTank(int tank, @NotNull FluidStack fluidStack) {}
-
-        @Override
-        public int getTankCapacity(int tank) {
-            return storage.getCapacity();
-        }
-
-        @Override
-        public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
-            return true;
-        }
-
-        @Override
-        @Nullable
-        public List<FluidIngredient> handleRecipeInner(IO io, GTRecipe recipe, List<FluidIngredient> left,
-                                                       boolean simulate) {
-            if (!io.support(IO.OUT)) return left;
-            FluidAction action = simulate ? FluidAction.SIMULATE : FluidAction.EXECUTE;
-            for (var it = left.iterator(); it.hasNext();) {
-                var ingredient = it.next();
-                if (ingredient.isEmpty()) {
-                    it.remove();
-                    continue;
-                }
-
-                var fluids = ingredient.getStacks();
-                if (fluids.length == 0 || fluids[0].isEmpty()) {
-                    it.remove();
-                    continue;
-                }
-
-                FluidStack output = fluids[0];
-                ingredient.shrink(storage.fill(output, action));
-                if (ingredient.getAmount() <= 0) it.remove();
-            }
-            return left.isEmpty() ? null : left;
-        }
-    }
     @Override
     public void onMachineRemoved() {
+        for (InternalSlot slot : internalInventory) slot.refund();
+        for (var proxy : Set.copyOf(getProxies())) proxy.setBuffer(null);
         clearInventory(patternInventory);
         clearInventory(shareInventory);
         var grid = getMainNode().getGrid();
@@ -686,7 +516,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
 
     public BufferData mergeInternalSlots() {
         var items = new Object2LongOpenCustomHashMap<>(ItemStackHashStrategy.comparingAllButCount());
-        var fluids = new Object2LongOpenHashMap<FluidStack>();
+        var fluids = new Object2LongOpenCustomHashMap<FluidStack>(FluidStackHashStrategy.comparingAllButAmount());
         for (InternalSlot slot : internalInventory) {
             if (!slot.isItemEmpty()) {
                 slot.itemInventory.object2LongEntrySet().fastForEach(e -> items.addTo(e.getKey(), e.getLongValue()));
@@ -700,25 +530,21 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
 
     public class InternalSlot implements ITagSerializable<CompoundTag>, IContentChangeAware {
 
+        // LDLib wraps and replaces this callback when it tracks persisted fields.
+        // It must never point back to onContentsChanged(), or its wrapper recurses.
+        @Getter
+        @Setter
+        private Runnable onContentsChanged = () -> {};
         private final List<Runnable> listeners = new ArrayList<>(2);
 
         public void addListener(Runnable listener) {
             listeners.add(listener);
         }
 
-        @Override
-        public Runnable getOnContentsChanged() {
-            return this::onContentsChanged;
-        }
-
-        @Override
-        public void setOnContentsChanged(Runnable listener) {
-            listeners.add(listener);
-        }
-
         private final Object2LongOpenCustomHashMap<ItemStack> itemInventory = new Object2LongOpenCustomHashMap<>(
                 ItemStackHashStrategy.comparingAllButCount());
-        private final Object2LongOpenHashMap<FluidStack> fluidInventory = new Object2LongOpenHashMap<>();
+        private final Object2LongOpenCustomHashMap<FluidStack> fluidInventory = new Object2LongOpenCustomHashMap<>(
+                FluidStackHashStrategy.comparingAllButAmount());
         private List<ItemStack> itemStacks = null;
         private List<FluidStack> fluidStacks = null;
         protected NotifiableItemStackHandler circuitInventory;
@@ -743,113 +569,108 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
         }
 
         public long getTotalItemCount() {
-            if (itemInventory.isEmpty()) return 0;
-            long sum = 0;
-            for (long count : itemInventory.values()) {
-                sum += count;
-            }
-            return sum;
+            return total(itemInventory);
         }
 
         public long getTotalFluidAmount() {
-            if (fluidInventory.isEmpty()) return 0;
-            long sum = 0;
-            for (long amount : fluidInventory.values()) {
-                sum += amount;
+            return total(fluidInventory);
+        }
+
+        private long total(Object2LongMap<?> inventory) {
+            long total = 0;
+            for (long amount : inventory.values()) {
+                if (amount > Long.MAX_VALUE - total) return Long.MAX_VALUE;
+                total += amount;
             }
-            return sum;
+            return total;
         }
 
         public void onContentsChanged() {
             itemStacks = null;
             fluidStacks = null;
-            for (int i = 0; i < listeners.size(); i++) {
-                listeners.get(i).run();
-            }
+            onContentsChanged.run();
+            for (Runnable listener : List.copyOf(listeners)) listener.run();
         }
 
         private void add(AEKey what, long amount) {
-            if (amount <= 0L) return;
+            if (amount <= 0) return;
             if (what instanceof AEItemKey itemKey) {
                 var stack = itemKey.toStack();
-                if(stack.is(CustomItems.VIRTUAL_ITEM_PROVIDER.get())){
+                if (stack.is(CustomItems.VIRTUAL_ITEM_PROVIDER.get())) {
                     circuitInventory.setStackInSlot(0, VirtualItemProviderBehavior.getVirtualItem(stack));
-                }else {
-                    itemInventory.addTo(stack, amount);
+                } else {
+                    itemInventory.put(stack, Math.addExact(itemInventory.getLong(stack), amount));
                 }
             } else if (what instanceof AEFluidKey fluidKey) {
                 var stack = fluidKey.toStack(1);
-                fluidInventory.addTo(stack, amount);
+                fluidInventory.put(stack, Math.addExact(fluidInventory.getLong(stack), amount));
             }
+        }
+
+        private boolean canAccept(KeyCounter[] inputs) {
+            Map<AEKey, Long> remaining = new java.util.HashMap<>();
+            for (var input : inputs) {
+                for (var entry : input) {
+                    AEKey key = entry.getKey();
+                    long amount = entry.getLongValue();
+                    if (amount < 0) return false;
+                    long stored;
+                    if (key instanceof AEItemKey item) {
+                        if (item.toStack().is(CustomItems.VIRTUAL_ITEM_PROVIDER.get())) continue;
+                        stored = itemInventory.getLong(item.toStack());
+                    } else if (key instanceof AEFluidKey fluid) {
+                        stored = fluidInventory.getLong(fluid.toStack(1));
+                    } else {
+                        return false;
+                    }
+                    long space = remaining.getOrDefault(key, Long.MAX_VALUE - stored);
+                    if (amount > space) return false;
+                    remaining.put(key, space - amount);
+                }
+            }
+            return true;
         }
 
         public List<ItemStack> getItems() {
             if (itemStacks == null) {
-                itemStacks = new ArrayList<>();
-                itemInventory.object2LongEntrySet().stream()
-                        .map(e -> GTMath.splitStacks(e.getKey(), e.getLongValue()))
-                        .forEach(itemStacks::addAll);
+                itemStacks = new ArrayList<>(itemInventory.size());
+                for (var entry : itemInventory.object2LongEntrySet()) {
+                    itemStacks.add(entry.getKey().copyWithCount(GTMath.saturatedCast(entry.getLongValue())));
+                }
             }
             return itemStacks;
         }
 
         public List<FluidStack> getFluids() {
             if (fluidStacks == null) {
-                fluidStacks = new ArrayList<>();
-                fluidInventory.object2LongEntrySet().stream()
-                        .map(e -> GTMath.splitFluidStacks(e.getKey(), e.getLongValue()))
-                        .forEach(fluidStacks::addAll);
+                fluidStacks = new ArrayList<>(fluidInventory.size());
+                for (var entry : fluidInventory.object2LongEntrySet()) {
+                    var stack = entry.getKey().copy();
+                    stack.setAmount(GTMath.saturatedCast(entry.getLongValue()));
+                    fluidStacks.add(stack);
+                }
             }
             return fluidStacks;
         }
 
         public void refund() {
-            var network = getMainNode().getGrid();
-            if (network != null) {
-                MEStorage networkInv = network.getStorageService().getInventory();
-                var energy = network.getEnergyService();
-
-                for (var it = itemInventory.object2LongEntrySet().iterator(); it.hasNext();) {
-                    var entry = it.next();
-                    var stack = entry.getKey();
-                    var count = entry.getLongValue();
-                    if (stack.isEmpty() || count == 0) {
-                        it.remove();
-                        continue;
-                    }
-
-                    var key = AEItemKey.of(stack);
-                    if (key == null) continue;
-
-                    long inserted = StorageHelper.poweredInsert(energy, networkInv, key, count, actionSource);
-                    if (inserted > 0) {
-                        count -= inserted;
-                        if (count == 0) it.remove();
-                        else entry.setValue(count);
-                    }
-                }
-
-                for (var it = fluidInventory.object2LongEntrySet().iterator(); it.hasNext();) {
-                    var entry = it.next();
-                    var stack = entry.getKey();
-                    var amount = entry.getLongValue();
-                    if (stack.isEmpty() || amount == 0) {
-                        it.remove();
-                        continue;
-                    }
-
-                    var key = AEFluidKey.of(stack);
-                    if (key == null) continue;
-
-                    long inserted = StorageHelper.poweredInsert(energy, networkInv, key, amount, actionSource);
-                    if (inserted > 0) {
-                        amount -= inserted;
-                        if (amount == 0) it.remove();
-                        else entry.setValue(amount);
-                    }
-                }
-                onContentsChanged();
+            // Keep refunds in the persisted output queue even when ME is offline or full.
+            for (var it = itemInventory.object2LongEntrySet().iterator(); it.hasNext();) {
+                var entry = it.next();
+                long inserted = MEPatternBufferOutputHandlers.insert(internalBufferItem,
+                        AEItemKey.of(entry.getKey()), entry.getLongValue(), false);
+                if (inserted == entry.getLongValue()) it.remove();
+                else entry.setValue(entry.getLongValue() - inserted);
             }
+            for (var it = fluidInventory.object2LongEntrySet().iterator(); it.hasNext();) {
+                var entry = it.next();
+                long inserted = MEPatternBufferOutputHandlers.insert(internalBufferFluid,
+                        AEFluidKey.of(entry.getKey()), entry.getLongValue(), false);
+                if (inserted == entry.getLongValue()) it.remove();
+                else entry.setValue(entry.getLongValue() - inserted);
+            }
+            circuitInventory.setStackInSlot(0, ItemStack.EMPTY);
+            onContentsChanged();
         }
 
         public void pushPattern(IPatternDetails patternDetails, KeyCounter[] inputHolder) {
@@ -858,6 +679,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
         }
 
         public @Nullable List<Ingredient> handleItemInternal(List<Ingredient> left, boolean simulate) {
+            var inventory = simulate ? itemInventory.clone() : itemInventory;
             boolean changed = false;
             for (var it = left.listIterator(); it.hasNext();) {
                 var ingredient = it.next();
@@ -872,8 +694,8 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                     continue;
                 }
 
-                int amount = items[0].getCount();
-                for (var it2 = itemInventory.object2LongEntrySet().iterator(); it2.hasNext();) {
+                int amount = ingredient instanceof SizedIngredient sized ? sized.getAmount() : items[0].getCount();
+                for (var it2 = inventory.object2LongEntrySet().iterator(); it2.hasNext();) {
                     var entry = it2.next();
                     var stack = entry.getKey();
                     var count = entry.getLongValue();
@@ -883,7 +705,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                     }
                     if (!ingredient.test(stack)) continue;
                     int extracted = Math.min(GTMath.saturatedCast(count), amount);
-                    if (!simulate && extracted > 0) {
+                    if (extracted > 0) {
                         changed = true;
                         count -= extracted;
                         if (count == 0) it2.remove();
@@ -905,11 +727,12 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                     }
                 }
             }
-            if (changed) onContentsChanged();
+            if (changed && !simulate) onContentsChanged();
             return left.isEmpty() ? null : left;
         }
 
         public @Nullable List<FluidIngredient> handleFluidInternal(List<FluidIngredient> left, boolean simulate) {
+            var inventory = simulate ? fluidInventory.clone() : fluidInventory;
             boolean changed = false;
             for (var it = left.listIterator(); it.hasNext();) {
                 var ingredient = it.next();
@@ -924,8 +747,8 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                     continue;
                 }
 
-                int amount = fluids[0].getAmount();
-                for (var it2 = fluidInventory.object2LongEntrySet().iterator(); it2.hasNext();) {
+                int amount = ingredient.getAmount();
+                for (var it2 = inventory.object2LongEntrySet().iterator(); it2.hasNext();) {
                     var entry = it2.next();
                     var stack = entry.getKey();
                     var count = entry.getLongValue();
@@ -935,7 +758,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                     }
                     if (!ingredient.test(stack)) continue;
                     int extracted = Math.min(GTMath.saturatedCast(count), amount);
-                    if (!simulate && extracted > 0) {
+                    if (extracted > 0) {
                         changed = true;
                         count -= extracted;
                         if (count == 0) it2.remove();
@@ -954,7 +777,7 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                 }
             }
 
-            if (changed) onContentsChanged();
+            if (changed && !simulate) onContentsChanged();
             return left.isEmpty() ? null : left;
         }
 
@@ -978,18 +801,24 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
             }
             if (!fluidsTag.isEmpty()) tag.put("fluidInventory", fluidsTag);
 
+            tag.put("circuitInventory", circuitInventory.storage.serializeNBT());
             return tag;
         }
 
         @Override
         public void deserializeNBT(CompoundTag tag) {
+            itemInventory.clear();
+            fluidInventory.clear();
+            var circuitTag = tag.getCompound("circuitInventory").copy();
+            circuitTag.putInt("Size", 1);
+            circuitInventory.storage.deserializeNBT(circuitTag);
             ListTag items = tag.getList("inventory", Tag.TAG_COMPOUND);
             for (Tag t : items) {
                 if (!(t instanceof CompoundTag ct)) continue;
                 var stack = ItemStack.of(ct);
                 var count = ct.getLong("real");
                 if (!stack.isEmpty() && count > 0) {
-                    itemInventory.put(stack, count);
+                    itemInventory.put(stack.copyWithCount(1), count);
                 }
             }
 
@@ -999,9 +828,11 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
                 var stack = FluidStack.loadFluidStackFromNBT(ct);
                 var amount = ct.getLong("real");
                 if (!stack.isEmpty() && amount > 0) {
+                    stack.setAmount(1);
                     fluidInventory.put(stack, amount);
                 }
             }
+            onContentsChanged();
         }
     }
 }

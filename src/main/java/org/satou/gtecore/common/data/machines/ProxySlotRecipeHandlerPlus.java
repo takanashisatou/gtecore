@@ -114,6 +114,7 @@ public final class ProxySlotRecipeHandlerPlus {
         }
 
         public void setProxy(IRecipeHandlerTrait<Ingredient> proxy) {
+            if (this.proxy == proxy) return;
             this.proxy = proxy;
             if (proxySub != null) {
                 proxySub.unsubscribe();
@@ -122,6 +123,7 @@ public final class ProxySlotRecipeHandlerPlus {
             if (proxy != null) {
                 proxySub = proxy.addChangedListener(this::notifyListeners);
             }
+            notifyListeners();
         }
 
         @Override
@@ -169,6 +171,7 @@ public final class ProxySlotRecipeHandlerPlus {
         }
 
         public void setProxy(IRecipeHandlerTrait<FluidIngredient> proxy) {
+            if (this.proxy == proxy) return;
             this.proxy = proxy;
             if (proxySub != null) {
                 proxySub.unsubscribe();
@@ -177,6 +180,7 @@ public final class ProxySlotRecipeHandlerPlus {
             if (proxy != null) {
                 proxySub = proxy.addChangedListener(this::notifyListeners);
             }
+            notifyListeners();
         }
 
         @Override
