@@ -24,11 +24,12 @@ public final class InternalSlotRecipeHandlerPlus {
     private final RecipeHandlerList sharedHandlerList;
 
     public InternalSlotRecipeHandlerPlus(MEPatternBufferPlusPartMachine buffer, MEPatternBufferPlusPartMachine.InternalSlot[] slots) {
-        this.slotHandlers = new ArrayList<>(slots.length);
+        var handlers = new ArrayList<RecipeHandlerList>(slots.length);
         for (int i = 0; i < slots.length; i++) {
             var rhl = new SlotRHL(buffer, slots[i], i);
-            slotHandlers.add(rhl);
+            handlers.add(rhl);
         }
+        this.slotHandlers = List.copyOf(handlers);
         this.sharedHandlerList = RecipeHandlerList.of(IO.IN, buffer.getCircuitInventory(), buffer.getShareInventory(), buffer.getShareTank());
         this.sharedHandlerList.setGroup(RecipeHandlerGroupDistinctness.BYPASS_DISTINCT);
     }
