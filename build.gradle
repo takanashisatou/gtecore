@@ -30,7 +30,8 @@ group = maven_group
 // `3.0.7-nightly-0c30e47-dirty`, which does not correspond to any commit and must
 // never be published. That is the signal to notice, not something to strip.
 //
-// Only the nightly version carries a build number. `gtm-reborn` (8.3.2) and
+// Only nightly and snapshot versions carry a build number. Release versions
+// stay equal to mod_version. `gtm-reborn` (8.3.2) and
 // `gt--` (1.3.5.1) keep clean release versions - a SHA in those would make every
 // build a different version and break any version-range dependency on them.
 def buildNumber = providers.provider {
@@ -57,7 +58,7 @@ boolean isSnapshot = System.getenv("SNAPSHOT")
 // Reading the provider (rather than shelling out directly) is still what makes
 // this configuration-cache friendly: Gradle tracks the exec as an input, so a new
 // commit invalidates the cache entry instead of reusing a stale hash.
-def sha = buildNumber.get()
+def sha = (mod_version.endsWith('-nightly') || isSnapshot) ? buildNumber.get() : ''
 version = "${mod_version}" + (isSnapshot ? "-SNAPSHOT" : "") + (sha ? "-${sha}" : "")
 boolean isCI = System.getenv("CI") != null
 
