@@ -38,6 +38,7 @@ public class GTERecipe {
                 IMAGINARY_LITHOGRAPHY_HANDLER.init(provider);
                 IMAGINARY_CIRCUIT_HANDLER.init(provider);
                 IMAGINARY_EXPANSION_HANDLER.init(provider);
+                SUPER_FUSION_II_HANDLER.init(provider);
                 /*
                  * gtr.assembly_line('gtecore:rare_earth_processing_plant')
                  * .itemInputs('8x gtceu:large_sifting_funnel',

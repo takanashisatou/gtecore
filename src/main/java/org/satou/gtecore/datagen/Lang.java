@@ -47,6 +47,15 @@ public class Lang {
                                 "支持1TOC,再也不用慢慢等聚变了!");
                 provider.add("block.gtecore.super_fusion_reactor", "Super Fusion Reactor", "超级聚变反应堆");
                 provider.add("gtecore.super_fusion_reactor_recipe", "Super Fusion Reactor", "超级聚变反应堆");
+                provider.add("block.gtecore.super_fusion_reactor_ii", "Super Fusion Reactor II", "超级聚变反应堆 II");
+                provider.add("gtecore.super_fusion_reactor_ii", "Super Fusion Reactor II", "超级聚变反应堆 II");
+                provider.add("com.gtecore.tooltips.super_fusion_reactor_ii.0",
+                                "§7UHV Eight Trigrams upgrade: produces Yin-Yang Fusion Alloy for UEV machine casings",
+                                "§7UHV八卦阶段升级：产出阴阳聚变合金，用于制作UEV机械方块");
+                provider.add("com.gtecore.tooltips.super_fusion_reactor_ii.1",
+                                "§7Runs Super Fusion I recipes too; retains the 15×15×3 ring with Yin-Yang coils",
+                                "§7兼容超级聚变I配方，沿用15×15×3环形结构并搭配阴阳线圈");
+                provider.add("material.gtecore.yin_yang_fusion_alloy", "Yin-Yang Fusion Alloy", "阴阳聚变合金");
                 provider.add("block.gtecore.distillation_tower_easy", "Distillation Tower Easy", "蒸馏塔简单版");
                 provider.add("block.gtecore.super_string_casing", "§d Super String Casing", "§d超弦外壳");
                 provider.add("block.gtecore.super_string_mixer", "§d Super String Mixer", "§d超弦搅拌机");

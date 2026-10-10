@@ -26,6 +26,13 @@ public class GTEMaterials {
                         .liquid(new FluidBuilder().textures(true, false).temperature(2000))
                         .buildAndRegister();
 
+        public static Material YinYangFusionAlloy = new Material.Builder(GTECore.id("yin_yang_fusion_alloy"))
+                        .ingot()
+                        .liquid(new FluidBuilder().temperature(6000))
+                        .color(0x766CBF)
+                        .flags(MaterialFlags.GENERATE_PLATE, MaterialFlags.DISABLE_DECOMPOSITION)
+                        .buildAndRegister();
+
         public static Material DistilledPurifiedWater = new Material.Builder(GTECore.id("distilled_purified_water"))
                         .fluid()
                         .color(0x4A94FF)

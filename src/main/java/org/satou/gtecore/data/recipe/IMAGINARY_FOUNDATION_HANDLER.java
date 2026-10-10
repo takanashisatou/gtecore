@@ -26,6 +26,7 @@ public final class IMAGINARY_FOUNDATION_HANDLER {
     public static void init(@NotNull Consumer<FinishedRecipe> provider) {
         // Construction materials must be obtainable before the first Tree of Imaginary exists.
         ASSEMBLY_LINE_RECIPES.recipeBuilder("imaginary_casing")
+                .inputItems(GTBlocks.MACHINE_CASING_UEV, 8)
                 .inputItems(GTEBlocks.EIGHT_TRIGMAS_CASING, 8)
                 .inputItems(plate, Neutronium, 8)
                 .inputItems(GTItems.ELECTRIC_PUMP_UEV)
