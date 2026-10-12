@@ -13,6 +13,7 @@ import com.gregtechceu.gtceu.common.data.models.GTModels;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.DistillationTowerMachine;
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.FluidDrillMachine;
 import com.lowdragmc.lowdraglib.test.TestJava;
+import dev.arbor.gtnn.common.machine.multiblock.NNPartAbility;
 import dev.arbor.gtnn.data.GTNNRecipeTypes;
 import dev.arbor.gtnn.data.GTNNRecipes;
 import dev.arbor.gtnn.data.block.GTNNBlocks;
@@ -1344,6 +1345,7 @@ public class GTEMultiMachine {
                     .where("K", easy("gtceu:high_temperature_smelting_casing")
                             .or(autoAbilities(definition.getRecipeTypes()))
                             .or(autoAbilities(true,false,true))
+                            .or(Predicates.abilities(NNPartAbility.Companion.getCATALYST()).setMaxGlobalLimited(2))
                             .or(Predicates.abilities(PartAbility.INPUT_LASER)))
                     .where("L", easy("gtceu:molybdenum_disilicide_coil_block"))
                     .where("M", easy("gtceu:vibration_safe_casing"))

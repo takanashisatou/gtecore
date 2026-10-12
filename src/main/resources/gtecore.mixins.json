@@ -17,6 +17,7 @@
     "GuideMEMixin",
     "LargeBoilerMachineMixin",
     "MinecraftServerMixin",
+    "PlantCasingConditionMixin",
     "PredicatesMixin",
     "SimpleGeneratorMixin",
     "SpawnMixin",
