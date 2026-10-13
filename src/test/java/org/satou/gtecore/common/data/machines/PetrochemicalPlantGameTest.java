@@ -18,10 +18,12 @@ import dev.arbor.gtnn.common.recipe.PlantCasingCondition;
 import dev.arbor.gtnn.data.GTNNMachines;
 import dev.arbor.gtnn.data.GTNNRecipeTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
@@ -36,8 +38,20 @@ public class PetrochemicalPlantGameTest {
 
     @GameTest(template = "empty", batch = "petrochemicalStructure", required = true, timeoutTicks = 400)
     public static void realStructureAcceptsTwoOptionalCatalystHatches(GameTestHelper helper) {
-        // Keep the 41-block-tall structure above the GameTest flat-world terrain.
-        var pos = helper.absolutePos(new BlockPos(0, 160, 0));
+        var origin = helper.absolutePos(BlockPos.ZERO);
+        // The empty template only clears its own small footprint. CI worlds can
+        // have terrain above the relative test height, and autobuild preserves it.
+        // Reserve an empty site that fits the whole structure below the build limit.
+        var pos = new BlockPos(origin.getX(), helper.getLevel().getMaxBuildHeight() - 70, origin.getZ());
+        // Model the obstructing terrain that exposed the CI failure, even in a flat world.
+        for (var direction : Direction.values()) {
+            helper.getLevel().setBlock(pos.relative(direction), Blocks.STONE.defaultBlockState(), 2);
+        }
+        for (var clear : BlockPos.betweenClosed(pos.offset(-44, -44, -44), pos.offset(44, 44, 44))) {
+            if (!helper.getLevel().getBlockState(clear).isAir()) {
+                helper.getLevel().setBlock(clear, Blocks.AIR.defaultBlockState(), 2);
+            }
+        }
         helper.getLevel().setBlockAndUpdate(pos,
                 GTEMultiMachine.INTEGRATED_PETROCHEMICAL_PLANT.getBlock().defaultBlockState());
         var machine = (WorkableElectricMultiblockMachine) MetaMachine.getMachine(helper.getLevel(), pos);
