@@ -237,8 +237,8 @@ public class WATER_PURIFICATION_HANDLER {
                 .EUt(VA[UEV])
                 .save(provider);
 
-        // T2 UV-Oxidation Purification Unit for the UEV Imaginary-series water supply.
-        ASSEMBLER_RECIPES.recipeBuilder("t2_uv_oxidation_purification_unit")
+        // Both fluids require an assembly line; a single-block assembler has only one input tank.
+        ASSEMBLY_LINE_RECIPES.recipeBuilder("t2_uv_oxidation_purification_unit")
                 .inputItems(GTBlocks.CASING_PTFE_INERT.asStack(4))
                 .inputItems(GTBlocks.CLEANROOM_GLASS.asStack(6))
                 .inputItems(GTBlocks.CASING_LAMINATED_GLASS.asStack(6))
