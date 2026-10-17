@@ -219,11 +219,13 @@ public class ImaginaryCircuitGameTest {
                     helper.absolutePos(new BlockPos(2, 1, 0)));
             // Drive exactly the registered duration through native tick IO. GTMThings' infinity
             // container itself implements non-depleting EU; no synthetic refill is necessary.
-            // suspendAfterFinish prevents rescheduling, but native onRecipeFinish may retain
-            // WORKING with completed progress, so SUSPEND is not a completion contract.
+            // The final native tick may finish the scheduled shutdown and clear the cycle
+            // before serverTick returns, rather than retaining the completed progress.
             for (int tick = 0; tick < recipe.duration; tick++) {
                 logic.serverTick();
-                helper.assertTrue(logic.getProgress() == tick + 1,
+                boolean finishedAndStopped = tick + 1 == recipe.duration && logic.isSuspend() &&
+                        logic.getProgress() == 0 && logic.getDuration() == 0 && !logic.isActive();
+                helper.assertTrue(finishedAndStopped || logic.getProgress() == tick + 1,
                         "Recipe did not advance at tick " + tick + ": " + recipe.id +
                                 ", progress=" + logic.getProgress() + "/" + logic.getDuration() +
                                 ", status=" + logic.getStatus() +
