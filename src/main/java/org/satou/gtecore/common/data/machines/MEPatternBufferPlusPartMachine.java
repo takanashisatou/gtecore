@@ -199,11 +199,11 @@ public class MEPatternBufferPlusPartMachine extends MEBusPartPlusMachine
     @Override
     public List<RecipeHandlerList> getRecipeHandlers() {
         var slotHandlers = internalRecipeHandler.getSlotHandlers();
-        var superHandlers = super.getRecipeHandlers();
-        List<RecipeHandlerList> allHandlers = new ArrayList<>(slotHandlers.size() + 1 + superHandlers.size());
+        List<RecipeHandlerList> allHandlers = new ArrayList<>(slotHandlers.size() + 2);
         allHandlers.addAll(slotHandlers);
         allHandlers.add(internalRecipeHandler.getSharedHandlerList());
-        allHandlers.addAll(superHandlers);
+        // The parent aggregates every recipe trait, which would subscribe the inputs again.
+        allHandlers.add(RecipeHandlerList.of(IO.OUT, getPaintingColor(), getInventory(), tank));
         return allHandlers;
     }
 

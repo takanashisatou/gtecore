@@ -103,11 +103,11 @@ public class MEPatternBufferProxyPlusPartMachine extends MEBusPartPlusMachine
     @Override
     public List<RecipeHandlerList> getRecipeHandlers() {
         var slotHandlers = proxySlotRecipeHandler.getProxySlotHandlers();
-        var superHandlers = super.getRecipeHandlers();
-        List<RecipeHandlerList> allHandlers = new ArrayList<>(slotHandlers.size() + 1 + superHandlers.size());
+        List<RecipeHandlerList> allHandlers = new ArrayList<>(slotHandlers.size() + 2);
         allHandlers.addAll(slotHandlers);
         allHandlers.add(proxySlotRecipeHandler.getProxySharedHandlerList());
-        allHandlers.addAll(superHandlers);
+        // Keep shared and per-slot input subscriptions out of the output group.
+        allHandlers.add(RecipeHandlerList.of(IO.OUT, getPaintingColor(), getInventory(), tank));
         return allHandlers;
     }
 
