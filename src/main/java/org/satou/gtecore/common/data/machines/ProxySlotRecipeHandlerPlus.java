@@ -30,15 +30,19 @@ public final class ProxySlotRecipeHandlerPlus {
     private final ProxyFluidRecipeHandlerPlus proxySharedFluid;
 
     public ProxySlotRecipeHandlerPlus(MEPatternBufferProxyPlusPartMachine machine, int slots) {
-        proxySlotHandlers = new ArrayList<>(slots);
-        for (int i = 0; i < slots; ++i) {
-            proxySlotHandlers.add(new ProxyRHL(machine));
-        }
         proxySharedCircuit = new ProxyItemRecipeHandlerPlus(machine);
         proxySharedItem = new ProxyItemRecipeHandlerPlus(machine);
         proxySharedFluid = new ProxyFluidRecipeHandlerPlus(machine);
+        var sharedCircuit = new SharedRecipeHandlerView<>(proxySharedCircuit);
+        var sharedItems = new SharedRecipeHandlerView<>(proxySharedItem);
+        var sharedFluids = new SharedRecipeHandlerView<>(proxySharedFluid);
+        proxySlotHandlers = new ArrayList<>(slots);
+        for (int i = 0; i < slots; ++i) {
+            proxySlotHandlers.add(new ProxyRHL(machine, sharedCircuit, sharedItems, sharedFluids));
+        }
         proxySharedHandlerList = RecipeHandlerList.of(IO.IN, proxySharedCircuit, proxySharedItem, proxySharedFluid);
-        proxySharedHandlerList.setGroup(RecipeHandlerGroupDistinctness.BYPASS_DISTINCT);
+        // Keep the shared-only candidate separate from slots that already expose the same storage.
+        proxySharedHandlerList.setGroup(RecipeHandlerGroupDistinctness.BUS_DISTINCT);
     }
 
     public void updateProxy(MEPatternBufferPlusPartMachine patternBuffer) {
@@ -69,12 +73,14 @@ public final class ProxySlotRecipeHandlerPlus {
         private final ProxyFluidRecipeHandlerPlus slotFluid;
         private final ProxyItemRecipeHandlerPlus circuitInventory;
 
-        public ProxyRHL(MEPatternBufferProxyPlusPartMachine machine) {
+        public ProxyRHL(MEPatternBufferProxyPlusPartMachine machine,
+                        IRecipeHandler<Ingredient> sharedCircuit, IRecipeHandler<Ingredient> sharedItems,
+                        IRecipeHandler<FluidIngredient> sharedFluids) {
             super(IO.IN);
             slotItem = new ProxyItemRecipeHandlerPlus(machine);
             slotFluid = new ProxyFluidRecipeHandlerPlus(machine);
             circuitInventory = new ProxyItemRecipeHandlerPlus(machine);
-            addHandlers(slotItem, slotFluid, circuitInventory);
+            addHandlers(slotItem, slotFluid, circuitInventory, sharedCircuit, sharedItems, sharedFluids);
             this.setGroup(RecipeHandlerGroupDistinctness.BUS_DISTINCT);
         }
 

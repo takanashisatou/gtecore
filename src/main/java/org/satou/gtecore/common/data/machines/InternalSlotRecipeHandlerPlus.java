@@ -24,14 +24,18 @@ public final class InternalSlotRecipeHandlerPlus {
     private final RecipeHandlerList sharedHandlerList;
 
     public InternalSlotRecipeHandlerPlus(MEPatternBufferPlusPartMachine buffer, MEPatternBufferPlusPartMachine.InternalSlot[] slots) {
+        var sharedCircuit = new SharedRecipeHandlerView<>(buffer.getCircuitInventory());
+        var sharedItems = new SharedRecipeHandlerView<>(buffer.getShareInventory());
+        var sharedFluids = new SharedRecipeHandlerView<>(buffer.getShareTank());
         var handlers = new ArrayList<RecipeHandlerList>(slots.length);
         for (int i = 0; i < slots.length; i++) {
-            var rhl = new SlotRHL(buffer, slots[i], i);
+            var rhl = new SlotRHL(buffer, slots[i], i, sharedCircuit, sharedItems, sharedFluids);
             handlers.add(rhl);
         }
         this.slotHandlers = List.copyOf(handlers);
         this.sharedHandlerList = RecipeHandlerList.of(IO.IN, buffer.getCircuitInventory(), buffer.getShareInventory(), buffer.getShareTank());
-        this.sharedHandlerList.setGroup(RecipeHandlerGroupDistinctness.BYPASS_DISTINCT);
+        // Slots already include these inputs; bypassing them would count shared storage twice.
+        this.sharedHandlerList.setGroup(RecipeHandlerGroupDistinctness.BUS_DISTINCT);
     }
 
     @Getter
@@ -41,12 +45,15 @@ public final class InternalSlotRecipeHandlerPlus {
         private final SlotFluidRecipeHandler fluidRecipeHandler;
         private final NotifiableItemStackHandler circuitInventory;
 
-        public SlotRHL(MEPatternBufferPlusPartMachine buffer, MEPatternBufferPlusPartMachine.InternalSlot slot, int idx) {
+        public SlotRHL(MEPatternBufferPlusPartMachine buffer, MEPatternBufferPlusPartMachine.InternalSlot slot, int idx,
+                       IRecipeHandler<Ingredient> sharedCircuit, IRecipeHandler<Ingredient> sharedItems,
+                       IRecipeHandler<FluidIngredient> sharedFluids) {
             super(IO.IN);
             itemRecipeHandler = new SlotItemRecipeHandler(buffer, slot, idx);
             fluidRecipeHandler = new SlotFluidRecipeHandler(buffer, slot, idx);
             circuitInventory = slot.circuitInventory;
-            addHandlers(itemRecipeHandler, fluidRecipeHandler, circuitInventory);
+            // Parallel calculation inspects each distinct group without merging bypass handlers.
+            addHandlers(itemRecipeHandler, fluidRecipeHandler, circuitInventory, sharedCircuit, sharedItems, sharedFluids);
             this.setGroup(RecipeHandlerGroupDistinctness.BUS_DISTINCT);
         }
 
