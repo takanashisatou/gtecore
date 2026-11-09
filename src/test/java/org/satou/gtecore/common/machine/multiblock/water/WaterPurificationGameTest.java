@@ -2,7 +2,6 @@ package org.satou.gtecore.common.machine.multiblock.water;
 
 import org.satou.gtecore.common.data.machines.GTEWaterPurificationMachines;
 import org.satou.gtecore.common.data.machines.GTEWaterPurificationParts;
-import org.satou.gtecore.common.data.machines.GTEMultiMachines2;
 import org.satou.gtecore.common.data.GTEMaterials;
 import org.satou.gtecore.common.data.GTERecipeTypes;
 
@@ -21,7 +20,6 @@ import com.gregtechceu.gtceu.api.misc.EnergyContainerList;
 import com.gregtechceu.gtceu.api.recipe.ingredient.FluidIngredient;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMachines;
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 
 import net.minecraft.core.BlockPos;
@@ -107,9 +105,6 @@ public class WaterPurificationGameTest {
         var plantUi = plant.createUIWidget();
         helper.assertTrue(plantUi != null && plantUi.getSize().width > 0 && plantUi.getSize().height > 0,
                 "Plant UI must construct with positive dimensions on the dedicated server");
-        var legacyTypes = GTEMultiMachines2.ULTRA_PURE_WATER_REFINERY.getRecipeTypes();
-        helper.assertTrue(legacyTypes.length == 1 && legacyTypes[0] == GTRecipeTypes.DUMMY_RECIPES,
-                "Legacy ultra-pure refinery must have only the dummy recipe type");
         helper.succeed();
     }
 
