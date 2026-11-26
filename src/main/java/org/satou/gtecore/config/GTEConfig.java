@@ -31,4 +31,9 @@ public class GTEConfig {
     @Configurable
     public  boolean superPeace = false;
 
+    @Configurable
+    @Configurable.Comment({ "Duration in seconds for Structure Testing Terminal world highlights.", "Default: 20" })
+    @Configurable.Range(min = 1, max = 600)
+    public int structureHighlightDurationSeconds = 20;
+
 }

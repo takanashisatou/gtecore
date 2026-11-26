@@ -111,15 +111,25 @@ public class EdiPurificationUnitMachine extends LinkedPurificationUnitMachine {
         if (!(machine instanceof EdiPurificationUnitMachine unit) || !unit.isFormed() || unit.controlHatch() == null) {
             return ModifierFunction.NULL;
         }
+        if (!unit.acceptsPurificationRecipe(recipe)) return ModifierFunction.NULL;
         boolean regeneration = recipe.data.getBoolean("ediRegeneration");
         long perParallel = loadPerParallel(recipe);
         if (perParallel <= 0 || recipe.duration <= 0 || regeneration != unit.isRegenerationRequested()) {
             return ModifierFunction.NULL;
         }
+        if (unit.getPlant() == null) {
+            return ModifierFunction.cancel(Component.translatable("gtecore.water.edi.unlinked"));
+        }
         int parallel = unit.computeParallel(recipe);
+        if (parallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+        }
         parallel = regeneration ? unit.edi.limitRegenerationParallel(perParallel, parallel) :
                 unit.edi.limitProductionParallel(perParallel, parallel);
-        if (parallel <= 0) return ModifierFunction.NULL;
+        if (parallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable(
+                    regeneration ? "gtecore.water.edi.clean" : "gtecore.water.edi.full"));
+        }
         long load = perParallel * parallel;
         var planned = new Batch(regeneration, regeneration ? Math.min(load, unit.edi.load()) : load, parallel);
         var contents = ModifierFunction.builder()
@@ -329,7 +339,7 @@ public class EdiPurificationUnitMachine extends LinkedPurificationUnitMachine {
                 !isRegenerationRequested() && edi.remainingCapacity() == 0 ? "full" : "waiting";
         lines.add(Component.translatable("gtecore.water.edi." + status));
         lines.add(Component.translatable("com.gtecore.tooltips.water_unit.energy", getStoredLinkedEnergy(), getLinkedEnergyCapacity()));
-        if (getRecipeLogic().isWaiting()) lines.addAll(getRecipeLogic().getFancyTooltip());
+        if (getRecipeLogic().getWaitingReason() != null) lines.addAll(getRecipeLogic().getFancyTooltip());
     }
 
     private ComponentPanelWidget panel(int x, int y, int width, Consumer<List<Component>> supplier) {

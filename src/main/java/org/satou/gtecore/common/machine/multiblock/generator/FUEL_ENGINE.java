@@ -167,6 +167,9 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
         if (!EUt.isEmpty()) {
             int maxParallel = 2000000000; // get maximum parallel
             int actualParallel = FUEL_ENGINE.getParallelAmount(engineMachine, recipe, maxParallel);
+            if (actualParallel <= 0) {
+                return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+            }
             double eutMultiplier = actualParallel * engineMachine.getProductionBoost();
             return ModifierFunction.builder()
                     .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -274,7 +277,8 @@ public class FUEL_ENGINE extends WorkableElectricMultiblockMachine implements IT
             builder.addCustom(tl -> tl.add(Component.translatable(key).withStyle(ChatFormatting.AQUA)));
         }
 
-        builder.addWorkingStatusLine();
+        builder.addWorkingStatusLine()
+                .addWaitingReasonLine(recipeLogic.getWaitingReason());
     }
 
     @Nullable

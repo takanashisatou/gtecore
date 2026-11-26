@@ -289,8 +289,19 @@ public class LinkedPurificationUnitMachine extends WorkableElectricMultiblockMac
         if (!(machine instanceof LinkedPurificationUnitMachine unit)) {
             return RecipeModifier.nullWrongType(LinkedPurificationUnitMachine.class, machine);
         }
+        if (!unit.acceptsPurificationRecipe(recipe)) return ModifierFunction.NULL;
+        if (unit.getPlant() == null) {
+            return ModifierFunction.cancel(Component.translatable("com.gtecore.tooltips.water_unit.unlinked"));
+        }
+        long recipeEUt = Math.max(1L, recipe.getInputEUt().getTotalEU());
+        if (unit.getEUtBudget() < recipeEUt) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_in")
+                    .append(": ").append(EURecipeCapability.CAP.getName()));
+        }
         int parallel = unit.computeParallel(recipe);
-        if (parallel <= 0) return ModifierFunction.NULL;
+        if (parallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+        }
         if (parallel == 1) return ModifierFunction.IDENTITY;
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(parallel))
