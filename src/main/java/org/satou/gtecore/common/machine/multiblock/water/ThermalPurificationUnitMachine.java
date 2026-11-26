@@ -179,7 +179,20 @@ public class ThermalPurificationUnitMachine extends LinkedPurificationUnitMachin
     }
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
-        if (!(machine instanceof ThermalPurificationUnitMachine unit) || !unit.canProcessThermally()) {
+        if (!(machine instanceof ThermalPurificationUnitMachine unit)) {
+            return ModifierFunction.NULL;
+        }
+        if (!ConfigHolder.INSTANCE.machines.enableMaintenance) {
+            return ModifierFunction.cancel(Component.translatable("gtecore.water.thermal.maintenance_disabled"));
+        }
+        if (unit.thermal.isFaulted()) {
+            return ModifierFunction.cancel(Component.translatable("gtecore.water.thermal.fault_hint"));
+        }
+        var maintenance = unit.maintenanceHatch();
+        if (maintenance != null && maintenance.hasMaintenanceProblems()) {
+            return ModifierFunction.cancel(Component.translatable("gtecore.water.thermal.maintenance_required"));
+        }
+        if (!unit.canProcessThermally()) {
             return ModifierFunction.NULL;
         }
         return LinkedPurificationUnitMachine.recipeModifier(machine, recipe);

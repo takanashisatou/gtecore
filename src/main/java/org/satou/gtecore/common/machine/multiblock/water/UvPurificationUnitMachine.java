@@ -100,11 +100,20 @@ public class UvPurificationUnitMachine extends LinkedPurificationUnitMachine {
 
     public static ModifierFunction recipeModifier(@NotNull MetaMachine machine, @NotNull GTRecipe recipe) {
         if (!(machine instanceof UvPurificationUnitMachine unit) || !unit.isFormed()) return ModifierFunction.NULL;
+        if (!unit.acceptsPurificationRecipe(recipe)) return ModifierFunction.NULL;
+        if (unit.getPlant() == null) {
+            return ModifierFunction.cancel(Component.translatable("gtecore.water.uv.unlinked"));
+        }
         int lamps = unit.getLampCount();
         int dose = recipe.data.getInt("uvDose");
-        if (lamps < 1 || lamps > PurificationUvState.MAX_LAMPS || dose <= 0 || recipe.duration <= 0) return ModifierFunction.NULL;
+        if (lamps < 1) {
+            return ModifierFunction.cancel(Component.translatable("gtecore.water.uv.no_lamps"));
+        }
+        if (lamps > PurificationUvState.MAX_LAMPS || dose <= 0 || recipe.duration <= 0) return ModifierFunction.NULL;
         int parallel = unit.computeParallel(recipe);
-        if (parallel <= 0) return ModifierFunction.NULL;
+        if (parallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+        }
         final PurificationUvState.Plan plan;
         try {
             plan = PurificationUvState.plan(parallel, lamps, unit.powerPercent, recipe.duration, dose);
@@ -316,7 +325,7 @@ public class UvPurificationUnitMachine extends LinkedPurificationUnitMachine {
             lines.add(Component.translatable("gtecore.water.uv.idle"));
         }
         lines.add(Component.translatable("com.gtecore.tooltips.water_unit.energy", getStoredLinkedEnergy(), getLinkedEnergyCapacity()));
-        if (getRecipeLogic().isWaiting()) lines.addAll(getRecipeLogic().getFancyTooltip());
+        if (getRecipeLogic().getWaitingReason() != null) lines.addAll(getRecipeLogic().getFancyTooltip());
     }
 
     private ComponentPanelWidget panel(int x, int y, int width, Consumer<List<Component>> supplier) {

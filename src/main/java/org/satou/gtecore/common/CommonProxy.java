@@ -13,6 +13,7 @@ import org.satou.gtecore.common.data.GTERecipeTypes;
 import org.satou.gtecore.common.data.condition.GTERecipeConditions;
 import org.satou.gtecore.common.data.items.GTEItems;
 import org.satou.gtecore.common.data.machines.GTEMachines;
+import org.satou.gtecore.common.network.GTECoreNetwork;
 import org.satou.gtecore.config.GTEConfig;
 
 import com.gregtechceu.gtceu.api.GTCEuAPI;
@@ -59,7 +60,9 @@ public class CommonProxy {
         GTEConfig.init();
     }
 
-    private static void commonSetup(FMLCommonSetupEvent event) {}
+    private static void commonSetup(FMLCommonSetupEvent event) {
+        GTECoreNetwork.init();
+    }
 
     private void registerRecipeConditions(GTCEuAPI.RegisterEvent<ResourceLocation, RecipeConditionType> event) {
         GTERecipeConditions.init();

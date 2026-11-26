@@ -335,6 +335,10 @@ public class Lang {
                 provider.add("item.gtecore.check_structure_terminal", "Structure Testing Terminal", "结构检测终端");
                 provider.add("gtecore.structure_terminal.tooltip.check", "Sneak-right-click a controller to diagnose its structure", "潜行右键控制器，检测当前结构");
                 provider.add("gtecore.structure_terminal.tooltip.preview", "Right-click for an example preview; repeat to cycle layers", "右键显示示例结构预览，再次右键逐层查看");
+                provider.add("gtecore.structure_terminal.tooltip.highlight", "Highlights mismatched blocks (amber = missing, red = wrong); sneak-right-click air to clear", "检测失败时高亮问题方块（琥珀色=缺失，红色=错误）；潜行右键空气清除高亮");
+                provider.add("gtecore.structure_terminal.highlighted", "Highlighted %s mismatched block(s) in world (amber = missing, red = wrong; sneak-right-click air to clear)", "已在世界中高亮 %s 处问题方块（琥珀色=缺失，红色=错误；潜行右键空气清除）");
+                provider.add("gtecore.structure_terminal.highlighted_capped", "Highlighted nearest %s of %s mismatched blocks in world (amber = missing, red = wrong; sneak-right-click air to clear)", "已在世界中高亮最近的 %s/%s 处问题方块（琥珀色=缺失，红色=错误；潜行右键空气清除）");
+                provider.add("gtecore.structure_terminal.highlight_cleared", "Cleared structure highlights", "已清除结构高亮");
                 provider.add("gtecore.structure_terminal.success", "Structure matches (this does not check operating requirements)", "结构检测通过（不代表已满足运行条件）");
                 provider.add("gtecore.structure_terminal.failure", "Structure does not match; fix the reported issue and check again", "结构检测未通过；修复提示的问题后再次检测");
                 provider.add("gtecore.structure_terminal.position", "Check X: %s, Y: %s, Z: %s", "检查位置 X：%s，Y：%s，Z：%s");

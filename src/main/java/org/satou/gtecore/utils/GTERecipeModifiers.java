@@ -14,6 +14,7 @@ import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
 import com.gregtechceu.gtceu.common.machine.multiblock.generator.LargeCombustionEngineMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
 import dev.architectury.platform.Mod;
+import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 import org.satou.gtecore.common.data.machines.YIN_YANG_EIGHT_TRIGMAS_BLAST_FURNACE;
 import org.satou.gtecore.common.machine.multiblock.generator.FUEL_ENGINE;
@@ -27,6 +28,9 @@ public class GTERecipeModifiers {
         }
         int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(machine, recipe, maxParallel);
+        if (actualParallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+        }
         //double eutMultiplier = actualParallel * super_string_mixer_machine.getProductionBoost();
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -43,6 +47,9 @@ public class GTERecipeModifiers {
         //super_string_mixer_machine.recipeLogic.setMultiParallelCount(128);
         int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(super_string_mixer_machine, recipe, maxParallel);
+        if (actualParallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+        }
         //double eutMultiplier = actualParallel * super_string_mixer_machine.getProductionBoost();
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -60,6 +67,9 @@ public class GTERecipeModifiers {
         //super_string_oscillator_array_machine.recipeLogic.setMultiParallelCount(128);
         int maxParallel = 1000000000; // get maximum parallel
         int actualParallel = FUEL_ENGINE.getParallelAmount(super_string_oscillator_array_machine, recipe, maxParallel);
+        if (actualParallel <= 0) {
+            return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+        }
         //double eutMultiplier = actualParallel * super_string_mixer_machine.getProductionBoost();
         return ModifierFunction.builder()
                 .inputModifier(ContentModifier.multiplier(actualParallel))
@@ -72,7 +82,9 @@ public class GTERecipeModifiers {
                 int parallel = ConfigHolder.INSTANCE.machines.batchDuration / recipe.duration;
                 parallel = ParallelLogic.getParallelAmountWithoutEU(machine, recipe, parallel);
 
-                if (parallel == 0) return ModifierFunction.NULL;
+                if (parallel == 0) {
+                    return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+                }
                 if (parallel == 1) return ModifierFunction.IDENTITY;
 
                 return ModifierFunction.builder()
@@ -92,7 +104,13 @@ public class GTERecipeModifiers {
         // has lubricant
         if (!EUt.isEmpty()) {
             int maxParallel = (int) (engineMachine.getOverclockVoltage() / EUt.getTotalEU()); // get maximum parallel
+            if (maxParallel <= 0) {
+                return ModifierFunction.cancel(Component.translatable("gtceu.multiblock.not_enough_energy_output"));
+            }
             int actualParallel = ParallelLogic.getParallelAmount(engineMachine, recipe, maxParallel);
+            if (actualParallel <= 0) {
+                return ModifierFunction.cancel(Component.translatable("gtceu.recipe_logic.insufficient_parallel"));
+            }
             double eutMultiplier = actualParallel;
 
             return ModifierFunction.builder()

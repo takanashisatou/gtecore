@@ -11,6 +11,7 @@ import com.gregtechceu.gtceu.api.recipe.content.ContentModifier;
 import com.gregtechceu.gtceu.api.recipe.modifier.ModifierFunction;
 import com.gregtechceu.gtceu.api.recipe.modifier.ParallelLogic;
 import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -42,6 +43,12 @@ public class SimpleGeneratorMixin {
         }
 
         int maxParallel = (int) (generator.getOverclockVoltage() / EUt);
+        if (maxParallel <= 0) {
+            cir.setReturnValue(ModifierFunction.cancel(
+                    Component.translatable("gtceu.multiblock.not_enough_energy_output")));
+            cir.cancel();
+            return;
+        }
         int parallels = ParallelLogic.getParallelAmountFast(generator, recipe, maxParallel);
          cir.setReturnValue(
                  ModifierFunction.builder()
