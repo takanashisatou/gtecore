@@ -234,7 +234,7 @@ public class Lang {
                 provider.add("item.gtecore.yin_yang_circuit_chip", "§8Yin§rYang Circuit Chip", "§8阴§r阳电路芯片");
 
                 provider.add("item.gtecore.imaginary_growth_medium", "§bImaginary Growth Medium", "§b虚数生长介质");
-                provider.add("item.gtecore.imaginary_growth_medium.tooltip", "§7Consumable crystal-growth medium prepared with third-stage ultrapure water; leaf matrices remain structural blocks", "§7由三级电子级净化水制备的晶体生长耗材；叶矩阵保留为结构方块");
+                provider.add("item.gtecore.imaginary_growth_medium.tooltip", "§7Consumable crystal-growth medium prepared with third-stage ultrapure water", "§7由三级电子级净化水制备的晶体生长耗材");
                 provider.add("item.gtecore.imaginary_tree_boule", "§bImaginary Tree Boule", "§b虚数之树单晶硅");
                 provider.add("item.gtecore.imaginary_tree_wafer", "§bImaginary Tree Wafer", "§b虚数之树晶圆");
                 provider.add("item.gtecore.imaginary_tree_cpu_wafer", "§bImaginary Tree CPU Wafer", "§b虚数之树CPU晶圆");
@@ -339,17 +339,17 @@ public class Lang {
                 provider.add("gtecore.structure_terminal.highlighted", "Highlighted %s mismatched block(s) in world (amber = missing, red = wrong; sneak-right-click air to clear)", "已在世界中高亮 %s 处问题方块（琥珀色=缺失，红色=错误；潜行右键空气清除）");
                 provider.add("gtecore.structure_terminal.highlighted_capped", "Highlighted nearest %s of %s mismatched blocks in world (amber = missing, red = wrong; sneak-right-click air to clear)", "已在世界中高亮最近的 %s/%s 处问题方块（琥珀色=缺失，红色=错误；潜行右键空气清除）");
                 provider.add("gtecore.structure_terminal.highlight_cleared", "Cleared structure highlights", "已清除结构高亮");
-                provider.add("gtecore.structure_terminal.success", "Structure matches (this does not check operating requirements)", "结构检测通过（不代表已满足运行条件）");
-                provider.add("gtecore.structure_terminal.failure", "Structure does not match; fix the reported issue and check again", "结构检测未通过；修复提示的问题后再次检测");
+                provider.add("gtecore.structure_terminal.success", "Structure matches", "结构检测通过");
+                provider.add("gtecore.structure_terminal.failure", "Structure does not match", "结构检测未通过");
                 provider.add("gtecore.structure_terminal.position", "Check X: %s, Y: %s, Z: %s", "检查位置 X：%s，Y：%s，Z：%s");
-                provider.add("gtecore.structure_terminal.candidates", "Candidate blocks (up to 8; count and tier constraints still apply): %s", "候选方块（最多8项，仍须满足数量与等级限制）：%s");
+                provider.add("gtecore.structure_terminal.candidates", "Expected blocks: %s", "可用方块：%s");
                 provider.add("gtecore.structure_terminal.wrong_block", "The block here does not satisfy the structure rule", "此处方块不满足结构要求");
                 provider.add("gtecore.structure_terminal.no_pattern", "This controller has no structure pattern to inspect", "此控制器没有可检测的结构图案");
                 provider.add("gtecore.structure_terminal.unloaded", "Part of the structure is in an unloaded chunk; load it and check again", "部分结构所在区块未加载，请加载后再次检测");
                 provider.add("gtecore.structure_terminal.error", "Could not inspect this structure; see the game log for details", "无法检测此结构，详细原因见游戏日志");
                 provider.add("gtecore.structure_terminal.no_preview", "No example preview is available for this controller", "此控制器没有可用的示例结构预览");
-                provider.add("gtecore.structure_terminal.preview_orientation", "Example preview is unavailable for mirrored or vertically facing controllers; structure detection still works", "镜像或垂直朝向控制器暂不支持示例预览，结构检测仍可使用");
-                provider.add("gtecore.structure_terminal.preview", "Showing the first example design; right-click again to cycle layers", "正在显示第一种示例结构；再次右键可逐层查看");
+                provider.add("gtecore.structure_terminal.preview_orientation", "Preview unavailable for mirrored or vertical controllers", "镜像或垂直朝向控制器不支持结构预览");
+                provider.add("gtecore.structure_terminal.preview", "Showing structure preview; right-click again to cycle layers", "正在显示结构预览，再次右键逐层查看");
 
                 provider.add("com.gtecore.structure_tesing.tooltips.at", "At", "位于");
                 provider.add("com.gtecore.structure_tesing.tooltips.place_error", "founded placement error", "不应该放置在这");
@@ -447,7 +447,7 @@ public class Lang {
                 provider.add("gtceu.recipe.ultrapure_water", "Ultrapure Water (EDI)", "电子级超纯水（电去离子）");
                 provider.add("recipe.gtecore.ultrapure_water_regeneration", "EDI Resin Regeneration (Cleaning)", "EDI 树脂再生（清洗）");
                 provider.add("gtceu.recipe.ultrapure_water_regeneration", "EDI Resin Regeneration (Cleaning)", "EDI 树脂再生（清洗）");
-                provider.add("com.gtecore.tooltips.ultrapure_water_refinery.0", "§cRetired machine: retained for existing worlds; no processing recipes", "§c已停用：仅为兼容旧存档保留，不再执行配方");
+                provider.add("com.gtecore.tooltips.ultrapure_water_refinery.0", "§cRetired: no longer processes recipes", "§c已停用，不再执行配方");
                 provider.add("com.gtecore.tooltips.ultrapure_water_refinery.1", "§bMigrate to the central plant and T1 / T2 / T3 purification units", "§b请迁移至中枢净化水厂与一、二、三级净化单元");
 
                 // Central Water Purification Plant & Tiered Purification Units
