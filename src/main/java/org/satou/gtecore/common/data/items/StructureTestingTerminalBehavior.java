@@ -1,24 +1,49 @@
 package org.satou.gtecore.common.data.items;
 
+import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
+import com.gregtechceu.gtceu.api.capability.IObjectHolder;
+import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.EURecipeCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
+import com.gregtechceu.gtceu.api.capability.recipe.IO;
 import com.gregtechceu.gtceu.api.item.component.IAddInformation;
 import com.gregtechceu.gtceu.api.item.component.IInteractionItem;
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity;
 import com.gregtechceu.gtceu.api.machine.MetaMachine;
+import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMaintenanceMachine;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiController;
 import com.gregtechceu.gtceu.api.machine.feature.multiblock.IMultiPart;
+import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility;
+import com.gregtechceu.gtceu.api.machine.trait.NotifiableFluidTank;
 import com.gregtechceu.gtceu.api.pattern.BlockPattern;
 import com.gregtechceu.gtceu.api.pattern.MultiblockState;
+import com.gregtechceu.gtceu.api.pattern.MultiblockWorldSavedData;
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate;
 import com.gregtechceu.gtceu.api.pattern.error.PatternError;
 import com.gregtechceu.gtceu.api.pattern.error.PatternStringError;
 import com.gregtechceu.gtceu.api.pattern.error.SinglePredicateError;
+import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection;
 import com.gregtechceu.gtceu.client.renderer.MultiblockInWorldPreviewRenderer;
+import com.gregtechceu.gtceu.common.data.GTMaterials;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.ActiveTransformerMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.CleanroomMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.DistillationTowerMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.LargeMinerMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.PowerSubstationMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.research.DataBankMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.electric.research.ResearchStationMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.primitive.CharcoalPileIgniterMachine;
+import com.gregtechceu.gtceu.common.machine.multiblock.steam.SteamParallelMultiblockMachine;
 import com.gregtechceu.gtceu.config.ConfigHolder;
+import com.gregtechceu.gtceu.data.recipe.CustomTags;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMaps;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
@@ -30,6 +55,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import org.satou.gtecore.GTECore;
@@ -39,13 +65,15 @@ import org.satou.gtecore.config.GTEConfig;
 import org.satou.gtecore.mixin.BlockPatternAccessor;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-/** Read-only diagnostics. Never reuse the controller's live matching state. */
+/** Structure formation check, failure diagnosis, and multi-position highlight targeting for multiblock controllers. */
 public class StructureTestingTerminalBehavior implements IInteractionItem, IAddInformation {
 
     private static final String PREFIX = "gtecore.structure_terminal.";
@@ -72,10 +100,12 @@ public class StructureTestingTerminalBehavior implements IInteractionItem, IAddI
     }
 
     private record CheckOutcome(
-            Diagnostic baseDiagnostic,
+            boolean matched,
+            @Nullable Diagnostic baseDiagnostic,
             Direction facing,
             boolean flipped,
-            @Nullable PatternError rawError) {}
+            @Nullable PatternError rawError,
+            @Nullable MultiblockState state) {}
 
     private record ScanResult(List<HighlightTarget> highlights, int totalIssueCount) {}
 
@@ -92,43 +122,100 @@ public class StructureTestingTerminalBehavior implements IInteractionItem, IAddI
         var lock = controller.getPatternLock();
         lock.lock();
         try {
-            // Use the actual pattern: some controllers generate it dynamically.
-            BlockPattern pattern = controller.getPattern();
-            if (pattern == null) return new Diagnostic(false, null, text("no_pattern"), Component.empty());
-            int[] repetitions = pattern.getFormedRepetitionCount();
-            int[] saved = repetitions.clone();
-            try {
-                var machine = controller.self();
-                Direction[] facings = controller.hasFrontFacing() ? new Direction[] { machine.getFrontFacing() } :
-                        new Direction[] { Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST };
-                CheckOutcome firstFailure = null;
-                for (Direction facing : facings) {
-                    CheckOutcome outcome = check(controller, pattern, facing, machine.isFlipped());
-                    if (outcome.baseDiagnostic().matches()) return outcome.baseDiagnostic();
-                    if (firstFailure == null) firstFailure = outcome;
-                    if (machine.allowFlip()) {
-                        outcome = check(controller, pattern, facing, !machine.isFlipped());
-                        if (outcome.baseDiagnostic().matches()) return outcome.baseDiagnostic();
-                    }
-                }
-                if (firstFailure == null) {
-                    return new Diagnostic(false, null, text("failure"), Component.empty());
-                }
-                Diagnostic base = firstFailure.baseDiagnostic();
-                if (firstFailure.rawError() == MultiblockState.UNLOAD_ERROR
-                        || firstFailure.rawError() == MultiblockState.UNINIT_ERROR) {
-                    return base;
-                }
-                BlockPos ref = referencePos != null ? referencePos : machine.getPos();
-                ScanResult scan = scanMismatches(controller, pattern, firstFailure.facing(), firstFailure.flipped(),
-                        base.position(), firstFailure.rawError(), ref);
-                return new Diagnostic(false, base.position(), base.detail(), base.candidates(),
-                        scan.highlights(), scan.totalIssueCount());
-            } finally {
-                System.arraycopy(saved, 0, repetitions, 0, saved.length);
+            // Ground truth: an already-formed controller must immediately report formed without invoking getPattern().
+            if (controller.isFormed()) {
+                return new Diagnostic(true, null, text("success"), Component.empty());
             }
+
+            // Attempt real formation on the server so freshly completed valid structures form immediately.
+            if (tryFormController(controller)) {
+                return new Diagnostic(true, null, text("success"), Component.empty());
+            }
+
+            // Controller is still unformed: never report success.
+            return diagnoseUnformed(controller, referencePos);
         } finally {
             lock.unlock();
+        }
+    }
+
+    /**
+     * Runs real locked formation matching {@code MultiblockControllerMachine.asyncCheckPattern}, while guarding
+     * against controllers whose {@code onStructureFormed()} rejects the structure via {@code onStructureInvalid()}.
+     */
+    private static boolean tryFormController(IMultiController controller) {
+        var machine = controller.self();
+        if (!(machine.getLevel() instanceof ServerLevel serverLevel)) {
+            return false;
+        }
+        if (!controller.checkPattern()) {
+            return false;
+        }
+        MultiblockState liveState = controller.getMultiblockState();
+        machine.setFlipped(liveState.isNeededFlip());
+        controller.onStructureFormed();
+        if (controller.isFormed()) {
+            var mwsd = MultiblockWorldSavedData.getOrCreate(serverLevel);
+            mwsd.addMapping(liveState);
+            mwsd.removeAsyncLogic(controller);
+            machine.notifyBlockUpdate();
+            return true;
+        }
+        machine.setFlipped(false);
+        return false;
+    }
+
+    private static Diagnostic diagnoseUnformed(IMultiController controller, @Nullable BlockPos referencePos) {
+        // Use the actual pattern: some controllers generate it dynamically.
+        BlockPattern pattern = controller.getPattern();
+        if (pattern == null) {
+            return new Diagnostic(false, null, text("no_pattern"), Component.empty());
+        }
+        int[] repetitions = pattern.getFormedRepetitionCount();
+        int[] saved = repetitions.clone();
+        try {
+            var machine = controller.self();
+            Direction[] facings = controller.hasFrontFacing() ? new Direction[] { machine.getFrontFacing() } :
+                    new Direction[] { Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST };
+            boolean allowsFlip = machine.allowFlip();
+            CheckOutcome firstFailure = null;
+            CheckOutcome matchedOutcome = null;
+            // Strictly align facing and flip traversal with BlockPattern.checkPatternAt(MultiblockState, boolean).
+            for (Direction facing : facings) {
+                CheckOutcome outcome = check(controller, pattern, facing, false);
+                if (outcome.matched()) {
+                    matchedOutcome = outcome;
+                    break;
+                }
+                if (firstFailure == null) {
+                    firstFailure = outcome;
+                }
+                if (allowsFlip) {
+                    CheckOutcome flippedOutcome = check(controller, pattern, facing, true);
+                    if (flippedOutcome.matched()) {
+                        matchedOutcome = flippedOutcome;
+                    }
+                    break;
+                }
+            }
+            if (matchedOutcome != null && matchedOutcome.state() != null) {
+                return diagnosePostPatternRejection(controller, matchedOutcome.state());
+            }
+            if (firstFailure == null || firstFailure.baseDiagnostic() == null) {
+                return new Diagnostic(false, null, text("failure"), Component.empty());
+            }
+            Diagnostic base = firstFailure.baseDiagnostic();
+            if (firstFailure.rawError() == MultiblockState.UNLOAD_ERROR
+                    || firstFailure.rawError() == MultiblockState.UNINIT_ERROR) {
+                return base;
+            }
+            BlockPos ref = referencePos != null ? referencePos : machine.getPos();
+            ScanResult scan = scanMismatches(controller, pattern, firstFailure.facing(), firstFailure.flipped(),
+                    base.position(), firstFailure.rawError(), ref);
+            return new Diagnostic(false, base.position(), base.detail(), base.candidates(),
+                    scan.highlights(), scan.totalIssueCount());
+        } finally {
+            System.arraycopy(saved, 0, repetitions, 0, saved.length);
         }
     }
 
@@ -137,10 +224,263 @@ public class StructureTestingTerminalBehavior implements IInteractionItem, IAddI
         var machine = controller.self();
         var state = new MultiblockState(machine.getLevel(), machine.getPos());
         if (pattern.checkPatternAt(state, machine.getPos(), facing, machine.getUpwardsFacing(), flipped, false)) {
-            return new CheckOutcome(new Diagnostic(true, null, text("success"), Component.empty()),
-                    facing, flipped, null);
+            return new CheckOutcome(true, null, facing, flipped, null, state);
         }
-        return new CheckOutcome(describeFailure(state), facing, flipped, state.error);
+        return new CheckOutcome(false, describeFailure(state), facing, flipped, state.error, null);
+    }
+
+    private static Diagnostic diagnosePostPatternRejection(IMultiController controller, MultiblockState matchedState) {
+        var machine = controller.self();
+        List<IMultiPart> matchedParts = collectMatchedParts(controller, matchedState);
+
+        if (controller instanceof LargeMinerMachine) {
+            Direction upwards = machine.getUpwardsFacing();
+            if (upwards != Direction.NORTH && upwards != Direction.SOUTH) {
+                return singleWrongBlockDiagnostic(machine.getPos().immutable(),
+                        text("reject.large_miner_orientation"));
+            }
+        }
+
+        if (controller instanceof DistillationTowerMachine) {
+            int startY = machine.getPos().getY() + 1;
+            List<IMultiPart> exportParts = matchedParts.stream()
+                    .filter(part -> PartAbility.EXPORT_FLUIDS.isApplicable(part.self().getBlockState().getBlock()))
+                    .filter(part -> part.self().getPos().getY() >= startY)
+                    .toList();
+            if (exportParts.isEmpty()) {
+                return new Diagnostic(false, null, text("reject.distillation_no_output"), Component.empty());
+            }
+            int maxY = exportParts.get(exportParts.size() - 1).self().getPos().getY();
+            int outputIndex = 0;
+            for (int y = startY; y <= maxY; ++y) {
+                if (exportParts.size() <= outputIndex) {
+                    continue;
+                }
+                IMultiPart part = exportParts.get(outputIndex);
+                int partY = part.self().getPos().getY();
+                if (partY == y) {
+                    outputIndex++;
+                } else if (partY < y) {
+                    return singleWrongBlockDiagnostic(part.self().getPos().immutable(),
+                            text("reject.distillation_invalid_output"));
+                }
+            }
+            return new Diagnostic(false, null, text("reject.distillation_no_output"), Component.empty());
+        }
+
+        if (controller instanceof ActiveTransformerMachine) {
+            boolean hasInput = false;
+            boolean hasOutput = false;
+            Long2ObjectMap<IO> ioMap = matchedState.getMatchContext().getOrCreate("ioMap", Long2ObjectMaps::emptyMap);
+            for (IMultiPart part : matchedParts) {
+                IO io = ioMap.getOrDefault(part.self().getPos().asLong(), IO.BOTH);
+                if (io == IO.NONE) {
+                    continue;
+                }
+                for (var handlerList : part.getRecipeHandlers()) {
+                    if (!handlerList.isValid(io)) {
+                        continue;
+                    }
+                    boolean hasEnergy = handlerList.getCapability(EURecipeCapability.CAP).stream()
+                            .anyMatch(IEnergyContainer.class::isInstance);
+                    if (!hasEnergy) {
+                        continue;
+                    }
+                    if (handlerList.getHandlerIO().support(IO.IN)) {
+                        hasInput = true;
+                    } else if (handlerList.getHandlerIO().support(IO.OUT)) {
+                        hasOutput = true;
+                    }
+                }
+            }
+            if (!hasInput && !hasOutput) {
+                return new Diagnostic(false, null, text("reject.active_transformer_no_io"), Component.empty());
+            }
+            if (!hasInput) {
+                return new Diagnostic(false, null, text("reject.active_transformer_no_input"), Component.empty());
+            }
+            if (!hasOutput) {
+                return new Diagnostic(false, null, text("reject.active_transformer_no_output"), Component.empty());
+            }
+        }
+
+        if (controller instanceof PowerSubstationMachine) {
+            boolean hasBattery = false;
+            for (Map.Entry<String, Object> entry : matchedState.getMatchContext().entrySet()) {
+                if (entry.getKey().startsWith(PowerSubstationMachine.PMC_BATTERY_HEADER)
+                        && entry.getValue() instanceof PowerSubstationMachine.BatteryMatchWrapper wrapper
+                        && wrapper.getAmount() > 0) {
+                    hasBattery = true;
+                    break;
+                }
+            }
+            if (!hasBattery) {
+                return new Diagnostic(false, null, text("reject.power_substation_empty_batteries"), Component.empty());
+            }
+        }
+
+        if (controller instanceof ResearchStationMachine) {
+            Direction expectedHolderFacing = machine.getFrontFacing().getOpposite();
+            boolean foundHolder = false;
+            boolean foundComputation = false;
+            for (IMultiPart part : matchedParts) {
+                if (part instanceof IObjectHolder holder) {
+                    if (holder.getFrontFacing() != expectedHolderFacing) {
+                        return singleWrongBlockDiagnostic(part.self().getPos().immutable(),
+                                text("reject.research_holder_facing"));
+                    }
+                    foundHolder = true;
+                }
+                if (part.self().getHolder().self().getCapability(GTCapability.CAPABILITY_COMPUTATION_PROVIDER)
+                        .isPresent()) {
+                    foundComputation = true;
+                }
+            }
+            if (!foundHolder) {
+                return new Diagnostic(false, null, text("reject.research_missing_holder"), Component.empty());
+            }
+            if (!foundComputation) {
+                return new Diagnostic(false, null, text("reject.research_missing_computation"), Component.empty());
+            }
+        }
+
+        if (controller instanceof DataBankMachine) {
+            boolean hasMaintenance = matchedParts.stream().anyMatch(IMaintenanceMachine.class::isInstance);
+            if (!hasMaintenance) {
+                return new Diagnostic(false, null, text("reject.data_bank_maintenance"), Component.empty());
+            }
+        }
+
+        if (controller instanceof SteamParallelMultiblockMachine) {
+            boolean hasSteamHatch = false;
+            for (IMultiPart part : matchedParts) {
+                if (!PartAbility.STEAM.isApplicable(part.self().getDefinition().getBlock())) {
+                    continue;
+                }
+                for (var handlerList : part.getRecipeHandlers()) {
+                    if (!handlerList.isValid(IO.IN)) {
+                        continue;
+                    }
+                    for (var fluidHandler : handlerList.getCapability(FluidRecipeCapability.CAP)) {
+                        if (fluidHandler instanceof NotifiableFluidTank tank
+                                && tank.isFluidValid(0, GTMaterials.Steam.getFluid(1))) {
+                            hasSteamHatch = true;
+                            break;
+                        }
+                    }
+                    if (hasSteamHatch) {
+                        break;
+                    }
+                }
+                if (hasSteamHatch) {
+                    break;
+                }
+            }
+            if (!hasSteamHatch) {
+                return new Diagnostic(false, null, text("reject.steam_missing_hatch"), Component.empty());
+            }
+        }
+
+        if (controller instanceof CleanroomMachine cleanroom && !hasValidCleanroomDimensions(cleanroom)) {
+            return singleWrongBlockDiagnostic(machine.getPos().immutable(), text("reject.cleanroom_dimensions"));
+        }
+
+        if (controller instanceof CharcoalPileIgniterMachine charcoal && !hasValidCharcoalPileDimensions(charcoal)) {
+            return singleWrongBlockDiagnostic(machine.getPos().immutable(), text("reject.charcoal_dimensions"));
+        }
+
+        return new Diagnostic(false, null, text("reject.generic"), Component.empty());
+    }
+
+    private static List<IMultiPart> collectMatchedParts(IMultiController controller, MultiblockState matchedState) {
+        Set<IMultiPart> rawParts = matchedState.getMatchContext().getOrCreate("parts", Collections::emptySet);
+        List<IMultiPart> parts = new ArrayList<>();
+        for (IMultiPart part : rawParts) {
+            if (controller.shouldAddPartToController(part)) {
+                parts.add(part);
+            }
+        }
+        parts.sort(controller.getPartSorter());
+        return parts;
+    }
+
+    private static Diagnostic singleWrongBlockDiagnostic(BlockPos pos, Component detail) {
+        return new Diagnostic(false, pos, detail, Component.empty(),
+                List.of(new HighlightTarget(pos, HighlightKind.WRONG, true)), 1);
+    }
+
+    private static boolean hasValidCleanroomDimensions(CleanroomMachine cleanroom) {
+        Level level = cleanroom.getLevel();
+        if (level == null) {
+            return false;
+        }
+        Direction front = cleanroom.getFrontFacing();
+        Direction back = front.getOpposite();
+        Direction left = front.getCounterClockWise();
+        Direction right = left.getOpposite();
+
+        BlockPos.MutableBlockPos lPos = cleanroom.getPos().mutable();
+        BlockPos.MutableBlockPos rPos = cleanroom.getPos().mutable();
+        BlockPos.MutableBlockPos fPos = cleanroom.getPos().mutable();
+        BlockPos.MutableBlockPos bPos = cleanroom.getPos().mutable();
+        BlockPos.MutableBlockPos hPos = cleanroom.getPos().mutable();
+
+        int lDist = 0;
+        int rDist = 0;
+        int bDist = 0;
+        int fDist = 0;
+        int hDist = 0;
+
+        for (int i = 1; i < 8; i++) {
+            if (lDist == 0 && cleanroom.isBlockEdge(level, lPos, left)) lDist = i;
+            if (rDist == 0 && cleanroom.isBlockEdge(level, rPos, right)) rDist = i;
+            if (bDist == 0 && cleanroom.isBlockEdge(level, bPos, back)) bDist = i;
+            if (fDist == 0 && cleanroom.isBlockEdge(level, fPos, front)) fDist = i;
+            if (lDist != 0 && rDist != 0 && bDist != 0 && fDist != 0) break;
+        }
+        for (int i = 1; i < 15; i++) {
+            if (cleanroom.isBlockFloor(level, hPos, Direction.DOWN)) hDist = i;
+            if (hDist != 0) break;
+        }
+        return Math.abs(lDist - rDist) <= 1 && Math.abs(bDist - fDist) <= 1
+                && lDist >= CleanroomMachine.MIN_RADIUS && rDist >= CleanroomMachine.MIN_RADIUS
+                && bDist >= CleanroomMachine.MIN_RADIUS && fDist >= CleanroomMachine.MIN_RADIUS
+                && hDist >= CleanroomMachine.MIN_DEPTH;
+    }
+
+    private static boolean hasValidCharcoalPileDimensions(CharcoalPileIgniterMachine charcoal) {
+        Level level = charcoal.getLevel();
+        if (level == null) {
+            return false;
+        }
+        Direction front = charcoal.getFrontFacing();
+        Direction back = front.getOpposite();
+        Direction left = RelativeDirection.LEFT.getRelativeFacing(front, charcoal.getUpwardsFacing(), false);
+        Direction right = RelativeDirection.RIGHT.getRelativeFacing(front, charcoal.getUpwardsFacing(), false);
+
+        BlockPos down = charcoal.getPos().relative(Direction.DOWN);
+        BlockPos.MutableBlockPos lPos = down.mutable();
+        BlockPos.MutableBlockPos rPos = down.mutable();
+        BlockPos.MutableBlockPos fPos = down.mutable();
+        BlockPos.MutableBlockPos bPos = down.mutable();
+        BlockPos.MutableBlockPos hPos = charcoal.getPos().mutable();
+
+        int lDist = 0;
+        int rDist = 0;
+        int bDist = 0;
+        int fDist = 0;
+        int hDist = 0;
+
+        for (int i = 1; i < 6; i++) {
+            if (lDist != 0 && rDist != 0 && hDist != 0) break;
+            if (lDist == 0 && level.getBlockState(lPos.move(left)).is(CustomTags.CHARCOAL_PILE_IGNITER_WALLS)) lDist = i;
+            if (rDist == 0 && level.getBlockState(rPos.move(right)).is(CustomTags.CHARCOAL_PILE_IGNITER_WALLS)) rDist = i;
+            if (bDist == 0 && level.getBlockState(bPos.move(back)).is(CustomTags.CHARCOAL_PILE_IGNITER_WALLS)) bDist = i;
+            if (fDist == 0 && level.getBlockState(fPos.move(front)).is(CustomTags.CHARCOAL_PILE_IGNITER_WALLS)) fDist = i;
+            if (hDist == 0 && level.getBlockState(hPos.move(Direction.DOWN)).is(Blocks.BRICKS)) hDist = i;
+        }
+        return Math.abs(lDist - rDist) <= 1 && Math.abs(bDist - fDist) <= 1
+                && lDist >= 1 && rDist >= 1 && fDist >= 1 && bDist >= 1 && hDist >= 2;
     }
 
     static Diagnostic describeFailure(MultiblockState state) {
